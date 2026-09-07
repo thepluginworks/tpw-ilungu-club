@@ -7,7 +7,7 @@ user-invocable: true
 
 Do not infer authority to mutate Git, remotes, release systems, or deployment targets merely because this agent was selected or invoked.
 
-Before committing, pushing, tagging, creating a GitHub Release, or triggering deployment or Freemius publication, require explicit user authority for that specific action. Accepted authority includes a clear instruction such as `Commit only`, `Commit + Push`, or `Full Release Workflow`.
+Before committing, pushing, tagging, creating a GitHub Release, or triggering deployment or Freemius publication, require explicit user authority. `Commit only` authorises only a commit. `Commit + Push` authorises a commit and push. `Full Release Workflow` authorises all repository-configured release actions: release metadata preparation, commit, push, tag creation and push, GitHub Release creation, and any applicable configured deployment handoff. After `Full Release Workflow` is given, do not ask for separate approval for those individual actions.
 
 A passing test does not grant release authority. If authority is absent, inspect and report release readiness only, then stop before mutation.
 
@@ -67,7 +67,11 @@ Release efficiency rules:
 • do not perform repository-wide searches
 • do not read runtime source files unless required to identify version constants or release metadata
 • do not inspect CSS, JS, PHP, templates, or includes to judge implementation quality
-• for a genuine command or environment failure, use at most one corrective or retry invocation, then stop and report the blocker if it still fails
+• distinguish an agent invocation mistake from a genuine maintained-tool or environment failure
+• if the agent constructed an invalid command, used an incorrect path, pre-created an output file that a maintained build script expects not to exist, or otherwise made a recoverable invocation error, correct the invocation and continue; this does not count as a failed release validation
+• do not repeatedly rerun an unchanged failing command
+• after a correct invocation genuinely fails because of a maintained tool or environment, make at most one useful retry, then stop and report the blocker
+• never bypass a genuine failed validation
 • distinguish tooling noise from command failure; do not investigate PHPCS or WP-CLI internals
 • once release safety has been established, proceed with the workflow rather than continuing investigation
 
@@ -239,7 +243,15 @@ If no changes:
 
 Reusable test source may remain tracked in Git. The distributable or customer plugin ZIP MUST exclude the entire `tests/` tree, `.env`, `.env.local`, other local secret or environment files, `node_modules`, `playwright-report`, `test-results`, authentication or storage state, screenshots, traces, videos, generated browser or test artifacts, and other test-only local or generated files.
 
-Release or package validation must fail if any excluded item is present in the production package. Do not require the Playwright harness to exist inside the production ZIP. Preserve repository-specific `.distignore`, build-script, and workflow rules where they already enforce these exclusions.
+Release or package validation must fail if any excluded item is present in the production package. Do not require the Playwright harness to exist inside the production ZIP. Do not blanket-reject `.png`, `.jpg`, `.jpeg`, `.svg`, `.webp`, or other legitimate plugin assets; reject images only when they are test, browser, generated, or artifact files, or live in excluded test/artifact paths. Do not blanket-reject Markdown when the repository intentionally ships runtime or admin-help Markdown. Package validation must follow the repository's actual `.distignore` and maintained build-script semantics.
+
+This plugin is not distributed through Freemius.
+
+Do not search for, require, trigger, or block on a Freemius deployment mechanism. Freemius deployment is not applicable.
+
+The production ZIP is intended to be WordPress-compatible. Build and validate the normal WordPress plugin ZIP using maintained repository packaging rules.
+
+The configured `uninstall.php` package policy is `include-if-runtime`: if `uninstall.php` contains genuine WordPress plugin uninstall functionality, it is distributable runtime functionality and must remain in the production ZIP. Do not fabricate an uninstall file when the repository does not use one.
 
 2.30 Release validation policy
 
@@ -368,6 +380,7 @@ After pushing the tag:
 - do NOT upload release assets manually unless explicitly asked.
 - rely on `.github/workflows/publish-release.yml` to build the package, upload `tpw-ilungu-club.zip`, and publish the version manifest.
 - treat the pushed version tag as the handoff point to the automated packaging workflow.
+- Freemius deployment is not applicable.
 
 Configured deployment workflow to monitor when applicable:
 .github/workflows/publish-release.yml
