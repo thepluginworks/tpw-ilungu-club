@@ -5,6 +5,10 @@ The Gallery module renders image collections from registered sources. It is opti
 
 ## Key Screens / Shortcodes
 
+- Public Gallery System Page: `/gallery/`
+	- Content: `[tpw_gallery_index]`
+	- The Gallery module registers and provisions this page through the System Pages registry on normal requests, including existing installations.
+	- If a site-owned WordPress page already occupies `/gallery/`, iLungu Club does not adopt, modify, publish, rename, or map it. The System Pages registry reports the Gallery page as unresolved instead.
 
 - Public shortcode: `[tpw_gallery id="123" view="grid|list|story" columns="3" show_categories="0|1" per_page="0" paginate="0|1"]`
 	- `id`: Gallery ID to render.

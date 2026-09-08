@@ -7,6 +7,7 @@ class WP_Post {
 	public $post_type = 'page';
 	public $post_status = 'publish';
 	public $post_name = '';
+	public $post_title = '';
 	public $post_content = '';
 }
 
@@ -65,5 +66,27 @@ $conflict = TPW_Core_System_Pages::recreate_page( 'occupied-page' );
 assert_same( true, is_wp_error( $conflict ), 'An unrelated occupied slug must return a conflict.' );
 assert_same( 'tpw_system_page_slug_conflict', $conflict->get_error_code(), 'Conflict must use the canonical error code.' );
 assert_same( 'Unrelated content', $pages[ 2 ]->post_content, 'Conflict must not mutate the unrelated page.' );
+
+TPW_Core_System_Pages::register_page( 'gallery', array( 'title' => 'Gallery', 'shortcode' => '[tpw_gallery_index]', 'plugin' => 'tpw-core' ) );
+$gallery_free_id = TPW_Core_System_Pages::ensure_page( 'gallery' );
+assert_same( 3, $gallery_free_id, 'A free Gallery path must create the registered System Page.' );
+assert_same( '[tpw_gallery_index]', $pages[ $gallery_free_id ]->post_content, 'The Gallery System Page must contain the Gallery index shortcode.' );
+unset( $pages[ $gallery_free_id ] );
+
+$gallery_page = new WP_Post();
+$gallery_page->ID = 4;
+$gallery_page->post_name = 'gallery';
+$gallery_page->post_title = 'Site-owned Gallery title';
+$gallery_page->post_status = 'draft';
+$gallery_page->post_content = 'Site-owned Gallery content';
+$pages[ 4 ] = $gallery_page;
+$gallery_result = TPW_Core_System_Pages::recreate_page( 'gallery' );
+assert_same( true, is_wp_error( $gallery_result ), 'An occupied Gallery path must return a conflict.' );
+assert_same( 'tpw_system_page_slug_conflict', $gallery_result->get_error_code(), 'Gallery conflicts must use the canonical error code.' );
+assert_same( 'gallery', $pages[ 4 ]->post_name, 'Gallery provisioning must not rename a site-owned page.' );
+assert_same( 'Site-owned Gallery title', $pages[ 4 ]->post_title, 'Gallery provisioning must not rename a site-owned title.' );
+assert_same( 'draft', $pages[ 4 ]->post_status, 'Gallery provisioning must not publish a site-owned draft.' );
+assert_same( 'Site-owned Gallery content', $pages[ 4 ]->post_content, 'Gallery provisioning must not mutate site-owned content.' );
+assert_same( 0, TPW_Core_System_Pages::get_page_id( 'gallery' ), 'A site-owned Gallery page must not be adopted into the registry.' );
 
 echo "system-pages collision tests passed\n";

@@ -4,6 +4,9 @@ const baseURL = process.env.ILUNGU_BASE_URL || 'https://flexiclub-smoke.local';
 const adminUser = process.env.ILUNGU_ADMIN_USER;
 const adminPassword = process.env.ILUNGU_ADMIN_PASSWORD;
 const freshInstallFixture = process.env.ILUNGU_FRESH_INSTALL === 'true';
+const galleryFixture = process.env.ILUNGU_GALLERY_FIXTURE === 'true';
+const galleryCollisionFixture = process.env.ILUNGU_GALLERY_COLLISION_FIXTURE === 'true';
+const galleryMenuFixture = process.env.ILUNGU_GALLERY_MENU_FIXTURE === 'true';
 
 const routes = {
 	memberLogin: '/member-login/',
@@ -11,6 +14,7 @@ const routes = {
 	join: process.env.ILUNGU_JOIN_PATH || '/join/',
 	home: '/',
 	portal: process.env.ILUNGU_PORTAL_PATH || '/club-management/',
+	gallery: '/gallery/',
 	dashboard: '/wp-admin/admin.php?page=tpw-flexiclub-dashboard',
 };
 
@@ -43,6 +47,25 @@ const baselineSnapshots: PageSnapshot[] = [];
 
 function pageUrl(path: string): string {
 	return new URL(path, `${baseURL.replace(/\/$/, '')}/`).toString();
+}
+
+function portalWorkspaceUrl(workspace: string): string {
+	const url = new URL(pageUrl(routes.portal));
+	url.searchParams.set('workspace', workspace);
+	return url.toString();
+}
+
+async function systemPageRow(page: Page, title: string) {
+	const rows = page.locator('.tpw-flexiclub-system-pages__row');
+	const rowIndex = await rows.evaluateAll((elements, expectedTitle) => elements.findIndex((row) =>
+		Array.from(row.children).some((cell) => cell.querySelector('.tpw-flexiclub-system-pages__page-title')?.textContent?.trim() === expectedTitle),
+	), title);
+	expect(rowIndex, `${title} System Page row must render`).toBeGreaterThanOrEqual(0);
+	return rows.nth(rowIndex);
+}
+
+function systemPageCell(row: ReturnType<Page['locator']>, index: number) {
+	return row.locator(':scope > .table-cell').nth(index);
 }
 
 function installPageGuards(page: Page): () => void {
@@ -184,6 +207,22 @@ test.describe('iLungu Club branding smoke test', () => {
 		await expect(page).toHaveTitle(/Member Login/i);
 	});
 
+	test('fresh-install Gallery System Page renders the gallery index', async ({ page }) => {
+		test.skip(!freshInstallFixture || !galleryFixture, 'Set ILUNGU_FRESH_INSTALL and ILUNGU_GALLERY_FIXTURE for a disposable Gallery fixture.');
+		const response = await page.goto(pageUrl(routes.gallery), { waitUntil: 'domcontentloaded' });
+		expect(response?.ok(), 'Gallery System Page must load on a fresh fixture').toBeTruthy();
+		await expect(page).toHaveURL(/\/gallery\/?$/);
+		await expect(page.locator('#tpw-gallery-browser')).toHaveCount(1);
+	});
+
+	test('site-owned Gallery collision fixture remains independent', async ({ page }) => {
+		test.skip(!galleryCollisionFixture, 'Set ILUNGU_GALLERY_COLLISION_FIXTURE for a fixture with a pre-existing site-owned /gallery/ page.');
+		const response = await page.goto(pageUrl(routes.gallery), { waitUntil: 'domcontentloaded' });
+		expect(response?.ok(), 'Site-owned Gallery collision page must load').toBeTruthy();
+		await expect(page.locator('body')).toContainText('ILUNGU Gallery collision fixture');
+		await expect(page.locator('#tpw-gallery-browser')).toHaveCount(0);
+	});
+
 	test('System Pages shows the healthy Club Management canonical route', async ({ page }) => {
 		test.skip(!adminUser || !adminPassword, 'Set ILUNGU_ADMIN_USER and ILUNGU_ADMIN_PASSWORD to manage System Pages.');
 		await page.goto(pageUrl('/wp-login.php'), { waitUntil: 'domcontentloaded' });
@@ -192,15 +231,12 @@ test.describe('iLungu Club branding smoke test', () => {
 		await page.getByRole('button', { name: /log in/i }).click();
 		await page.waitForURL(/\/wp-admin\//);
 
-		const response = await page.goto(pageUrl('/club-management/?workspace=system-pages'), { waitUntil: 'domcontentloaded' });
+		const response = await page.goto(portalWorkspaceUrl('system-pages'), { waitUntil: 'domcontentloaded' });
 		expect(response?.ok(), 'System Pages workspace must load').toBeTruthy();
-		const clubManagementRow = page.locator('.tpw-flexiclub-system-pages__row').filter({
-			has: page.locator('.tpw-flexiclub-system-pages__page-title', { hasText: /^Club Management$/ }),
-		});
-		await expect(clubManagementRow, 'Club Management System Page row must render').toHaveCount(1);
-		await expect(clubManagementRow.locator('.tpw-flexiclub-dashboard__status')).toContainText('Complete');
-		await expect(clubManagementRow.locator('.tpw-flexiclub-system-pages__page-chip--plugin')).toHaveText('iLungu Club');
-		const linkedPage = clubManagementRow.getByRole('link', { name: 'View' });
+		const clubManagementRow = await systemPageRow(page, 'Club Management');
+		await expect(systemPageCell(clubManagementRow, 2).locator('.tpw-flexiclub-dashboard__status')).toContainText('Complete');
+		await expect(systemPageCell(clubManagementRow, 0).locator('.tpw-flexiclub-system-pages__page-chip--plugin')).toHaveText('iLungu Club');
+		const linkedPage = systemPageCell(clubManagementRow, 5).getByRole('link', { name: 'View' });
 		await expect(linkedPage).toHaveAttribute('href', /\/club-management\/?$/);
 		const linkedPageUrl = await linkedPage.getAttribute('href');
 		expect(linkedPageUrl, 'Club Management linked page must have a target URL').toBeTruthy();
@@ -209,6 +245,54 @@ test.describe('iLungu Club branding smoke test', () => {
 		expect(linkedPageResponse?.ok(), 'Linked Club Management page must load').toBeTruthy();
 		await expect(page).toHaveURL(/\/club-management\/?$/);
 		await expect(page).toHaveTitle(/Club Management/i);
+	});
+
+	test('System Pages lists Gallery without mutating the active Member Menu', async ({ page }) => {
+		test.skip(!adminUser || !adminPassword, 'Set ILUNGU_ADMIN_USER and ILUNGU_ADMIN_PASSWORD to manage System Pages.');
+		await page.goto(pageUrl('/wp-login.php'), { waitUntil: 'domcontentloaded' });
+		await page.getByLabel(/username or email address/i).fill(adminUser!);
+		await page.getByLabel(/^password$/i).fill(adminPassword!);
+		await page.getByRole('button', { name: /log in/i }).click();
+		await page.waitForURL(/\/wp-admin\//);
+
+		const response = await page.goto(portalWorkspaceUrl('system-pages'), { waitUntil: 'domcontentloaded' });
+		expect(response?.ok(), 'System Pages workspace must load').toBeTruthy();
+		const galleryRow = await systemPageRow(page, 'Gallery');
+
+		if (galleryFixture) {
+			await expect(systemPageCell(galleryRow, 2).locator('.tpw-flexiclub-dashboard__status')).toContainText('Complete');
+			const linkedPage = systemPageCell(galleryRow, 5).getByRole('link', { name: 'View' });
+			await expect(linkedPage).toHaveAttribute('href', /\/gallery\/?$/);
+		}
+		if (galleryCollisionFixture) {
+			await expect(systemPageCell(galleryRow, 2).locator('.tpw-flexiclub-dashboard__status')).toContainText('Missing');
+			await expect(systemPageCell(galleryRow, 5).getByRole('link', { name: 'View' })).toHaveCount(0);
+		}
+	});
+
+	test('Gallery provisioning leaves the rendered assigned Member Menu unchanged', async ({ page }) => {
+		test.skip(!adminUser || !adminPassword || !galleryFixture || !galleryMenuFixture, 'Set admin credentials and Gallery fixture flags for a disposable assigned Members Menu fixture.');
+		await page.goto(pageUrl('/wp-login.php'), { waitUntil: 'domcontentloaded' });
+		await page.getByLabel(/username or email address/i).fill(adminUser!);
+		await page.getByLabel(/^password$/i).fill(adminPassword!);
+		await page.getByRole('button', { name: /log in/i }).click();
+		await page.waitForURL(/\/(?:wp-admin\/|wp-login\.php)/);
+		await page.goto(pageUrl(routes.home), { waitUntil: 'domcontentloaded' });
+		const memberMenu = page.locator('.tpw-member-menu-active');
+		await expect(memberMenu, 'Fixture must render the assigned Members Menu').toHaveCount(1);
+		const before = await memberMenu.locator('li').evaluateAll((items) => items.map((item) => ({
+			text: item.textContent?.trim() || '',
+			parent: item.parentElement?.closest('li')?.textContent?.trim() || '',
+		})));
+
+		const response = await page.goto(pageUrl(routes.gallery), { waitUntil: 'domcontentloaded' });
+		expect(response?.ok(), 'Gallery System Page must load').toBeTruthy();
+		await page.goto(pageUrl(routes.home), { waitUntil: 'domcontentloaded' });
+		const after = await page.locator('.tpw-member-menu-active li').evaluateAll((items) => items.map((item) => ({
+			text: item.textContent?.trim() || '',
+			parent: item.parentElement?.closest('li')?.textContent?.trim() || '',
+		})));
+		expect(after, 'Gallery System Page provisioning must not change the rendered assigned Members Menu').toEqual(before);
 	});
 
 	test('WordPress administration uses current branding and Club assets', async ({ page }) => {

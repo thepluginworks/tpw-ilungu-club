@@ -15,11 +15,13 @@ $editing = $sub === 'edit' && $page_id > 0;
 $page = $editing ? TPW_Control_Upload_Pages::get_page_by_id( $page_id ) : null;
 $files = $editing ? TPW_Control_Upload_Pages::get_files( $page_id ) : [];
 
-function tpw_upl_vis_value( $page, $key ) {
-    $vis = $page ? json_decode( (string)$page->visibility, true ) : [];
-    if ( ! is_array( $vis ) ) $vis = [];
-    if ( $key === 'status' ) return $vis['status'] ?? [];
-    return ! empty( $vis[$key] );
+if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
+    function tpw_upl_vis_value( $page, $key ) {
+        $vis = $page ? json_decode( (string)$page->visibility, true ) : [];
+        if ( ! is_array( $vis ) ) $vis = [];
+        if ( $key === 'status' ) return $vis['status'] ?? [];
+        return ! empty( $vis[$key] );
+    }
 }
 ?>
 
