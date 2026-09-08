@@ -2179,7 +2179,7 @@ class TPW_FlexiClub_Admin_Menu {
 				),
 				'done'         => ! empty( $system_summary['required_complete'] ),
 				'url'          => isset( $system_pages_route['url'] ) ? (string) $system_pages_route['url'] : '',
-				'action_label' => ! empty( $system_pages_route['configured'] ) ? __( 'Open FE workspace', 'tpw-core' ) : __( 'Open admin tab', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-core' ),
 			],
 			[
 				'label'       => __( 'Add your first members', 'tpw-core' ),
@@ -2195,7 +2195,7 @@ class TPW_FlexiClub_Admin_Menu {
 				),
 				'done'        => ! empty( $menu_summary['configured'] ),
 				'url'         => isset( $menu_management_route['url'] ) ? (string) $menu_management_route['url'] : '',
-				'action_label' => ! empty( $menu_management_route['action_label'] ) ? (string) $menu_management_route['action_label'] : __( 'Open Menu Management', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-core' ),
 			],
 			[
 				'label'        => __( 'Configure settings', 'tpw-core' ),
@@ -2205,7 +2205,7 @@ class TPW_FlexiClub_Admin_Menu {
 				),
 				'done'         => ! empty( $settings_summary['configured'] ),
 				'url'          => isset( $settings_route['url'] ) ? (string) $settings_route['url'] : '',
-				'action_label' => ! empty( $settings_route['configured'] ) ? __( 'Open FE settings', 'tpw-core' ) : __( 'Open admin settings', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-core' ),
 			],
 			[
 				'label'        => __( 'Configure payments', 'tpw-core' ),
@@ -2216,7 +2216,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'done'         => ! empty( $payments_summary['configured'] ) || ! empty( $payments_summary['optional'] ),
 				'url'          => isset( $payments_route['url'] ) ? (string) $payments_route['url'] : '',
 				'optional'     => ! empty( $payments_summary['optional'] ),
-				'action_label' => ! empty( $payments_route['configured'] ) ? __( 'Open FE payments', 'tpw-core' ) : __( 'Open admin payments', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-core' ),
 			],
 			[
 				'label'        => __( 'Publish your first notice', 'tpw-core' ),
@@ -2228,7 +2228,7 @@ class TPW_FlexiClub_Admin_Menu {
 					),
 				'done'         => ! empty( $notices_summary['count'] ),
 				'url'          => isset( $noticeboard_route['url'] ) ? (string) $noticeboard_route['url'] : '',
-				'action_label' => ! empty( $noticeboard_route['configured'] ) ? __( 'Open FE noticeboard', 'tpw-core' ) : __( 'Needs front-end screen', 'tpw-core' ),
+					'action_label' => __( 'Open', 'tpw-core' ),
 			],
 		];
 	}

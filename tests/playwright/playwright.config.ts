@@ -39,4 +39,9 @@ export default defineConfig({
 	},
 	outputDir: join(__dirname, 'test-results'),
 	reporter: [['list']],
+	projects: [
+		{ name: 'chromium', use: { browserName: 'chromium' } },
+		{ name: 'firefox', use: { browserName: 'firefox' } },
+		{ name: 'webkit', use: { browserName: 'webkit' } },
+	],
 });

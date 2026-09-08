@@ -164,62 +164,62 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 
-		<div class="tpw-flexiclub-dashboard__layout">
-			<div class="tpw-flexiclub-dashboard__main">
-				<?php if ( ! empty( $dashboard['show_checklist'] ) ) : ?>
-					<section id="tpw-flexiclub-checklist" class="tpw-flexiclub-dashboard__section tpw-card tpw-flexiclub-dashboard__section--checklist tpw-flexiclub-dashboard__section--checklist-full">
-						<div class="tpw-flexiclub-dashboard__section-head">
-							<div>
-								<h2><?php esc_html_e( 'Getting Started', 'tpw-core' ); ?></h2>
-								<p><?php esc_html_e( 'A launch checklist for the iLungu Club front-end workspace and connected pages.', 'tpw-core' ); ?></p>
-							</div>
+		<?php if ( ! empty( $dashboard['show_checklist'] ) ) : ?>
+			<section id="tpw-flexiclub-checklist" class="tpw-flexiclub-dashboard__section tpw-card tpw-flexiclub-dashboard__section--checklist tpw-flexiclub-dashboard__section--checklist-full">
+				<div class="tpw-flexiclub-dashboard__section-head">
+					<div>
+						<h2><?php esc_html_e( 'Getting Started', 'tpw-core' ); ?></h2>
+						<p><?php esc_html_e( 'A launch checklist for the iLungu Club front-end workspace and connected pages.', 'tpw-core' ); ?></p>
+					</div>
+				</div>
+
+				<div class="tpw-flexiclub-dashboard__checklist">
+					<div class="tpw-flexiclub-dashboard__progress" style="--tpw-progress: <?php echo esc_attr( $dashboard['checklist_progress'] ); ?>%;">
+						<div class="tpw-flexiclub-dashboard__progress-ring">
+							<strong><?php echo esc_html( $dashboard['checklist_done'] ); ?>/<?php echo esc_html( $dashboard['checklist_total'] ); ?></strong>
 						</div>
+						<div class="tpw-flexiclub-dashboard__progress-copy">
+							<h3><?php esc_html_e( 'Setup Progress', 'tpw-core' ); ?></h3>
+							<p><?php esc_html_e( 'Complete the remaining setup tasks before handing this portal to club administrators.', 'tpw-core' ); ?></p>
+						</div>
+					</div>
 
-						<div class="tpw-flexiclub-dashboard__checklist">
-							<div class="tpw-flexiclub-dashboard__progress" style="--tpw-progress: <?php echo esc_attr( $dashboard['checklist_progress'] ); ?>%;">
-								<div class="tpw-flexiclub-dashboard__progress-ring">
-									<strong><?php echo esc_html( $dashboard['checklist_done'] ); ?>/<?php echo esc_html( $dashboard['checklist_total'] ); ?></strong>
-								</div>
-								<div class="tpw-flexiclub-dashboard__progress-copy">
-									<h3><?php esc_html_e( 'Setup Progress', 'tpw-core' ); ?></h3>
-									<p><?php esc_html_e( 'Complete the remaining setup tasks before handing this portal to club administrators.', 'tpw-core' ); ?></p>
-								</div>
-							</div>
-
-							<div class="tpw-flexiclub-dashboard__checklist-panel">
-								<div class="tpw-flexiclub-dashboard__checklist-items">
-									<?php foreach ( $dashboard['checklist_items'] as $item ) : ?>
-										<div class="tpw-flexiclub-dashboard__checklist-item">
-											<span class="tpw-flexiclub-dashboard__checkmark tpw-flexiclub-dashboard__checkmark--<?php echo ! empty( $item['done'] ) ? 'done' : 'pending'; ?>" aria-hidden="true">
-												<?php echo ! empty( $item['done'] ) ? '✓' : '○'; ?>
-											</span>
-											<div>
-												<div class="tpw-flexiclub-dashboard__checklist-title">
-													<?php echo esc_html( $item['label'] ); ?>
-													<?php if ( ! empty( $item['optional'] ) ) : ?>
-														<span class="tpw-flexiclub-dashboard__optional"><?php esc_html_e( 'Optional', 'tpw-core' ); ?></span>
-													<?php endif; ?>
-												</div>
-												<p><?php echo esc_html( $item['description'] ); ?></p>
-											</div>
-											<?php $checklist_action_label = ! empty( $item['action_label'] ) ? (string) $item['action_label'] : __( 'Open', 'tpw-core' ); ?>
-											<?php if ( ! empty( $item['url'] ) ) : ?>
-												<a class="tpw-flexiclub-dashboard__checklist-action" href="<?php echo esc_url( $item['url'] ); ?>"><?php echo esc_html( $checklist_action_label ); ?></a>
-											<?php else : ?>
-												<span class="tpw-flexiclub-dashboard__checklist-action tpw-flexiclub-dashboard__checklist-action--disabled"><?php echo esc_html( $checklist_action_label ); ?></span>
+					<div class="tpw-flexiclub-dashboard__checklist-panel">
+						<div class="tpw-flexiclub-dashboard__checklist-items">
+							<?php foreach ( $dashboard['checklist_items'] as $item ) : ?>
+								<div class="tpw-flexiclub-dashboard__checklist-item">
+									<span class="tpw-flexiclub-dashboard__checkmark tpw-flexiclub-dashboard__checkmark--<?php echo ! empty( $item['done'] ) ? 'done' : 'pending'; ?>" aria-hidden="true">
+										<?php echo ! empty( $item['done'] ) ? '✓' : '○'; ?>
+									</span>
+									<div>
+										<div class="tpw-flexiclub-dashboard__checklist-title">
+											<?php echo esc_html( $item['label'] ); ?>
+											<?php if ( ! empty( $item['optional'] ) ) : ?>
+												<span class="tpw-flexiclub-dashboard__optional"><?php esc_html_e( 'Optional', 'tpw-core' ); ?></span>
 											<?php endif; ?>
 										</div>
-									<?php endforeach; ?>
+										<p><?php echo esc_html( $item['description'] ); ?></p>
+									</div>
+									<?php $checklist_action_label = ! empty( $item['action_label'] ) ? (string) $item['action_label'] : __( 'Open', 'tpw-core' ); ?>
+									<?php if ( ! empty( $item['url'] ) ) : ?>
+										<a class="tpw-flexiclub-dashboard__checklist-action" href="<?php echo esc_url( $item['url'] ); ?>"><?php echo esc_html( $checklist_action_label ); ?></a>
+									<?php else : ?>
+										<span class="tpw-flexiclub-dashboard__checklist-action tpw-flexiclub-dashboard__checklist-action--disabled"><?php echo esc_html( $checklist_action_label ); ?></span>
+									<?php endif; ?>
 								</div>
-
-								<div class="tpw-flexiclub-dashboard__checklist-actions">
-									<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard['checklist_primary_action']['url'] ); ?>"><?php echo esc_html( $dashboard['checklist_primary_action']['label'] ); ?></a>
-								</div>
-							</div>
+							<?php endforeach; ?>
 						</div>
-					</section>
-				<?php endif; ?>
 
+						<div class="tpw-flexiclub-dashboard__checklist-actions">
+							<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard['checklist_primary_action']['url'] ); ?>"><?php echo esc_html( $dashboard['checklist_primary_action']['label'] ); ?></a>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php endif; ?>
+
+		<div class="tpw-flexiclub-dashboard__layout">
+			<div class="tpw-flexiclub-dashboard__main">
 				<section id="flexiclub-tools" class="tpw-flexiclub-dashboard__section tpw-card">
 					<div class="tpw-flexiclub-dashboard__section-head">
 						<div>

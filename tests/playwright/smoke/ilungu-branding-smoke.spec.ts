@@ -7,6 +7,7 @@ const freshInstallFixture = process.env.ILUNGU_FRESH_INSTALL === 'true';
 const galleryFixture = process.env.ILUNGU_GALLERY_FIXTURE === 'true';
 const galleryCollisionFixture = process.env.ILUNGU_GALLERY_COLLISION_FIXTURE === 'true';
 const galleryMenuFixture = process.env.ILUNGU_GALLERY_MENU_FIXTURE === 'true';
+const checklistFixture = process.env.ILUNGU_CHECKLIST_FIXTURE === 'true';
 
 const routes = {
 	memberLogin: '/member-login/',
@@ -158,6 +159,14 @@ async function visitClubAdminMenuPage(page: Page, label: string): Promise<void> 
 	verifyPage();
 }
 
+async function signInAsAdmin(page: Page): Promise<void> {
+	await page.goto(pageUrl('/wp-login.php'), { waitUntil: 'domcontentloaded' });
+	await page.getByLabel(/username or email address/i).fill(adminUser!);
+	await page.getByLabel(/^password$/i).fill(adminPassword!);
+	await page.getByRole('button', { name: /log in/i }).click();
+	await page.waitForURL(/\/wp-admin\//);
+}
+
 test.describe('iLungu Club branding smoke test', () => {
 	test.beforeAll(async ({ browser }) => {
 		const page = await browser.newPage({ ignoreHTTPSErrors: true });
@@ -196,6 +205,51 @@ test.describe('iLungu Club branding smoke test', () => {
 		await expect(page.locator('.tpw-flexiclub-dashboard__permission-state')).toContainText('iLungu Club workspace');
 		for (const path of optionalPortalPaths) {
 			await visitOptionalPage(page, path, path);
+		}
+	});
+
+	test('front-end Getting Started preserves usable responsive task cards', async ({ page }) => {
+		test.skip(!adminUser || !adminPassword || !checklistFixture, 'Set ILUNGU_ADMIN_USER, ILUNGU_ADMIN_PASSWORD, and ILUNGU_CHECKLIST_FIXTURE for an incomplete six-task checklist fixture.');
+		await signInAsAdmin(page);
+
+		for (const [label, viewport] of [
+			['desktop', { width: 1440, height: 1000 }],
+			['tablet', { width: 900, height: 1000 }],
+			['mobile', { width: 390, height: 844 }],
+		] as const) {
+			await page.setViewportSize(viewport);
+			const response = await page.goto(pageUrl(routes.portal), { waitUntil: 'domcontentloaded' });
+			expect(response?.ok(), `${label} portal must load`).toBeTruthy();
+
+			const checklist = page.locator('#tpw-flexiclub-checklist');
+			const cards = checklist.locator('.tpw-flexiclub-dashboard__checklist-item');
+			await expect(checklist, `${label} checklist must render`).toBeVisible();
+			await expect(cards, `${label} must retain all six checklist tasks`).toHaveCount(6);
+			expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), `${label} must not overflow horizontally`).toBeTruthy();
+
+			const cardLayout = await cards.evaluateAll((elements) => elements.map((element) => {
+				const card = element.getBoundingClientRect();
+				const title = element.querySelector<HTMLElement>('.tpw-flexiclub-dashboard__checklist-title')?.getBoundingClientRect();
+				const description = element.querySelector<HTMLElement>('p')?.getBoundingClientRect();
+				const action = element.querySelector<HTMLElement>('.tpw-flexiclub-dashboard__checklist-action')?.getBoundingClientRect();
+				return { card, title, description, action };
+			}));
+
+			for (const { title, description, action } of cardLayout) {
+				expect(title && description && action, `${label} task content and action must render`).toBeTruthy();
+				const overlaps = (first: DOMRect, second: DOMRect) => first.left < second.right && first.right > second.left && first.top < second.bottom && first.bottom > second.top;
+				expect(overlaps(action!, description!), `${label} action must not overlap its description`).toBeFalsy();
+				expect(overlaps(action!, title!), `${label} action must not overlap its title`).toBeFalsy();
+			}
+
+			const columns = new Set(cardLayout.map(({ card }) => Math.round(card.x / 10) * 10));
+			if ('desktop' === label) {
+				expect(columns.size, 'desktop must use two task columns').toBe(2);
+				expect(cardLayout.every(({ card }) => card.width >= 260), 'desktop task cards must remain at least 260px wide').toBeTruthy();
+			}
+			if ('mobile' === label) {
+				expect(columns.size, 'mobile must stack task cards into one column').toBe(1);
+			}
 		}
 	});
 

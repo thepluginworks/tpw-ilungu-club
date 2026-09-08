@@ -1211,6 +1211,20 @@ body.tpw-flexiclub-portal-page .secondary-sidebar {
   gap: 22px;
 }
 
+.tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__section--checklist-full {
+  margin-bottom: 0;
+}
+
+.tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__checklist {
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+}
+
+@media (min-width: 1081px) {
+  .tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__checklist-items {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
 .tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__hero-content {
   grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.5fr);
   gap: clamp(20px, 2vw, 32px);
@@ -1341,6 +1355,22 @@ body.tpw-flexiclub-portal-page .secondary-sidebar {
 
   .tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__overview-grid,
   .tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__extend-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1080px) {
+  .tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__checklist {
+    grid-template-columns: 1fr;
+  }
+
+  .tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__checklist-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .tpw-frontend-ui.flexiclub-dashboard--frontend.flexiclub-portal-page .tpw-flexiclub-dashboard__checklist-items {
     grid-template-columns: 1fr;
   }
 }
