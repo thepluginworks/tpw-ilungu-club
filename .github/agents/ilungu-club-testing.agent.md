@@ -67,6 +67,9 @@ Public Entry:
 Adminer / DB UI:
 http://localhost:10065/?username=root&db=local
 
+DB socket:
+/Users/stuart/Library/Application Support/Local/run/HUid5twAp/mysql/mysqld.sock
+
 Primary tables to inspect:
 - wp_users
 - wp_tpw_members

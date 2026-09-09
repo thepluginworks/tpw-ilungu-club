@@ -2886,6 +2886,11 @@ class TPW_FlexiClub_Admin_Menu {
 		$required_label    = $required ? __( 'Required', 'tpw-core' ) : __( 'Optional', 'tpw-core' );
 		$required_tone     = $required ? 'info' : 'neutral';
 		$shortcode_tag     = '';
+		$shortcode_display = $shortcode;
+
+		if ( '' !== $shortcode_display && ( '[' !== substr( $shortcode_display, 0, 1 ) || ']' !== substr( $shortcode_display, -1 ) ) ) {
+			$shortcode_display = '[' . $shortcode_display . ']';
+		}
 
 		if ( '' !== $shortcode && class_exists( 'TPW_Core_System_Pages' ) && method_exists( 'TPW_Core_System_Pages', 'parse_shortcode_tag' ) ) {
 			$shortcode_tag = (string) TPW_Core_System_Pages::parse_shortcode_tag( $shortcode );
@@ -3008,6 +3013,7 @@ class TPW_FlexiClub_Admin_Menu {
 			'legacy_label'     => $legacy_label,
 			'legacy_message'   => $legacy_message,
 			'shortcode'        => '' !== $shortcode ? $shortcode : __( 'No shortcode registered', 'tpw-core' ),
+			'shortcode_display' => '' !== $shortcode_display ? $shortcode_display : __( 'No shortcode registered', 'tpw-core' ),
 			'required'         => $required,
 			'required_label'   => $required_label,
 			'required_tone'    => $required_tone,

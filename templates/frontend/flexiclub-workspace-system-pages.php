@@ -101,7 +101,7 @@ $notice_text    = isset( $workspace['notice_text'] ) ? (string) $workspace['noti
 					</div>
 
 					<div class="table-cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Shortcode', 'tpw-core' ); ?>">
-						<code class="tpw-flexiclub-system-pages__shortcode"><?php echo esc_html( $row['shortcode'] ); ?></code>
+						<code class="tpw-flexiclub-system-pages__shortcode"><?php echo esc_html( $row['shortcode_display'] ); ?></code>
 					</div>
 
 					<div class="table-cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Linked Page', 'tpw-core' ); ?>">
