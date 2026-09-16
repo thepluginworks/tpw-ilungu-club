@@ -51,6 +51,12 @@ UI architecture defines the canonical wrapper, shared component, and enqueue con
 
 The canonical shared UI contract is [docs/architecture/ui/tpw-core-ui-wrapper-enqueue-contract.md](ui/tpw-core-ui-wrapper-enqueue-contract.md).
 
+## Payments Architecture
+
+Payments architecture defines the distinction between stored active preferences and customer-safe checkout methods.
+
+The canonical payment-method contract is [docs/architecture/payments/tpw-core-payment-method-contract.md](payments/tpw-core-payment-method-contract.md).
+
 ## Architectural Separation
 
 Identity and permissions are separate architectural layers.

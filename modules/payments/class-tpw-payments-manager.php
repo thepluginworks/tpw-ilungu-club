@@ -2,6 +2,60 @@
 
 class TPW_Payments_Manager {
 
+	/**
+	 * Return payment methods currently released by iLungu Club.
+	 *
+	 * A database row never makes a method customer-facing on its own.
+	 *
+	 * @return array<int,string>
+	 */
+	public static function get_released_method_slugs(): array {
+		return array( 'bacs', 'cheque', 'cash', 'card-on-the-day', 'square' );
+	}
+
+	/**
+	 * Determine whether a method is currently released for use by consumers.
+	 *
+	 * @param string $slug Payment method slug.
+	 * @return bool
+	 */
+	public static function is_method_released( $slug ): bool {
+		$slug = sanitize_key( (string) $slug );
+
+		return in_array( $slug, self::get_released_method_slugs(), true );
+	}
+
+	/**
+	 * Determine whether a released method has all required stored settings.
+	 *
+	 * @param string $slug Payment method slug.
+	 * @return bool
+	 */
+	public static function is_method_configured( $slug ): bool {
+		$slug = sanitize_key( (string) $slug );
+
+		if ( ! self::is_method_released( $slug ) ) {
+			return false;
+		}
+
+		$required_options = array(
+			'bacs'            => array( 'tpw_bacs_account_name', 'tpw_bacs_account_number', 'tpw_bacs_sort_code' ),
+			'cheque'          => array( 'tpw_cheque_payable_to' ),
+			'cash'            => array( 'tpw_cash_message' ),
+			'card-on-the-day' => array( 'tpw_card_on_the_day_message' ),
+			'square'          => array( 'tpw_square_app_id', 'tpw_square_access_token', 'tpw_square_location_id' ),
+		);
+
+		foreach ( $required_options[ $slug ] as $option_name ) {
+			$value = get_option( $option_name, '' );
+			if ( ! is_scalar( $value ) || '' === trim( (string) $value ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
     /**
      * Keep persisted Square availability coherent with runtime add-on state.
      *
@@ -83,14 +137,7 @@ class TPW_Payments_Manager {
      * @return bool
      */
     public static function square_has_stored_configuration() : bool {
-        foreach ( [ 'tpw_square_app_id', 'tpw_square_access_token', 'tpw_square_location_id' ] as $option_name ) {
-            $value = get_option( $option_name, '' );
-            if ( is_string( $value ) && trim( $value ) !== '' ) {
-                return true;
-            }
-        }
-
-        return false;
+        return self::is_method_configured( 'square' );
     }
 
     /**
@@ -114,7 +161,7 @@ class TPW_Payments_Manager {
      */
     public static function is_method_available( $slug ) : bool {
         $slug = sanitize_key( (string) $slug );
-        if ( '' === $slug ) {
+        if ( ! self::is_method_released( $slug ) ) {
             return false;
         }
 
@@ -125,6 +172,66 @@ class TPW_Payments_Manager {
         }
 
         return true;
+    }
+
+    /**
+     * Determine whether the stored method row is explicitly active.
+     *
+     * This checkout-only check gives a supported database row precedence over
+     * legacy option preferences, which remain available through get_active_methods().
+     *
+     * @param string $slug Payment method slug.
+     * @return bool
+     */
+    private static function is_method_active_for_checkout( $slug ) : bool {
+        global $wpdb;
+
+        if ( $wpdb && isset( $wpdb->prefix ) ) {
+            $table        = $wpdb->prefix . 'tpw_payment_methods';
+            $table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) );
+
+            if ( $table_exists === $table ) {
+                $has_slug   = $wpdb->get_var( "SHOW COLUMNS FROM {$table} LIKE 'slug'" );
+                $has_key    = $wpdb->get_var( "SHOW COLUMNS FROM {$table} LIKE 'method_key'" );
+                $has_active = $wpdb->get_var( "SHOW COLUMNS FROM {$table} LIKE 'active'" );
+                $has_enabled = $wpdb->get_var( "SHOW COLUMNS FROM {$table} LIKE 'enabled'" );
+                $col_slug   = $has_slug ? 'slug' : ( $has_key ? 'method_key' : '' );
+                $col_flag   = $has_active ? 'active' : ( $has_enabled ? 'enabled' : '' );
+
+                if ( $col_slug && $col_flag ) {
+                    $stored_active = $wpdb->get_var(
+                        $wpdb->prepare( "SELECT {$col_flag} FROM {$table} WHERE {$col_slug} = %s LIMIT 1", $slug )
+                    );
+
+                    if ( null !== $stored_active ) {
+                        return self::value_is_enabled( $stored_active );
+                    }
+                }
+            }
+        }
+
+        foreach ( self::get_active_methods() as $method ) {
+            if ( isset( $method->slug ) && $slug === sanitize_key( (string) $method->slug ) ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether a method can safely be offered and processed at checkout.
+     *
+     * @param string $slug Payment method slug.
+     * @return bool
+     */
+    public static function is_method_usable( $slug ): bool {
+        $slug = sanitize_key( (string) $slug );
+        if ( ! self::is_method_released( $slug ) || ! self::is_method_configured( $slug ) || ! self::is_method_available( $slug ) ) {
+            return false;
+        }
+
+        return self::is_method_active_for_checkout( $slug );
     }
 
     /**
@@ -214,7 +321,27 @@ class TPW_Payments_Manager {
             }
         }
 
-        return self::filter_available_methods( $out );
+        return $out;
+    }
+
+    /**
+     * Return the checkout-safe list of released, active, configured, and available methods.
+     *
+     * @return array<int,object{slug:string,name:string}>
+     */
+    public static function get_usable_methods(): array {
+        $usable = [];
+
+        foreach ( self::get_active_methods() as $method ) {
+            $slug = isset( $method->slug ) ? sanitize_key( (string) $method->slug ) : '';
+            if ( '' === $slug || ! self::is_method_usable( $slug ) ) {
+                continue;
+            }
+
+            $usable[] = $method;
+        }
+
+        return $usable;
     }
 
     /**

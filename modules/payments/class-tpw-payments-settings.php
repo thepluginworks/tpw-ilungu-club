@@ -9,24 +9,6 @@ class TPW_Payments_Settings {
     public static function add_menu() {
         add_submenu_page(
             'tpw_core',
-            'SumUp Settings',
-            'SumUp Settings',
-            'manage_options',
-            'tpw-sumup-settings',
-            [__CLASS__, 'render_page']
-        );
-        add_submenu_page(
-            'tpw_core',
-            'Test SumUp API',
-            'Test SumUp',
-            'manage_options',
-            'tpw-sumup-test',
-            function () {
-                include plugin_dir_path(__FILE__) . '/views/sumup-test-page.php';
-            }
-        );
-        add_submenu_page(
-            'tpw_core',
             'Square Settings',
             'Square Settings',
             'manage_options',
@@ -36,8 +18,6 @@ class TPW_Payments_Settings {
     }
 
     public static function register_settings() {
-        self::register_sumup_settings();
-
         if ( 'core' === self::get_square_settings_registration_owner() ) {
             self::register_square_settings();
         }

@@ -196,9 +196,7 @@ if ( ! function_exists( 'tpw_core_payments_get_method_label' ) ) {
         }
 
         $fixed_names = [
-            'square'      => __( 'Square', 'tpw-core' ),
-            'sumup'       => __( 'SumUp', 'tpw-core' ),
-            'woocommerce' => __( 'WooCommerce', 'tpw-core' ),
+            'square' => __( 'Square', 'tpw-core' ),
         ];
 
         if ( isset( $fixed_names[ $method_slug ] ) ) {
@@ -222,20 +220,12 @@ if ( ! function_exists( 'tpw_core_payments_get_method_label' ) ) {
 if ( ! function_exists( 'tpw_core_payments_get_frontend_fallback_message' ) ) {
     function tpw_core_payments_get_frontend_fallback_message( $method_slug ) {
         switch ( sanitize_key( (string) $method_slug ) ) {
-            case 'sumup':
-                return __( 'SumUp currently keeps its existing admin-only credential and OAuth flow. A front-end-safe wrapper is not available yet, so this method temporarily falls back to the existing admin page.', 'tpw-core' );
-
             case 'square':
                 if ( function_exists( 'tpw_core_get_square_settings_route_owner' ) && 'addon' === tpw_core_get_square_settings_route_owner() ) {
                     return __( 'Square settings are currently owned by the TPW Square Gateway add-on. Use the existing admin route until a front-end-safe compatibility wrapper is available.', 'tpw-core' );
                 }
 
                 return __( 'Square configuration includes credential fields and still relies on the existing admin settings surface. Use the admin route for now.', 'tpw-core' );
-
-            case 'woocommerce':
-                return class_exists( 'WooCommerce' )
-                    ? __( 'WooCommerce payment configuration remains owned by WooCommerce. Use the existing admin route for now.', 'tpw-core' )
-                    : __( 'WooCommerce is not active on this site, so there is no front-end configuration screen to render here.', 'tpw-core' );
 
             default:
                 return __( 'This payment method is registered, but a front-end-safe configuration screen is not available yet. Use the existing admin route for now.', 'tpw-core' );
@@ -246,6 +236,10 @@ if ( ! function_exists( 'tpw_core_payments_get_frontend_fallback_message' ) ) {
 if ( ! function_exists( 'tpw_core_payments_render_frontend_method_detail' ) ) {
     function tpw_core_payments_render_frontend_method_detail( $method_slug ) {
         $method_slug     = sanitize_key( (string) $method_slug );
+        if ( ! class_exists( 'TPW_Payments_Manager' ) || ! TPW_Payments_Manager::is_method_released( $method_slug ) ) {
+            return false;
+        }
+
         $method_map      = tpw_core_payments_get_frontend_detail_method_map();
         $method_label    = tpw_core_payments_get_method_label( $method_slug );
         $back_url        = function_exists( 'tpw_core_get_payment_methods_settings_url' ) ? tpw_core_get_payment_methods_settings_url() : '';

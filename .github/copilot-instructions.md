@@ -133,3 +133,27 @@ After documentation or code changes, validate that:
 - the new or updated contract is discoverable from the relevant README or index docs
 - existing help docs point back to the canonical contract instead of redefining it inconsistently
 - no new documentation claims a handle, helper, or guarantee that does not exist in the current codebase unless it is clearly marked as future work
+
+## Documentation
+Update all relevant Markdown documentation so the payment-method contract is explicit and future VC sessions do not reintroduce SumUp/WooCommerce or misuse `get_active_methods()`.
+
+At minimum review and update:
+
+- Club payment integration documentation, including `payments-integration.md`;
+- any developer/audit documentation describing payment-method discovery;
+- Lodge Meetings integration docs where payment-method selection is described;
+- Tickets integration docs where accepted payment methods are described;
+- any README or architecture notes that currently imply SumUp or WooCommerce are available/shipping.
+
+Documentation must clearly state:
+
+- released methods are currently `bacs`, `cheque`, `cash`, `card-on-the-day`, `square`;
+- `sumup` and `woocommerce` are currently unreleased and must not be surfaced anywhere;
+- `get_active_methods()` means stored administrator active preference only and is not a checkout-safety contract;
+- checkout consumers must use the new canonical usable-method contract;
+- a usable method means released + active + configured + runtime-available;
+- new payment-method rows default inactive;
+- existing legacy rows are not automatically migrated/deactivated;
+- SumUp/WooCommerce may remain dormant in storage for compatibility but must remain invisible until deliberately released.
+
+Also update any relevant changelog/decision documentation according to the repository's normal documentation conventions. Do not leave stale documentation telling consumers to use `get_active_methods()` for checkout eligibility.

@@ -158,6 +158,8 @@ The top-level iLungu Club wp-admin dashboard is a shared-framework-owned operati
 	- File: `modules/payments/webhook.php`
 	- Since: 1.0.0
 	- Description: Fires with gateway, reference, email, amount, payload array.
+- Payment method discovery — Use `TPW_Payments_Manager::get_usable_methods()` for customer checkout and `TPW_Payments_Manager::is_method_usable()` for server-side submission validation. `get_active_methods()` is only the stored administrator preference compatibility API.
+	- Contract: `docs/architecture/payments/tpw-core-payment-method-contract.md`
 
 ### Gallery
 - tpw_gallery_enabled (filter) — Toggle gallery feature on/off.

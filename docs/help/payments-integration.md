@@ -71,8 +71,10 @@ Use `.tpw-frontend-ui` for public/member-facing payment screens. Add `.tpw-admin
 
 ## 2) Payment method picker contract
 
-- Radio inputs must use name="tpw_payment_method" and a slug value that matches the currently exposed shared-framework methods (e.g., `square`, `bacs`, `cheque`, `cash`, `card-on-the-day`).
-- `sumup` and `woocommerce` remain reserved compatibility or development slugs in the shared framework, but they are intentionally hidden from the current shared FE and BE Payment Methods configuration UI and should not be treated as current club-facing options.
+- The canonical contract is [TPW Core Payment Method Contract](../architecture/payments/tpw-core-payment-method-contract.md).
+- Radio inputs must use name="tpw_payment_method" and a slug returned by `TPW_Payments_Manager::get_usable_methods()`.
+- Released methods are `bacs`, `cheque`, `cash`, `card-on-the-day`, and `square`. `sumup` and `woocommerce` are unreleased dormant compatibility records and must not be surfaced or accepted.
+- After submission, validate the chosen slug with `TPW_Payments_Manager::is_method_usable()` before starting any payment processing.
 - Show/hide method-specific UI based on the selected radio.
 
 Minimal structure:
@@ -94,7 +96,7 @@ Container IDs (conventions used by shared-framework-compatible UIs):
 - `#tpw-square-container` — mount the Square “Card”/“Payment” element here.
 - `#tpw-square-errors` — surface validation or SDK errors.
 
-Tip: Read active methods via `TPW_Payments_Manager::get_active_methods()` to show only available options.
+Use `TPW_Payments_Manager::get_usable_methods()` to show checkout options. `get_active_methods()` exposes only stored administrator preferences and is not safe for checkout eligibility.
 
 ---
 
@@ -204,7 +206,7 @@ $cfg = [
     'locationId' => get_option('tpw_square_location_id'),
     'sandbox'    => (get_option('tpw_square_sandbox_mode') === '1'),
   ],
-  'activeMethods' => (class_exists('TPW_Payments_Manager') ? TPW_Payments_Manager::get_active_methods() : []),
+  'activeMethods' => (class_exists('TPW_Payments_Manager') ? TPW_Payments_Manager::get_usable_methods() : []),
 ];
 wp_register_script('my-checkout', plugins_url('assets/js/checkout.js', __FILE__), ['jquery'], '1.0', true);
 wp_localize_script('my-checkout', 'tpwPaymentsConfig', $cfg);
@@ -287,5 +289,6 @@ JS (outline using the bootstrap):
 See also:
 - `TPW_Core_Payments` (helpers, surcharges, row creation)
 - `TPW_Square_Gateway` (server-side Square charge using SDK)
-- `TPW_Payments_Manager::get_active_methods()` (discover site-enabled methods)
+- `TPW_Payments_Manager::get_usable_methods()` (discover checkout-safe methods)
+- `TPW_Payments_Manager::is_method_usable()` (validate a submitted method)
 - Branding/UI: `docs/help/tpw-branding.md`, Payments UI: `docs/tpw-payments-ui.md`

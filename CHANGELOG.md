@@ -1,6 +1,9 @@
 # Changelog
 
-## [Unreleased]
+## [2.11.1] - 2026-09-16
+
+### Changed
+- Payments: documented the canonical payment-method eligibility contract. Checkout-safe methods must be released, administrator-active, configured, and runtime-available; stored active state alone is not customer-facing eligibility. SumUp and WooCommerce are documented as unreleased dormant compatibility records.
 
 ## [2.11.0] - 2026-08-13
 

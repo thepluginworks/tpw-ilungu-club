@@ -14,7 +14,7 @@ class TPW_Payment_DB {
             name varchar(100) NOT NULL,
             slug varchar(100) NOT NULL,
             sort_order int(11) NOT NULL DEFAULT 0,
-            active tinyint(1) DEFAULT 1,
+            active tinyint(1) DEFAULT 0,
             created_at datetime DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY  (id),
             UNIQUE KEY slug_unique (slug)
@@ -72,7 +72,7 @@ class TPW_Payment_DB {
                     'name' => $method['name'],
                     'slug' => $method['slug'],
                     'sort_order' => $i,
-                    'active' => 1,
+                    'active' => 0,
                     'created_at' => current_time('mysql'),
                 ]);
             }

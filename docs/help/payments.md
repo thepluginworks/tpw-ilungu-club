@@ -1,12 +1,12 @@
 # Payments
 
 ## Overview
-Payments provides lightweight helpers and webhooks to log completed transactions (e.g., SumUp, Square) and expose settings like currency for dependent plugins.
+Payments provides lightweight helpers and webhooks to log completed transactions and expose settings like currency for dependent plugins.
 
 ## Current Payment Methods Status
-- Visible in the shared Payment Methods settings UI: Bank Transfer (BACS), Cheque, Cash, Card on the day, and Square compatibility settings.
-- Hidden from the shared Payment Methods settings UI for now: SumUp and WooCommerce.
-- SumUp and WooCommerce remain development or integration surfaces in the shared plugin framework and must not be treated as current club-facing configuration options in the FE or BE Payment Methods list.
+- Released methods: Bank Transfer (BACS), Cheque, Cash, Card on the day, and Square.
+- SumUp and WooCommerce are unreleased, dormant compatibility records. They must not be surfaced in settings, customer UI, or checkout flows even when legacy storage rows exist.
+- A checkout method must be released, administrator-active, configured, and runtime-available. See the canonical [payment-method contract](../architecture/payments/tpw-core-payment-method-contract.md).
 - Square remains visible because the shared framework still preserves its compatibility-era configuration state, even when the TPW Square Gateway add-on is not active.
 
 ## Key Screens / Shortcodes
@@ -19,6 +19,7 @@ Payments provides lightweight helpers and webhooks to log completed transactions
 ## Extending
 - Subscribe to tpw_payment_completed to update your domain models (orders, entries). Validate payloads and idempotency yourself.
 - Use get_option('flexievent_settings') for currency_symbol and currency_code where needed.
+- Use `TPW_Payments_Manager::get_usable_methods()` to build a checkout selector and `TPW_Payments_Manager::is_method_usable()` to validate its submission. `get_active_methods()` is a backwards-compatible stored-preference API, not a checkout gate.
 
 ## References
 - Developer Guide → ../developer-guide.md

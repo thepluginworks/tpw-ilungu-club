@@ -23,8 +23,8 @@ class TPW_Member_Payments {
      * Safe/no-op when the registry isn't used elsewhere yet.
      */
     public static function register_profile_section( array $sections ) : array {
-        $active_methods = class_exists( 'TPW_Payments_Manager' ) ? (array) TPW_Payments_Manager::get_active_methods() : [];
-        if ( ! empty( $active_methods ) ) {
+        $usable_methods = class_exists( 'TPW_Payments_Manager' ) ? (array) TPW_Payments_Manager::get_usable_methods() : [];
+        if ( ! empty( $usable_methods ) ) {
             $sections['payments'] = [
                 'slug'     => 'payments',
                 'label'    => __( 'My Payments', 'tpw-core' ),
@@ -98,7 +98,7 @@ class TPW_Member_Payments {
      */
     public static function render_source_methods() : void {
         $active_slugs = [];
-        $active_methods = class_exists( 'TPW_Payments_Manager' ) ? (array) TPW_Payments_Manager::get_active_methods() : [];
+        $active_methods = class_exists( 'TPW_Payments_Manager' ) ? (array) TPW_Payments_Manager::get_usable_methods() : [];
 
         foreach ( $active_methods as $method ) {
             $slug = isset( $method->slug ) ? (string) $method->slug : '';
@@ -198,10 +198,10 @@ class TPW_Member_Payments {
      * Helper: determine if there are any active payment methods using manager, table, or options fallback.
      */
     public static function has_active_methods() : bool {
-        if ( class_exists( 'TPW_Payments_Manager' ) && method_exists( 'TPW_Payments_Manager', 'has_active_methods' ) ) {
-            return TPW_Payments_Manager::has_active_methods();
+        if ( class_exists( 'TPW_Payments_Manager' ) && method_exists( 'TPW_Payments_Manager', 'get_usable_methods' ) ) {
+            return ! empty( TPW_Payments_Manager::get_usable_methods() );
         }
-        $active_methods = class_exists( 'TPW_Payments_Manager' ) ? (array) TPW_Payments_Manager::get_active_methods() : [];
+        $active_methods = class_exists( 'TPW_Payments_Manager' ) ? (array) TPW_Payments_Manager::get_usable_methods() : [];
         return ! empty( $active_methods );
     }
 }

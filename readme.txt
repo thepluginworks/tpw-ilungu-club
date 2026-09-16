@@ -4,7 +4,7 @@ Tags: members, payments, rsvp, admin-tools, tpw
 Requires at least: 5.8
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 2.11.0
+Stable tag: 2.11.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,10 @@ Displays a thank-you or confirmation view for supported TPW payment and RSVP flo
 Displays the TPW Control front-end admin hub where this is enabled for your site.
 
 == Changelog ==
+
+= 2.11.1 =
+- Added the checkout-safe payment method API used by iLungu Club add-ons. Only released, active, configured, and available methods can be offered at checkout.
+- Prevented inactive Bank Transfer settings from being exposed through checkout payment method discovery.
 
 = 2.11.0 =
 - Renamed the distributed plugin identity to iLungu Club, including the plugin package, updater channel, and release artifacts, while preserving existing technical identifiers for compatibility.

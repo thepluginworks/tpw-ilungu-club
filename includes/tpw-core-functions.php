@@ -1085,7 +1085,7 @@ if ( ! function_exists( 'tpw_core_payments_required' ) ) {
 /**
  * Build a default payments page config for front-end bootstrapping.
  *
- * Includes currency, Square app/location IDs, sandbox flag, and active methods list.
+ * Includes currency, Square app/location IDs, sandbox flag, and checkout-safe methods list.
  *
  * @since 1.1.0
  * @return array
@@ -1103,7 +1103,7 @@ if ( ! function_exists( 'tpw_core_get_payments_page_config' ) ) {
                 'locationId' => get_option('tpw_square_location_id'),
                 'sandbox'    => ( get_option('tpw_square_sandbox_mode') === '1' ),
             ],
-            'activeMethods' => class_exists('TPW_Payments_Manager') ? TPW_Payments_Manager::get_active_methods() : [],
+            'activeMethods' => class_exists('TPW_Payments_Manager') ? TPW_Payments_Manager::get_usable_methods() : [],
         ];
 
         /**
