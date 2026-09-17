@@ -193,6 +193,10 @@ class TPW_FlexiClub_Admin_Menu {
 				[ __CLASS__, 'render_logs_page' ]
 			);
 		}
+
+		foreach ( self::get_consumer_workspaces( 'admin' ) as $workspace ) {
+			add_submenu_page( self::TOP_LEVEL_SLUG, $workspace['label'], $workspace['label'], $workspace['admin']['capability'], self::TOP_LEVEL_SLUG . '-' . $workspace['key'], $workspace['admin']['page_callback'] );
+		}
 	}
 
 	public static function render_dashboard() {
@@ -1393,6 +1397,7 @@ class TPW_FlexiClub_Admin_Menu {
 		$system_pages_workspace = self::get_frontend_system_pages_workspace_view_model();
 		$active_portal_item     = $workspace;
 		$workspace_nav_context  = [];
+		$consumer_workspace     = self::get_consumer_workspace( $workspace, 'frontend' );
 
 		if ( 'settings' === $workspace && ! empty( $settings_workspace['active_portal_key'] ) ) {
 			$active_portal_item = (string) $settings_workspace['active_portal_key'];
@@ -1432,6 +1437,7 @@ class TPW_FlexiClub_Admin_Menu {
 			'system_pages_workspace' => $system_pages_workspace,
 			'menu_management_workspace' => $menu_management_workspace,
 			'archival_system_workspace' => $archival_system_workspace,
+			'consumer_workspace'      => $consumer_workspace,
 			'system_items'           => self::get_dashboard_system_items(
 				$members_summary,
 				$system_summary,
@@ -1845,7 +1851,7 @@ class TPW_FlexiClub_Admin_Menu {
 			];
 		}
 
-		return $cards;
+		return array_merge( $cards, self::get_consumer_overview_cards( 'frontend' ) );
 	}
 
 	protected static function get_frontend_portal_nav_items( $cards, $active_workspace ) {
@@ -1867,6 +1873,16 @@ class TPW_FlexiClub_Admin_Menu {
 				'current'  => (string) $card_key === (string) $active_workspace,
 				'internal' => false,
 				'disabled' => empty( $card['action_url'] ),
+			];
+		}
+
+		foreach ( self::get_consumer_workspaces( 'frontend' ) as $workspace ) {
+			$items[] = [
+				'label'    => $workspace['label'],
+				'url'      => self::get_frontend_workspace_url( $workspace['key'] ),
+				'current'  => $workspace['key'] === $active_workspace,
+				'internal' => true,
+				'disabled' => '' === self::get_frontend_workspace_url( $workspace['key'] ),
 			];
 		}
 
@@ -1898,7 +1914,7 @@ class TPW_FlexiClub_Admin_Menu {
 	}
 
 	protected static function get_allowed_frontend_workspaces() {
-		return [
+		$workspaces = [
 			'dashboard',
 			'logs',
 			'menu-management',
@@ -1906,6 +1922,12 @@ class TPW_FlexiClub_Admin_Menu {
 			'settings',
 			'system-pages',
 		];
+
+		foreach ( self::get_consumer_workspaces( 'frontend' ) as $workspace ) {
+			$workspaces[] = $workspace['key'];
+		}
+
+		return array_values( array_unique( $workspaces ) );
 	}
 
 	protected static function normalize_frontend_workspace( $workspace ) {
@@ -2084,6 +2106,15 @@ class TPW_FlexiClub_Admin_Menu {
 				[
 					'label' => $active_label,
 					'url'   => '#flexiclub-logs-table',
+				],
+			];
+		}
+
+		if ( ! empty( self::get_consumer_workspace( $workspace, 'frontend' ) ) ) {
+			return [
+				[
+					'label' => __( 'Workspace', 'tpw-core' ),
+					'url'   => '#tpw-flexiclub-consumer-workspace',
 				],
 			];
 		}
@@ -3277,7 +3308,7 @@ class TPW_FlexiClub_Admin_Menu {
 					'icon'          => 'dashicons-calendar-alt',
 				],
 			],
-			'overview_cards'  => [
+			'overview_cards'  => array_merge( [
 				[
 					'title'         => __( 'Members', 'tpw-core' ),
 					'metric'        => self::format_metric_value( $members_summary['count'] ),
@@ -3387,7 +3418,7 @@ class TPW_FlexiClub_Admin_Menu {
 					'icon'          => 'dashicons-chart-line',
 					'disabled'      => false,
 				],
-			],
+			], self::get_consumer_overview_cards( 'admin' ) ),
 			'quick_actions'   => self::get_dashboard_quick_actions( $payments_summary ),
 			'extend_cards'    => self::get_dashboard_extend_cards(),
 			'checklist_items' => $checklist_items,
@@ -3529,6 +3560,7 @@ class TPW_FlexiClub_Admin_Menu {
 	protected static function get_dashboard_extend_cards( $prefer_frontend = false ) {
 		$definitions = [
 			[
+				'key'              => 'events',
 				'name'             => __( 'iLungu Events', 'tpw-core' ),
 				'description'      => __( 'Events, scheduling, and club activities.', 'tpw-core' ),
 				'icon_url'         => self::get_plugin_icon_url( 'ilunguevent-icon.svg' ),
@@ -3544,6 +3576,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'active_label'     => __( 'Manage events', 'tpw-core' ),
 			],
 			[
+				'key'          => 'subscriptions',
 				'name'         => __( 'iLungu Subscriptions', 'tpw-core' ),
 				'description'  => __( 'Membership subscriptions and renewals.', 'tpw-core' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungusubscriptions-icon.svg' ),
@@ -3556,6 +3589,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'active_label' => __( 'Manage subscriptions', 'tpw-core' ),
 			],
 			[
+				'key'          => 'tickets',
 				'name'         => __( 'iLungu Tickets', 'tpw-core' ),
 				'description'  => __( 'Ticketing and event sales for members.', 'tpw-core' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungutickets-icon.svg' ),
@@ -3568,6 +3602,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'active_label' => __( 'Manage ticketing', 'tpw-core' ),
 			],
 			[
+				'key'          => 'ledger',
 				'name'         => __( 'iLungu Ledger', 'tpw-core' ),
 				'description'  => __( 'Financial tracking and reconciliation tools.', 'tpw-core' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilunguledger-icon.svg' ),
@@ -3579,6 +3614,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'active_label' => __( 'Manage ledger', 'tpw-core' ),
 			],
 			[
+				'key'              => 'golf',
 				'name'             => __( 'iLungu Golf', 'tpw-core' ),
 				'description'      => __( 'Fixtures, results, and match administration.', 'tpw-core' ),
 				'icon_url'         => self::get_plugin_icon_url( 'ilungugolf-icon.svg' ),
@@ -3590,6 +3626,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'product_url'      => 'https://thepluginworks.com/FlexiGolf',
 			],
 			[
+				'key'          => 'policy',
 				'name'         => __( 'iLungu Policy', 'tpw-core' ),
 				'description'  => __( 'Club documents, policy delivery, and acknowledgements.', 'tpw-core' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungupolicy-icon.svg' ),
@@ -3599,6 +3636,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'product_url'  => 'https://thepluginworks.com/FlexiPolicy',
 			],
 			[
+				'key'          => 'rota',
 				'name'         => __( 'iLungu Rota', 'tpw-core' ),
 				'description'  => __( 'Volunteer and duty rota planning.', 'tpw-core' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungurota-icon.svg' ),
@@ -3608,6 +3646,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'product_url'  => 'https://thepluginworks.com/FlexiRota',
 			],
 			[
+				'key'          => 'lodge',
 				'name'         => __( 'iLungu Lodge', 'tpw-core' ),
 				'description'  => __( 'Responses, attendance, and payment-ready RSVPs.', 'tpw-core' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungulodgemeetings-icon.svg' ),
@@ -3656,6 +3695,8 @@ class TPW_FlexiClub_Admin_Menu {
 				$card['action_url']   = $action_url;
 			}
 
+			$card = self::add_consumer_extend_actions( $card, $definition, $prefer_frontend );
+
 			return $card;
 		}
 
@@ -3681,6 +3722,218 @@ class TPW_FlexiClub_Admin_Menu {
 			$card['action_label'] = __( 'Learn more', 'tpw-core' );
 			$card['action_url']   = $definition['product_url'];
 		}
+
+		return $card;
+	}
+
+	protected static function get_club_administration_contributions( $context = '' ) {
+		$registered = apply_filters( 'tpw_core_club_administration_contributions', [] );
+		$valid      = [];
+
+		if ( ! is_array( $registered ) ) {
+			return $valid;
+		}
+
+		foreach ( $registered as $contribution ) {
+			if ( ! is_array( $contribution ) || empty( $contribution['key'] ) ) {
+				continue;
+			}
+			$key = sanitize_key( (string) $contribution['key'] );
+			if ( '' === $key || isset( $valid[ $key ] ) ) {
+				continue;
+			}
+
+			$contexts = isset( $contribution['contexts'] ) && is_array( $contribution['contexts'] ) ? $contribution['contexts'] : [];
+			$contexts = array_values( array_intersect( [ 'frontend', 'admin' ], array_map( 'sanitize_key', $contexts ) ) );
+			if ( empty( $contexts ) || ( '' !== $context && ! in_array( $context, $contexts, true ) ) ) {
+				continue;
+			}
+
+			$capability = isset( $contribution['capability'] ) ? $contribution['capability'] : '';
+			if ( ! self::consumer_contribution_is_visible( $capability ) ) {
+				continue;
+			}
+
+			$normalized = [ 'key' => $key, 'contexts' => $contexts ];
+			$overview   = self::normalize_consumer_overview_card( isset( $contribution['overview_card'] ) ? $contribution['overview_card'] : [] );
+			$extend     = self::normalize_consumer_extend_actions( isset( $contribution['extend_actions'] ) ? $contribution['extend_actions'] : [] );
+			$workspace  = self::normalize_consumer_workspace( isset( $contribution['workspace'] ) ? $contribution['workspace'] : [], $key, $capability );
+
+			if ( ! empty( $overview ) ) {
+				$normalized['overview_card'] = $overview;
+			}
+			if ( ! empty( $extend ) ) {
+				$normalized['extend_actions'] = $extend;
+			}
+			if ( ! empty( $workspace ) ) {
+				$normalized['workspace'] = $workspace;
+			}
+			if ( 2 < count( $normalized ) ) {
+				$valid[ $key ] = $normalized;
+			}
+		}
+
+		return $valid;
+	}
+
+	protected static function consumer_contribution_is_visible( $capability ) {
+		if ( is_callable( $capability ) ) {
+			return (bool) call_user_func( $capability );
+		}
+
+		return is_string( $capability ) && '' !== $capability && current_user_can( $capability );
+	}
+
+	protected static function normalize_consumer_overview_card( $card ) {
+		if ( ! is_array( $card ) || empty( $card['title'] ) || empty( $card['primary_action'] ) ) {
+			return [];
+		}
+
+		$primary_action = self::normalize_consumer_action( $card['primary_action'] );
+		if ( empty( $primary_action ) ) {
+			return [];
+		}
+
+		$normalized = [
+			'title'        => sanitize_text_field( $card['title'] ),
+			'metric'       => isset( $card['metric'] ) ? sanitize_text_field( $card['metric'] ) : '',
+			'tone'         => isset( $card['tone'] ) ? sanitize_html_class( $card['tone'] ) : 'default',
+			'status_label' => isset( $card['status_label'] ) ? sanitize_text_field( $card['status_label'] ) : '',
+			'status_tone'  => isset( $card['status_tone'] ) ? sanitize_html_class( $card['status_tone'] ) : 'neutral',
+			'description'  => isset( $card['description'] ) ? sanitize_text_field( $card['description'] ) : '',
+			'icon'         => isset( $card['icon'] ) ? sanitize_html_class( $card['icon'] ) : 'dashicons-admin-generic',
+			'action_label' => $primary_action['label'],
+			'action_url'   => $primary_action['url'],
+			'disabled'     => false,
+			'position'     => isset( $card['position'] ) ? (int) $card['position'] : 10,
+		];
+		$secondary_action = isset( $card['secondary_action'] ) ? self::normalize_consumer_action( $card['secondary_action'] ) : [];
+		if ( ! empty( $secondary_action ) ) {
+			$normalized['secondary_action'] = $secondary_action;
+		}
+
+		return $normalized;
+	}
+
+	protected static function normalize_consumer_extend_actions( $extend ) {
+		if ( ! is_array( $extend ) || empty( $extend['catalogue_key'] ) || empty( $extend['actions'] ) || ! is_array( $extend['actions'] ) ) {
+			return [];
+		}
+
+		$actions = [];
+		foreach ( $extend['actions'] as $action ) {
+			$action = self::normalize_consumer_action( $action );
+			if ( ! empty( $action ) ) {
+				$actions[] = $action;
+			}
+		}
+
+		return empty( $actions ) ? [] : [ 'catalogue_key' => sanitize_key( $extend['catalogue_key'] ), 'actions' => $actions ];
+	}
+
+	protected static function normalize_consumer_action( $action ) {
+		if ( ! is_array( $action ) || empty( $action['label'] ) || empty( $action['url'] ) ) {
+			return [];
+		}
+
+		$url = esc_url_raw( $action['url'] );
+		return '' === $url ? [] : [ 'label' => sanitize_text_field( $action['label'] ), 'url' => $url ];
+	}
+
+	protected static function normalize_consumer_workspace( $workspace, $contribution_key, $capability ) {
+		if ( ! is_array( $workspace ) || empty( $workspace['key'] ) || empty( $workspace['label'] ) ) {
+			return [];
+		}
+
+		$key = sanitize_key( $workspace['key'] );
+		if ( '' === $key || $key !== $contribution_key ) {
+			return [];
+		}
+
+		$normalized = [ 'key' => $key, 'label' => sanitize_text_field( $workspace['label'] ), 'position' => isset( $workspace['position'] ) ? (int) $workspace['position'] : 10 ];
+		if ( isset( $workspace['frontend']['render_callback'] ) && is_callable( $workspace['frontend']['render_callback'] ) ) {
+			$normalized['frontend'] = [ 'render_callback' => $workspace['frontend']['render_callback'] ];
+		}
+		$admin_capability = isset( $workspace['admin']['capability'] ) ? $workspace['admin']['capability'] : $capability;
+		if ( isset( $workspace['admin']['page_callback'] ) && is_callable( $workspace['admin']['page_callback'] ) && is_string( $admin_capability ) && '' !== $admin_capability ) {
+			$normalized['admin'] = [ 'page_callback' => $workspace['admin']['page_callback'], 'capability' => sanitize_key( $admin_capability ) ];
+		}
+
+		return empty( $normalized['frontend'] ) && empty( $normalized['admin'] ) ? [] : $normalized;
+	}
+
+	protected static function get_consumer_overview_cards( $context ) {
+		$cards = [];
+		foreach ( self::get_club_administration_contributions( $context ) as $contribution ) {
+			if ( ! empty( $contribution['overview_card'] ) ) {
+				$cards[ $contribution['key'] ] = $contribution['overview_card'];
+				$cards[ $contribution['key'] ]['key'] = $contribution['key'];
+			}
+		}
+		uasort(
+			$cards,
+			static function( $first, $second ) {
+				$position_order = $first['position'] <=> $second['position'];
+				return 0 !== $position_order ? $position_order : strcmp( $first['key'], $second['key'] );
+			}
+		);
+		foreach ( $cards as &$card ) {
+			unset( $card['key'], $card['position'] );
+		}
+
+		return array_values( $cards );
+	}
+
+	protected static function get_consumer_workspace( $workspace_key, $context ) {
+		foreach ( self::get_consumer_workspaces( $context ) as $workspace ) {
+			if ( $workspace_key === $workspace['key'] ) {
+				return $workspace;
+			}
+		}
+
+		return [];
+	}
+
+	protected static function get_consumer_workspaces( $context ) {
+		$workspaces = [];
+		foreach ( self::get_club_administration_contributions( $context ) as $contribution ) {
+			if ( ! empty( $contribution['workspace'][ $context ] ) ) {
+				$workspaces[ $contribution['workspace']['key'] ] = $contribution['workspace'];
+			}
+		}
+		uasort(
+			$workspaces,
+			static function( $first, $second ) {
+				$position_order = $first['position'] <=> $second['position'];
+				return 0 !== $position_order ? $position_order : strcmp( $first['key'], $second['key'] );
+			}
+		);
+
+		return $workspaces;
+	}
+
+	protected static function add_consumer_extend_actions( $card, $definition, $prefer_frontend ) {
+		$catalogue_key = isset( $definition['key'] ) ? sanitize_key( $definition['key'] ) : '';
+		$context       = $prefer_frontend ? 'frontend' : 'admin';
+		$actions       = [];
+
+		if ( ! empty( $card['action_label'] ) && ! empty( $card['action_url'] ) ) {
+			$actions[] = [ 'label' => $card['action_label'], 'url' => $card['action_url'] ];
+		}
+		foreach ( self::get_club_administration_contributions( $context ) as $contribution ) {
+			if ( empty( $contribution['extend_actions'] ) || $catalogue_key !== $contribution['extend_actions']['catalogue_key'] ) {
+				continue;
+			}
+			foreach ( $contribution['extend_actions']['actions'] as $action ) {
+				$actions[] = $action;
+			}
+		}
+
+		$unique_actions = [];
+		foreach ( $actions as $action ) {
+			$unique_actions[ $action['label'] . '|' . $action['url'] ] = $action;
+		}
+		$card['actions'] = array_values( $unique_actions );
 
 		return $card;
 	}

@@ -51,6 +51,8 @@ UI architecture defines the canonical wrapper, shared component, and enqueue con
 
 The canonical shared UI contract is [docs/architecture/ui/tpw-core-ui-wrapper-enqueue-contract.md](ui/tpw-core-ui-wrapper-enqueue-contract.md).
 
+The canonical Club Management dashboard, workspace, and wp-admin consumer contribution contract is [docs/architecture/ui/tpw-core-club-administration-contribution-contract.md](ui/tpw-core-club-administration-contribution-contract.md).
+
 ## Payments Architecture
 
 Payments architecture defines the distinction between stored active preferences and customer-safe checkout methods.

@@ -162,6 +162,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<?php else : ?>
 									<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $card['action_url'] ); ?>"><?php echo esc_html( $card['action_label'] ); ?></a>
 								<?php endif; ?>
+								<?php if ( ! empty( $card['secondary_action'] ) ) : ?>
+									<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $card['secondary_action']['url'] ); ?>"><?php echo esc_html( $card['secondary_action']['label'] ); ?></a>
+								<?php endif; ?>
 							</div>
 						<?php endif; ?>
 					</div>
@@ -192,7 +195,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</span>
 						</div>
 						<p><?php echo esc_html( $card['description'] ); ?></p>
-						<?php if ( ! empty( $card['action_url'] ) ) : ?>
+						<?php if ( ! empty( $card['actions'] ) ) : ?>
+							<div class="tpw-flexiclub-dashboard__extend-action">
+								<?php foreach ( $card['actions'] as $action ) : ?>
+									<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $action['url'] ); ?>"><?php echo esc_html( $action['label'] ); ?></a>
+								<?php endforeach; ?>
+							</div>
+						<?php elseif ( ! empty( $card['action_url'] ) ) : ?>
 							<div class="tpw-flexiclub-dashboard__extend-action">
 								<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $card['action_url'] ); ?>"><?php echo esc_html( $card['action_label'] ); ?></a>
 							</div>

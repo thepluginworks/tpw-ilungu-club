@@ -3,6 +3,14 @@
 The maintained iLungu Club browser suite is
 `tests/playwright/smoke/ilungu-branding-smoke.spec.ts`.
 
+The contribution contract suite is
+`tests/playwright/club-administration-contributions.spec.ts`. It requires the
+Local-only WordPress test bootstrap to define `ILUNGU_CLUB_PLAYWRIGHT_TESTING`
+and require `tests/playwright/fixtures/club-administration-contributions.php`.
+The fixture is request-scoped: it registers synthetic contributions only when
+the spec supplies its test query flag, creates no persistent state, and does
+not load outside that explicit Local test bootstrap.
+
 Run the current smoke suite with:
 
 ```sh
@@ -10,7 +18,7 @@ npm run test:ilungu-smoke
 ```
 
 `tests/playwright/playwright.config.ts` sets `testDir` to `tests/playwright` and
-matches only `smoke/ilungu-branding-smoke.spec.ts`. This keeps the maintained
+matches the smoke and contribution-contract specs. This keeps the maintained
 existing-install, authenticated-admin, portal/workspace, and fresh-install
 fixture checks separate from historical diagnostics.
 
