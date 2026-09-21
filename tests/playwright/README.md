@@ -22,6 +22,37 @@ matches the smoke and contribution-contract specs. This keeps the maintained
 existing-install, authenticated-admin, portal/workspace, and fresh-install
 fixture checks separate from historical diagnostics.
 
+## Member-role permission fixture
+
+`member-role-permissions.spec.ts` is a Local-only, rerun-safe role contract suite.
+It creates or reuses one fictitious linked member and one idempotent Noticeboard
+record through `fixtures/member-role-permissions.php`, then performs Treasurer
+and Noticeboard Admin transitions through the rendered member editor.
+
+Set these local-only variables in `.env.local`:
+
+```sh
+ILUNGU_MEMBER_USER=ilungu-playwright-permission-member
+ILUNGU_MEMBER_PASSWORD=local-only-password
+ILUNGU_WP_PATH=/path/to/local/wordpress/root
+ILUNGU_LOCAL_SHELL=/path/to/local/site-shell.sh
+ILUNGU_ROLE_FIXTURE_ENABLED=true
+```
+
+Run it with:
+
+```sh
+npm run test:ilungu-member-role-permissions
+```
+
+The fixture is WP-CLI-only and must run against the approved Local site. It does
+not reset office flags directly: Playwright restores Treasurer and Noticeboard
+Admin to unchecked through the rendered Club member editor at the end of each
+scenario. The fixture command is run through `ILUNGU_LOCAL_SHELL`, which loads
+the site's Local runtime before invoking WP-CLI. This stateful suite runs in
+Chromium only so its single reusable fixture cannot be mutated concurrently by
+multiple browser projects.
+
 Use `.env.example` as the placeholder reference. Put local site credentials only
 in `.env.local`; it is ignored. Generated `test-results`, Playwright reports, and
 blob reports are also ignored. The full `tests/playwright` directory is excluded

@@ -53,7 +53,7 @@ The existence of a flag in `tpw_members` does not make that flag part of the can
 
 Secretary and Treasurer currently live in `tpw_members` as compatibility-era storage columns (`is_secretary` and `is_treasurer`). That storage is transitional. Plugin code must use `tpw_core_user_can()` and must not treat raw member flags as the long-term contract.
 
-The supported factual Secretary read path is `tpw_core_user_can( 'tpw_member_office_secretary', $user_id )`. It returns true only when the user resolves to a linked member record with `is_secretary = 1`; it is not an authorization capability and has no WordPress Administrator or management-permission override. It creates no WordPress role or capability, and existing records require no migration or backfill. The `tpw_member_office_<office>` pattern is reserved for demonstrated consumer needs only.
+The supported factual Secretary and Treasurer read paths are `tpw_core_user_can( 'tpw_member_office_secretary', $user_id )` and `tpw_core_user_can( 'tpw_member_office_treasurer', $user_id )`. Each returns true only when the user resolves to a linked member record with its corresponding current flag enabled; neither is an authorization capability or has a WordPress Administrator or management-permission override. They create no WordPress role or capability, and existing records require no migration or backfill. The `tpw_member_office_<office>` pattern is reserved for demonstrated consumer needs only.
 
 ## 5. Classification Model
 

@@ -489,6 +489,21 @@ if ( ! function_exists( 'tpw_core_user_can' ) ) {
             return false;
         };
 
+        $tpw_member_is_treasurer = static function( int $uid ) use ( $ensure_member_access ): bool {
+            $ensure_member_access();
+            if ( class_exists( 'TPW_Member_Access', false ) && method_exists( 'TPW_Member_Access', 'user_has_member_flag' ) ) {
+                return TPW_Member_Access::user_has_member_flag( 'is_treasurer', $uid );
+            }
+
+            return false;
+        };
+
+        // Mirrors TPW_Noticeboard_Handler::user_can_manage_notices() for a specific user.
+        $tpw_notices_can_manage = static function( int $uid ) use ( $wp_user_can, $tpw_flag_from_members_table ): bool {
+            return $wp_user_can( $uid, 'manage_options' )
+                || $tpw_flag_from_members_table( $uid, 'is_noticeboard_admin', 'tpw_control/is_noticeboard_admin_user' );
+        };
+
         // Members directory eligibility as currently enforced by the manage-members shortcode.
         // Delegates to:
         // - TPW_Member_Access::get_allowed_statuses()
@@ -517,6 +532,9 @@ if ( ! function_exists( 'tpw_core_user_can' ) ) {
             // or management-permission override applies.
             case 'tpw_member_office_secretary':
                 return $tpw_member_is_secretary( $user_id );
+
+            case 'tpw_member_office_treasurer':
+                return $tpw_member_is_treasurer( $user_id );
 
             // === Members ===
             case 'tpw_members_manage':
@@ -554,10 +572,9 @@ if ( ! function_exists( 'tpw_core_user_can' ) ) {
                 return $wp_user_can( $user_id, 'manage_options' );
 
             // === Notices / Noticeboard ===
-            // Existing enforcement points: modules/notices/* gates management actions on manage_options.
-            // Note: the TPW member flag is_noticeboard_admin is currently *not* an enforcement path here.
+            // Mirrors TPW_Noticeboard_Handler::user_can_manage_notices().
             case 'tpw_notices_manage':
-                return $wp_user_can( $user_id, 'manage_options' );
+                return $tpw_notices_can_manage( $user_id );
 
             // === Gallery ===
             // Existing enforcement points: modules/gallery/* gates admin actions on a filterable cap.

@@ -24,13 +24,14 @@ if (existsSync(localEnvironmentFile)) {
 	}
 }
 
-const baseURL = process.env.ILUNGU_BASE_URL || 'https://flexiclub-smoke.local';
+const baseURL = process.env.ILUNGU_BASE_URL || 'http://ilungu-club.local';
 
 export default defineConfig({
 	testDir: __dirname,
 	testMatch: [
 		'smoke/ilungu-branding-smoke.spec.ts',
 		'club-administration-contributions.spec.ts',
+		'member-role-permissions.spec.ts',
 	],
 	timeout: 45_000,
 	retries: 1,

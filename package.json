@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test:ilungu-smoke": "playwright test --config=tests/playwright/playwright.config.ts tests/playwright/smoke/ilungu-branding-smoke.spec.ts"
+    "test:ilungu-smoke": "playwright test --config=tests/playwright/playwright.config.ts tests/playwright/smoke/ilungu-branding-smoke.spec.ts",
+    "test:ilungu-member-role-permissions": "playwright test --config=tests/playwright/playwright.config.ts tests/playwright/member-role-permissions.spec.ts --project=chromium"
   },
   "dependencies": {
     "@playwright/test": "^1.60.0",

@@ -12,13 +12,16 @@ tpw_core_user_can( string $ability, int $user_id = 0 )
 
 Use this helper for TPW capability-style checks instead of querying raw `tpw_members` office-role flags.
 
-For the factual question "is this linked Club member currently the Secretary?", use the narrow office-state predicate:
+For factual office questions, use the narrow office-state predicates:
 
 ```php
 tpw_core_user_can( 'tpw_member_office_secretary', $user_id )
+tpw_core_user_can( 'tpw_member_office_treasurer', $user_id )
 ```
 
-It is true only when the linked member row currently has `is_secretary = 1`. It is not an authorization capability: WordPress Administrator, Core administration, Members Manager, Treasurer, Committee, and broad event or member-management permissions do not imply it. It does not create or synchronise a WordPress role/capability, and existing Secretary records need no migration or backfill. The `tpw_member_office_<office>` pattern is reserved for demonstrated future office-state needs only.
+Each is true only when the linked member row currently has its corresponding flag enabled. They are not authorization capabilities: WordPress Administrator, Core administration, other offices, and broad management permissions do not imply either office. In particular, `tpw_payments_manage` does not answer whether a user is Treasurer. These predicates do not create or synchronise a WordPress role/capability, and existing Secretary or Treasurer records need no migration or backfill. The `tpw_member_office_<office>` pattern is reserved for demonstrated future office-state needs only.
+
+For Noticeboard management authorization, use `tpw_core_user_can( 'tpw_notices_manage', $user_id )`. It mirrors the active Noticeboard rule for WordPress Administrators and linked `is_noticeboard_admin` members; consumers must not read that flag directly.
 
 Current compatibility-era office-role storage:
 

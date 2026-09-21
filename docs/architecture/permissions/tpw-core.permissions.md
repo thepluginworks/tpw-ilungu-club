@@ -69,13 +69,14 @@ Manage Members protected fields in this phase are:
 
 Office-state predicates answer a factual question about the linked Club member record. They are not authorization capabilities and do not grant access to an action.
 
-The current supported predicate is:
+The currently supported predicates are:
 
 ```php
 tpw_core_user_can( 'tpw_member_office_secretary', $user_id )
+tpw_core_user_can( 'tpw_member_office_treasurer', $user_id )
 ```
 
-It returns true only when `$user_id` resolves to a linked `tpw_members` record with `is_secretary = 1`. WordPress Administrator status, Core administration, Members Manager status, Treasurer status, Committee status, and broad management abilities do not imply Secretary.
+Each returns true only when `$user_id` resolves to a linked `tpw_members` record with its corresponding office flag enabled (`is_secretary` or `is_treasurer`). WordPress Administrator status, Core administration, Members Manager status, Committee status, and broad management abilities do not imply either office. In particular, `tpw_payments_manage` answers whether a user may manage payments; it does not answer whether that user is Treasurer.
 
 This predicate creates no WordPress role or capability, does not synchronise the member flag to WordPress, and requires no migration or backfill. The `tpw_member_office_<office>` namespace is reserved for demonstrated consumer needs only; it must not be populated speculatively.
 
@@ -196,6 +197,8 @@ Shared infrastructure for RSVP and Ticketing.
 - `tpw_notices_manage`
 
 Used by Noticeboard Editor role.
+
+`tpw_notices_manage` mirrors the active Noticeboard management rule: WordPress Administrators and linked members with `is_noticeboard_admin = 1` may manage notices. Consumers must use this ability rather than reading the member flag directly.
 
 ---
 
