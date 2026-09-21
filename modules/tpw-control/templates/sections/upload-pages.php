@@ -14,6 +14,10 @@ $page_id = isset($_GET['upload_page_id']) ? (int) $_GET['upload_page_id'] : 0;
 $editing = $sub === 'edit' && $page_id > 0;
 $page = $editing ? TPW_Control_Upload_Pages::get_page_by_id( $page_id ) : null;
 $files = $editing ? TPW_Control_Upload_Pages::get_files( $page_id ) : [];
+$admin_page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+$base_url = is_admin() && 'tpw-flexiclub-upload-pages' === $admin_page
+    ? admin_url( 'admin.php?page=tpw-flexiclub-upload-pages' )
+    : TPW_Control_UI::menu_url( 'upload-pages' );
 
 if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
     function tpw_upl_vis_value( $page, $key ) {
@@ -38,7 +42,7 @@ if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
         <h2>Upload Pages</h2>
         <div>
             <?php if ( $editing ): ?>
-                <a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( TPW_Control_UI::menu_url('upload-pages') ); ?>">Back to list</a>
+                <a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( $base_url ); ?>">Back to list</a>
             <?php endif; ?>
         </div>
     </div>
@@ -48,7 +52,7 @@ if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
             <?php wp_nonce_field( 'tpw_control_upload_pages' ); ?>
             <input type="hidden" name="tpw_control_upload_pages_action" value="update_page" />
             <input type="hidden" name="upload_page_id" value="<?php echo (int)$page->id; ?>" />
-            <input type="hidden" name="_tpw_control_page_url" value="<?php echo esc_url( TPW_Control_UI::menu_url('upload-pages') ); ?>" />
+            <input type="hidden" name="_tpw_control_page_url" value="<?php echo esc_url( $base_url ); ?>" />
 
 
             <fieldset class="tpw-section">
@@ -666,7 +670,7 @@ if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
                         if ( ! empty($vis[$k]) ) $vis_bits[] = $label;
                     }
                     if ( ! empty($vis['status']) && is_array($vis['status']) ) $vis_bits[] = 'Status(' . implode(', ', $vis['status']) . ')';
-                    $edit_url = add_query_arg( [ 'sub' => 'edit', 'upload_page_id' => (int)$p->id ], TPW_Control_UI::menu_url('upload-pages') );
+                    $edit_url = add_query_arg( [ 'sub' => 'edit', 'upload_page_id' => (int)$p->id ], $base_url );
                     $can_delete = (int)$file_count === 0;
                 ?>
                 <div class="table-row">
@@ -692,7 +696,6 @@ if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
                 <div class="tablenav">
                     <div class="tablenav-pages">
                         <?php
-                        $base_url = TPW_Control_UI::menu_url('upload-pages');
                         echo '<span class="displaying-num">' . (int)$total . ' items</span>';
                         echo '<span class="pagination-links">';
                         $first_url = add_query_arg( 'pg', 1, $base_url );
@@ -720,7 +723,7 @@ if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
                     <form method="post" class="tpw-upl-new tpw-form tpw-upl-modal__form--md">
                         <?php wp_nonce_field( 'tpw_control_upload_pages' ); ?>
                         <input type="hidden" name="tpw_control_upload_pages_action" value="create_page" />
-                        <input type="hidden" name="_tpw_control_page_url" value="<?php echo esc_url( TPW_Control_UI::menu_url('upload-pages') ); ?>" />
+                        <input type="hidden" name="_tpw_control_page_url" value="<?php echo esc_url( $base_url ); ?>" />
                         <div class="tpw-fieldset"><label>Title<br/><input type="text" name="title" required /></label></div>
                         <div class="tpw-fieldset"><label>Slug (optional)<br/><input type="text" name="slug" /></label></div>
                         <div class="tpw-fieldset"><label>Description (optional)<br/><textarea name="description" rows="3" class="tpw-upl-textarea-full"></textarea></label></div>

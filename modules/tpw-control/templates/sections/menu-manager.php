@@ -8,7 +8,11 @@ if ( ! class_exists('TPW_Control_UI') || ! TPW_Control_UI::user_has_access( [ 'l
 }
 
 // Helpers
-$base_url = TPW_Control_UI::menu_url('menu-manager');
+$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+$is_backend_menu_manager = is_admin() && 'tpw-flexiclub-menu-manager' === $page;
+$base_url = $is_backend_menu_manager
+    ? admin_url( 'admin.php?page=tpw-flexiclub-menu-manager' )
+    : TPW_Control_UI::menu_url('menu-manager');
 $nonce_action = 'tpw_control_menu_manager';
 if ( ! class_exists( 'TPW_Member_Field_Loader' ) ) {
     $member_field_loader = TPW_CORE_PATH . 'modules/members/includes/class-tpw-member-field-loader.php';
@@ -318,6 +322,9 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['_wpnonce']) && wp_ve
     $redir = $base_url;
     if ( $redirect_menu_id ) {
         $redir = add_query_arg( 'menu_id', (int)$redirect_menu_id, $base_url );
+    }
+    if ( $is_backend_menu_manager ) {
+        $redir = add_query_arg( 'tpw_flexiclub_menu_notice', 'saved', $redir );
     }
     $tpw_mm_redirect( $redir );
 }

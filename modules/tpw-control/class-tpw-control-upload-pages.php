@@ -1710,7 +1710,11 @@ class TPW_Control_Upload_Pages {
     protected static function redirect_section( $args = [] ) {
         // Prefer an explicit page URL from the form, then fall back to current menu URL, then referer, then home
         $posted_url = isset($_POST['_tpw_control_page_url']) ? esc_url_raw( wp_unslash( $_POST['_tpw_control_page_url'] ) ) : '';
-        $url = $posted_url ?: TPW_Control_UI::menu_url('upload-pages');
+        $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+        $backend_url = is_admin() && 'tpw-flexiclub-upload-pages' === $page
+            ? admin_url( 'admin.php?page=tpw-flexiclub-upload-pages' )
+            : '';
+        $url = $posted_url ?: ( '' !== $backend_url ? $backend_url : TPW_Control_UI::menu_url('upload-pages') );
         if ( empty( $url ) ) {
             $ref = wp_get_referer();
             $url = $ref ? $ref : home_url( '/' );

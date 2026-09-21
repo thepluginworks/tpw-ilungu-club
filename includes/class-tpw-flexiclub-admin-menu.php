@@ -327,6 +327,16 @@ class TPW_FlexiClub_Admin_Menu {
 			return;
 		}
 
+		if ( self::PAGE_MENU_MANAGER === $config['page_slug'] ) {
+			self::render_menu_permissions_page( $config );
+			return;
+		}
+
+		if ( self::PAGE_UPLOADS === $config['page_slug'] ) {
+			self::render_upload_pages_page( $config );
+			return;
+		}
+
 		$status = self::build_bridge_status( $config );
 
 		if ( ! self::bridge_diagnostics_requested() && empty( $status['diagnostics_required'] ) && ! empty( $status['open_url'] ) ) {
@@ -376,6 +386,58 @@ class TPW_FlexiClub_Admin_Menu {
 			echo '<div class="notice notice-info"><p>' . esc_html( $status['message'] ) . '</p></div>';
 		}
 
+		self::render_page_end();
+	}
+
+	protected static function render_menu_permissions_page( $config ) {
+		self::ensure_tpw_control_runtime();
+		self::render_page_start( $config['title'], __( 'Manage WordPress menu visibility and access rules.', 'tpw-core' ) );
+
+		$notice = isset( $_GET['tpw_flexiclub_menu_notice'] ) ? sanitize_key( wp_unslash( $_GET['tpw_flexiclub_menu_notice'] ) ) : '';
+		if ( 'saved' === $notice ) {
+			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Menu permissions saved.', 'tpw-core' ) . '</p></div>';
+		}
+
+		if ( ! class_exists( 'TPW_Control', false ) || ! class_exists( 'TPW_Control_Router', false ) ) {
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Menu Permissions is unavailable because the iLungu Club Control module could not be loaded.', 'tpw-core' ) . '</p></div>';
+			self::render_page_end();
+			return;
+		}
+
+		$sections = TPW_Control::get_sections();
+		$section  = isset( $sections['menu-manager'] ) && is_array( $sections['menu-manager'] ) ? $sections['menu-manager'] : [];
+		$callback = isset( $section['callback'] ) ? $section['callback'] : null;
+		if ( ! is_callable( $callback ) ) {
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Menu Permissions is unavailable because its renderer is not registered.', 'tpw-core' ) . '</p></div>';
+			self::render_page_end();
+			return;
+		}
+
+		call_user_func( $callback );
+		self::render_page_end();
+	}
+
+	protected static function render_upload_pages_page( $config ) {
+		self::ensure_tpw_control_runtime();
+		self::render_page_start( $config['title'], __( 'Manage protected upload pages and their files.', 'tpw-core' ) );
+
+		if ( ! class_exists( 'TPW_Control', false ) || ! class_exists( 'TPW_Control_Upload_Pages', false ) ) {
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Upload Pages is unavailable because the iLungu Club Control module could not be loaded.', 'tpw-core' ) . '</p></div>';
+			self::render_page_end();
+			return;
+		}
+
+		TPW_Control::enqueue_workspace_assets();
+		$sections = TPW_Control::get_sections();
+		$section  = isset( $sections['upload-pages'] ) && is_array( $sections['upload-pages'] ) ? $sections['upload-pages'] : [];
+		$callback = isset( $section['callback'] ) ? $section['callback'] : null;
+		if ( ! is_callable( $callback ) ) {
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Upload Pages is unavailable because its renderer is not registered.', 'tpw-core' ) . '</p></div>';
+			self::render_page_end();
+			return;
+		}
+
+		call_user_func( $callback );
 		self::render_page_end();
 	}
 
