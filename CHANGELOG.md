@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+- Admin routing: standardised iLungu Club Settings and every Core-owned Settings tab on `admin.php?page=tpw-flexiclub-settings`; native WordPress Settings no longer contains an iLungu Club submenu. Legacy `options-general.php?page=tpw-core-settings` URLs redirect to the canonical Club route while preserving valid tab context.
+
 ## [2.11.1] - 2026-09-16
 
 ### Changed

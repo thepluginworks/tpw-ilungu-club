@@ -252,7 +252,7 @@ Queue behaviour:
 - In that deferred state, `TPW_Email::enqueue_mail()` still returns a successful queue result, but `action_id` may remain `0` until the deferred scheduling pass runs.
 - Queued emails are processed asynchronously by Action Scheduler.
 - Failed queued sends remain in queue state and are retried with backoff until `max_attempts` is reached.
-- WordPress Admin → Settings → iLungu Club → Email Queue is the business-level payload and status view.
+- WordPress Admin → iLungu Club → Settings → Email Queue is the business-level payload and status view.
 - Tools → Scheduled Actions is the infrastructure and job-execution view.
 - Email Logs remain an operational attempt log only; they are not the queue store.
 - Email Logs are written when an actual send attempt happens, not when a queue row is created.
@@ -332,10 +332,10 @@ Retention:
 
 Admin access:
 
-- WordPress Admin → Settings → iLungu Club → Email Logs
+- WordPress Admin → iLungu Club → Settings → Email Logs
 - The screen shows the latest 100 log entries, newest first.
 - Administrators can clear the log table from this tab.
-- WordPress Admin → Settings → iLungu Club → Email Queue
+- WordPress Admin → iLungu Club → Settings → Email Queue
 - The queue tab shows pending, processing, sent, failed, and cancelled items and supports reconciliation, retry, cancel, and sent-item cleanup actions.
 
 Local testing note:
@@ -530,7 +530,7 @@ Templates are stored in memory only (static registry). Admin overrides are store
 
 #### RSVP plugin — registering templates
 
-To expose RSVP-related templates in Settings → iLungu Club → Email Templates (`/wp-admin/options-general.php?page=tpw-core-settings&tab=email-templates`), register them from your RSVP plugin on `init` (or after `tpw_core_loaded`). Use a stable group key for tidy grouping in the UI, e.g. `tpw-rsvp-lodge-meetings`.
+To expose RSVP-related templates in wp-admin → iLungu Club → Settings → Email Templates (`/wp-admin/admin.php?page=tpw-flexiclub-settings&tab=email-templates`), register them from your RSVP plugin on `init` (or after `tpw_core_loaded`). Use a stable group key for tidy grouping in the UI, e.g. `tpw-rsvp-lodge-meetings`.
 
 Example bootstrap in your RSVP plugin:
 
@@ -627,7 +627,7 @@ Notes:
 
 ### Admin Editing
 
-Under Settings → iLungu Club → Email Templates, site admins can:
+Under wp-admin → iLungu Club → Settings → Email Templates, site admins can:
 - See all registered templates grouped by plugin/scope
 - Edit subject/body (only if the template marked them as editable)
 - Toggle “Include fallback logo” for that template

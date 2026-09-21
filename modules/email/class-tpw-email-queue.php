@@ -800,7 +800,7 @@ class TPW_Email_Queue {
 			exit;
 		}
 
-		wp_safe_redirect( admin_url( 'options-general.php?page=tpw-core-settings&tab=email-queue&tpw_queue_notice=' . rawurlencode( $notice ) ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=tpw-flexiclub-settings&tab=email-queue&tpw_queue_notice=' . rawurlencode( $notice ) ) );
 		exit;
 	}
 

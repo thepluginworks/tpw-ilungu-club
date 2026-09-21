@@ -243,7 +243,7 @@ if ( ! function_exists( 'tpw_core_payments_render_frontend_method_detail' ) ) {
         $method_map      = tpw_core_payments_get_frontend_detail_method_map();
         $method_label    = tpw_core_payments_get_method_label( $method_slug );
         $back_url        = function_exists( 'tpw_core_get_payment_methods_settings_url' ) ? tpw_core_get_payment_methods_settings_url() : '';
-        $admin_url       = function_exists( 'tpw_core_build_payment_method_admin_url' ) ? tpw_core_build_payment_method_admin_url( $method_slug ) : admin_url( 'options-general.php?page=tpw-core-settings&tab=payment-methods' );
+        $admin_url       = function_exists( 'tpw_core_build_payment_method_admin_url' ) ? tpw_core_build_payment_method_admin_url( $method_slug ) : admin_url( 'admin.php?page=tpw-flexiclub-settings&tab=payment-methods' );
         $can_manage_page = current_user_can( 'manage_options' );
 
         static $did_styles = false;

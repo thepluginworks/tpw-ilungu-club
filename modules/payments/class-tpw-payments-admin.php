@@ -227,7 +227,7 @@ class TPW_Payments_Admin {
 
 						$action_url = function_exists( 'tpw_core_build_payment_method_settings_url' )
 							? tpw_core_build_payment_method_settings_url( (string) $method->slug )
-							: admin_url('options-general.php?page=tpw-core-settings&tab=payment-methods');
+                            : admin_url('admin.php?page=tpw-flexiclub-settings&tab=payment-methods');
                         ?>
                         <div class="tpw-pay-row" data-slug="<?php echo esc_attr($method->slug); ?>">
                             <div class="tpw-pay-col tpw-pay-drag" title="Drag to reorder" aria-label="Drag to reorder">

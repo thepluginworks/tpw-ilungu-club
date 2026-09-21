@@ -10,7 +10,7 @@ Canonical contract: [../architecture/ui/tpw-core-ui-wrapper-enqueue-contract.md]
 
 ## What the Branding tab configures
 
-The Branding tab at: Settings → iLungu Club → Branding (`/wp-admin/options-general.php?page=tpw-core-settings&tab=branding`) lets admins set:
+The Branding tab at: wp-admin → iLungu Club → Settings → Branding (`/wp-admin/admin.php?page=tpw-flexiclub-settings&tab=branding`) lets admins set:
 
 - Button system tokens used by `.tpw-btn` variants
   - `--tpw-btn-primary`, `--tpw-btn-secondary`, `--tpw-btn-danger`, `--tpw-btn-light`, `--tpw-btn-dark`
@@ -48,7 +48,7 @@ Defaults/derivations:
 - Error: `var(--tpw-btn-danger)`
 
 Where they come from:
-- Defined in Branding tab (Settings → iLungu Club → Branding) with optional overrides.
+- Defined in Branding tab (wp-admin → iLungu Club → Settings → Branding) with optional overrides.
 - Emitted in the same inline `<style id="tpw-core-branding-vars">` block as other Branding tokens (admin and front-end heads).
 
 Integration guidance will follow separately; for now, other TPW plugins can reference these variables directly in their CSS with sensible fallbacks.

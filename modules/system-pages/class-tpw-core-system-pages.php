@@ -366,7 +366,7 @@ add_action( 'admin_post_tpw_system_pages_action', function(){
 
     $op   = isset($_POST['op']) ? sanitize_key( $_POST['op'] ) : '';
     $slug = isset($_POST['slug']) ? sanitize_key( $_POST['slug'] ) : '';
-    $tab_url = add_query_arg( [ 'page' => 'tpw-core-settings', 'tab' => 'system-pages' ], admin_url( 'options-general.php' ) );
+    $tab_url = add_query_arg( [ 'page' => 'tpw-flexiclub-settings', 'tab' => 'system-pages' ], admin_url( 'admin.php' ) );
 
     if ( $op === 'recreate' && $slug ) {
         global $wpdb;

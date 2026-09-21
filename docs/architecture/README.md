@@ -53,6 +53,8 @@ The canonical shared UI contract is [docs/architecture/ui/tpw-core-ui-wrapper-en
 
 The canonical Club Management dashboard, workspace, and wp-admin consumer contribution contract is [docs/architecture/ui/tpw-core-club-administration-contribution-contract.md](ui/tpw-core-club-administration-contribution-contract.md).
 
+The canonical iLungu Club wp-admin route contract is [docs/architecture/ui/tpw-core-wp-admin-routing-contract.md](ui/tpw-core-wp-admin-routing-contract.md).
+
 ## Payments Architecture
 
 Payments architecture defines the distinction between stored active preferences and customer-safe checkout methods.

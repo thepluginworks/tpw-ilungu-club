@@ -2,7 +2,7 @@
 /**
  * iLungu Club Settings and Member Menu swapper.
  *
- * Registers the Settings → iLungu Club page with tabbed content for Branding,
+ * Registers the iLungu Club → Settings page with tabbed content for Branding,
  * Member Menu, Features, Email, Email Templates, and System Pages.
  *
  * @since 1.0.0
@@ -20,15 +20,31 @@ add_action( 'init', function () {
     }
 }, 5 );
 
-// 2) Add Settings page under Settings
-add_action( 'admin_menu', function () {
-    add_options_page(
-        __( 'iLungu™ Club Settings', 'tpw-core' ),
-        __( 'iLungu™ Club', 'tpw-core' ),
-        'manage_options',
-        'tpw-core-settings',
-        'tpw_core_render_settings_page'
-    );
+// Legacy Settings URLs remain redirect-only; the visible screen is registered under iLungu Club.
+add_action( 'admin_init', function () {
+    global $pagenow;
+
+    $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+    if ( 'options-general.php' !== $pagenow || 'tpw-core-settings' !== $page ) {
+        return;
+    }
+
+    $args = [ 'page' => 'tpw-flexiclub-settings' ];
+    foreach ( $_GET as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Preserves legacy GET navigation context only.
+        $key = sanitize_key( $key );
+        if ( '' === $key || 'page' === $key || ! is_scalar( $value ) ) {
+            continue;
+        }
+
+        $args[ $key ] = sanitize_text_field( wp_unslash( $value ) );
+    }
+
+    if ( isset( $args['tab'] ) && ! array_key_exists( sanitize_key( $args['tab'] ), tpw_core_get_settings_tabs() ) ) {
+        unset( $args['tab'] );
+    }
+
+    wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) );
+    exit;
 } );
 
 // Output TPW Core notices in the normal WP admin notice region (Core Settings screen only).
@@ -45,8 +61,8 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
             return;
         }
 
-        $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-        if ( ! $screen || ! isset( $screen->id ) || (string) $screen->id !== 'settings_page_tpw-core-settings' ) {
+        $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+        if ( 'tpw-flexiclub-settings' !== $page ) {
             return;
         }
 
@@ -119,7 +135,7 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
         // Profile page configuration warnings (Core Settings screen only).
         if ( function_exists( 'tpw_core_profile_page_is_configured' ) ) {
             if ( ! tpw_core_profile_page_is_configured() ) {
-                $url = add_query_arg( 'tab', 'profile', admin_url( 'options-general.php?page=tpw-core-settings' ) );
+                $url = add_query_arg( [ 'page' => 'tpw-flexiclub-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
                 echo '<div class="notice notice-warning is-dismissible"><p>'
                     . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-core' )
                     . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-core' ) . '</a>'
@@ -146,8 +162,9 @@ if ( ! has_action( 'admin_notices', 'tpw_core_output_core_settings_warnings' ) )
 }
 
 // Ensure media library scripts are available on our settings page
-add_action( 'admin_enqueue_scripts', function( $hook ) {
-    if ( $hook === 'settings_page_tpw-core-settings' ) {
+add_action( 'admin_enqueue_scripts', function() {
+    $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+    if ( 'tpw-flexiclub-settings' === $page ) {
         // Load WordPress media modal and dependencies
         if ( function_exists( 'wp_enqueue_media' ) ) {
             wp_enqueue_media();
@@ -178,7 +195,7 @@ if ( ! function_exists( 'tpw_core_get_settings_view_context' ) ) {
         $workspace = isset( $_GET['workspace'] ) ? sanitize_key( wp_unslash( $_GET['workspace'] ) ) : '';
         $defaults  = [
             'mode'          => ( ! is_admin() && 'settings' === $workspace ) ? 'frontend' : 'admin',
-            'base_url'      => admin_url( 'options-general.php?page=tpw-core-settings' ),
+            'base_url'      => admin_url( 'admin.php?page=tpw-flexiclub-settings' ),
             'tab_query_arg' => 'tab',
             'return_url'    => '',
         ];
@@ -485,7 +502,7 @@ if ( ! function_exists( 'tpw_core_render_settings_page' ) ) {
         tpw_core_set_settings_view_context(
             [
                 'mode'          => 'admin',
-                'base_url'      => admin_url( 'options-general.php?page=tpw-core-settings' ),
+                'base_url'      => admin_url( 'admin.php?page=tpw-flexiclub-settings' ),
                 'tab_query_arg' => 'tab',
             ]
         );
@@ -1011,7 +1028,7 @@ add_action( 'admin_post_tpw_core_save_email_template', function() {
     $body    = $tpl['editable_body'] ? ( isset($_POST['body_override']) ? wp_kses_post( wp_unslash( $_POST['body_override'] ) ) : '' ) : '';
     $use_logo = isset($_POST['use_logo']) ? 1 : 0;
 
-    $args = [ 'page' => 'tpw-core-settings', 'tab' => 'email-templates', 'edit_template' => $key ];
+    $args = [ 'tab' => 'email-templates', 'edit_template' => $key ];
     if ( class_exists('TPW_Email_Templates_DB') ) {
         TPW_Email_Templates_DB::upsert_override( $key, $tpl['group'], $tpl['label'], $subject, $body, $use_logo );
         $args['settings-updated'] = '1';
@@ -1729,7 +1746,7 @@ add_action( 'admin_post_tpw_core_reset_email_template', function() {
     check_admin_referer( 'tpw_reset_email_template', 'tpw_email_tmpl_nonce' );
 
     $key = isset($_GET['template_key']) ? strtolower( preg_replace( '/[^a-z0-9_-]/i', '', (string) $_GET['template_key'] ) ) : '';
-    $args = [ 'page' => 'tpw-core-settings', 'tab' => 'email-templates' ];
+    $args = [ 'tab' => 'email-templates' ];
     if ( $key && class_exists('TPW_Email_Templates_DB') ) {
         TPW_Email_Templates_DB::delete_override( $key );
         $args['settings-updated'] = '1';
@@ -1877,7 +1894,7 @@ add_action( 'admin_post_tpw_core_save_email_settings', function() {
         $redirect_notice = 'email_settings_class_missing';
     }
 
-    $args = [ 'page' => 'tpw-core-settings', 'tab' => 'email' ];
+    $args = [ 'tab' => 'email' ];
     if ( $save_success ) {
         $args['settings-updated'] = '1';
     }
@@ -1896,7 +1913,7 @@ add_action( 'admin_post_tpw_core_clear_email_logs', function() {
 
     check_admin_referer( 'tpw_core_clear_email_logs', 'tpw_core_email_logs_nonce' );
 
-    $args = [ 'page' => 'tpw-core-settings', 'tab' => 'email-logs' ];
+    $args = [ 'tab' => 'email-logs' ];
 
     if ( class_exists( 'TPW_Email_Logs' ) ) {
         TPW_Email_Logs::clear_all();
@@ -2921,7 +2938,7 @@ add_action( 'admin_notices', function() {
     }
 
     if ( ! tpw_core_profile_page_is_configured() ) {
-        $url = add_query_arg( 'tab', 'profile', admin_url( 'options-general.php?page=tpw-core-settings' ) );
+        $url = add_query_arg( [ 'page' => 'tpw-flexiclub-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
         echo '<div class="notice notice-warning is-dismissible"><p>'
             . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-core' )
             . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-core' ) . '</a>'

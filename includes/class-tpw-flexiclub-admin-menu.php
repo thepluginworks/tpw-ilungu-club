@@ -13,10 +13,10 @@ class TPW_FlexiClub_Admin_Menu {
 	const PAGE_MENU_MANAGER   = 'tpw-flexiclub-menu-manager';
 	const PAGE_LOGS           = 'tpw-flexiclub-logs';
 	const PAGE_SETTINGS       = 'tpw-flexiclub-settings';
-	const SETTINGS_ROUTE      = 'options-general.php?page=tpw-core-settings';
-	const SYSTEM_PAGES_ROUTE  = 'options-general.php?page=tpw-core-settings&tab=system-pages';
-	const PAYMENTS_ROUTE      = 'options-general.php?page=tpw-core-settings&tab=payment-methods';
-	const EMAIL_LOGS_ROUTE    = 'options-general.php?page=tpw-core-settings&tab=email-logs';
+	const SETTINGS_ROUTE      = 'admin.php?page=tpw-flexiclub-settings';
+	const SYSTEM_PAGES_ROUTE  = 'admin.php?page=tpw-flexiclub-settings&tab=system-pages';
+	const PAYMENTS_ROUTE      = 'admin.php?page=tpw-flexiclub-settings&tab=payment-methods';
+	const EMAIL_LOGS_ROUTE    = 'admin.php?page=tpw-flexiclub-settings&tab=email-logs';
 	const PAYMENT_LOGS_ROUTE  = 'tools.php?page=tpw-payment-logs';
 	const NOTICEBOARD_ROUTE   = 'edit.php?post_type=tpw_notice';
 
@@ -399,7 +399,7 @@ class TPW_FlexiClub_Admin_Menu {
 		echo '<tbody>';
 		echo '<tr>';
 		echo '<td><strong>' . esc_html__( 'Email Logs', 'tpw-core' ) . '</strong><br />' . esc_html__( 'Existing iLungu Club settings tab for outbound email diagnostics.', 'tpw-core' ) . '</td>';
-		echo '<td>' . esc_html( 'options-general.php?page=tpw-core-settings&tab=email-logs' ) . '</td>';
+		echo '<td>' . esc_html( self::EMAIL_LOGS_ROUTE ) . '</td>';
 		echo '<td><a class="button button-secondary" href="' . esc_url( admin_url( self::EMAIL_LOGS_ROUTE ) ) . '">' . esc_html__( 'Open', 'tpw-core' ) . '</a></td>';
 		echo '</tr>';
 		echo '<tr>';
@@ -510,33 +510,15 @@ class TPW_FlexiClub_Admin_Menu {
 		$map = is_array( $map ) ? $map : [];
 
 		$map[] = [
-			'query'        => [ 'page' => 'tpw-core-settings', 'tab' => 'payment-methods' ],
-			'parent_slug'  => self::TOP_LEVEL_SLUG,
-			'submenu_slug' => self::PAYMENTS_ROUTE,
-		];
-
-		$map[] = [
 			'query'        => [ 'page' => self::PAGE_SETTINGS, 'tab' => 'payment-methods' ],
 			'parent_slug'  => self::TOP_LEVEL_SLUG,
 			'submenu_slug' => self::PAYMENTS_ROUTE,
 		];
 
 		$map[] = [
-			'query'        => [ 'page' => 'tpw-core-settings', 'tab' => 'system-pages' ],
-			'parent_slug'  => self::TOP_LEVEL_SLUG,
-			'submenu_slug' => self::SYSTEM_PAGES_ROUTE,
-		];
-
-		$map[] = [
 			'query'        => [ 'page' => self::PAGE_SETTINGS, 'tab' => 'system-pages' ],
 			'parent_slug'  => self::TOP_LEVEL_SLUG,
 			'submenu_slug' => self::SYSTEM_PAGES_ROUTE,
-		];
-
-		$map[] = [
-			'query'        => [ 'page' => 'tpw-core-settings', 'tab' => 'email-logs' ],
-			'parent_slug'  => self::TOP_LEVEL_SLUG,
-			'submenu_slug' => self::PAGE_LOGS,
 		];
 
 		$map[] = [
@@ -549,12 +531,6 @@ class TPW_FlexiClub_Admin_Menu {
 			'pages'        => [ 'tpw-payment-logs' ],
 			'parent_slug'  => self::TOP_LEVEL_SLUG,
 			'submenu_slug' => self::PAGE_LOGS,
-		];
-
-		$map[] = [
-			'query'        => [ 'page' => 'tpw-core-settings' ],
-			'parent_slug'  => self::TOP_LEVEL_SLUG,
-			'submenu_slug' => self::PAGE_SETTINGS,
 		];
 
 		$map[] = [

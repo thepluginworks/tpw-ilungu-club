@@ -605,7 +605,7 @@ if ( ! function_exists( 'tpw_core_get_payment_methods_settings_url' ) ) {
             }
         }
 
-        return admin_url( 'options-general.php?page=tpw-core-settings&tab=payment-methods' );
+        return admin_url( 'admin.php?page=tpw-flexiclub-settings&tab=payment-methods' );
     }
 }
 
@@ -663,12 +663,12 @@ if ( ! function_exists( 'tpw_core_build_payment_method_admin_url' ) ) {
     function tpw_core_build_payment_method_admin_url( string $method_slug, array $extra_args = [] ): string {
         $method_slug = sanitize_key( $method_slug );
         if ( '' === $method_slug ) {
-            return admin_url( 'options-general.php?page=tpw-core-settings&tab=payment-methods' );
+            return admin_url( 'admin.php?page=tpw-flexiclub-settings&tab=payment-methods' );
         }
 
         $page_slug = tpw_core_get_payment_method_settings_page_slug( $method_slug );
         if ( '' === $page_slug ) {
-            return admin_url( 'options-general.php?page=tpw-core-settings&tab=payment-methods' );
+            return admin_url( 'admin.php?page=tpw-flexiclub-settings&tab=payment-methods' );
         }
 
         if ( 0 === strpos( $page_slug, 'admin.php?' ) ) {

@@ -32,7 +32,7 @@ If a plugin expects shared member, payment, or front-end account functionality, 
 
 1. Install and activate iLungu™ Club in WordPress.
 2. Install any add-on plugins that depend on it.
-3. Review the shared settings under WordPress Settings -> iLungu Club.
+3. Review the shared settings under iLungu Club -> Settings in wp-admin.
 4. Confirm that required pages such as login, profile, join, or thank-you pages are set up for your site.
 
 iLungu Club includes its own update and packaging flow so production sites receive the intended install package structure.
@@ -44,7 +44,7 @@ The physical WordPress plugin identity is `tpw-ilungu-club/ilungu-club.php`. Whe
 ## Key admin areas
 
 - iLungu Club top-level wp-admin menu for core navigation, with bridge pages for front-end-only management tools
-- Settings -> iLungu Club for shared configuration such as branding, payments, and platform options
+- iLungu Club -> Settings for shared configuration such as branding, payments, and platform options
 - Member-related iLungu Club screens used by dependent plugins
 - iLungu Club front-end workspaces for dashboard, Menu Management, Archival System, settings, and system-page operations
 - iLungu Club Control retained as a legacy transition workspace where older links or shortcodes are still in use
