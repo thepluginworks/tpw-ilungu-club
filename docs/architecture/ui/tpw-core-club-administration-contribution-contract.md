@@ -18,6 +18,7 @@ Each contribution row has a unique stable `key` and may declare these optional a
 [
 	[
 		'key' => 'example',
+		'legacy_keys' => [ 'legacy-example' ], // Optional migration aliases.
 	'contexts' => [ 'frontend', 'admin' ],
 	'capability' => 'manage_options', // WordPress capability or callable returning bool.
 	'overview_card' => [
@@ -54,6 +55,8 @@ Each contribution row has a unique stable `key` and may declare these optional a
 ```
 
 `contexts` accepts `frontend`, `admin`, or both. A row can additionally declare a capability string or callable. Admin workspaces require a WordPress capability string, supplied by `workspace.admin.capability` or the contribution-level capability. Missing labels, URLs, callbacks, unsupported contexts, malformed rows, and duplicate keys are ignored. Rows are processed in filter-return order. The first valid row for a key wins, and a rejected malformed row does not reserve that key. `position` is ascending, with stable key order as the tie-breaker.
+
+For canonical/legacy migration, the canonical row may declare `legacy_keys`. Core resolves those legacy keys to the canonical key, renders only one logical contribution, and gives a valid canonical row priority when both forms are present. If only a legacy row is valid, it remains the compatibility fallback. Unrelated contribution keys retain the standard first-valid-row rule. See [the canonical identity compatibility contract](../tpw-core-canonical-legacy-identity-compatibility-contract.md).
 
 ## Dashboard contributions
 

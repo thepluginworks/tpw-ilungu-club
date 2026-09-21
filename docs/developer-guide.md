@@ -590,6 +590,7 @@ Notes:
 - If your plugin must run strictly after the shared framework, hook to `tpw_core_loaded` instead of `init`.
 - Choose a unique group string to avoid mixing templates from unrelated plugins.
 - When sending, use `TPW_Email_Template_Manager::get_rendered_template( 'rsvp-meeting-invite', $tokens )` to merge admin overrides and replace placeholders.
+- When moving a group to a canonical identifier, keep the template key stable and declare `legacy_groups` on the canonical registration. Existing overrides remain keyed by template key and are not duplicated or overwritten. See `docs/architecture/tpw-core-canonical-legacy-identity-compatibility-contract.md`.
 
 ### Rendering a Template
 
@@ -603,22 +604,15 @@ $rendered = TPW_Email_Template_Manager::get_rendered_template(
 		'{fixture-date}' => '25 Sept 2025',
 	### System Pages Manager
 
-	The shared plugin framework provides a lightweight registry for front-end WordPress pages required by TPW plugins (e.g., My Profile, Manage Members, Noticeboard, TPW Control). It stores page definitions in a single table and ensures the linked WP pages exist.
+	The active `TPW_Core_System_Pages` registry stores explicit page mappings in the `tpw_core_system_pages` option and ownership markers in page meta; it does not use the retired table-based registry described in earlier guides.
 
-	Key API (class `TPW_Core_System_Pages`):
-	- `register_page( $slug, [ 'title' => 'My Title', 'shortcode' => '[my_shortcode]', 'plugin' => 'tpw-core', 'required' => 1 ] )` – register or update the page meta.
-	- `get_page_id( $slug )` – get the WP page ID (0 if not linked).
-	- `get_permalink( $slug )` – get the front-end URL if linked.
-	- `ensure_page( $slug )` – create the WP page if missing and link it.
-	- `delete_page( $slug )` – trash the page and unlink it.
+	Key API:
+	- `register_page( $slug, [ 'title' => 'My Title', 'shortcode' => '[my_shortcode]', 'plugin' => 'my-addon', 'legacy_plugins' => [ 'legacy-addon' ], 'required' => 1 ] )`
+	- `get_page_id( $slug )` / `get_permalink( $slug )`
+	- `ensure_page( $slug )`
+	- `unlink( $slug )` for an explicit administrator-managed unlink; it does not delete the WordPress page.
 
-	Tables are auto-created on plugin load and activation. Other TPW plugins can call `register_page` on `plugins_loaded` to declare their pages.
-
-	Note — My Profile registration:
-	- The shared framework now registers the Members “My Profile” page in the System Pages table under slug `my-profile` with shortcode `[tpw_member_profile]`.
-	- Existing logic remains: the shared framework still creates the WP page on activation where needed and keeps using the `tpw_member_profile_page_id` option.
-	- Where the shared framework resolves the profile URL, it first tries `TPW_Core_System_Pages::get_permalink( 'my-profile' )` and falls back to `get_permalink( get_option( 'tpw_member_profile_page_id' ) )` or the front-end route. This provides a safe migration path without breaking existing menus or links.
-	- For the canonical logged-out menu-hiding and direct-access contract, see `docs/architecture/system-pages/tpw-core-system-page-protection-contract.md`.
+	A canonical registration with `legacy_plugins` reuses an existing page carrying the matching legacy ownership marker. It preserves page ID and content, does not create a duplicate page, and may lazily write canonical ownership metadata only when the existing ensure path resolves that page. See `docs/architecture/tpw-core-canonical-legacy-identity-compatibility-contract.md` and `docs/architecture/system-pages/tpw-core-system-page-protection-contract.md`.
 
 		'{member-name}'  => 'Stuart Moodey',
 	]

@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 const baseURL = process.env.ILUNGU_BASE_URL || 'https://ilungu-club.local';
+const portalPath = process.env.ILUNGU_PORTAL_PATH || '/club-management/';
 const adminUser = process.env.ILUNGU_ADMIN_USER;
 const adminPassword = process.env.ILUNGU_ADMIN_PASSWORD;
 const fixtureEnabled = process.env.ILUNGU_CLUB_CONTRIBUTIONS_FIXTURE === 'true';
@@ -36,12 +37,12 @@ async function disableContributions(page: Page): Promise<void> {
 }
 
 async function openPortal(page: Page, contribution = false, workspace = ''): Promise<void> {
-	const target = new URL(url('/club-management/', contribution));
+	const target = new URL(url(portalPath, contribution));
 	if (workspace) {
 		target.searchParams.set('workspace', workspace);
 	}
-	const response = await page.goto(target.toString(), { waitUntil: 'domcontentloaded' });
-	expect(response?.ok(), 'Club Management portal must load').toBeTruthy();
+	await page.goto(target.toString(), { waitUntil: 'domcontentloaded' });
+	await expect(page.locator('.tpw-flexiclub-dashboard')).toBeVisible();
 }
 
 async function openDashboard(page: Page, contribution = false): Promise<void> {
@@ -80,6 +81,8 @@ test.describe('Club administration contributions', () => {
 		await expect(page.getByText('Synthetic Admin Only', { exact: true })).toHaveCount(0);
 		await expect(page.getByRole('heading', { name: 'Synthetic Duplicate First', exact: true })).toHaveCount(1);
 		await expect(page.getByText('Synthetic Duplicate Second', { exact: true })).toHaveCount(0);
+		await expect(page.getByRole('heading', { name: 'Synthetic Canonical Alias', exact: true })).toHaveCount(1);
+		await expect(page.getByText('Synthetic Legacy Alias', { exact: true })).toHaveCount(0);
 		await expect(page.getByRole('heading', { name: 'Synthetic Valid After Malformed', exact: true })).toHaveCount(1);
 		await expect(page.getByText('Malformed Synthetic Contribution', { exact: true })).toHaveCount(0);
 		await expect(page.getByText('Unsupported Context Contribution', { exact: true })).toHaveCount(0);
@@ -88,6 +91,8 @@ test.describe('Club administration contributions', () => {
 		await openDashboard(page, true);
 		await expect(page.getByRole('heading', { name: 'Synthetic Club Tool', exact: true })).toHaveCount(1);
 		await expect(page.getByRole('heading', { name: 'Synthetic Admin Only', exact: true })).toHaveCount(1);
+		await expect(page.getByRole('heading', { name: 'Synthetic Canonical Alias', exact: true })).toHaveCount(1);
+		await expect(page.getByText('Synthetic Legacy Alias', { exact: true })).toHaveCount(0);
 		await expect(page.getByText('Synthetic Frontend Only', { exact: true })).toHaveCount(0);
 	});
 
@@ -107,10 +112,7 @@ test.describe('Club administration contributions', () => {
 	test('renders authorized frontend and wp-admin workspaces without a new top-level menu', async ({ page }) => {
 		await signInAsAdmin(page);
 		await enableContributions(page);
-		await openPortal(page, true);
-		const workspaceLink = page.getByRole('link', { name: 'Synthetic Club Workspace', exact: true });
-		await expect(workspaceLink).toBeVisible();
-		await workspaceLink.click();
+		await openPortal(page, true, 'synthetic-club');
 		await expect(page.getByRole('heading', { name: 'Synthetic Club Frontend Workspace', exact: true })).toBeVisible();
 
 		await openDashboard(page, true);

@@ -273,6 +273,7 @@ if ( file_exists( TPW_CORE_PATH . 'modules/members/includes/class-tpw-member-adm
 //require_once TPW_CORE_PATH . 'modules/api/endpoints/class-tpw-api-guests.php';
 //require_once TPW_CORE_PATH . 'modules/api/endpoints/class-tpw-api-menus.php';
 //require_once TPW_CORE_PATH . 'modules/api/endpoints/class-tpw-api-choices.php';
+require_once TPW_CORE_PATH . 'modules/payments/class-tpw-payment-source-registry.php';
 require_once TPW_CORE_PATH . 'modules/payments/class-tpw-payment-logger.php';
 require_once TPW_CORE_PATH . 'modules/payments/class-tpw-payment-logs-admin.php';
 require_once TPW_CORE_PATH . 'modules/payments/class-tpw-core-payments.php';

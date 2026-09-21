@@ -89,4 +89,17 @@ assert_same( 'draft', $pages[ 4 ]->post_status, 'Gallery provisioning must not p
 assert_same( 'Site-owned Gallery content', $pages[ 4 ]->post_content, 'Gallery provisioning must not mutate site-owned content.' );
 assert_same( 0, TPW_Core_System_Pages::get_page_id( 'gallery' ), 'A site-owned Gallery page must not be adopted into the registry.' );
 
+$legacy_ticket_page = new WP_Post();
+$legacy_ticket_page->ID = 5;
+$legacy_ticket_page->post_name = 'ticket-sales';
+$pages[ 5 ] = $legacy_ticket_page;
+$meta[ 5 ] = array(
+	'_tpw_system_page_slug'   => 'ticket-sales',
+	'_tpw_system_page_plugin' => 'tpw-flexiticket',
+);
+TPW_Core_System_Pages::register_page( 'ticket-sales', array( 'title' => 'Ticket Sales', 'shortcode' => '[ilungu_ticket_sales]', 'plugin' => 'ilungu-tickets', 'legacy_plugins' => array( 'tpw-flexiticket' ) ) );
+assert_same( 5, TPW_Core_System_Pages::ensure_page( 'ticket-sales' ), 'Canonical provider registration must reuse the legacy-owned System Page.' );
+assert_same( 'ilungu-tickets', $meta[ 5 ]['_tpw_system_page_plugin'], 'Lazy canonical System Page write must preserve the existing page ID.' );
+assert_same( 5, TPW_Core_System_Pages::ensure_page( 'ticket-sales' ), 'Repeated canonical registration must be idempotent.' );
+
 echo "system-pages collision tests passed\n";

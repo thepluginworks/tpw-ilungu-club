@@ -60,6 +60,13 @@ Managed Members Menu items use the following contract fields.
 - `requires_login` — whether the item should be hidden from logged-out users
 - `visibility` — shared-framework visibility rules for the menu item
 
+### 4.1.1 Canonical and legacy migration fields
+
+- `legacy_keys` — optional previous managed item key(s) that resolve to this canonical `key`
+- `legacy_providers` — optional prior provider identifier(s), retained as registration metadata during a provider migration
+
+When a consumer temporarily contributes canonical and legacy forms, the canonical form must declare its legacy keys. Core renders one logical menu item, gives the canonical form priority, and retains legacy keys for matching existing managed menu metadata during repair. Existing menu rows are updated to the canonical key/provider only when normal repair already processes that item; Core does not bulk rewrite menu rows.
+
 ### 4.2 Preferred destination field
 
 - `system_slug` — preferred canonical destination when the plugin owns a real front-end page registered through `TPW_Core_System_Pages`
@@ -103,7 +110,7 @@ The shared framework uses the normalized managed order during repair and seeding
 
 ## 7. Duplicate Prevention
 
-Managed duplicate prevention is key-based.
+Managed duplicate prevention is key-based. During a declared canonical/legacy migration, legacy keys are normalized to the canonical key before duplicate prevention and repair matching.
 
 Current matching order during repair or seeding:
 
@@ -216,3 +223,5 @@ When changing or extending this area, validate all of the following:
 5. provider-managed items disappear cleanly from the managed menu after the provider stops registering them
 6. custom site-owned menu items are not deleted or rewritten by the managed repair flow
 7. no add-on-local `wp_nav_menu_objects` visibility filter is required for a managed Members Menu item
+
+For the related email-template group, payment-log source, System Page provider, and Club Administration contribution alias patterns, see [the canonical identity compatibility contract](../tpw-core-canonical-legacy-identity-compatibility-contract.md).

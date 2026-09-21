@@ -2391,7 +2391,9 @@ if ( ! function_exists( 'tpw_core_normalize_member_menu_item_spec' ) ) {
 
         $normalized = [
             'key'            => $key,
+			'legacy_keys'    => isset( $spec['legacy_keys'] ) && is_array( $spec['legacy_keys'] ) ? array_values( array_unique( array_filter( array_map( 'sanitize_key', $spec['legacy_keys'] ) ) ) ) : [],
             'provider'       => sanitize_key( (string) ( $spec['provider'] ?? 'tpw-core' ) ),
+			'legacy_providers' => isset( $spec['legacy_providers'] ) && is_array( $spec['legacy_providers'] ) ? array_values( array_unique( array_filter( array_map( 'sanitize_key', $spec['legacy_providers'] ) ) ) ) : [],
             'title'          => isset( $spec['title'] ) && '' !== trim( (string) $spec['title'] ) ? (string) $spec['title'] : ucwords( str_replace( '-', ' ', $key ) ),
             'system_slug'    => isset( $spec['system_slug'] ) ? sanitize_key( (string) $spec['system_slug'] ) : '',
             'shortcode_tag'  => isset( $spec['shortcode_tag'] ) ? sanitize_key( (string) $spec['shortcode_tag'] ) : '',
@@ -2426,6 +2428,20 @@ if ( ! function_exists( 'tpw_core_get_member_menu_registered_items' ) ) {
             $items = tpw_core_get_member_menu_core_default_items();
         }
 
+        $aliases = [];
+        foreach ( $items as $spec ) {
+            if ( ! is_array( $spec ) || empty( $spec['key'] ) || empty( $spec['legacy_keys'] ) || ! is_array( $spec['legacy_keys'] ) ) {
+                continue;
+            }
+            $canonical_key = sanitize_key( (string) $spec['key'] );
+            foreach ( $spec['legacy_keys'] as $legacy_key ) {
+                $legacy_key = sanitize_key( (string) $legacy_key );
+                if ( '' !== $canonical_key && '' !== $legacy_key && $canonical_key !== $legacy_key && ! isset( $aliases[ $legacy_key ] ) ) {
+                    $aliases[ $legacy_key ] = $canonical_key;
+                }
+            }
+        }
+
         $items_by_key = [];
         foreach ( $items as $spec ) {
             if ( ! is_array( $spec ) ) {
@@ -2433,11 +2449,14 @@ if ( ! function_exists( 'tpw_core_get_member_menu_registered_items' ) ) {
             }
 
             $normalized = tpw_core_normalize_member_menu_item_spec( $spec );
+			$declared_key = $normalized['key'];
+			$normalized['key'] = isset( $aliases[ $declared_key ] ) ? $aliases[ $declared_key ] : $declared_key;
+			$is_canonical = $declared_key === $normalized['key'];
             if ( empty( $normalized['key'] ) ) {
                 continue;
             }
 
-            if ( isset( $items_by_key[ $normalized['key'] ] ) ) {
+			if ( isset( $items_by_key[ $normalized['key'] ] ) && ! $is_canonical ) {
                 continue;
             }
 
@@ -2476,6 +2495,7 @@ if ( ! function_exists( 'tpw_core_ensure_member_menu_defaults' ) ) {
 
         $defaults        = tpw_core_get_member_menu_default_items();
         $managed_keys    = [];
+		$managed_key_aliases = [];
         foreach ( $defaults as $spec ) {
             if ( ! is_array( $spec ) ) {
                 continue;
@@ -2484,6 +2504,15 @@ if ( ! function_exists( 'tpw_core_ensure_member_menu_defaults' ) ) {
             $managed_key = sanitize_key( (string) ( $spec['key'] ?? '' ) );
             if ( '' !== $managed_key ) {
                 $managed_keys[ $managed_key ] = true;
+            }
+            if ( ! empty( $spec['legacy_keys'] ) && is_array( $spec['legacy_keys'] ) ) {
+                foreach ( $spec['legacy_keys'] as $legacy_key ) {
+                    $legacy_key = sanitize_key( (string) $legacy_key );
+                    if ( '' !== $legacy_key && $legacy_key !== $managed_key ) {
+                        $managed_keys[ $legacy_key ] = true;
+                        $managed_key_aliases[ $legacy_key ] = $managed_key;
+                    }
+                }
             }
         }
 
@@ -2506,6 +2535,7 @@ if ( ! function_exists( 'tpw_core_ensure_member_menu_defaults' ) ) {
 
             $default_key = sanitize_key( (string) get_post_meta( $item_id, '_tpw_member_menu_default_key', true ) );
             $page_slug   = sanitize_key( (string) get_post_meta( $item_id, '_tpw_page_slug', true ) );
+			$logical_key  = isset( $managed_key_aliases[ $default_key ] ) ? $managed_key_aliases[ $default_key ] : $default_key;
 
             if ( '' !== $default_key && ! isset( $managed_keys[ $default_key ] ) ) {
                 if ( function_exists( 'wp_delete_post' ) ) {
@@ -2517,7 +2547,7 @@ if ( ! function_exists( 'tpw_core_ensure_member_menu_defaults' ) ) {
             $filtered_existing_items[] = $existing_item;
 
             if ( '' !== $default_key ) {
-                $existing_by_default_key[ $default_key ] = $existing_item;
+				$existing_by_default_key[ $logical_key ] = $existing_item;
                 $existing_managed_positions[] = isset( $existing_item->menu_order ) ? (int) $existing_item->menu_order : 0;
             }
 

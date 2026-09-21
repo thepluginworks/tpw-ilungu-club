@@ -63,7 +63,49 @@ class TPW_Payment_Logs_Admin {
             $offset
         );
 
-        return $wpdb->get_results( $query );
+        $rows = $wpdb->get_results( $query );
+
+        if ( ! class_exists( 'TPW_Payment_Source_Registry' ) || ! is_array( $rows ) ) {
+            return $rows;
+        }
+
+        return array_map( array( 'TPW_Payment_Source_Registry', 'normalize_log_row' ), $rows );
+    }
+
+    /**
+     * Retrieve historical and canonical rows for one logical source.
+     *
+     * @param string $source Canonical or legacy source identifier.
+     * @param int    $page Page number.
+     * @param int    $per_page Rows per page.
+     * @return array<int,object>
+     */
+    public static function get_page_for_source( $source, $page = 1, $per_page = 20 ) {
+        global $wpdb;
+
+        $identities = class_exists( 'TPW_Payment_Source_Registry' ) ? TPW_Payment_Source_Registry::get_source_identities( $source ) : array( sanitize_key( $source ) );
+        $page       = max( 1, (int) $page );
+        $per_page   = max( 1, min( 100, (int) $per_page ) );
+        $offset     = ( $page - 1 ) * $per_page;
+        $table_name = self::get_table_name();
+
+        if ( empty( $identities ) ) {
+            return array();
+        }
+
+        $placeholders = implode( ', ', array_fill( 0, count( $identities ), '%s' ) );
+        $arguments    = array_merge( $identities, array( $per_page, $offset ) );
+        $query        = $wpdb->prepare(
+            "SELECT * FROM {$table_name} WHERE plugin IN ({$placeholders}) ORDER BY created_at DESC, id DESC LIMIT %d OFFSET %d",
+            ...$arguments
+        );
+        $rows         = $wpdb->get_results( $query );
+
+        if ( class_exists( 'TPW_Payment_Source_Registry' ) && is_array( $rows ) ) {
+            return array_map( array( 'TPW_Payment_Source_Registry', 'normalize_log_row' ), $rows );
+        }
+
+        return is_array( $rows ) ? $rows : array();
     }
 
     public static function clear_all() {

@@ -8,6 +8,7 @@ const galleryFixture = process.env.ILUNGU_GALLERY_FIXTURE === 'true';
 const galleryCollisionFixture = process.env.ILUNGU_GALLERY_COLLISION_FIXTURE === 'true';
 const galleryMenuFixture = process.env.ILUNGU_GALLERY_MENU_FIXTURE === 'true';
 const checklistFixture = process.env.ILUNGU_CHECKLIST_FIXTURE === 'true';
+const canonicalSystemPagesFixture = process.env.ILUNGU_SYSTEM_PAGES_CANONICAL_FIXTURE === 'true';
 
 const routes = {
 	memberLogin: '/member-login/',
@@ -53,6 +54,12 @@ function pageUrl(path: string): string {
 function portalWorkspaceUrl(workspace: string): string {
 	const url = new URL(pageUrl(routes.portal));
 	url.searchParams.set('workspace', workspace);
+	return url.toString();
+}
+
+function canonicalSystemPagesWorkspaceUrl(): string {
+	const url = new URL(portalWorkspaceUrl('system-pages'));
+	url.searchParams.set('tpw_club_playwright_system_pages', '1');
 	return url.toString();
 }
 
@@ -278,19 +285,19 @@ test.describe('iLungu Club branding smoke test', () => {
 	});
 
 	test('System Pages shows the healthy Club Management canonical route', async ({ page }) => {
-		test.skip(!adminUser || !adminPassword, 'Set ILUNGU_ADMIN_USER and ILUNGU_ADMIN_PASSWORD to manage System Pages.');
+		test.skip(!adminUser || !adminPassword || !canonicalSystemPagesFixture, 'Set administrator credentials and ILUNGU_SYSTEM_PAGES_CANONICAL_FIXTURE=true for a Local canonical System Pages fixture.');
 		await page.goto(pageUrl('/wp-login.php'), { waitUntil: 'domcontentloaded' });
 		await page.getByLabel(/username or email address/i).fill(adminUser!);
 		await page.getByLabel(/^password$/i).fill(adminPassword!);
 		await page.getByRole('button', { name: /log in/i }).click();
 		await page.waitForURL(/\/wp-admin\//);
 
-		const response = await page.goto(portalWorkspaceUrl('system-pages'), { waitUntil: 'domcontentloaded' });
+		const response = await page.goto(canonicalSystemPagesWorkspaceUrl(), { waitUntil: 'domcontentloaded' });
 		expect(response?.ok(), 'System Pages workspace must load').toBeTruthy();
 		const clubManagementRow = await systemPageRow(page, 'Club Management');
 		await expect(systemPageCell(clubManagementRow, 2).locator('.tpw-flexiclub-dashboard__status')).toContainText('Complete');
 		await expect(systemPageCell(clubManagementRow, 0).locator('.tpw-flexiclub-system-pages__page-chip--plugin')).toHaveText('iLungu Club');
-		const linkedPage = systemPageCell(clubManagementRow, 5).getByRole('link', { name: 'View' });
+		const linkedPage = systemPageCell(clubManagementRow, 6).getByRole('link', { name: 'View' });
 		await expect(linkedPage).toHaveAttribute('href', /\/club-management\/?$/);
 		const linkedPageUrl = await linkedPage.getAttribute('href');
 		expect(linkedPageUrl, 'Club Management linked page must have a target URL').toBeTruthy();

@@ -20,6 +20,7 @@ Payments provides lightweight helpers and webhooks to log completed transactions
 - Subscribe to tpw_payment_completed to update your domain models (orders, entries). Validate payloads and idempotency yourself.
 - Use get_option('flexievent_settings') for currency_symbol and currency_code where needed.
 - Use `TPW_Payments_Manager::get_usable_methods()` to build a checkout selector and `TPW_Payments_Manager::is_method_usable()` to validate its submission. `get_active_methods()` is a backwards-compatible stored-preference API, not a checkout gate.
+- For payment-log source migrations, register canonical and legacy aliases with `TPW_Payment_Source_Registry::register_source_aliases()`. New log writes use the canonical source; historical `tpw_payment_logs.plugin` values remain readable as one logical source. See [the canonical identity compatibility contract](../architecture/tpw-core-canonical-legacy-identity-compatibility-contract.md).
 
 ## References
 - Developer Guide → ../developer-guide.md

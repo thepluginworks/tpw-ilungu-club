@@ -58,6 +58,7 @@ class TPW_Payment_Logger {
         global $wpdb;
 
         $table_name = $wpdb->prefix . 'tpw_payment_logs';
+		$plugin     = class_exists( 'TPW_Payment_Source_Registry' ) ? TPW_Payment_Source_Registry::normalize_source( $plugin ) : $plugin;
 
         $wpdb->insert(
             $table_name,

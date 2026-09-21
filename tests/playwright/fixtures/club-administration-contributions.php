@@ -51,8 +51,23 @@ add_filter(
 			'workspace' => [
 				'key'      => 'synthetic-club',
 				'label'    => 'Synthetic Club Workspace',
-				'frontend' => [ 'render_callback' => 'tpw_club_playwright_render_frontend_workspace' ],
-				'admin'    => [ 'capability' => 'manage_options', 'page_callback' => 'tpw_club_playwright_render_admin_workspace' ],
+				'frontend' => [
+					'render_callback' => static function() {
+						if ( current_user_can( 'manage_options' ) ) {
+							echo '<section class="tpw-club-playwright-workspace"><h1>Synthetic Club Frontend Workspace</h1></section>';
+						}
+					},
+				],
+				'admin' => [
+					'capability'    => 'manage_options',
+					'page_callback' => static function() {
+						if ( ! current_user_can( 'manage_options' ) ) {
+							wp_die( esc_html__( 'Access denied.', 'tpw-core' ) );
+						}
+
+						echo '<div class="wrap"><h1>Synthetic Club Admin Workspace</h1></div>';
+					},
+				],
 			],
 		];
 		$contributions[] = [
@@ -74,7 +89,7 @@ add_filter(
 			],
 		];
 		$contributions[] = [
-			'key'        => 'synthetic-duplicate',
+			'key'        => 'wave1b-synthetic-duplicate',
 			'contexts'   => [ 'frontend', 'admin' ],
 			'capability' => 'manage_options',
 			'overview_card' => [
@@ -83,12 +98,31 @@ add_filter(
 			],
 		];
 		$contributions[] = [
-			'key'        => 'synthetic-duplicate',
+			'key'        => 'wave1b-synthetic-duplicate',
 			'contexts'   => [ 'frontend', 'admin' ],
 			'capability' => 'manage_options',
 			'overview_card' => [
 				'title'          => 'Synthetic Duplicate Second',
 				'primary_action' => [ 'label' => 'Open Second Duplicate', 'url' => home_url( '/?synthetic=second' ) ],
+			],
+		];
+		$contributions[] = [
+			'key'        => 'synthetic-legacy-alias',
+			'contexts'   => [ 'frontend', 'admin' ],
+			'capability' => 'manage_options',
+			'overview_card' => [
+				'title'          => 'Synthetic Legacy Alias',
+				'primary_action' => [ 'label' => 'Open Legacy Alias', 'url' => home_url( '/?synthetic=legacy-alias' ) ],
+			],
+		];
+		$contributions[] = [
+			'key'         => 'synthetic-canonical-alias',
+			'legacy_keys' => [ 'synthetic-legacy-alias' ],
+			'contexts'    => [ 'frontend', 'admin' ],
+			'capability'  => 'manage_options',
+			'overview_card' => [
+				'title'          => 'Synthetic Canonical Alias',
+				'primary_action' => [ 'label' => 'Open Canonical Alias', 'url' => home_url( '/?synthetic=canonical-alias' ) ],
 			],
 		];
 		$contributions[] = [

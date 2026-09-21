@@ -4,6 +4,7 @@
 
 ### Added
 - Members: added the read-only `tpw_member_office_secretary` and `tpw_member_office_treasurer` office-state predicates through `tpw_core_user_can()`. They report only the linked member record's corresponding current office flag; they do not create a WordPress role or capability and do not alter existing authorization mappings.
+- Core compatibility: added canonical/legacy aliases for email-template groups, payment-log sources, System Page providers, Club Administration contribution keys, and managed Members Menu item keys. The aliases use canonical writes and legacy reads without bulk rewriting site data.
 
 ### Fixed
 - Notices: aligned `tpw_notices_manage` with the active Noticeboard management rule so the Core permission bridge recognises configured Noticeboard Admin members as well as WordPress Administrators.

@@ -162,6 +162,19 @@ if (!$result['success']) {
 Notes:
 - For online “on-page” gateways like Square, you’ll typically capture on the same page (via the SDK) and then store the gateway reference back into the shared-framework record (set `payment_reference`).
 
+### Payment-log source identity
+
+When your plugin writes a `TPW_Payment_Logger` entry, register a canonical source and legacy aliases during bootstrap:
+
+```php
+TPW_Payment_Source_Registry::register_source_aliases(
+  'ilungu-tickets',
+  array( 'tpw-flexiticket' )
+);
+```
+
+Pass `ilungu-tickets` to new log writes. Core keeps historical legacy rows and reads them with the canonical logical source through `TPW_Payment_Logs_Admin::get_page_for_source()`. Do not bulk rewrite payment-log history. See [the canonical identity compatibility contract](../architecture/tpw-core-canonical-legacy-identity-compatibility-contract.md).
+
 ---
 
 ## 5) Square capture flow (with shared-framework bootstrap)

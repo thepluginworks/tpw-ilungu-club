@@ -22,8 +22,9 @@ That private set includes the default Noticeboard route as well as the other mem
 
 ## Extending
 - Register your page and ensure it exists:
-  - TPW_Core_System_Pages::register_page( 'slug', [ 'title' => 'Title', 'shortcode' => '[shortcode]', 'plugin' => 'my-addon', 'required' => 1 ] );
+  - TPW_Core_System_Pages::register_page( 'slug', [ 'title' => 'Title', 'shortcode' => '[shortcode]', 'plugin' => 'my-addon', 'legacy_plugins' => [ 'legacy-addon' ], 'required' => 1 ] );
   - TPW_Core_System_Pages::ensure_page( 'slug' );
+- For canonical/legacy provider migration, declare `legacy_plugins` on the canonical registration. Core reuses an existing legacy-owned page ID and does not recreate its content. See [the canonical identity compatibility contract](../architecture/tpw-core-canonical-legacy-identity-compatibility-contract.md).
 - Plugin-owned iLungu Club Members Menu destinations should prefer `system_slug` entries registered through System Pages rather than hard-coded menu URLs. See the canonical Members Menu registration contract: ../architecture/navigation/tpw-core-members-menu-registration-contract.md
 
 ## Logged-out Fallback Menus

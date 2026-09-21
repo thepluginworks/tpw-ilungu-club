@@ -3767,17 +3767,43 @@ class TPW_FlexiClub_Admin_Menu {
 	protected static function get_club_administration_contributions( $context = '' ) {
 		$registered = apply_filters( 'tpw_core_club_administration_contributions', [] );
 		$valid      = [];
+		$valid_origins = [];
+		$aliases    = [];
+		$canonical_keys = [];
 
 		if ( ! is_array( $registered ) ) {
 			return $valid;
 		}
 
 		foreach ( $registered as $contribution ) {
+			if ( ! is_array( $contribution ) || empty( $contribution['key'] ) || empty( $contribution['legacy_keys'] ) || ! is_array( $contribution['legacy_keys'] ) ) {
+				continue;
+			}
+
+			$canonical_key = sanitize_key( (string) $contribution['key'] );
+			if ( '' === $canonical_key ) {
+				continue;
+			}
+			$canonical_keys[ $canonical_key ] = true;
+
+			foreach ( $contribution['legacy_keys'] as $legacy_key ) {
+				$legacy_key = sanitize_key( (string) $legacy_key );
+				if ( '' !== $legacy_key && $canonical_key !== $legacy_key && ! isset( $aliases[ $legacy_key ] ) ) {
+					$aliases[ $legacy_key ] = $canonical_key;
+				}
+			}
+		}
+
+		foreach ( $registered as $contribution ) {
 			if ( ! is_array( $contribution ) || empty( $contribution['key'] ) ) {
 				continue;
 			}
-			$key = sanitize_key( (string) $contribution['key'] );
-			if ( '' === $key || isset( $valid[ $key ] ) ) {
+			$declared_key = sanitize_key( (string) $contribution['key'] );
+			$key          = isset( $aliases[ $declared_key ] ) ? $aliases[ $declared_key ] : $declared_key;
+			$replaces_legacy = isset( $valid[ $key ], $canonical_keys[ $key ], $valid_origins[ $key ], $aliases[ $valid_origins[ $key ] ] )
+				&& $declared_key === $key
+				&& $aliases[ $valid_origins[ $key ] ] === $key;
+			if ( '' === $key || ( isset( $valid[ $key ] ) && ! $replaces_legacy ) ) {
 				continue;
 			}
 
@@ -3808,6 +3834,7 @@ class TPW_FlexiClub_Admin_Menu {
 			}
 			if ( 2 < count( $normalized ) ) {
 				$valid[ $key ] = $normalized;
+				$valid_origins[ $key ] = $declared_key;
 			}
 		}
 

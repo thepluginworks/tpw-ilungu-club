@@ -61,6 +61,10 @@ Payments architecture defines the distinction between stored active preferences 
 
 The canonical payment-method contract is [docs/architecture/payments/tpw-core-payment-method-contract.md](payments/tpw-core-payment-method-contract.md).
 
+## Canonical and Legacy Identity Compatibility
+
+The canonical migration contract for consumer provider, email-template group, payment-log source, and Club Administration contribution aliases is [docs/architecture/tpw-core-canonical-legacy-identity-compatibility-contract.md](tpw-core-canonical-legacy-identity-compatibility-contract.md).
+
 ## Architectural Separation
 
 Identity and permissions are separate architectural layers.

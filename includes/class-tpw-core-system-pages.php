@@ -113,6 +113,31 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
         }
 
         /**
+         * Return the canonical provider and legacy providers accepted for a page.
+         *
+         * @param array $def Registered page definition.
+         * @return array<int,string>
+         */
+        protected static function get_provider_identities( $def ) {
+            $providers = array();
+            $plugin    = isset( $def['plugin'] ) ? sanitize_key( (string) $def['plugin'] ) : '';
+
+            if ( '' !== $plugin ) {
+                $providers[] = $plugin;
+            }
+
+            $legacy_plugins = isset( $def['legacy_plugins'] ) && is_array( $def['legacy_plugins'] ) ? $def['legacy_plugins'] : array();
+            foreach ( $legacy_plugins as $legacy_plugin ) {
+                $legacy_plugin = sanitize_key( (string) $legacy_plugin );
+                if ( '' !== $legacy_plugin && ! in_array( $legacy_plugin, $providers, true ) ) {
+                    $providers[] = $legacy_plugin;
+                }
+            }
+
+            return $providers;
+        }
+
+        /**
          * Public: get permalink for a system page key.
          * - Resolves to linked WP Page if mapped/found
          * - Falls back to conventional path /{slug}/
@@ -277,8 +302,10 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
                 return false;
             }
 
-            $plugin = isset( $def['plugin'] ) ? sanitize_key( (string) $def['plugin'] ) : '';
-            return '' === $plugin || $plugin === sanitize_key( (string) get_post_meta( $page->ID, '_tpw_system_page_plugin', true ) );
+            $providers = self::get_provider_identities( $def );
+            $provider  = sanitize_key( (string) get_post_meta( $page->ID, '_tpw_system_page_plugin', true ) );
+
+            return empty( $providers ) || in_array( $provider, $providers, true );
         }
 
         /**
@@ -429,8 +456,9 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
             $title = isset( $args['title'] ) ? (string) $args['title'] : ( $current['title'] ?? ucwords( str_replace( '-', ' ', $s ) ) );
             $shortcode = isset( $args['shortcode'] ) ? (string) $args['shortcode'] : ( $current['shortcode'] ?? '' );
             $plugin = isset( $args['plugin'] ) ? (string) $args['plugin'] : ( $current['plugin'] ?? '' );
+            $legacy_plugins = isset( $args['legacy_plugins'] ) && is_array( $args['legacy_plugins'] ) ? $args['legacy_plugins'] : ( $current['legacy_plugins'] ?? array() );
             $required = isset( $args['required'] ) ? (int) $args['required'] : (int) ( $current['required'] ?? 0 );
-            self::$registry[ $s ] = [ 'title' => $title, 'shortcode' => $shortcode, 'plugin' => $plugin, 'required' => $required ];
+            self::$registry[ $s ] = [ 'title' => $title, 'shortcode' => $shortcode, 'plugin' => $plugin, 'legacy_plugins' => array_values( array_unique( array_filter( array_map( 'sanitize_key', $legacy_plugins ) ) ) ), 'required' => $required ];
         }
 
         /**
