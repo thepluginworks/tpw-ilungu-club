@@ -479,6 +479,16 @@ if ( ! function_exists( 'tpw_core_user_can' ) ) {
             return $wp_user_can( $uid, 'manage_options' );
         };
 
+        // Office-state predicates are factual member-record checks, not permissions.
+        $tpw_member_is_secretary = static function( int $uid ) use ( $ensure_member_access ): bool {
+            $ensure_member_access();
+            if ( class_exists( 'TPW_Member_Access', false ) && method_exists( 'TPW_Member_Access', 'user_has_member_flag' ) ) {
+                return TPW_Member_Access::user_has_member_flag( 'is_secretary', $uid );
+            }
+
+            return false;
+        };
+
         // Members directory eligibility as currently enforced by the manage-members shortcode.
         // Delegates to:
         // - TPW_Member_Access::get_allowed_statuses()
@@ -502,6 +512,12 @@ if ( ! function_exists( 'tpw_core_user_can' ) ) {
 
         // --- Ability mapping (Step 1 only; add more only when there is an existing enforcement point) ---
         switch ( $ability ) {
+            // === Member office state ===
+            // This is intentionally not an authorization ability: no administrator
+            // or management-permission override applies.
+            case 'tpw_member_office_secretary':
+                return $tpw_member_is_secretary( $user_id );
+
             // === Members ===
             case 'tpw_members_manage':
             case 'tpw_members_create':

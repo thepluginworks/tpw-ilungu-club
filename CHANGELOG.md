@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Members: added the read-only `tpw_member_office_secretary` office-state predicate through `tpw_core_user_can()`. It reports only the linked member record's current Secretary flag; it does not create a WordPress role or capability and does not alter existing authorization mappings.
+
 ### Changed
 - Admin routing: standardised iLungu Club Settings and every Core-owned Settings tab on `admin.php?page=tpw-flexiclub-settings`; native WordPress Settings no longer contains an iLungu Club submenu. Legacy `options-general.php?page=tpw-core-settings` URLs redirect to the canonical Club route while preserving valid tab context.
 

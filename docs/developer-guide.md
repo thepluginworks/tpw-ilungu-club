@@ -12,6 +12,14 @@ tpw_core_user_can( string $ability, int $user_id = 0 )
 
 Use this helper for TPW capability-style checks instead of querying raw `tpw_members` office-role flags.
 
+For the factual question "is this linked Club member currently the Secretary?", use the narrow office-state predicate:
+
+```php
+tpw_core_user_can( 'tpw_member_office_secretary', $user_id )
+```
+
+It is true only when the linked member row currently has `is_secretary = 1`. It is not an authorization capability: WordPress Administrator, Core administration, Members Manager, Treasurer, Committee, and broad event or member-management permissions do not imply it. It does not create or synchronise a WordPress role/capability, and existing Secretary records need no migration or backfill. The `tpw_member_office_<office>` pattern is reserved for demonstrated future office-state needs only.
+
 Current compatibility-era office-role storage:
 
 - `is_secretary`

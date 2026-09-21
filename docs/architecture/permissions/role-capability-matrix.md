@@ -34,6 +34,16 @@ This matrix explains the *default intent*.
 Current Phase 1 shared-framework note:
 - Secretary and Treasurer remain compatibility-era storage in `tpw_members`; plugins must not query raw flags directly.
 
+### Office-State Predicate
+
+The matrix describes broad authorization capabilities; it does not establish factual office holding. A consumer that needs to know whether a linked Club member currently holds the Secretary office must use:
+
+```php
+tpw_core_user_can( 'tpw_member_office_secretary', $user_id )
+```
+
+This narrow office-state predicate is true only when the linked member row has `is_secretary = 1`. WordPress Administrator status and broad member, event, or payment-management permissions do not imply it. It creates no WordPress role or capability and needs no migration or backfill. `tpw_member_office_<office>` is reserved for demonstrated future needs, rather than a speculative mirror of Club flags.
+
 3. **Defaults are adjustable**
    - Clubs may grant or revoke capabilities (e.g. give Treasurer temporary member-import access).
    - This matrix shows *recommended defaults*, not hard limits.

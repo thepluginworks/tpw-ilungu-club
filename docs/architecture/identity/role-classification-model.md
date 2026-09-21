@@ -93,6 +93,14 @@ During migration, the compatibility layer should abstract access to these signal
 
 For current plugin code, that abstraction point is `tpw_core_user_can()` rather than direct raw-flag reads.
 
+For the demonstrated cross-plugin Secretary office-state need, consumers must call:
+
+```php
+tpw_core_user_can( 'tpw_member_office_secretary', $user_id )
+```
+
+This is a factual office-state predicate, not an authorization capability. It is true only for a linked member whose current `is_secretary` flag is enabled; WordPress Administrator and broad management authority do not imply it. It creates no WordPress role or capability. The `tpw_member_office_<office>` pattern is reserved for demonstrated future office-state needs and is not a general invitation to mirror every member flag.
+
 ## 6. Category 3 - Plugin-Local Responsibility Roles
 
 Plugin-local responsibility roles are roles that exist only within a specific plugin domain.

@@ -65,6 +65,20 @@ Manage Members protected fields in this phase are:
 
 `is_admin` remains special because it synchronises with the linked WordPress `administrator` role.
 
+### Office-State Predicates
+
+Office-state predicates answer a factual question about the linked Club member record. They are not authorization capabilities and do not grant access to an action.
+
+The current supported predicate is:
+
+```php
+tpw_core_user_can( 'tpw_member_office_secretary', $user_id )
+```
+
+It returns true only when `$user_id` resolves to a linked `tpw_members` record with `is_secretary = 1`. WordPress Administrator status, Core administration, Members Manager status, Treasurer status, Committee status, and broad management abilities do not imply Secretary.
+
+This predicate creates no WordPress role or capability, does not synchronise the member flag to WordPress, and requires no migration or backfill. The `tpw_member_office_<office>` namespace is reserved for demonstrated consumer needs only; it must not be populated speculatively.
+
 ---
 
 ## 3. Platform Roles (Business Roles)
@@ -100,6 +114,8 @@ Rules:
 - Underscore separated
 - Explicit scope (view vs manage, own vs all)
 - No role names in capability strings
+
+These naming rules apply to authorization capabilities. Office-state predicates use the separately reserved `tpw_member_office_<office>` pattern and are factual checks, not action permissions.
 
 ---
 

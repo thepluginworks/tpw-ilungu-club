@@ -67,6 +67,8 @@ These concepts must not be mixed.
 
 A person may be a member and also hold one or more responsibilities. A person may also hold a responsibility projection in a feature workflow without that responsibility redefining their identity category.
 
+Secretary is one such responsibility, not an identity category. Consumers that need the factual Secretary office state must use `tpw_core_user_can( 'tpw_member_office_secretary', $user_id )`; it is true only for a linked Club member with the current Secretary office flag enabled. It is not an authorization capability, does not inherit WordPress Administrator or management permissions, and creates no WordPress role or capability.
+
 ## 6. Membership Identity Rule
 
 A person counts as a current TPW member only when both of the following are true:
