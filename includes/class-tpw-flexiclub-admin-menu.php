@@ -3917,9 +3917,6 @@ class TPW_FlexiClub_Admin_Menu {
 		$context       = $prefer_frontend ? 'frontend' : 'admin';
 		$actions       = [];
 
-		if ( ! empty( $card['action_label'] ) && ! empty( $card['action_url'] ) ) {
-			$actions[] = [ 'label' => $card['action_label'], 'url' => $card['action_url'] ];
-		}
 		foreach ( self::get_club_administration_contributions( $context ) as $contribution ) {
 			if ( empty( $contribution['extend_actions'] ) || $catalogue_key !== $contribution['extend_actions']['catalogue_key'] ) {
 				continue;
@@ -3927,6 +3924,10 @@ class TPW_FlexiClub_Admin_Menu {
 			foreach ( $contribution['extend_actions']['actions'] as $action ) {
 				$actions[] = $action;
 			}
+		}
+
+		if ( empty( $actions ) && ! empty( $card['action_label'] ) && ! empty( $card['action_url'] ) ) {
+			$actions[] = [ 'label' => $card['action_label'], 'url' => $card['action_url'] ];
 		}
 
 		$unique_actions = [];

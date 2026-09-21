@@ -68,7 +68,7 @@ The top-level iLungu Club wp-admin dashboard is a shared-framework-owned operati
 
 - Dashboard status pills use shared semantic meanings across Club Overview and System Status: `Active`, `Complete`, `Healthy`, and `In use` use the green success tone, `Ready` uses the neutral grey tone, `Needs review` and `Inactive` use the warning tone, and `Missing` or required unavailable states use the error tone.
 - Overview card background tints and icon colours express module identity only. They must not override the shared semantic pill colours.
-- The `Extend iLungu Club` add-on cards only show real actions. Active plugins may show a safe management/admin URL when one is known, installed inactive plugins may show an activation action, and available plugins may show `Learn more` only when a real product URL exists. Do not add placeholder links, dead buttons, or fake management destinations.
+- The `Extend iLungu Club` add-on cards only show real actions. For active catalogue cards, valid consumer `extend_actions` are authoritative per context; otherwise the Core management URL remains the compatibility fallback. Installed inactive plugins may show an activation action, and available plugins may show `Learn more` only when a real product URL exists. Do not add placeholder links, dead buttons, or fake management destinations. See `docs/architecture/ui/tpw-core-club-administration-contribution-contract.md`.
 - Compatible active consumer plugins contribute Club Overview cards, active Extend-card actions, and frontend/wp-admin workspaces through `tpw_core_club_administration_contributions`. See `docs/architecture/ui/tpw-core-club-administration-contribution-contract.md`. Quick Actions are Core-owned in this release.
 
 ### System Pages

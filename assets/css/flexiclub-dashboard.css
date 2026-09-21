@@ -676,6 +676,8 @@
 .tpw-flexiclub-dashboard__extend-action {
   display: flex;
   align-items: stretch;
+  flex-wrap: wrap;
+  gap: 8px;
   min-height: 40px;
   margin-top: auto;
   padding-top: 4px;
