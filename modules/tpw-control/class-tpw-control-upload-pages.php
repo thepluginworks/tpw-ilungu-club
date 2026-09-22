@@ -1711,8 +1711,8 @@ class TPW_Control_Upload_Pages {
         // Prefer an explicit page URL from the form, then fall back to current menu URL, then referer, then home
         $posted_url = isset($_POST['_tpw_control_page_url']) ? esc_url_raw( wp_unslash( $_POST['_tpw_control_page_url'] ) ) : '';
         $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-        $backend_url = is_admin() && 'tpw-flexiclub-upload-pages' === $page
-            ? admin_url( 'admin.php?page=tpw-flexiclub-upload-pages' )
+		$backend_url = is_admin() && 'ilungu-club-upload-pages' === $page
+			? admin_url( 'admin.php?page=ilungu-club-upload-pages' )
             : '';
         $url = $posted_url ?: ( '' !== $backend_url ? $backend_url : TPW_Control_UI::menu_url('upload-pages') );
         if ( empty( $url ) ) {

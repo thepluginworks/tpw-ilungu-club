@@ -15,6 +15,11 @@ That private set includes the default Noticeboard route as well as the other mem
   - Manage Members — [tpw_manage_members]
   - Noticeboard — [tpw_noticeboard_list]
   - TPW Control — [tpw-control]
+  - Club Management — [ilungu_club]
+  - Menu Management — [ilungu_club_menu_management]
+  - Archival System — [ilungu_club_archival_system]
+
+Club-owned System Pages retain the canonical slugs `club-management`, `menu-management`, `archival-system`, and `logs`. Club updates exact owned legacy FlexiClub shortcode content in place, preserving the existing page ID and never creating replacement pages. `[flexiclub]`, `[flexiclub_menu_management]`, and `[flexiclub_archival_system]` remain temporary shortcode aliases.
 
 ## Hooks
 - tpw/system_pages/defaults (filter) — Modify default registry rows.

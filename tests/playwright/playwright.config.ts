@@ -24,7 +24,7 @@ if (existsSync(localEnvironmentFile)) {
 	}
 }
 
-const baseURL = process.env.ILUNGU_BASE_URL || 'http://ilungu-club.local';
+const baseURL = process.env.ILUNGU_BASE_URL || 'https://ilungu-club.local';
 
 export default defineConfig({
 	testDir: __dirname,

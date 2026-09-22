@@ -71,6 +71,7 @@ if ( ! function_exists( 'tpw_core_is_tpw_admin_request' ) ) {
             if (
                 0 === strpos( $page, 'tpw-' ) ||
                 0 === strpos( $page, 'tpw_' ) ||
+                ( function_exists( 'tpw_core_get_admin_pages' ) && in_array( $page, tpw_core_get_admin_pages(), true ) ) ||
                 in_array( $page, $allow, true )
             ) {
                 $is_tpw = true;
@@ -161,7 +162,7 @@ add_filter('admin_body_class', function ($classes) {
     }
 
     // Settings page-specific marker class (used to guard any JS that manipulates .wrap or notices).
-    if ( $page === 'tpw-flexiclub-settings' ) {
+    if ( $page === 'ilungu-club-settings' ) {
         $classes .= ' tpw-core-settings-page';
     }
 
@@ -176,15 +177,15 @@ add_filter('admin_body_class', function ($classes) {
  */
 function tpw_core_get_admin_pages() {
 	$pages = array(
-        'tpw-flexiclub-settings',
+		'ilungu-club-settings',
 		'tpw-core-dashboard',
 		'tpw-core-tools',
-        'tpw-flexiclub-dashboard',
-        'tpw-flexiclub-manage-members',
-        'tpw-flexiclub-gallery-admin',
-        'tpw-flexiclub-upload-pages',
-        'tpw-flexiclub-menu-manager',
-        'tpw-flexiclub-logs',
+		'ilungu-club-dashboard',
+		'ilungu-club-manage-members',
+		'ilungu-club-gallery-admin',
+		'ilungu-club-upload-pages',
+		'ilungu-club-menu-manager',
+		'ilungu-club-logs',
 	);
 	return apply_filters( 'tpw_core_get_admin_pages', $pages );
 }
@@ -319,7 +320,7 @@ if ( ! function_exists( 'tpw_core_output_header' ) ) {
         $page   = isset($_GET['page']) ? sanitize_key( wp_unslash($_GET['page']) ) : '';
         $icon_url = apply_filters( 'tpw_core/header_icon_url', $icon_url, $screen, $page );
         ?>
-        <div class="<?php echo $page === 'tpw-flexiclub-settings' ? 'tpw-fe-header' : 'wrap tpw-fe-header'; ?>">
+        <div class="<?php echo $page === 'ilungu-club-settings' ? 'tpw-fe-header' : 'wrap tpw-fe-header'; ?>">
             <div class="tpw-fe-header-inner">
                 <div class="tpw-fe-header-left">
                     <?php if ( ! empty( $icon_url ) ) : ?>
@@ -342,7 +343,7 @@ if ( ! function_exists( 'tpw_core_output_header' ) ) {
         <?php
         // Allow extensions to output content after the header strip, but never on the
         // Core Settings screen (that page controls its own notices and tab layout).
-        if ( $page !== 'tpw-flexiclub-settings' ) {
+        if ( $page !== 'ilungu-club-settings' ) {
             do_action( 'tpw_core/admin_header/after', $title );
         }
         ?>

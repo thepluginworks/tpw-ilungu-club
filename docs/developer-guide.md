@@ -541,7 +541,7 @@ Templates are stored in memory only (static registry). Admin overrides are store
 
 #### RSVP plugin — registering templates
 
-To expose RSVP-related templates in wp-admin → iLungu Club → Settings → Email Templates (`/wp-admin/admin.php?page=tpw-flexiclub-settings&tab=email-templates`), register them from your RSVP plugin on `init` (or after `tpw_core_loaded`). Use a stable group key for tidy grouping in the UI, e.g. `tpw-rsvp-lodge-meetings`.
+To expose RSVP-related templates in wp-admin → iLungu Club → Settings → Email Templates (`/wp-admin/admin.php?page=ilungu-club-settings&tab=email-templates`), register them from your RSVP plugin on `init` (or after `tpw_core_loaded`). Use a stable group key for tidy grouping in the UI, e.g. `tpw-rsvp-lodge-meetings`.
 
 Example bootstrap in your RSVP plugin:
 
@@ -992,7 +992,7 @@ iLungu Club now also exposes FE-first workspace shells for the same operational 
 - Shortcode: `[tpw-control]`
 - Route format: `/tpw-control/?action=` where `action` matches a registered section key.
 - Default page (no `action`): Dashboard.
-- FE workspace shortcodes: `[flexiclub]`, `[flexiclub_menu_management]`, and `[flexiclub_archival_system]`.
+- FE workspace shortcodes: `[ilungu_club]`, `[ilungu_club_menu_management]`, and `[ilungu_club_archival_system]`. The former FlexiClub shortcodes remain temporary aliases only.
 - FE system page slugs: `flexiclub`, `menu-management`, and `archival-system`.
 - Legacy compatibility: keep the `tpw-control` page registered and available during migration; do not hard-remove existing links, pages, or shortcode usage.
 
@@ -1057,8 +1057,8 @@ Shortcode Routing
 	- `https://example.com/tpw-control/?action=menu-manager`
 
 iLungu Club FE Workspace Routing
-- `[flexiclub]` remains the main iLungu Club FE portal and can route to additive workspace views such as `?workspace=menu-management` and `?workspace=archival-system`.
-- `[flexiclub_menu_management]` and `[flexiclub_archival_system]` render the same FE shell directly on dedicated system pages.
+- `[ilungu_club]` is the main iLungu Club FE portal and can route to additive workspace views such as `?workspace=menu-management` and `?workspace=archival-system`.
+- `[ilungu_club_menu_management]` and `[ilungu_club_archival_system]` render the same FE shell directly on dedicated system pages.
 - When reusing TPW Control sections inside iLungu Club FE workspaces, preserve the original section callbacks and legacy routes rather than duplicating their business logic.
 
 ### Developer helpers (Phase 5)

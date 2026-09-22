@@ -4,42 +4,82 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TPW_FlexiClub_Admin_Menu {
-	const TOP_LEVEL_SLUG      = 'tpw-flexiclub-dashboard';
-	const DASHBOARD_SETUP_META = 'tpw_flexiclub_dashboard_setup_dismissed';
-	const PAGE_MEMBERS        = 'tpw-flexiclub-manage-members';
-	const PAGE_GALLERY        = 'tpw-flexiclub-gallery-admin';
-	const PAGE_UPLOADS        = 'tpw-flexiclub-upload-pages';
-	const PAGE_MENU_MANAGER   = 'tpw-flexiclub-menu-manager';
-	const PAGE_LOGS           = 'tpw-flexiclub-logs';
-	const PAGE_SETTINGS       = 'tpw-flexiclub-settings';
-	const SETTINGS_ROUTE      = 'admin.php?page=tpw-flexiclub-settings';
-	const SYSTEM_PAGES_ROUTE  = 'admin.php?page=tpw-flexiclub-settings&tab=system-pages';
-	const PAYMENTS_ROUTE      = 'admin.php?page=tpw-flexiclub-settings&tab=payment-methods';
-	const EMAIL_LOGS_ROUTE    = 'admin.php?page=tpw-flexiclub-settings&tab=email-logs';
+class iLungu_Club_Admin_Menu {
+	const TOP_LEVEL_SLUG              = 'ilungu-club-dashboard';
+	const DASHBOARD_SETUP_META        = 'ilungu_club_dashboard_setup_dismissed';
+	const LEGACY_DASHBOARD_SETUP_META = 'tpw_flexiclub_dashboard_setup_dismissed';
+	const PAGE_MEMBERS                = 'ilungu-club-manage-members';
+	const PAGE_GALLERY                = 'ilungu-club-gallery-admin';
+	const PAGE_UPLOADS                = 'ilungu-club-upload-pages';
+	const PAGE_MENU_MANAGER           = 'ilungu-club-menu-manager';
+	const PAGE_LOGS                   = 'ilungu-club-logs';
+	const PAGE_SETTINGS               = 'ilungu-club-settings';
+	const SETTINGS_ROUTE              = 'admin.php?page=ilungu-club-settings';
+	const SYSTEM_PAGES_ROUTE          = 'admin.php?page=ilungu-club-settings&tab=system-pages';
+	const PAYMENTS_ROUTE              = 'admin.php?page=ilungu-club-settings&tab=payment-methods';
+	const EMAIL_LOGS_ROUTE            = 'admin.php?page=ilungu-club-settings&tab=email-logs';
 	const PAYMENT_LOGS_ROUTE  = 'tools.php?page=tpw-payment-logs';
 	const NOTICEBOARD_ROUTE   = 'edit.php?post_type=tpw_notice';
 
 	public static function init() {
-		if ( ! is_admin() ) {
-			return;
-		}
-
 		add_action( 'admin_menu', [ __CLASS__, 'register_menu' ], 12 );
+		add_action( 'admin_init', [ __CLASS__, 'redirect_legacy_admin_routes' ], 1 );
 		add_action( 'admin_init', [ __CLASS__, 'handle_dashboard_actions' ] );
 		add_action( 'admin_init', [ __CLASS__, 'handle_bridge_actions' ] );
+		add_action( 'admin_post_ilungu_club_activate_plugin', [ __CLASS__, 'handle_frontend_plugin_activation' ] );
 		add_action( 'admin_post_tpw_flexiclub_activate_plugin', [ __CLASS__, 'handle_frontend_plugin_activation' ] );
 		add_action( 'admin_enqueue_scripts', [ __CLASS__, 'enqueue_dashboard_assets' ] );
 		add_filter( 'tpw_core_menu_map', [ __CLASS__, 'filter_menu_map' ] );
 	}
 
 	public static function init_frontend() {
+		add_shortcode( 'ilungu_club', [ __CLASS__, 'render_frontend_shortcode' ] );
+		add_shortcode( 'ilungu_club_menu_management', [ __CLASS__, 'render_menu_management_shortcode' ] );
+		add_shortcode( 'ilungu_club_archival_system', [ __CLASS__, 'render_archival_system_shortcode' ] );
 		add_shortcode( 'flexiclub', [ __CLASS__, 'render_frontend_shortcode' ] );
 		add_shortcode( 'flexiclub_menu_management', [ __CLASS__, 'render_menu_management_shortcode' ] );
 		add_shortcode( 'flexiclub_archival_system', [ __CLASS__, 'render_archival_system_shortcode' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_frontend_page_assets' ] );
 		add_action( 'template_redirect', [ __CLASS__, 'prepare_frontend_portal_page' ], 0 );
 		add_filter( 'body_class', [ __CLASS__, 'filter_frontend_portal_body_classes' ] );
+	}
+
+	public static function redirect_legacy_admin_routes() {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+		$legacy_routes = self::get_legacy_admin_routes();
+
+		if ( ! isset( $legacy_routes[ $page ] ) ) {
+			return;
+		}
+
+		$args = [ 'page' => $legacy_routes[ $page ] ];
+		foreach ( $_GET as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Preserves legacy bookmark state only.
+			$key = sanitize_key( $key );
+			if ( '' === $key || 'page' === $key || ! is_scalar( $value ) ) {
+				continue;
+			}
+
+			$args[ $key ] = sanitize_text_field( wp_unslash( $value ) );
+		}
+
+		wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) );
+		exit;
+	}
+
+	protected static function get_legacy_admin_routes() {
+		return [
+			'tpw-flexiclub-dashboard'      => self::TOP_LEVEL_SLUG,
+			'tpw-flexiclub-settings'       => self::PAGE_SETTINGS,
+			'tpw-flexiclub-manage-members' => self::PAGE_MEMBERS,
+			'tpw-flexiclub-gallery-admin'  => self::PAGE_GALLERY,
+			'tpw-flexiclub-upload-pages'   => self::PAGE_UPLOADS,
+			'tpw-flexiclub-menu-manager'   => self::PAGE_MENU_MANAGER,
+			'tpw-flexiclub-logs'           => self::PAGE_LOGS,
+		];
 	}
 
 	public static function enqueue_frontend_page_assets() {
@@ -63,6 +103,8 @@ class TPW_FlexiClub_Admin_Menu {
 			return $classes;
 		}
 
+		$classes[] = 'ilungu-club-portal-page';
+		$classes[] = 'ilungu-club-portal-page--full-width';
 		$classes[] = 'tpw-flexiclub-portal-page';
 		$classes[] = 'tpw-flexiclub-portal-page--full-width';
 
@@ -72,6 +114,10 @@ class TPW_FlexiClub_Admin_Menu {
 	public static function register_menu() {
 		$visible_items      = self::get_visible_items();
 		$dashboard_visible  = self::current_user_can_view_dashboard();
+
+		foreach ( array_keys( self::get_legacy_admin_routes() ) as $legacy_page ) {
+			add_submenu_page( null, '', '', 'read', $legacy_page, [ __CLASS__, 'redirect_legacy_admin_routes' ] );
+		}
 
 		if ( empty( $visible_items ) && ! $dashboard_visible ) {
 			return;
@@ -206,9 +252,9 @@ class TPW_FlexiClub_Admin_Menu {
 		}
 
 		$dashboard = self::get_dashboard_view_model();
-		$template  = defined( 'TPW_CORE_PATH' ) ? TPW_CORE_PATH . 'templates/admin/flexiclub-dashboard.php' : '';
+		$template  = defined( 'TPW_CORE_PATH' ) ? TPW_CORE_PATH . 'templates/admin/ilungu-club-dashboard.php' : '';
 
-		echo '<div class="tpw-admin-ui tpw-flexiclub-dashboard" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
+		echo '<div class="tpw-admin-ui ilungu-club-dashboard " style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
 		echo '<div class="wrap">';
 
 		if ( $template && file_exists( $template ) ) {
@@ -227,7 +273,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'workspace' => '',
 			],
 			is_array( $atts ) ? $atts : [],
-			'flexiclub'
+			'ilungu_club'
 		);
 
 		$workspace = '';
@@ -282,15 +328,15 @@ class TPW_FlexiClub_Admin_Menu {
 		}
 
 		$dashboard = self::get_frontend_dashboard_view_model( $workspace );
-		$template  = defined( 'TPW_CORE_PATH' ) ? TPW_CORE_PATH . 'templates/frontend/flexiclub-dashboard.php' : '';
+		$template  = defined( 'TPW_CORE_PATH' ) ? TPW_CORE_PATH . 'templates/frontend/ilungu-club-dashboard.php' : '';
 
 		ob_start();
-		echo '<div class="tpw-frontend-ui tpw-flexiclub-dashboard flexiclub-dashboard flexiclub-dashboard--frontend flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
+		echo '<div class="tpw-frontend-ui ilungu-club-dashboard --frontend ilungu-club-portal-page    flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
 
 		if ( $template && file_exists( $template ) ) {
 			include $template;
 		} else {
-			echo '<div class="tpw-card tpw-flexiclub-dashboard__permission-state"><h2>' . esc_html__( 'iLungu Club workspace unavailable', 'tpw-core' ) . '</h2><p>' . esc_html__( 'The front-end iLungu Club dashboard template could not be found.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="tpw-card ilungu-club-dashboard__permission-state"><h2>' . esc_html__( 'iLungu Club workspace unavailable', 'tpw-core' ) . '</h2><p>' . esc_html__( 'The front-end iLungu Club dashboard template could not be found.', 'tpw-core' ) . '</p></div>';
 		}
 
 		echo '</div>';
@@ -300,9 +346,9 @@ class TPW_FlexiClub_Admin_Menu {
 
 	protected static function render_frontend_permission_state( $message ) {
 		ob_start();
-		echo '<div class="tpw-frontend-ui tpw-flexiclub-dashboard flexiclub-dashboard flexiclub-dashboard--frontend flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
-		echo '<div class="tpw-card tpw-flexiclub-dashboard__permission-state">';
-		echo '<span class="tpw-flexiclub-dashboard__status tpw-flexiclub-dashboard__status--warning">' . esc_html__( 'Access restricted', 'tpw-core' ) . '</span>';
+		echo '<div class="tpw-frontend-ui ilungu-club-dashboard --frontend ilungu-club-portal-page    flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
+		echo '<div class="tpw-card ilungu-club-dashboard__permission-state">';
+		echo '<span class="ilungu-club-dashboard__status ilungu-club-dashboard__status--warning">' . esc_html__( 'Access restricted', 'tpw-core' ) . '</span>';
 		echo '<h2>' . esc_html__( 'iLungu Club workspace', 'tpw-core' ) . '</h2>';
 		echo '<p>' . esc_html( $message ) . '</p>';
 		echo '</div>';
@@ -516,11 +562,13 @@ class TPW_FlexiClub_Admin_Menu {
 			return;
 		}
 
-		if ( ! isset( $_GET['tpw_flexiclub_dashboard_action'] ) ) {
+		$action = isset( $_GET['ilungu_club_dashboard_action'] )
+			? sanitize_key( wp_unslash( $_GET['ilungu_club_dashboard_action'] ) )
+			: ( isset( $_GET['tpw_flexiclub_dashboard_action'] ) ? sanitize_key( wp_unslash( $_GET['tpw_flexiclub_dashboard_action'] ) ) : '' );
+		if ( '' === $action ) {
 			return;
 		}
 
-		$action = sanitize_key( wp_unslash( $_GET['tpw_flexiclub_dashboard_action'] ) );
 		if ( 'dismiss_setup_banner' !== $action ) {
 			return;
 		}
@@ -529,7 +577,7 @@ class TPW_FlexiClub_Admin_Menu {
 			wp_die( esc_html__( 'Access denied.', 'tpw-core' ), 403 );
 		}
 
-		check_admin_referer( 'tpw_flexiclub_dismiss_setup_banner' );
+		check_admin_referer( isset( $_GET['ilungu_club_dashboard_action'] ) ? 'ilungu_club_dismiss_setup_banner' : 'tpw_flexiclub_dismiss_setup_banner' );
 		update_user_meta( get_current_user_id(), self::DASHBOARD_SETUP_META, '1' );
 
 		wp_safe_redirect( self::get_dashboard_base_url() );
@@ -548,7 +596,8 @@ class TPW_FlexiClub_Admin_Menu {
 			wp_die( esc_html__( 'Invalid plugin request.', 'tpw-core' ), 400 );
 		}
 
-		check_admin_referer( 'tpw_flexiclub_activate_plugin_' . $plugin_file );
+		$is_legacy_action = isset( $_REQUEST['action'] ) && 'tpw_flexiclub_activate_plugin' === sanitize_key( wp_unslash( $_REQUEST['action'] ) );
+		check_admin_referer( ( $is_legacy_action ? 'tpw_flexiclub_activate_plugin_' : 'ilungu_club_activate_plugin_' ) . $plugin_file );
 
 		$dashboard_url = self::get_frontend_workspace_url( 'dashboard' );
 		$return_url    = self::get_frontend_dashboard_safe_redirect_url(
@@ -1193,7 +1242,7 @@ class TPW_FlexiClub_Admin_Menu {
 	}
 
 	protected static function is_flexievent_active() {
-		return post_type_exists( 'tpw_event' ) || class_exists( 'TPW_FlexiEvent', false ) || defined( 'TPW_FLEXIEVENT_VERSION' );
+		return post_type_exists( 'tpw_event' ) || class_exists( 'iLungu_Events_Frontend_Admin', false ) || defined( 'ILUNGU_EVENTS_VERSION' ) || class_exists( 'TPW_FlexiEvent', false ) || defined( 'TPW_FLEXIEVENT_VERSION' );
 	}
 
 	public static function current_user_can_gallery_manage() {
@@ -1268,7 +1317,16 @@ class TPW_FlexiClub_Admin_Menu {
 
 	public static function enqueue_dashboard_assets( $hook_suffix = '' ) {
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-		if ( self::TOP_LEVEL_SLUG !== $page ) {
+		$club_admin_pages = [
+			self::TOP_LEVEL_SLUG,
+			self::PAGE_SETTINGS,
+			self::PAGE_MEMBERS,
+			self::PAGE_GALLERY,
+			self::PAGE_UPLOADS,
+			self::PAGE_MENU_MANAGER,
+			self::PAGE_LOGS,
+		];
+		if ( ! in_array( $page, $club_admin_pages, true ) ) {
 			return;
 		}
 
@@ -1286,12 +1344,12 @@ class TPW_FlexiClub_Admin_Menu {
 			return;
 		}
 
-		$css_file = TPW_CORE_PATH . 'assets/css/flexiclub-dashboard.css';
-		$css_url  = TPW_CORE_URL . 'assets/css/flexiclub-dashboard.css';
+		$css_file = TPW_CORE_PATH . 'assets/css/ilungu-club-dashboard.css';
+		$css_url  = TPW_CORE_URL . 'assets/css/ilungu-club-dashboard.css';
 
 		if ( file_exists( $css_file ) ) {
 			wp_enqueue_style(
-				'tpw-flexiclub-dashboard',
+				'ilungu-club-dashboard',
 				$css_url,
 				[ 'tpw-admin-ui', 'tpw-buttons' ],
 				filemtime( $css_file )
@@ -1314,12 +1372,12 @@ class TPW_FlexiClub_Admin_Menu {
 			return;
 		}
 
-		$css_file = TPW_CORE_PATH . 'assets/css/flexiclub-dashboard.css';
-		$css_url  = TPW_CORE_URL . 'assets/css/flexiclub-dashboard.css';
+		$css_file = TPW_CORE_PATH . 'assets/css/ilungu-club-dashboard.css';
+		$css_url  = TPW_CORE_URL . 'assets/css/ilungu-club-dashboard.css';
 
 		if ( file_exists( $css_file ) ) {
 			wp_enqueue_style(
-				'tpw-flexiclub-dashboard',
+				'ilungu-club-dashboard',
 				$css_url,
 				[ 'tpw-admin-ui', 'tpw-buttons' ],
 				filemtime( $css_file )
@@ -1527,6 +1585,8 @@ class TPW_FlexiClub_Admin_Menu {
 
 		if ( function_exists( 'flexievent_fe_get_base_url' ) ) {
 			$base_url = (string) flexievent_fe_get_base_url();
+		} elseif ( class_exists( 'iLungu_Events_Frontend_Admin' ) && method_exists( 'iLungu_Events_Frontend_Admin', 'get_shortcode_base_url' ) ) {
+			$base_url = (string) iLungu_Events_Frontend_Admin::get_shortcode_base_url();
 		} elseif ( class_exists( 'FlexiEvent_Frontend_Admin' ) && method_exists( 'FlexiEvent_Frontend_Admin', 'get_shortcode_base_url' ) ) {
 			$base_url = (string) FlexiEvent_Frontend_Admin::get_shortcode_base_url();
 		}
@@ -1669,14 +1729,14 @@ class TPW_FlexiClub_Admin_Menu {
 		return wp_nonce_url(
 			add_query_arg(
 				[
-					'action'      => 'tpw_flexiclub_activate_plugin',
+					'action'      => 'ilungu_club_activate_plugin',
 					'plugin'      => $plugin_file,
 					'redirect_to' => $success_url,
 					'return_to'   => $return_url,
 				],
 				admin_url( 'admin-post.php' )
 			),
-			'tpw_flexiclub_activate_plugin_' . $plugin_file
+			'ilungu_club_activate_plugin_' . $plugin_file
 		);
 	}
 
@@ -3562,8 +3622,8 @@ class TPW_FlexiClub_Admin_Menu {
 	protected static function get_dashboard_checklist_url() {
 		return add_query_arg(
 			[
-				'page'                        => self::TOP_LEVEL_SLUG,
-				'tpw_flexiclub_show_checklist' => '1',
+				'page'                      => self::TOP_LEVEL_SLUG,
+				'ilungu_club_show_checklist' => '1',
 			],
 			admin_url( 'admin.php' )
 		) . '#tpw-flexiclub-checklist';
@@ -3574,16 +3634,16 @@ class TPW_FlexiClub_Admin_Menu {
 			add_query_arg(
 				[
 					'page'                           => self::TOP_LEVEL_SLUG,
-					'tpw_flexiclub_dashboard_action' => 'dismiss_setup_banner',
+					'ilungu_club_dashboard_action' => 'dismiss_setup_banner',
 				],
 				admin_url( 'admin.php' )
 			),
-			'tpw_flexiclub_dismiss_setup_banner'
+			'ilungu_club_dismiss_setup_banner'
 		);
 	}
 
 	protected static function dashboard_checklist_requested() {
-		return isset( $_GET['tpw_flexiclub_show_checklist'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['tpw_flexiclub_show_checklist'] ) );
+		return isset( $_GET['ilungu_club_show_checklist'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['ilungu_club_show_checklist'] ) );
 	}
 
 	protected static function is_dashboard_setup_banner_dismissed() {
@@ -3592,7 +3652,16 @@ class TPW_FlexiClub_Admin_Menu {
 			return false;
 		}
 
-		return '1' === (string) get_user_meta( $user_id, self::DASHBOARD_SETUP_META, true );
+		if ( '1' === (string) get_user_meta( $user_id, self::DASHBOARD_SETUP_META, true ) ) {
+			return true;
+		}
+
+		if ( '1' !== (string) get_user_meta( $user_id, self::LEGACY_DASHBOARD_SETUP_META, true ) ) {
+			return false;
+		}
+
+		update_user_meta( $user_id, self::DASHBOARD_SETUP_META, '1' );
+		return true;
 	}
 
 	protected static function get_dashboard_extend_cards( $prefer_frontend = false ) {
@@ -3603,10 +3672,10 @@ class TPW_FlexiClub_Admin_Menu {
 				'description'      => __( 'Events, scheduling, and club activities.', 'tpw-core' ),
 				'icon_url'         => self::get_plugin_icon_url( 'ilunguevent-icon.svg' ),
 				'plugin_names'     => [ 'iLungu Events', 'TPW FlexiEvent' ],
-				'text_domains'     => [ 'ilunguevent', 'tpw-flexievent' ],
-				'basenames'        => [ 'ilunguevent/ilunguevent.php', 'tpw-flexievent/flexievent.php', 'tpw-flexievent/tpw-flexievent.php' ],
-				'active_classes'   => [ 'TPW_FlexiEvent' ],
-				'active_constants' => [ 'TPW_FLEXIEVENT_VERSION' ],
+				'text_domains'     => [ 'ilungu-events', 'tpw-flexievent' ],
+				'basenames'        => [ 'ilungu-events/ilungu-events.php', 'tpw-flexievent/flexievent.php', 'tpw-flexievent/tpw-flexievent.php' ],
+				'active_classes'   => [ 'iLungu_Events_Frontend_Admin', 'TPW_FlexiEvent' ],
+				'active_constants' => [ 'ILUNGU_EVENTS_VERSION', 'TPW_FLEXIEVENT_VERSION' ],
 				'active_post_types'=> [ 'tpw_event' ],
 				'frontend_route_family' => 'flexievent-events',
 				'product_url'      => 'https://thepluginworks.com/FlexiEvent',
@@ -3633,7 +3702,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'icon_url'     => self::get_plugin_icon_url( 'ilungutickets-icon.svg' ),
 				'plugin_names' => [ 'iLungu Tickets', 'TPW FlexiTicket' ],
 				'text_domains' => [ 'ilungutickets', 'tpw-flexiticket' ],
-				'basenames'    => [ 'ilungutickets/ilungutickets.php', 'tpw-flexiticket/flexiticket.php', 'tpw-flexiticket/tpw-flexiticket.php' ],
+				'basenames'    => [ 'ilungu-tickets/ilungu-tickets.php', 'tpw-flexiticket/flexiticket.php', 'tpw-flexiticket/tpw-flexiticket.php' ],
 				'frontend_route_family' => 'flexiticket-checkin',
 				'product_url'  => 'https://thepluginworks.com/FlexiTicket',
 				'active_url'   => admin_url( 'edit.php?post_type=tpw_event' ),
@@ -3646,7 +3715,7 @@ class TPW_FlexiClub_Admin_Menu {
 				'icon_url'     => self::get_plugin_icon_url( 'ilunguledger-icon.svg' ),
 				'plugin_names' => [ 'iLungu Ledger', 'TPW FlexiLedger' ],
 				'text_domains' => [ 'ilunguledger', 'tpw-flexiledger' ],
-				'basenames'    => [ 'ilunguledger/ilunguledger.php', 'tpw-flexiledger/flexiledger.php', 'tpw-flexiledger/tpw-flexiledger.php' ],
+				'basenames'    => [ 'ilungu-ledger/ilungu-ledger.php', 'tpw-flexiledger/flexiledger.php', 'tpw-flexiledger/tpw-flexiledger.php' ],
 				'frontend_route_family' => 'flexiledger',
 				'product_url'  => 'https://thepluginworks.com/FlexiLedger',
 				'active_label' => __( 'Manage ledger', 'tpw-core' ),
@@ -3658,9 +3727,9 @@ class TPW_FlexiClub_Admin_Menu {
 				'icon_url'         => self::get_plugin_icon_url( 'ilungugolf-icon.svg' ),
 				'plugin_names'     => [ 'iLungu Golf', 'TPW FlexiGolf' ],
 				'text_domains'     => [ 'ilungugolf', 'tpw-flexigolf' ],
-				'basenames'        => [ 'ilungugolf/ilungugolf.php', 'ilungugolf/ilungugolf-main.php', 'tpw-flexigolf/tpw-flexigolf.php', 'tpw-flexigolf/tpw-flexigolf-main.php' ],
-				'active_classes'   => [ 'FlexiGolf' ],
-				'active_constants' => [ 'FLEXIGOLF_VERSION' ],
+				'basenames'        => [ 'ilungu-golf/ilungu-golf.php', 'tpw-flexigolf/tpw-flexigolf.php', 'tpw-flexigolf/tpw-flexigolf-main.php' ],
+				'active_classes'   => [ 'iLungu_Golf_Loader', 'FlexiGolf' ],
+				'active_constants' => [ 'ILUNGU_GOLF_VERSION', 'FLEXIGOLF_VERSION' ],
 				'product_url'      => 'https://thepluginworks.com/FlexiGolf',
 			],
 			[
@@ -3669,8 +3738,8 @@ class TPW_FlexiClub_Admin_Menu {
 				'description'  => __( 'Club documents, policy delivery, and acknowledgements.', 'tpw-core' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungupolicy-icon.svg' ),
 				'plugin_names' => [ 'iLungu Policy', 'TPW FlexiPolicy' ],
-				'text_domains' => [ 'ilungupolicy', 'tpw-flexipolicy' ],
-				'basenames'    => [ 'ilungupolicy/ilungupolicy.php', 'tpw-flexipolicy/flexipolicy.php', 'tpw-flexipolicy/tpw-flexipolicy.php' ],
+				'text_domains' => [ 'ilungu-policies', 'tpw-flexipolicy' ],
+				'basenames'    => [ 'ilungu-policies/ilungu-policies.php', 'tpw-flexipolicy/flexipolicy.php', 'tpw-flexipolicy/tpw-flexipolicy.php' ],
 				'product_url'  => 'https://thepluginworks.com/FlexiPolicy',
 			],
 			[
@@ -4932,4 +5001,8 @@ class TPW_FlexiClub_Admin_Menu {
 			echo '<div class="notice notice-error"><p>' . esc_html__( 'The front-end page could not be created or repaired.', 'tpw-core' ) . '</p></div>';
 		}
 	}
+}
+
+if ( ! class_exists( 'TPW_FlexiClub_Admin_Menu', false ) ) {
+	class_alias( 'iLungu_Club_Admin_Menu', 'TPW_FlexiClub_Admin_Menu' );
 }

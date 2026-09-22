@@ -1,0 +1,2080 @@
+.ilungu-club-dashboard {
+  --tpw-flexi-accent: #5b3df5;
+  --tpw-flexi-accent-soft: rgba(91, 61, 245, 0.12);
+  --tpw-flexi-purple: #5b3df5;
+  --tpw-flexi-green: #15803d;
+  --tpw-flexi-blue: #2563eb;
+  --tpw-flexi-orange: #c2410c;
+  --tpw-flexi-teal: #0f766e;
+  --tpw-flexi-red: #e11d48;
+  --tpw-flexi-success: #15803d;
+  --tpw-flexi-warning: #b45309;
+  --tpw-flexi-info: #475569;
+  --tpw-flexi-border: rgba(91, 61, 245, 0.12);
+  --tpw-flexi-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --tpw-flexi-muted: #64748b;
+  --tpw-flexi-surface: #ffffff;
+}
+
+.ilungu-club-dashboard.wrap,
+.ilungu-club-dashboard .wrap {
+  max-width: none;
+  width: 100%;
+}
+
+.ilungu-club-dashboard .wrap {
+  margin-top: 18px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.ilungu-club-dashboard__hero {
+  background:
+    radial-gradient(circle at top right, rgba(91, 61, 245, 0.08), transparent 38%),
+    linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+  border-color: var(--tpw-flexi-border);
+  box-shadow: var(--tpw-flexi-shadow);
+  padding: 20px 24px;
+}
+
+.ilungu-club-dashboard__brand-row,
+.ilungu-club-dashboard__hero-content,
+.ilungu-club-dashboard__section-head,
+.ilungu-club-dashboard__overview-head,
+.ilungu-club-dashboard__activity-item,
+.ilungu-club-dashboard__system-item,
+.ilungu-club-dashboard__checklist-item,
+.ilungu-club-dashboard__summary-card,
+.ilungu-club-dashboard__overview-card,
+.ilungu-club-dashboard__action-link {
+  display: flex;
+}
+
+.ilungu-club-dashboard__brand-row,
+.ilungu-club-dashboard__section-head,
+.ilungu-club-dashboard__overview-head,
+.ilungu-club-dashboard__activity-item,
+.ilungu-club-dashboard__system-item,
+.ilungu-club-dashboard__checklist-item,
+.ilungu-club-dashboard__action-link {
+  justify-content: space-between;
+}
+
+.ilungu-club-dashboard__brand-row,
+.ilungu-club-dashboard__hero-content,
+.ilungu-club-dashboard__section-head,
+.ilungu-club-dashboard__summary-card,
+.ilungu-club-dashboard__overview-card,
+.ilungu-club-dashboard__activity-item,
+.ilungu-club-dashboard__system-item,
+.ilungu-club-dashboard__checklist-item,
+.ilungu-club-dashboard__action-link {
+  gap: 16px;
+}
+
+.ilungu-club-dashboard__brand-row,
+.ilungu-club-dashboard__hero-content,
+.ilungu-club-dashboard__summary-card,
+.ilungu-club-dashboard__overview-card,
+.ilungu-club-dashboard__activity-item,
+.ilungu-club-dashboard__system-item,
+.ilungu-club-dashboard__checklist-item,
+.ilungu-club-dashboard__action-link {
+  align-items: center;
+}
+
+.ilungu-club-dashboard__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.ilungu-club-dashboard__brand-mark {
+  display: none;
+}
+
+.ilungu-club-dashboard__brand-mark img {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+.ilungu-club-dashboard__brand-mark .dashicons {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+.ilungu-club-dashboard__brand-copy h1 {
+  display: none;
+}
+
+.ilungu-club-dashboard__logo {
+  display: block;
+  height: auto;
+  width: auto;
+  margin-bottom: 0;
+  max-width: 340px;
+  object-fit: contain;
+}
+
+.ilungu-club-dashboard__tagline {
+  margin: 4px 0 0;
+  color: var(--tpw-flexi-muted);
+  font-size: 0.88rem;
+}
+
+.ilungu-club-dashboard__version {
+  border: 1px solid var(--tpw-flexi-border);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--tpw-flexi-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.ilungu-club-dashboard__version strong {
+  color: #1f2937;
+}
+
+.ilungu-club-dashboard__hero-content {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.ilungu-club-dashboard__welcome {
+  min-width: 0;
+  flex: 1 1 280px;
+}
+
+.ilungu-club-dashboard__welcome h2 {
+  margin: 0 0 10px;
+  color: var(--tpw-flexi-accent);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ilungu-club-dashboard__welcome p {
+  margin: 0;
+  color: #334155;
+  max-width: 100%;
+  font-size: 0.95rem;
+}
+
+.ilungu-club-dashboard__summary-grid,
+.ilungu-club-dashboard__overview-grid,
+.ilungu-club-dashboard__extend-grid,
+.ilungu-club-dashboard__system-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.ilungu-club-dashboard__summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  flex: 1 1 700px;
+  gap: 12px;
+}
+
+.ilungu-club-dashboard__summary-card {
+  min-width: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 255, 0.96) 100%);
+  border: 1px solid rgba(203, 213, 225, 0.75);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+}
+
+.ilungu-club-dashboard__summary-card--link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.ilungu-club-dashboard__summary-card--link:hover,
+.ilungu-club-dashboard__summary-card--link:focus-visible {
+  border-color: rgba(91, 61, 245, 0.28);
+  box-shadow: 0 16px 32px rgba(91, 61, 245, 0.12);
+  transform: translateY(-1px);
+}
+
+.ilungu-club-dashboard__summary-card--link:focus-visible {
+  outline: 2px solid rgba(91, 61, 245, 0.22);
+  outline-offset: 2px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__summary-card--link,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__summary-card--link:visited,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__summary-card--link:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__summary-card--link:focus-visible,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link:visited,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link:focus-visible,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__action-link,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__action-link:visited,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__action-link:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__action-link:focus-visible,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-action,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-action:visited,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-action:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-action:focus-visible,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__overview-action .tpw-btn,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__overview-action .tpw-btn:visited,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__overview-action .tpw-btn:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__overview-action .tpw-btn:focus-visible,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-action .tpw-btn,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-action .tpw-btn:visited,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-action .tpw-btn:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-action .tpw-btn:focus-visible,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-actions .tpw-btn,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-actions .tpw-btn:visited,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-actions .tpw-btn:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-actions .tpw-btn:focus-visible {
+  text-decoration: none !important;
+}
+
+.ilungu-club-dashboard__summary-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ilungu-club-dashboard__summary-label {
+  display: inline-block;
+  color: var(--tpw-flexi-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ilungu-club-dashboard__metric {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0;
+  color: #111827;
+}
+
+.ilungu-club-dashboard__summary-copy h3,
+.ilungu-club-dashboard__activity-item h3,
+.ilungu-club-dashboard__extend-card h3,
+.ilungu-club-dashboard__progress-copy h3 {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.ilungu-club-dashboard__summary-copy p,
+.ilungu-club-dashboard__section-head p,
+.ilungu-club-dashboard__overview-card p,
+.ilungu-club-dashboard__checklist-item p,
+.ilungu-club-dashboard__extend-card p,
+.ilungu-club-dashboard__activity-item p,
+.ilungu-club-dashboard__progress-copy p {
+  color: var(--tpw-flexi-muted);
+  font-size: 0.92rem;
+}
+
+.ilungu-club-dashboard__summary-copy p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.ilungu-club-dashboard__checklist-item a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ilungu-club-dashboard__checklist-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(91, 61, 245, 0.18);
+  background: rgba(91, 61, 245, 0.08);
+  color: var(--tpw-flexi-accent);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: normal;
+  text-align: center;
+}
+
+.ilungu-club-dashboard__checklist-action--disabled {
+  border-color: rgba(148, 163, 184, 0.28);
+  background: rgba(241, 245, 249, 0.88);
+  color: var(--tpw-flexi-muted);
+}
+
+.ilungu-club-dashboard__muted-link {
+  font-size: 0.9rem;
+  color: var(--tpw-flexi-muted);
+}
+
+.ilungu-club-dashboard__layout {
+  margin-top: 18px;
+}
+
+.ilungu-club-dashboard__layout {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 3.2fr) minmax(320px, 1fr);
+}
+
+.ilungu-club-dashboard__main,
+.ilungu-club-dashboard__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ilungu-club-dashboard__section--checklist,
+.ilungu-club-dashboard__section--activity {
+  display: flex;
+  flex-direction: column;
+}
+
+.ilungu-club-dashboard__section--activity {
+  min-width: 0;
+}
+
+.ilungu-club-dashboard__section--checklist-full {
+  margin-bottom: 2px;
+}
+
+.ilungu-club-dashboard__setup-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 20px;
+  border: 1px solid rgba(21, 128, 61, 0.18);
+  background: linear-gradient(180deg, rgba(240, 253, 244, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+}
+
+.ilungu-club-dashboard__setup-banner h2 {
+  margin: 0 0 4px;
+  font-size: 1.08rem;
+}
+
+.ilungu-club-dashboard__setup-banner p {
+  margin: 0;
+  color: var(--tpw-flexi-muted);
+}
+
+.ilungu-club-dashboard__setup-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.ilungu-club-dashboard__aside {
+  max-width: 420px;
+  width: 100%;
+  justify-self: end;
+}
+
+.ilungu-club-dashboard__section {
+  border-color: var(--tpw-flexi-border);
+  box-shadow: var(--tpw-flexi-shadow);
+  padding: 20px;
+}
+
+.ilungu-club-dashboard__section-head {
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.ilungu-club-dashboard__section-head h2 {
+  margin: 0 0 6px;
+  font-size: 1.16rem;
+}
+
+.ilungu-club-dashboard__section-head p {
+  margin: 0;
+}
+
+.ilungu-club-dashboard__overview-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ilungu-club-dashboard__overview-card {
+  --tpw-overview-accent: var(--tpw-flexi-accent);
+  --tpw-overview-soft: rgba(91, 61, 245, 0.1);
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid rgba(203, 213, 225, 0.78);
+  border-radius: 18px;
+  padding: 22px;
+  min-height: 252px;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--tpw-overview-accent) 10%, transparent), transparent 44%),
+    linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+}
+
+.ilungu-club-dashboard__overview-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--tpw-overview-accent) 14%, white), var(--tpw-overview-soft));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.ilungu-club-dashboard__overview-icon .dashicons {
+  color: var(--tpw-overview-accent);
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.ilungu-club-dashboard__overview-card--members {
+  --tpw-overview-accent: var(--tpw-flexi-green);
+  --tpw-overview-soft: rgba(21, 128, 61, 0.12);
+}
+
+.ilungu-club-dashboard__overview-card--noticeboard,
+.ilungu-club-dashboard__overview-card--settings {
+  --tpw-overview-accent: var(--tpw-flexi-purple);
+  --tpw-overview-soft: rgba(91, 61, 245, 0.12);
+}
+
+.ilungu-club-dashboard__overview-card--gallery,
+.ilungu-club-dashboard__overview-card--system-pages {
+  --tpw-overview-accent: var(--tpw-flexi-blue);
+  --tpw-overview-soft: rgba(37, 99, 235, 0.12);
+}
+
+.ilungu-club-dashboard__overview-card--system-pages {
+  --tpw-overview-accent: #4f46e5;
+  --tpw-overview-soft: rgba(79, 70, 229, 0.12);
+}
+
+.ilungu-club-dashboard__overview-card--uploads {
+  --tpw-overview-accent: var(--tpw-flexi-orange);
+  --tpw-overview-soft: rgba(194, 65, 12, 0.12);
+}
+
+.ilungu-club-dashboard__overview-card--permissions {
+  --tpw-overview-accent: var(--tpw-flexi-teal);
+  --tpw-overview-soft: rgba(15, 118, 110, 0.12);
+}
+
+.ilungu-club-dashboard__overview-card--payments {
+  --tpw-overview-accent: var(--tpw-flexi-green);
+  --tpw-overview-soft: rgba(21, 128, 61, 0.12);
+}
+
+.ilungu-club-dashboard__overview-card--logs {
+  --tpw-overview-accent: var(--tpw-flexi-red);
+  --tpw-overview-soft: rgba(225, 29, 72, 0.12);
+}
+
+.ilungu-club-dashboard__overview-body {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 auto;
+}
+
+.ilungu-club-dashboard__overview-head {
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.ilungu-club-dashboard__overview-head h3 {
+  margin: 0;
+  font-size: 1.04rem;
+}
+
+.ilungu-club-dashboard__overview-metric {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.ilungu-club-dashboard__overview-card p {
+  margin: 0;
+  max-width: 28ch;
+}
+
+.ilungu-club-dashboard__overview-action {
+  margin-top: auto;
+}
+
+.ilungu-club-dashboard__overview-action .tpw-btn {
+  border-radius: 999px;
+}
+
+.ilungu-club-dashboard__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.25;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  border: 1px solid transparent;
+}
+
+.ilungu-club-dashboard__status--success {
+  color: var(--tpw-flexi-success);
+  background: rgba(21, 128, 61, 0.1);
+  border-color: rgba(21, 128, 61, 0.18);
+}
+
+.ilungu-club-dashboard__status--warning {
+  color: var(--tpw-flexi-warning);
+  background: rgba(180, 83, 9, 0.1);
+  border-color: rgba(180, 83, 9, 0.18);
+}
+
+.ilungu-club-dashboard__status--info,
+.ilungu-club-dashboard__status--neutral {
+  color: var(--tpw-flexi-info);
+  background: rgba(100, 116, 139, 0.12);
+  border-color: rgba(100, 116, 139, 0.16);
+}
+
+.ilungu-club-dashboard__status--error {
+  color: var(--tpw-flexi-red);
+  background: rgba(225, 29, 72, 0.1);
+  border-color: rgba(225, 29, 72, 0.18);
+}
+
+.ilungu-club-dashboard__action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ilungu-club-dashboard__action-link {
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #1f2937;
+  background: #fff;
+  text-decoration: none;
+  font-size: 0.94rem;
+  line-height: 1.35;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.ilungu-club-dashboard__action-link:hover {
+  border-color: rgba(91, 61, 245, 0.35);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.ilungu-club-dashboard__action-link--disabled {
+  color: var(--tpw-flexi-muted);
+  background: #fafafa;
+}
+
+.ilungu-club-dashboard__extend-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.ilungu-club-dashboard__extend-card {
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ilungu-club-dashboard__extend-card img {
+  width: 140px;
+  height: 140px;
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+  align-self: center;
+  flex: 0 0 auto;
+}
+
+.ilungu-club-dashboard__extend-card .dashicons {
+  font-size: 72px;
+  width: 106px;
+  height: 106px;
+  color: var(--tpw-flexi-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  flex: 0 0 auto;
+}
+
+.ilungu-club-dashboard__extend-card h3,
+.ilungu-club-dashboard__extend-card p,
+.ilungu-club-dashboard__extend-card .tpw-btn,
+.ilungu-club-dashboard__extend-action {
+  min-width: 0;
+}
+
+.ilungu-club-dashboard__extend-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.ilungu-club-dashboard__extend-card h3 {
+  overflow-wrap: anywhere;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.ilungu-club-dashboard__extend-card p {
+  margin: 0;
+  min-height: 0;
+  overflow-wrap: anywhere;
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.ilungu-club-dashboard__extend-action {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.ilungu-club-dashboard__extend-card .tpw-btn {
+  width: 100%;
+}
+
+.ilungu-club-dashboard__extend-note {
+  color: var(--tpw-flexi-muted);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.ilungu-club-dashboard__checklist {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.ilungu-club-dashboard__checklist-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ilungu-club-dashboard__progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.ilungu-club-dashboard__progress-ring {
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #fff 54%, transparent 55%),
+    conic-gradient(var(--tpw-flexi-accent) 0 var(--tpw-progress), rgba(203, 213, 225, 0.6) var(--tpw-progress) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.9);
+}
+
+.ilungu-club-dashboard__progress-ring strong {
+  font-size: 1.7rem;
+  color: #111827;
+}
+
+.ilungu-club-dashboard__progress-copy p {
+  margin: 4px 0 0;
+}
+
+.ilungu-club-dashboard__checklist-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ilungu-club-dashboard__checklist-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: flex-start;
+  border: 1px solid rgba(226, 232, 240, 0.78);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.ilungu-club-dashboard__checklist-item > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.ilungu-club-dashboard__checkmark {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex: 0 0 24px;
+  margin-top: 1px;
+}
+
+.ilungu-club-dashboard__checkmark--done {
+  background: rgba(21, 128, 61, 0.1);
+  color: var(--tpw-flexi-success);
+}
+
+.ilungu-club-dashboard__checkmark--pending {
+  background: rgba(203, 213, 225, 0.45);
+  color: var(--tpw-flexi-muted);
+}
+
+.ilungu-club-dashboard__checklist-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.ilungu-club-dashboard__optional {
+  font-size: 0.75rem;
+  color: var(--tpw-flexi-info);
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(100, 116, 139, 0.1);
+}
+
+.ilungu-club-dashboard__checklist-item p,
+.ilungu-club-dashboard__activity-item p {
+  margin: 0;
+}
+
+.ilungu-club-dashboard__activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+  flex: 1 1 auto;
+}
+
+.ilungu-club-dashboard__checklist-actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ilungu-club-dashboard__activity-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 22px;
+  row-gap: 6px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.75);
+  padding-bottom: 14px;
+  align-items: start;
+}
+
+.ilungu-club-dashboard__activity-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ilungu-club-dashboard__activity-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ilungu-club-dashboard__activity-time {
+  color: var(--tpw-flexi-muted);
+  white-space: normal;
+  text-align: right;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  padding-top: 2px;
+}
+
+.ilungu-club-dashboard__system-status {
+  margin-top: 2px;
+}
+
+.ilungu-club-dashboard__system-status h3 {
+  margin: 0 0 14px;
+  font-size: 0.98rem;
+}
+
+.ilungu-club-dashboard__system-grid {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.ilungu-club-dashboard__system-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 14px;
+  min-width: 0;
+  min-height: 68px;
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  border-radius: 12px;
+  padding: 13px 14px;
+  background: #fff;
+}
+
+.ilungu-club-dashboard__system-label {
+  color: var(--tpw-flexi-muted);
+  font-size: 0.88rem;
+  min-width: 0;
+  flex: 1 1 auto;
+  line-height: 1.45;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.ilungu-club-dashboard__system-item strong {
+  margin-left: 0;
+  justify-self: end;
+  margin-top: 1px;
+}
+
+.ilungu-club-dashboard__system-item .ilungu-club-dashboard__status {
+  flex: 0 0 auto;
+  margin-left: auto;
+  text-align: center;
+  white-space: nowrap;
+  word-break: normal;
+  max-width: none;
+}
+
+@media (max-width: 1280px) {
+  .ilungu-club-dashboard.wrap,
+  .ilungu-club-dashboard .wrap {
+    max-width: none;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .ilungu-club-dashboard__layout {
+    grid-template-columns: minmax(0, 2.45fr) minmax(300px, 1fr);
+  }
+  .ilungu-club-dashboard__aside {
+    max-width: 400px;
+  }
+
+  .ilungu-club-dashboard__summary-grid,
+  .ilungu-club-dashboard__overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ilungu-club-dashboard__extend-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .ilungu-club-dashboard__layout,
+  .ilungu-club-dashboard__checklist,
+  .ilungu-club-dashboard__hero-content {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .ilungu-club-dashboard__checklist {
+    gap: 20px;
+  }
+
+  .ilungu-club-dashboard__checklist-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .ilungu-club-dashboard__summary-grid,
+  .ilungu-club-dashboard__system-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ilungu-club-dashboard__system-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ilungu-club-dashboard__aside {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .ilungu-club-dashboard__setup-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ilungu-club-dashboard__extend-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ilungu-club-dashboard__extend-card {
+    gap: 11px;
+  }
+
+  .ilungu-club-dashboard__extend-card img,
+  .ilungu-club-dashboard__extend-card .dashicons {
+    width: 96px;
+    height: 96px;
+  }
+
+  .ilungu-club-dashboard__progress {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 920px) {
+  .ilungu-club-dashboard__checklist-items {
+    grid-template-columns: 1fr;
+  }
+
+  .ilungu-club-dashboard__checklist-item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .ilungu-club-dashboard__checklist-item a {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 782px) {
+  .ilungu-club-dashboard .wrap {
+    margin-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .ilungu-club-dashboard__hero,
+  .ilungu-club-dashboard__section {
+    padding: 16px;
+  }
+
+  .ilungu-club-dashboard__brand-row,
+  .ilungu-club-dashboard__hero-content,
+  .ilungu-club-dashboard__overview-card,
+  .ilungu-club-dashboard__checklist-item,
+  .ilungu-club-dashboard__action-link,
+  .ilungu-club-dashboard__activity-item,
+  .ilungu-club-dashboard__system-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ilungu-club-dashboard__summary-grid,
+  .ilungu-club-dashboard__overview-grid,
+  .ilungu-club-dashboard__extend-grid,
+  .ilungu-club-dashboard__system-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ilungu-club-dashboard__summary-card {
+    padding: 14px;
+  }
+
+  .ilungu-club-dashboard__extend-card {
+    gap: 11px;
+  }
+
+  .ilungu-club-dashboard__extend-card img,
+  .ilungu-club-dashboard__extend-card .dashicons {
+    width: min(106px, 100%);
+    height: auto;
+    align-self: flex-start;
+  }
+
+  .ilungu-club-dashboard__checklist-item {
+    grid-template-columns: 1fr;
+  }
+
+  .ilungu-club-dashboard__extend-card .dashicons {
+    height: 106px;
+  }
+
+  .ilungu-club-dashboard__activity-item,
+  .ilungu-club-dashboard__system-item {
+    grid-template-columns: 1fr;
+  }
+
+  .ilungu-club-dashboard__activity-time,
+  .ilungu-club-dashboard__system-item strong {
+    text-align: left;
+  }
+
+  .ilungu-club-dashboard__system-item {
+    align-items: flex-start;
+  }
+
+  .ilungu-club-dashboard__system-item .ilungu-club-dashboard__status {
+    margin-left: 0;
+  }
+
+  .ilungu-club-dashboard__brand-copy h1 {
+    font-size: 1.6rem;
+  }
+
+  .ilungu-club-dashboard__progress {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+body.ilungu-club-portal-page .site-main,
+body.ilungu-club-portal-page .content-area,
+body.ilungu-club-portal-page .entry-content,
+body.ilungu-club-portal-page .wp-block-post-content,
+body.ilungu-club-portal-page .post-content,
+body.ilungu-club-portal-page .page-content {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+body.ilungu-club-portal-page .site-main,
+body.ilungu-club-portal-page .content-area,
+body.ilungu-club-portal-page .entry-content,
+body.ilungu-club-portal-page .wp-block-post-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+body.ilungu-club-portal-page #secondary,
+body.ilungu-club-portal-page .site-sidebar,
+body.ilungu-club-portal-page .widget-area,
+body.ilungu-club-portal-page .sidebar-primary,
+body.ilungu-club-portal-page .primary-sidebar,
+body.ilungu-club-portal-page .secondary-sidebar {
+  display: none !important;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page {
+  --ilungu-club-page-gutter: clamp(16px, 2vw, 32px);
+  --ilungu-club-page-max-width: 1720px;
+  width: min(100%, var(--ilungu-club-page-max-width));
+  max-width: var(--ilungu-club-page-max-width);
+  margin: 0 auto;
+  padding: 32px var(--ilungu-club-page-gutter) 48px;
+  box-sizing: border-box;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal {
+  display: grid;
+  grid-template-columns: minmax(272px, 320px) minmax(0, 1fr);
+  gap: clamp(20px, 2vw, 32px);
+  align-items: start;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-sidebar-shell {
+  display: block;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-toggle {
+  display: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 24px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-brand-card,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-group {
+  border-color: var(--tpw-flexi-border);
+  box-shadow: var(--tpw-flexi-shadow);
+  padding: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-logo {
+  display: block;
+  max-width: 220px;
+  height: auto;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-tagline {
+  margin: 12px 0 0;
+  color: var(--tpw-flexi-muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-group h2 {
+  margin: 0 0 12px;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tpw-flexi-muted);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #0f172a;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(203, 213, 225, 0.78);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link:focus-visible {
+  border-color: rgba(91, 61, 245, 0.28);
+  box-shadow: 0 10px 24px rgba(91, 61, 245, 0.1);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link--current {
+  background: linear-gradient(180deg, rgba(91, 61, 245, 0.12) 0%, rgba(91, 61, 245, 0.06) 100%);
+  border-color: rgba(91, 61, 245, 0.22);
+  color: var(--tpw-flexi-accent);
+  font-weight: 700;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link--disabled {
+  color: var(--tpw-flexi-muted);
+  background: #fafafa;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-stage {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__section--checklist-full {
+  margin-bottom: 0;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist {
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+}
+
+@media (min-width: 1081px) {
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-items {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__hero-content {
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.5fr);
+  gap: clamp(20px, 2vw, 32px);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__layout {
+  grid-template-columns: minmax(0, 1.75fr) minmax(320px, 0.78fr);
+  gap: 24px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__aside {
+  max-width: none;
+  min-width: 0;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__overview-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-card {
+  min-width: 0;
+  min-height: 290px;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-head {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-card h3,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-card p {
+  text-align: left;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-card p {
+  max-width: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-card .tpw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__permission-state {
+  max-width: 720px;
+  margin: 24px auto;
+  border-color: var(--tpw-flexi-border);
+  box-shadow: var(--tpw-flexi-shadow);
+  padding: 24px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__permission-state h2 {
+  margin: 14px 0 8px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__permission-state p {
+  margin: 0;
+  color: var(--tpw-flexi-muted);
+}
+
+@media (max-width: 1180px) {
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 920px) {
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page {
+    --ilungu-club-page-gutter: 14px;
+    padding: 20px 0 30px;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    cursor: pointer;
+    border: 1px solid rgba(203, 213, 225, 0.78);
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: #fff;
+    box-shadow: var(--tpw-flexi-shadow);
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-sidebar-shell:not([open]) > .ilungu-club-dashboard__portal-sidebar {
+    display: none;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-sidebar {
+    position: static;
+    margin-top: 12px;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__overview-grid,
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__extend-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1080px) {
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist {
+    grid-template-columns: 1fr;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__checklist-items {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero {
+  gap: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero-head {
+  align-items: flex-start;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero-copy {
+  max-width: 62ch;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero-copy h2 {
+  margin: 0 0 8px;
+  color: var(--tpw-flexi-accent);
+  font-size: 1.4rem;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero-copy p {
+  margin: 0;
+  color: #334155;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__summary-card {
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__summary-card strong {
+  font-size: 1.35rem;
+  color: #0f172a;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__section {
+  min-width: 0;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__section--full {
+  width: 100%;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__section-head {
+  align-items: flex-start;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__help-shell {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__help-toggle {
+  list-style: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__help-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__help-panel {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  border-radius: 14px;
+  background: rgba(248, 250, 252, 0.94);
+  max-width: 620px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__help-panel h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__notice,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback {
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  background: rgba(248, 250, 252, 0.92);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__notice {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__notice p,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback {
+  margin: 0;
+  color: #334155;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__notice--success,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback--success {
+  border-color: rgba(21, 128, 61, 0.18);
+  background: rgba(240, 253, 244, 0.92);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__notice--warning,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback--warning,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback--info {
+  border-color: rgba(180, 83, 9, 0.18);
+  background: rgba(255, 247, 237, 0.94);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__notice--error,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback--error {
+  border-color: rgba(225, 29, 72, 0.18);
+  background: rgba(255, 241, 242, 0.94);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback {
+  display: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__feedback.is-visible {
+  display: block;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__empty {
+  margin: 0;
+  color: var(--tpw-flexi-muted);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.72fr) minmax(0, 0.62fr) minmax(0, 0.92fr) minmax(0, 1.02fr) minmax(0, 1.12fr) minmax(0, 1.16fr);
+  gap: 14px;
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  align-items: start;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__row--head {
+  background: rgba(248, 250, 252, 0.96);
+  border-style: dashed;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tpw-flexi-muted);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__cell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-title,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__linked-title {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.96rem;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.08);
+  color: #4338ca;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-chip--plugin {
+  background: rgba(15, 23, 42, 0.06);
+  color: #334155;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-chip--required {
+  background: rgba(37, 99, 235, 0.1);
+  color: #1d4ed8;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-chip--optional {
+  background: rgba(148, 163, 184, 0.18);
+  color: #475569;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-chip--legacy {
+  background: rgba(180, 83, 9, 0.14);
+  color: #9a3412;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__page-slug,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__linked-meta,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__action-copy {
+  margin: 0;
+  color: var(--tpw-flexi-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__shortcode {
+  display: inline-block;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  color: #0f172a;
+  font-size: 0.84rem;
+  word-break: break-word;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__inline-link {
+  color: var(--tpw-flexi-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__actions .tpw-btn {
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__guide-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 12px;
+  color: #334155;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__notice-card,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__section {
+  border-color: var(--tpw-flexi-border);
+  box-shadow: var(--tpw-flexi-shadow);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero-head,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__notice {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero-copy,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__notice {
+  flex: 1 1 auto;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero-copy h2 {
+  margin: 0 0 10px;
+  color: var(--tpw-flexi-accent);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero-copy p,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__summary-card p,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__notice p {
+  margin: 0;
+  color: #334155;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__summary-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 20px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__summary-card {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__summary-card strong {
+  font-size: 1.5rem;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__notice {
+  border: 1px solid rgba(180, 83, 9, 0.18);
+  border-radius: 16px;
+  background: rgba(255, 247, 237, 0.86);
+  padding: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__section-head {
+  margin-bottom: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__embed {
+  min-width: 0;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__empty {
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+  background: rgba(248, 250, 252, 0.92);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__empty p {
+  margin: 0;
+  color: var(--tpw-flexi-muted);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__hero,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__section {
+  display: grid;
+  gap: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__hero-head,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__hero-copy,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__hero-copy p {
+  margin: 0;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #0f172a;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-link:hover,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-link:focus-visible {
+  background: rgba(255, 255, 255, 1);
+  border-color: color-mix(in srgb, var(--tpw-accent-color, #0b6cad) 34%, white);
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-link--current {
+  background: var(--tpw-accent-color, #0b6cad);
+  border-color: var(--tpw-accent-color, #0b6cad);
+  color: #ffffff;
+  box-shadow: 0 14px 28px rgba(11, 108, 173, 0.18);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-link--disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-link--external::after {
+  content: '↗';
+  margin-left: 8px;
+  font-size: 0.8em;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel {
+  border-radius: 24px;
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+  padding: clamp(18px, 2vw, 28px);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel-head {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel-head h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(1.32rem, 2vw, 1.72rem);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel-body {
+  display: grid;
+  gap: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell {
+  display: grid;
+  gap: 18px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--email-templates > form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px 12px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form > .form-table,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form > h2,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--email-templates > form > .form-table {
+  flex: 0 0 100%;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form .form-table th,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form .form-table td {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  vertical-align: top;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form .form-table td .description,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form .form-table td span.description {
+  display: block;
+  margin-top: 8px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form .form-table td input[type="color"] {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form .form-table td input[type="color"] + input.small-text,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--branding .tpw-branding-form .form-table td input.small-text + select {
+  display: block;
+  margin-top: 10px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page :is(
+  .ilungu-club-settings__tab-shell--branding .tpw-branding-form .submit .button,
+  .ilungu-club-settings__tab-shell--branding .tpw-branding-form > .button,
+  .ilungu-club-settings__tab-shell--email-templates > p .button,
+  .ilungu-club-settings__tab-shell--email-templates .tpw-email-templates-list .button,
+  .ilungu-club-settings__tab-shell--email-templates > form > .submit .button,
+  .ilungu-club-settings__tab-shell--email-templates > form > .button,
+  .ilungu-club-settings__tab-shell--payment-methods .tpw-pay-action .button,
+  .ilungu-club-settings__tab-shell--payment-methods .submit .button
+) {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 40px;
+  padding: var(--tpw-btn-padding, 4px 8px) !important;
+  border-radius: var(--tpw-btn-radius, 7px) !important;
+  font-family: var(--tpw-btn-font-family, var(--tpw-font-family, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji")) !important;
+  font-size: var(--tpw-btn-font-size, 0.9rem) !important;
+  font-weight: var(--tpw-btn-font-weight, var(--tpw-font-weight, 600)) !important;
+  text-transform: var(--tpw-text-transform, none) !important;
+  letter-spacing: var(--tpw-letter-spacing, normal) !important;
+  text-shadow: var(--tpw-text-shadow, none) !important;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  white-space: nowrap;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page :is(
+  .ilungu-club-settings__tab-shell--branding .tpw-branding-form .submit .button,
+  .ilungu-club-settings__tab-shell--email-templates > p .button:not(.button-secondary),
+  .ilungu-club-settings__tab-shell--email-templates .tpw-email-templates-list .button,
+  .ilungu-club-settings__tab-shell--email-templates > form > .submit .button,
+  .ilungu-club-settings__tab-shell--payment-methods .tpw-pay-action .button,
+  .ilungu-club-settings__tab-shell--payment-methods .submit .button
+) {
+  background: var(--tpw-btn-primary, #0b6cad) !important;
+  color: var(--tpw-btn-text-light, #ffffff) !important;
+  border: 1px solid color-mix(in oklab, var(--tpw-btn-primary, #0b6cad) 75%, black 25%) !important;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page :is(
+  .ilungu-club-settings__tab-shell--branding .tpw-branding-form > .button.button-secondary,
+  .ilungu-club-settings__tab-shell--email-templates > form > .button.button-secondary
+) {
+  background: var(--tpw-btn-light, #f8f9fa) !important;
+  color: var(--tpw-btn-text-dark, #000000) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page :is(
+  .ilungu-club-settings__tab-shell--branding .tpw-branding-form .submit,
+  .ilungu-club-settings__tab-shell--email-templates > form > .submit,
+  .ilungu-club-settings__tab-shell--payment-methods .submit
+) {
+  margin: 24px 0 0;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page :is(
+  .ilungu-club-settings__tab-shell--branding .tpw-branding-form > .button.button-secondary,
+  .ilungu-club-settings__tab-shell--email-templates > form > .button.button-secondary
+) {
+  margin-top: 24px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--email-templates .tpw-email-templates-list {
+  display: grid;
+  gap: 20px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--email-templates .tpw-email-templates-list .widefat th:last-child,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--email-templates .tpw-email-templates-list .widefat td:last-child {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--payment-methods .tpw-payments-list {
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--payment-methods .tpw-pay-row {
+  align-items: center;
+  gap: 16px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--payment-methods .tpw-pay-action {
+  margin-left: auto;
+  justify-content: flex-end;
+  min-width: max-content;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--payment-methods .tpw-payments-list + .submit {
+  margin-top: 28px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel .notice,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel .updated {
+  margin: 0 0 16px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel .form-table,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel .widefat {
+  width: 100%;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__panel .submit {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1280px) {
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__section-head {
+    flex-direction: column;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__hero-head,
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__section-head {
+    flex-direction: column;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__help-shell {
+    margin-left: 0;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 782px) {
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero-head {
+    flex-direction: column;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero-head,
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__notice {
+    flex-direction: column;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-control-workspace__hero-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__hero-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page :is(
+    .ilungu-club-settings__tab-shell--branding .tpw-branding-form > .button.button-secondary,
+    .ilungu-club-settings__tab-shell--email-templates > form > .button.button-secondary
+  ) {
+    margin-top: 0;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-settings__tab-shell--payment-methods .tpw-pay-action {
+    margin-left: 0;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__hero-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__help-panel {
+    max-width: none;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__summary-grid,
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__row {
+    grid-template-columns: 1fr;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__row {
+    padding: 14px;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__row--head {
+    display: none;
+  }
+
+  .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-system-pages__cell::before {
+    content: attr(data-label);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tpw-flexi-muted);
+  }
+}

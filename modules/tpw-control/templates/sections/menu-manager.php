@@ -9,9 +9,9 @@ if ( ! class_exists('TPW_Control_UI') || ! TPW_Control_UI::user_has_access( [ 'l
 
 // Helpers
 $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-$is_backend_menu_manager = is_admin() && 'tpw-flexiclub-menu-manager' === $page;
+$is_backend_menu_manager = is_admin() && 'ilungu-club-menu-manager' === $page;
 $base_url = $is_backend_menu_manager
-    ? admin_url( 'admin.php?page=tpw-flexiclub-menu-manager' )
+    ? admin_url( 'admin.php?page=ilungu-club-menu-manager' )
     : TPW_Control_UI::menu_url('menu-manager');
 $nonce_action = 'tpw_control_menu_manager';
 if ( ! class_exists( 'TPW_Member_Field_Loader' ) ) {

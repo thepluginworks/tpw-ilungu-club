@@ -39,7 +39,7 @@ class TPW_Core_Create_Menu {
                 'Payment Methods',
                 'Payment Methods',
                 'manage_options',
-                'admin.php?page=tpw-flexiclub-settings&tab=payment-methods'
+				'admin.php?page=ilungu-club-settings&tab=payment-methods'
             );
         }
     }

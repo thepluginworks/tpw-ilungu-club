@@ -238,7 +238,10 @@ class TPW_Menus {
         // Ensure modal UI assets are available
         self::flag_need_ui_assets();
 
-        $template = locate_template( 'tpw-flexiclub/menus/menu-modal.php' );
+        $template = locate_template( 'tpw-ilungu-club/menus/menu-modal.php' );
+        if ( ! $template ) {
+            $template = locate_template( 'tpw-flexiclub/menus/menu-modal.php' );
+        }
         if ( ! $template ) {
             $template = locate_template( 'tpw-core/menus/menu-modal.php' );
         }

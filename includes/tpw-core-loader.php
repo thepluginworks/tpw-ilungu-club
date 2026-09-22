@@ -28,8 +28,8 @@ require_once TPW_CORE_PATH . 'modules/costs/class-tpw-costs.php';
 require_once TPW_CORE_PATH . 'includes/admin-functions.php';
 
 TPW_Core_Updater::init();
-TPW_FlexiClub_Admin_Menu::init();
-TPW_FlexiClub_Admin_Menu::init_frontend();
+iLungu_Club_Admin_Menu::init();
+iLungu_Club_Admin_Menu::init_frontend();
 
 if ( ! function_exists( 'tpw_core_maybe_ensure_system_page' ) ) {
 	/**
@@ -128,6 +128,44 @@ if ( ! function_exists( 'tpw_core_maybe_update_club_management_page_title' ) ) {
     }
 }
 
+if ( ! function_exists( 'ilungu_club_maybe_migrate_system_page_shortcode' ) ) {
+    function ilungu_club_maybe_migrate_system_page_shortcode( $slug, $canonical_shortcode, $legacy_shortcode ) {
+        if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
+            return;
+        }
+
+        $page_id = (int) TPW_Core_System_Pages::get_page_id( $slug );
+        $page    = $page_id > 0 ? get_post( $page_id ) : null;
+        if ( ! ( $page instanceof WP_Post ) || trim( (string) $page->post_content ) !== $legacy_shortcode ) {
+            return;
+        }
+
+        wp_update_post(
+            [
+                'ID'           => $page_id,
+                'post_content' => $canonical_shortcode,
+            ]
+        );
+    }
+}
+
+if ( ! function_exists( 'ilungu_club_maybe_migrate_legacy_system_page_mapping' ) ) {
+    function ilungu_club_maybe_migrate_legacy_system_page_mapping() {
+        if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
+            return;
+        }
+
+        $page_id = (int) TPW_Core_System_Pages::get_page_id( 'flexiclub' );
+        $page    = $page_id > 0 ? get_post( $page_id ) : null;
+        if ( ! ( $page instanceof WP_Post ) || 'club-management' !== $page->post_name || '[flexiclub]' !== trim( (string) $page->post_content ) ) {
+            return;
+        }
+
+        update_post_meta( $page_id, '_tpw_system_page_slug', 'club-management' );
+        TPW_Core_System_Pages::unlink( 'flexiclub' );
+    }
+}
+
 // Load WP-CLI command if in CLI context (safe to include; will noop outside WP_CLI)
 if ( file_exists( TPW_CORE_PATH . 'modules/system-pages/class-tpw-core-system-pages-cli.php' ) ) {
     require_once TPW_CORE_PATH . 'modules/system-pages/class-tpw-core-system-pages-cli.php';
@@ -160,22 +198,22 @@ add_action( 'init', function() {
             ],
             'club-management' => [
                 'title'     => 'Club Management',
-                'shortcode' => '[flexiclub]',
+                'shortcode' => '[ilungu_club]',
                 'required'  => 1,
             ],
             'logs' => [
                 'title'     => 'Logs',
-                'shortcode' => '[flexiclub workspace="logs"]',
+                'shortcode' => '[ilungu_club workspace="logs"]',
                 'required'  => 0,
             ],
             'menu-management' => [
                 'title'     => 'Menu Management',
-                'shortcode' => '[flexiclub_menu_management]',
+                'shortcode' => '[ilungu_club_menu_management]',
                 'required'  => 0,
             ],
             'archival-system' => [
                 'title'     => 'Archival System',
-                'shortcode' => '[flexiclub_archival_system]',
+                'shortcode' => '[ilungu_club_archival_system]',
                 'required'  => 0,
             ],
             'tpw-control' => [
@@ -184,6 +222,8 @@ add_action( 'init', function() {
                 'required'  => 0,
             ],
         ];
+
+        ilungu_club_maybe_migrate_legacy_system_page_mapping();
 
         foreach ( $core_pages as $slug => $config ) {
             TPW_Core_System_Pages::register_page( $slug, [
@@ -206,6 +246,16 @@ add_action( 'init', function() {
 
             if ( 'club-management' === $slug ) {
                 tpw_core_maybe_update_club_management_page_title();
+            }
+
+            $legacy_shortcodes = [
+                'club-management' => '[flexiclub]',
+                'logs'            => '[flexiclub workspace="logs"]',
+                'menu-management' => '[flexiclub_menu_management]',
+                'archival-system' => '[flexiclub_archival_system]',
+            ];
+            if ( isset( $legacy_shortcodes[ $slug ] ) ) {
+                ilungu_club_maybe_migrate_system_page_shortcode( $slug, $config['shortcode'], $legacy_shortcodes[ $slug ] );
             }
         }
     }

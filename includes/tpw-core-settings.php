@@ -29,7 +29,7 @@ add_action( 'admin_init', function () {
         return;
     }
 
-    $args = [ 'page' => 'tpw-flexiclub-settings' ];
+    $args = [ 'page' => 'ilungu-club-settings' ];
     foreach ( $_GET as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Preserves legacy GET navigation context only.
         $key = sanitize_key( $key );
         if ( '' === $key || 'page' === $key || ! is_scalar( $value ) ) {
@@ -62,7 +62,7 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
         }
 
         $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-        if ( 'tpw-flexiclub-settings' !== $page ) {
+        if ( 'ilungu-club-settings' !== $page ) {
             return;
         }
 
@@ -135,7 +135,7 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
         // Profile page configuration warnings (Core Settings screen only).
         if ( function_exists( 'tpw_core_profile_page_is_configured' ) ) {
             if ( ! tpw_core_profile_page_is_configured() ) {
-                $url = add_query_arg( [ 'page' => 'tpw-flexiclub-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
+                $url = add_query_arg( [ 'page' => 'ilungu-club-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
                 echo '<div class="notice notice-warning is-dismissible"><p>'
                     . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-core' )
                     . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-core' ) . '</a>'
@@ -164,7 +164,7 @@ if ( ! has_action( 'admin_notices', 'tpw_core_output_core_settings_warnings' ) )
 // Ensure media library scripts are available on our settings page
 add_action( 'admin_enqueue_scripts', function() {
     $page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-    if ( 'tpw-flexiclub-settings' === $page ) {
+    if ( 'ilungu-club-settings' === $page ) {
         // Load WordPress media modal and dependencies
         if ( function_exists( 'wp_enqueue_media' ) ) {
             wp_enqueue_media();
@@ -195,7 +195,7 @@ if ( ! function_exists( 'tpw_core_get_settings_view_context' ) ) {
         $workspace = isset( $_GET['workspace'] ) ? sanitize_key( wp_unslash( $_GET['workspace'] ) ) : '';
         $defaults  = [
             'mode'          => ( ! is_admin() && 'settings' === $workspace ) ? 'frontend' : 'admin',
-            'base_url'      => admin_url( 'admin.php?page=tpw-flexiclub-settings' ),
+            'base_url'      => admin_url( 'admin.php?page=ilungu-club-settings' ),
             'tab_query_arg' => 'tab',
             'return_url'    => '',
         ];
@@ -502,7 +502,7 @@ if ( ! function_exists( 'tpw_core_render_settings_page' ) ) {
         tpw_core_set_settings_view_context(
             [
                 'mode'          => 'admin',
-                'base_url'      => admin_url( 'admin.php?page=tpw-flexiclub-settings' ),
+                'base_url'      => admin_url( 'admin.php?page=ilungu-club-settings' ),
                 'tab_query_arg' => 'tab',
             ]
         );
@@ -2968,7 +2968,7 @@ add_action( 'admin_notices', function() {
     }
 
     if ( ! tpw_core_profile_page_is_configured() ) {
-        $url = add_query_arg( [ 'page' => 'tpw-flexiclub-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
+        $url = add_query_arg( [ 'page' => 'ilungu-club-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
         echo '<div class="notice notice-warning is-dismissible"><p>'
             . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-core' )
             . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-core' ) . '</a>'

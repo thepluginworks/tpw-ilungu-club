@@ -39,7 +39,7 @@ iLungu Club includes its own update and packaging flow so production sites recei
 
 The physical WordPress plugin identity is `tpw-ilungu-club/ilungu-club.php`. When migrating an existing installation, deactivate `tpw-flexiclub/tpw-flexiclub.php` at its current activation scope before activating the new plugin. Do not activate both copies together.
 
-**Compatibility note:** iLungu™ Club was previously named FlexiClub. Some internal plugin identifiers, directory names, shortcodes and database keys retain the legacy FlexiClub naming to preserve backwards compatibility.
+**Compatibility note:** iLungu™ Club was previously named FlexiClub. New Club integrations use `ilungu-club-*` admin routes and `[ilungu_club]`, `[ilungu_club_menu_management]`, and `[ilungu_club_archival_system]`. Legacy `tpw-flexiclub-*` bookmarks and FlexiClub shortcodes remain temporary compatibility aliases only.
 
 ## Key admin areas
 
@@ -51,9 +51,9 @@ The physical WordPress plugin identity is `tpw-ilungu-club/ilungu-club.php`. Whe
 
 ## Common public shortcodes
 
-- `[flexiclub]`
-- `[flexiclub_menu_management]`
-- `[flexiclub_archival_system]`
+- `[ilungu_club]`
+- `[ilungu_club_menu_management]`
+- `[ilungu_club_archival_system]`
 - `[tpw_member_login]`
 - `[tpw_member_profile]`
 - `[tpw_join_form]`

@@ -42,11 +42,11 @@ async function openPortal(page: Page, contribution = false, workspace = ''): Pro
 		target.searchParams.set('workspace', workspace);
 	}
 	await page.goto(target.toString(), { waitUntil: 'domcontentloaded' });
-	await expect(page.locator('.tpw-flexiclub-dashboard')).toBeVisible();
+	await expect(page.locator('.ilungu-club-dashboard')).toBeVisible();
 }
 
 async function openDashboard(page: Page, contribution = false): Promise<void> {
-	const response = await page.goto(url('/wp-admin/admin.php?page=tpw-flexiclub-dashboard', contribution), { waitUntil: 'domcontentloaded' });
+	const response = await page.goto(url('/wp-admin/admin.php?page=ilungu-club-dashboard', contribution), { waitUntil: 'domcontentloaded' });
 	expect(response?.ok(), 'iLungu Club wp-admin dashboard must load').toBeTruthy();
 }
 
@@ -116,7 +116,7 @@ test.describe('Club administration contributions', () => {
 		await expect(page.getByRole('heading', { name: 'Synthetic Club Frontend Workspace', exact: true })).toBeVisible();
 
 		await openDashboard(page, true);
-		const submenu = page.locator('#toplevel_page_tpw-flexiclub-dashboard .wp-submenu a').filter({ hasText: /^Synthetic Club Workspace$/ });
+		const submenu = page.locator('#toplevel_page_ilungu-club-dashboard .wp-submenu a').filter({ hasText: /^Synthetic Club Workspace$/ });
 		await expect(submenu).toHaveCount(1);
 		await expect(page.locator('#adminmenu > li > a .wp-menu-name').filter({ hasText: /^Synthetic Club Workspace$/ })).toHaveCount(0);
 		const href = await submenu.getAttribute('href');
@@ -124,6 +124,13 @@ test.describe('Club administration contributions', () => {
 		const response = await page.goto(new URL(href!, page.url()).toString(), { waitUntil: 'domcontentloaded' });
 		expect(response?.ok(), 'Synthetic wp-admin workspace must load').toBeTruthy();
 		await expect(page.getByRole('heading', { name: 'Synthetic Club Admin Workspace', exact: true })).toBeVisible();
+	});
+
+	test('redirects a legacy Club dashboard bookmark to the canonical route', async ({ page }) => {
+		await signInAsAdmin(page);
+		await page.goto(url('/wp-admin/admin.php?page=tpw-flexiclub-dashboard&workspace=logs'), { waitUntil: 'domcontentloaded' });
+		await expect(page).toHaveURL(/page=ilungu-club-dashboard/);
+		await expect(page).toHaveURL(/workspace=logs/);
 	});
 
 	test('does not expose authorized contributions to logged-out visitors', async ({ page }) => {

@@ -35,13 +35,13 @@ $render_status_tone = static function( $status ) {
 };
 ?>
 
-<section id="flexiclub-logs-overview" class="tpw-flexiclub-dashboard__hero tpw-card tpw-flexiclub-logs__hero">
-	<div class="tpw-flexiclub-dashboard__brand-row tpw-flexiclub-logs__hero-head">
-		<div class="tpw-flexiclub-dashboard__welcome tpw-flexiclub-logs__hero-copy">
+<section id="ilungu-club-logs-overview" class="ilungu-club-dashboard__hero tpw-flexiclub-dashboard__hero tpw-card ilungu-club-logs__hero tpw-flexiclub-logs__hero">
+	<div class="ilungu-club-dashboard__brand-row tpw-flexiclub-dashboard__brand-row ilungu-club-logs__hero-head tpw-flexiclub-logs__hero-head">
+		<div class="ilungu-club-dashboard__welcome tpw-flexiclub-dashboard__welcome ilungu-club-logs__hero-copy tpw-flexiclub-logs__hero-copy">
 			<h2><?php esc_html_e( 'Logs Workspace', 'tpw-core' ); ?></h2>
 			<p><?php esc_html_e( 'Review operational email and payment logs from the iLungu Club portal without leaving the front end. Sensitive payloads and secrets remain hidden.', 'tpw-core' ); ?></p>
 		</div>
-		<div class="tpw-flexiclub-logs__hero-actions">
+		<div class="ilungu-club-logs__hero-actions tpw-flexiclub-logs__hero-actions">
 			<?php if ( '' !== $dashboard_url ) : ?>
 				<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard_url ); ?>"><?php esc_html_e( 'Back to dashboard', 'tpw-core' ); ?></a>
 			<?php endif; ?>
@@ -51,18 +51,18 @@ $render_status_tone = static function( $status ) {
 		</div>
 	</div>
 
-	<div class="tpw-flexiclub-logs__summary-grid">
+	<div class="ilungu-club-logs__summary-grid tpw-flexiclub-logs__summary-grid">
 		<?php foreach ( $summary_cards as $card ) : ?>
-			<div class="tpw-flexiclub-logs__summary-card">
-				<span class="tpw-flexiclub-dashboard__status tpw-flexiclub-dashboard__status--<?php echo esc_attr( $card['tone'] ?? 'neutral' ); ?>"><?php echo esc_html( $card['label'] ?? '' ); ?></span>
+			<div class="ilungu-club-logs__summary-card tpw-flexiclub-logs__summary-card">
+				<span class="ilungu-club-dashboard__status tpw-flexiclub-dashboard__status ilungu-club-dashboard__status--<?php echo esc_attr( $card['tone'] ?? 'neutral' ); ?> tpw-flexiclub-dashboard__status--<?php echo esc_attr( $card['tone'] ?? 'neutral' ); ?>"><?php echo esc_html( $card['label'] ?? '' ); ?></span>
 				<strong><?php echo esc_html( $card['value'] ?? '' ); ?></strong>
 			</div>
 		<?php endforeach; ?>
 	</div>
 </section>
 
-<section id="flexiclub-logs-sources" class="tpw-flexiclub-dashboard__section tpw-card tpw-flexiclub-logs__section">
-	<div class="tpw-flexiclub-dashboard__section-head tpw-flexiclub-logs__section-head">
+<section id="ilungu-club-logs-sources" class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card ilungu-club-logs__section tpw-flexiclub-logs__section">
+	<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head ilungu-club-logs__section-head tpw-flexiclub-logs__section-head">
 		<div>
 			<h2><?php esc_html_e( 'Log Sources', 'tpw-core' ); ?></h2>
 			<p><?php esc_html_e( 'Switch between the existing log sources that iLungu Club currently exposes through shared Core tooling.', 'tpw-core' ); ?></p>
@@ -70,9 +70,9 @@ $render_status_tone = static function( $status ) {
 	</div>
 
 	<?php if ( empty( $sources ) ) : ?>
-		<p class="tpw-flexiclub-logs__empty"><?php esc_html_e( 'No front-end-safe log sources are currently available.', 'tpw-core' ); ?></p>
+		<p class="ilungu-club-logs__empty tpw-flexiclub-logs__empty"><?php esc_html_e( 'No front-end-safe log sources are currently available.', 'tpw-core' ); ?></p>
 	<?php else : ?>
-		<nav class="tpw-flexiclub-logs__tabs" aria-label="<?php esc_attr_e( 'iLungu Club log sources', 'tpw-core' ); ?>">
+		<nav class="ilungu-club-logs__tabs tpw-flexiclub-logs__tabs" aria-label="<?php esc_attr_e( 'iLungu Club log sources', 'tpw-core' ); ?>">
 			<?php foreach ( $sources as $source ) : ?>
 				<?php
 				$tab_classes = 'tpw-flexiclub-logs__tab-link';
@@ -83,12 +83,12 @@ $render_status_tone = static function( $status ) {
 				<a class="<?php echo esc_attr( $tab_classes ); ?>" href="<?php echo esc_url( $source['url'] ?? '' ); ?>" <?php echo ! empty( $source['current'] ) ? 'aria-current="page"' : ''; ?>>
 					<span><?php echo esc_html( $source['label'] ?? '' ); ?></span>
 					<strong><?php echo esc_html( $source['count'] ?? '' ); ?></strong>
-					<small class="tpw-flexiclub-dashboard__status tpw-flexiclub-dashboard__status--<?php echo esc_attr( $source['status_tone'] ?? 'neutral' ); ?>"><?php echo esc_html( $source['status_label'] ?? '' ); ?></small>
+					<small class="ilungu-club-dashboard__status tpw-flexiclub-dashboard__status ilungu-club-dashboard__status--<?php echo esc_attr( $source['status_tone'] ?? 'neutral' ); ?> tpw-flexiclub-dashboard__status--<?php echo esc_attr( $source['status_tone'] ?? 'neutral' ); ?>"><?php echo esc_html( $source['status_label'] ?? '' ); ?></small>
 				</a>
 			<?php endforeach; ?>
 		</nav>
 
-		<div class="tpw-flexiclub-logs__source-notes">
+		<div class="ilungu-club-logs__source-notes tpw-flexiclub-logs__source-notes">
 			<?php foreach ( $sources as $source ) : ?>
 				<?php if ( ! empty( $source['current'] ) ) : ?>
 					<p><?php echo esc_html( $source['description'] ?? '' ); ?></p>
@@ -99,14 +99,14 @@ $render_status_tone = static function( $status ) {
 	<?php endif; ?>
 </section>
 
-<section id="flexiclub-logs-table" class="tpw-flexiclub-dashboard__section tpw-card tpw-flexiclub-logs__section tpw-flexiclub-logs__section--full">
-	<div class="tpw-flexiclub-dashboard__section-head tpw-flexiclub-logs__section-head">
+<section id="ilungu-club-logs-table" class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card ilungu-club-logs__section tpw-flexiclub-logs__section ilungu-club-logs__section--full tpw-flexiclub-logs__section--full">
+	<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head ilungu-club-logs__section-head tpw-flexiclub-logs__section-head">
 		<div>
 			<h2><?php echo esc_html( $active_label ); ?></h2>
 			<p><?php echo esc_html( sprintf( __( 'Review the latest %1$s entries available from this source.', 'tpw-core' ), number_format_i18n( $total_rows ) ) ); ?></p>
 		</div>
 		<?php if ( ! empty( $clear_form['enabled'] ) ) : ?>
-			<form class="tpw-flexiclub-logs__clear-form" method="post" action="<?php echo esc_url( $clear_form['action_url'] ?? '' ); ?>">
+			<form class="ilungu-club-logs__clear-form tpw-flexiclub-logs__clear-form" method="post" action="<?php echo esc_url( $clear_form['action_url'] ?? '' ); ?>">
 				<?php wp_nonce_field( $clear_form['nonce_action'] ?? '', $clear_form['nonce_field'] ?? '' ); ?>
 				<input type="hidden" name="action" value="<?php echo esc_attr( $clear_form['action'] ?? '' ); ?>" />
 				<input type="hidden" name="<?php echo esc_attr( $clear_form['redirect_key'] ?? '' ); ?>" value="<?php echo esc_url( $clear_form['redirect_url'] ?? '' ); ?>" />
@@ -121,17 +121,17 @@ $render_status_tone = static function( $status ) {
 	</div>
 
 	<?php if ( ! empty( $notice['message'] ) ) : ?>
-		<div class="tpw-flexiclub-logs__notice tpw-flexiclub-logs__notice--<?php echo esc_attr( $notice['tone'] ?? 'info' ); ?>">
-			<span class="tpw-flexiclub-dashboard__status tpw-flexiclub-dashboard__status--<?php echo esc_attr( $notice['tone'] ?? 'info' ); ?>"><?php echo esc_html( ucfirst( str_replace( '-', ' ', (string) ( $notice['tone'] ?? 'info' ) ) ) ); ?></span>
+		<div class="ilungu-club-logs__notice tpw-flexiclub-logs__notice ilungu-club-logs__notice--<?php echo esc_attr( $notice['tone'] ?? 'info' ); ?> tpw-flexiclub-logs__notice--<?php echo esc_attr( $notice['tone'] ?? 'info' ); ?>">
+			<span class="ilungu-club-dashboard__status tpw-flexiclub-dashboard__status ilungu-club-dashboard__status--<?php echo esc_attr( $notice['tone'] ?? 'info' ); ?> tpw-flexiclub-dashboard__status--<?php echo esc_attr( $notice['tone'] ?? 'info' ); ?>"><?php echo esc_html( ucfirst( str_replace( '-', ' ', (string) ( $notice['tone'] ?? 'info' ) ) ) ); ?></span>
 			<p><?php echo esc_html( $notice['message'] ); ?></p>
 		</div>
 	<?php endif; ?>
 
 	<?php if ( empty( $rows ) ) : ?>
-		<p class="tpw-flexiclub-logs__empty"><?php echo esc_html( $empty_text ); ?></p>
+		<p class="ilungu-club-logs__empty tpw-flexiclub-logs__empty"><?php echo esc_html( $empty_text ); ?></p>
 	<?php else : ?>
-		<div class="tpw-table-container tpw-flexiclub-logs__table" role="table" aria-label="<?php echo esc_attr( $active_label ); ?>">
-			<div class="table-row tpw-flexiclub-logs__row tpw-flexiclub-logs__row--head" role="row">
+		<div class="tpw-table-container ilungu-club-logs__table tpw-flexiclub-logs__table" role="table" aria-label="<?php echo esc_attr( $active_label ); ?>">
+			<div class="table-row ilungu-club-logs__row tpw-flexiclub-logs__row ilungu-club-logs__row--head tpw-flexiclub-logs__row--head" role="row">
 				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Date / Time', 'tpw-core' ); ?></div>
 				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Type / Source', 'tpw-core' ); ?></div>
 				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Status', 'tpw-core' ); ?></div>
@@ -141,20 +141,20 @@ $render_status_tone = static function( $status ) {
 
 			<?php foreach ( $rows as $row ) : ?>
 				<?php $status = isset( $row['status'] ) ? (string) $row['status'] : ''; ?>
-				<div class="table-row tpw-flexiclub-logs__row" role="row">
-					<div class="table-cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Date / Time', 'tpw-core' ); ?>">
+				<div class="table-row ilungu-club-logs__row tpw-flexiclub-logs__row" role="row">
+					<div class="table-cell ilungu-club-logs__cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Date / Time', 'tpw-core' ); ?>">
 						<strong><?php echo esc_html( $row['date'] ?? '' ); ?></strong>
 					</div>
-					<div class="table-cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Type / Source', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-logs__cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Type / Source', 'tpw-core' ); ?>">
 						<?php echo esc_html( $row['source'] ?? '' ); ?>
 					</div>
-					<div class="table-cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Status', 'tpw-core' ); ?>">
-						<span class="tpw-flexiclub-dashboard__status tpw-flexiclub-dashboard__status--<?php echo esc_attr( $render_status_tone( $status ) ); ?>"><?php echo esc_html( '' !== $status ? ucfirst( str_replace( '-', ' ', $status ) ) : __( 'Unknown', 'tpw-core' ) ); ?></span>
+					<div class="table-cell ilungu-club-logs__cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Status', 'tpw-core' ); ?>">
+						<span class="ilungu-club-dashboard__status tpw-flexiclub-dashboard__status ilungu-club-dashboard__status--<?php echo esc_attr( $render_status_tone( $status ) ); ?> tpw-flexiclub-dashboard__status--<?php echo esc_attr( $render_status_tone( $status ) ); ?>"><?php echo esc_html( '' !== $status ? ucfirst( str_replace( '-', ' ', $status ) ) : __( 'Unknown', 'tpw-core' ) ); ?></span>
 					</div>
-					<div class="table-cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Message / Summary', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-logs__cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Message / Summary', 'tpw-core' ); ?>">
 						<?php echo esc_html( $row['message'] ?? '' ); ?>
 					</div>
-					<div class="table-cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Related Item', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-logs__cell tpw-flexiclub-logs__cell" role="cell" data-label="<?php esc_attr_e( 'Related Item', 'tpw-core' ); ?>">
 						<?php echo esc_html( $row['reference'] ?? '' ); ?>
 					</div>
 				</div>
@@ -162,12 +162,12 @@ $render_status_tone = static function( $status ) {
 		</div>
 
 		<?php if ( count( $pagination ) > 1 ) : ?>
-			<nav class="tpw-flexiclub-logs__pagination" aria-label="<?php esc_attr_e( 'Log pagination', 'tpw-core' ); ?>">
+			<nav class="ilungu-club-logs__pagination tpw-flexiclub-logs__pagination" aria-label="<?php esc_attr_e( 'Log pagination', 'tpw-core' ); ?>">
 				<?php foreach ( $pagination as $page_link ) : ?>
 					<?php if ( ! empty( $page_link['current'] ) ) : ?>
-						<span class="tpw-flexiclub-logs__page-link tpw-flexiclub-logs__page-link--current"><?php echo esc_html( $page_link['label'] ?? '' ); ?></span>
+						<span class="ilungu-club-logs__page-link tpw-flexiclub-logs__page-link ilungu-club-logs__page-link--current tpw-flexiclub-logs__page-link--current"><?php echo esc_html( $page_link['label'] ?? '' ); ?></span>
 					<?php else : ?>
-						<a class="tpw-flexiclub-logs__page-link" href="<?php echo esc_url( $page_link['url'] ?? '' ); ?>"><?php echo esc_html( $page_link['label'] ?? '' ); ?></a>
+						<a class="ilungu-club-logs__page-link tpw-flexiclub-logs__page-link" href="<?php echo esc_url( $page_link['url'] ?? '' ); ?>"><?php echo esc_html( $page_link['label'] ?? '' ); ?></a>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</nav>

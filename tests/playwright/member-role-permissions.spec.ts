@@ -1,7 +1,7 @@
 import { expect, test, type Browser, type Page } from '@playwright/test';
 import { loadMemberRoleFixture, type MemberRoleFixture } from './helpers/member-role-fixture';
 
-const baseURL = process.env.ILUNGU_BASE_URL || 'http://ilungu-club.local';
+const baseURL = process.env.ILUNGU_BASE_URL || 'https://ilungu-club.local';
 const adminUser = process.env.ILUNGU_ADMIN_USER;
 const adminPassword = process.env.ILUNGU_ADMIN_PASSWORD;
 const memberUser = process.env.ILUNGU_MEMBER_USER;

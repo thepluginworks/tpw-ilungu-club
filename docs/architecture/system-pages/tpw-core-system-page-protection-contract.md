@@ -147,11 +147,13 @@ The following reflects current runtime behaviour in the shared framework.
 - `noticeboard` via `[tpw_noticeboard_list]` — requires login plus an allowed member status, with notice managers retaining their existing management access
 - `gallery-admin` via `[tpw_gallery_admin]` — requires login plus gallery-manage authority
 - `gallery-help` via `[tpw_gallery_help]` — requires login plus gallery-manage authority
-- `flexiclub` via `[flexiclub]` — requires login plus iLungu Club frontend dashboard authority
-- `logs` via `[flexiclub workspace="logs"]` — requires login plus iLungu Club frontend dashboard authority
-- `menu-management` via `[flexiclub_menu_management]` — requires login plus workspace-specific authority
-- `archival-system` via `[flexiclub_archival_system]` — requires login plus workspace-specific authority
+- `club-management` via `[ilungu_club]` — requires login plus iLungu Club frontend dashboard authority
+- `logs` via `[ilungu_club workspace="logs"]` — requires login plus iLungu Club frontend dashboard authority
+- `menu-management` via `[ilungu_club_menu_management]` — requires login plus workspace-specific authority
+- `archival-system` via `[ilungu_club_archival_system]` — requires login plus workspace-specific authority
 - `tpw-control` via `[tpw-control]` — requires TPW Control manage access and section visibility
+
+`[flexiclub]`, `[flexiclub_menu_management]`, and `[flexiclub_archival_system]` remain temporary aliases that delegate to the canonical iLungu Club shortcodes. Existing Club-managed System Pages retain their page IDs and slugs, but their owned content is migrated to canonical shortcode markup without creating replacement pages.
 
 ### 5.2 Noticeboard default
 
@@ -169,7 +171,7 @@ Core keeps Noticeboard in the private-page automatic menu-hiding set.
 
 For the listed iLungu Club system and admin-style pages, the current Core direction is:
 
-- `my-profile`, `manage-members`, `noticeboard`, `gallery-admin`, `gallery-help`, `flexiclub`, `logs`, `menu-management`, `archival-system`, and `tpw-control` are private/member-or-admin routes and should deny logged-out direct access
+- `my-profile`, `manage-members`, `noticeboard`, `gallery-admin`, `gallery-help`, `club-management`, `logs`, `menu-management`, `archival-system`, and `tpw-control` are private/member-or-admin routes and should deny logged-out direct access
 - `member-login` is intentionally public and is not part of the private-page exclusion set
 
 For `noticeboard`, the current default is members-only and remains aligned with the private-page automatic menu-hiding set.

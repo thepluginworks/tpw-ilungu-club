@@ -85,7 +85,10 @@ function assert_same( $expected, $actual, $label ) {
 
 require dirname( __DIR__, 2 ) . '/includes/class-tpw-flexiclub-admin-menu.php';
 
-$method = new ReflectionMethod( 'TPW_FlexiClub_Admin_Menu', 'get_club_administration_contributions' );
+assert_same( true, class_exists( 'iLungu_Club_Admin_Menu', false ), 'The canonical Club controller must load.' );
+assert_same( true, class_exists( 'TPW_FlexiClub_Admin_Menu', false ), 'The legacy Club controller alias must remain available.' );
+
+$method = new ReflectionMethod( 'iLungu_Club_Admin_Menu', 'get_club_administration_contributions' );
 $resolved = $method->invoke( null, 'admin' );
 
 assert_same( array( 'ilungu-tickets-admin', 'unrelated', 'same-key-duplicate' ), array_keys( $resolved ), 'Canonical and legacy contribution identities must resolve to one logical contribution.' );

@@ -10,7 +10,7 @@ Canonical contract: [../architecture/ui/tpw-core-ui-wrapper-enqueue-contract.md]
 
 ## What the Branding tab configures
 
-The Branding tab at: wp-admin → iLungu Club → Settings → Branding (`/wp-admin/admin.php?page=tpw-flexiclub-settings&tab=branding`) lets admins set:
+The Branding tab at: wp-admin → iLungu Club → Settings → Branding (`/wp-admin/admin.php?page=ilungu-club-settings&tab=branding`) lets admins set:
 
 - Button system tokens used by `.tpw-btn` variants
   - `--tpw-btn-primary`, `--tpw-btn-secondary`, `--tpw-btn-danger`, `--tpw-btn-light`, `--tpw-btn-dark`

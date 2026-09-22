@@ -3,6 +3,12 @@
 The maintained iLungu Club browser suite is
 `tests/playwright/smoke/ilungu-branding-smoke.spec.ts`.
 
+The canonical Local target for every maintained Club browser and fixture test is
+`https://ilungu-club.local`. Set `ILUNGU_BASE_URL` to that HTTPS origin and keep
+`ILUNGU_WP_PATH` and `ILUNGU_LOCAL_SHELL` pointed at the matching Local site.
+Do not substitute a different Local site unless a tracked cross-plugin test
+explicitly documents it.
+
 The contribution contract suite is
 `tests/playwright/club-administration-contributions.spec.ts`. It requires the
 Local-only WordPress test bootstrap to define `ILUNGU_CLUB_PLAYWRIGHT_TESTING`

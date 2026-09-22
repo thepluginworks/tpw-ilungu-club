@@ -13,7 +13,7 @@ $workspace_url    = isset( $workspace['workspace_url'] ) ? (string) $workspace['
 $current_url      = isset( $workspace['current_url'] ) ? (string) $workspace['current_url'] : $workspace_url;
 $active_tab_slug  = '' !== $active_tab ? sanitize_html_class( $active_tab ) : 'member-menu';
 $panel_classes    = 'tpw-flexiclub-settings__panel tpw-admin-ui tpw-flexiclub-settings__panel--' . $active_tab_slug;
-$tab_shell_class  = 'tpw-flexiclub-settings__tab-shell tpw-admin-ui wp-core-ui tpw-flexiclub-settings__tab-shell--' . $active_tab_slug;
+$tab_shell_class  = 'ilungu-club-settings__tab-shell tpw-flexiclub-settings__tab-shell tpw-admin-ui wp-core-ui ilungu-club-settings__tab-shell-- tpw-flexiclub-settings__tab-shell--' . $active_tab_slug;
 
 if ( function_exists( 'tpw_core_set_settings_view_context' ) ) {
 	tpw_core_set_settings_view_context(
@@ -26,13 +26,13 @@ if ( function_exists( 'tpw_core_set_settings_view_context' ) ) {
 	);
 }
 ?>
-<section id="flexiclub-settings-overview" class="tpw-flexiclub-dashboard__hero tpw-card tpw-flexiclub-settings__hero">
-	<div class="tpw-flexiclub-dashboard__brand-row tpw-flexiclub-settings__hero-head">
-		<div class="tpw-flexiclub-dashboard__welcome tpw-flexiclub-settings__hero-copy">
+<section id="ilungu-club-settings-overview" class="ilungu-club-dashboard__hero tpw-flexiclub-dashboard__hero tpw-card ilungu-club-settings__hero tpw-flexiclub-settings__hero">
+	<div class="ilungu-club-dashboard__brand-row tpw-flexiclub-dashboard__brand-row ilungu-club-settings__hero-head tpw-flexiclub-settings__hero-head">
+		<div class="ilungu-club-dashboard__welcome tpw-flexiclub-dashboard__welcome ilungu-club-settings__hero-copy tpw-flexiclub-settings__hero-copy">
 			<h2><?php esc_html_e( 'Settings Workspace', 'tpw-core' ); ?></h2>
 			<p><?php esc_html_e( 'Manage the existing iLungu Club settings from the portal using the same shared forms, validation, and save flows that already power the wp-admin settings screen.', 'tpw-core' ); ?></p>
 		</div>
-		<div class="tpw-flexiclub-settings__hero-actions">
+		<div class="ilungu-club-settings__hero-actions tpw-flexiclub-settings__hero-actions">
 			<?php if ( '' !== $dashboard_url ) : ?>
 				<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard_url ); ?>"><?php esc_html_e( 'Back to dashboard', 'tpw-core' ); ?></a>
 			<?php endif; ?>
@@ -43,15 +43,15 @@ if ( function_exists( 'tpw_core_set_settings_view_context' ) ) {
 	</div>
 </section>
 
-<section id="flexiclub-settings-tabs" class="tpw-flexiclub-dashboard__section tpw-card tpw-flexiclub-settings__section">
-	<div class="tpw-flexiclub-dashboard__section-head tpw-flexiclub-settings__section-head">
+<section id="ilungu-club-settings-tabs" class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card ilungu-club-settings__section tpw-flexiclub-settings__section">
+	<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head ilungu-club-settings__section-head tpw-flexiclub-settings__section-head">
 		<div>
 			<h2><?php esc_html_e( 'Settings Areas', 'tpw-core' ); ?></h2>
 			<p><?php esc_html_e( 'Switch between the existing iLungu Club settings areas without leaving the front-end workspace.', 'tpw-core' ); ?></p>
 		</div>
 	</div>
 
-	<nav class="tpw-flexiclub-settings__tabs" aria-label="<?php esc_attr_e( 'iLungu Club settings areas', 'tpw-core' ); ?>">
+	<nav class="ilungu-club-settings__tabs tpw-flexiclub-settings__tabs" aria-label="<?php esc_attr_e( 'iLungu Club settings areas', 'tpw-core' ); ?>">
 		<?php foreach ( $tabs as $item ) : ?>
 			<?php
 			$item_classes = 'tpw-flexiclub-settings__tab-link';
@@ -73,9 +73,9 @@ if ( function_exists( 'tpw_core_set_settings_view_context' ) ) {
 		<?php endforeach; ?>
 	</nav>
 
-	<div id="flexiclub-settings-panel" class="<?php echo esc_attr( $panel_classes ); ?>" style="<?php echo esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ); ?>">
-		<div class="tpw-flexiclub-settings__panel-head">
-			<span class="tpw-flexiclub-dashboard__status tpw-flexiclub-dashboard__status--neutral"><?php esc_html_e( 'Portal Settings', 'tpw-core' ); ?></span>
+	<div id="ilungu-club-settings-panel" class="<?php echo esc_attr( $panel_classes ); ?>" style="<?php echo esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ); ?>">
+		<div class="ilungu-club-settings__panel-head tpw-flexiclub-settings__panel-head">
+			<span class="ilungu-club-dashboard__status tpw-flexiclub-dashboard__status ilungu-club-dashboard__status--neutral tpw-flexiclub-dashboard__status--neutral"><?php esc_html_e( 'Portal Settings', 'tpw-core' ); ?></span>
 			<h3><?php echo esc_html( $active_label ); ?></h3>
 		</div>
 
@@ -83,7 +83,7 @@ if ( function_exists( 'tpw_core_set_settings_view_context' ) ) {
 			<?php tpw_core_render_settings_request_notices( $active_tab ); ?>
 		<?php endif; ?>
 
-		<div class="tpw-flexiclub-settings__panel-body">
+		<div class="ilungu-club-settings__panel-body tpw-flexiclub-settings__panel-body">
 			<div class="<?php echo esc_attr( $tab_shell_class ); ?>" data-settings-tab="<?php echo esc_attr( $active_tab_slug ); ?>">
 				<?php if ( function_exists( 'tpw_core_render_settings_tab_content' ) ) : ?>
 					<?php tpw_core_render_settings_tab_content( $active_tab ); ?>

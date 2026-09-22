@@ -281,22 +281,22 @@ class TPW_Core_Activator {
                 $flexiclub_pages = [
                     'club-management' => [
                         'title'     => 'Club Management',
-                        'shortcode' => '[flexiclub]',
+                        'shortcode' => '[ilungu_club]',
                         'required'  => 1,
                     ],
                     'logs' => [
                         'title'     => 'Logs',
-                        'shortcode' => '[flexiclub workspace="logs"]',
+                        'shortcode' => '[ilungu_club workspace="logs"]',
                         'required'  => 0,
                     ],
                     'menu-management' => [
                         'title'     => 'Menu Management',
-                        'shortcode' => '[flexiclub_menu_management]',
+                        'shortcode' => '[ilungu_club_menu_management]',
                         'required'  => 0,
                     ],
                     'archival-system' => [
                         'title'     => 'Archival System',
-                        'shortcode' => '[flexiclub_archival_system]',
+                        'shortcode' => '[ilungu_club_archival_system]',
                         'required'  => 0,
                     ],
                     'tpw-control' => [

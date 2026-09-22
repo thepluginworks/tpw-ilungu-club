@@ -15,8 +15,8 @@ $editing = $sub === 'edit' && $page_id > 0;
 $page = $editing ? TPW_Control_Upload_Pages::get_page_by_id( $page_id ) : null;
 $files = $editing ? TPW_Control_Upload_Pages::get_files( $page_id ) : [];
 $admin_page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
-$base_url = is_admin() && 'tpw-flexiclub-upload-pages' === $admin_page
-    ? admin_url( 'admin.php?page=tpw-flexiclub-upload-pages' )
+$base_url = is_admin() && 'ilungu-club-upload-pages' === $admin_page
+	? admin_url( 'admin.php?page=ilungu-club-upload-pages' )
     : TPW_Control_UI::menu_url( 'upload-pages' );
 
 if ( ! function_exists( 'tpw_upl_vis_value' ) ) {

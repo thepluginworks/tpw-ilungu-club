@@ -10,7 +10,8 @@
 - Notices: aligned `tpw_notices_manage` with the active Noticeboard management rule so the Core permission bridge recognises configured Noticeboard Admin members as well as WordPress Administrators.
 
 ### Changed
-- Admin routing: standardised iLungu Club Settings and every Core-owned Settings tab on `admin.php?page=tpw-flexiclub-settings`; native WordPress Settings no longer contains an iLungu Club submenu. Legacy `options-general.php?page=tpw-core-settings` URLs redirect to the canonical Club route while preserving valid tab context.
+- Admin routing: standardised iLungu Club Settings and every Club-owned Settings tab on `admin.php?page=ilungu-club-settings`; native WordPress Settings no longer contains an iLungu Club submenu. Legacy `tpw-flexiclub-settings` and `options-general.php?page=tpw-core-settings` URLs redirect to the canonical Club route while preserving valid tab context.
+- Club migration: published `iLungu_Club_Admin_Menu`, `ilungu-club-*` wp-admin routes, canonical Club shortcodes, and canonical dashboard dismissal metadata. Legacy FlexiClub symbols, routes, shortcodes, and dismissal metadata remain bounded compatibility bridges that delegate to or are adopted by the canonical implementation.
 
 ## [2.11.1] - 2026-09-16
 

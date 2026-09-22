@@ -19,7 +19,7 @@ if ( defined('TPW_CORE_URL') ) {
 }
 
 $admin_post = admin_url( 'admin-post.php' );
-$base_url   = admin_url( 'admin.php?page=tpw-flexiclub-settings&tab=system-pages' );
+$base_url   = admin_url( 'admin.php?page=ilungu-club-settings&tab=system-pages' );
 ?>
 <div class="tpw-system-pages">
     <p><?php echo esc_html__( 'Registered TPW system pages across plugins. This list does not auto-create WordPress pages. Use Recreate to restore a missing page for an existing slug.', 'tpw-core' ); ?></p>

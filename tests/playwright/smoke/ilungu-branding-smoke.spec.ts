@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-const baseURL = process.env.ILUNGU_BASE_URL || 'https://flexiclub-smoke.local';
+const baseURL = process.env.ILUNGU_BASE_URL || 'https://ilungu-club.local';
 const adminUser = process.env.ILUNGU_ADMIN_USER;
 const adminPassword = process.env.ILUNGU_ADMIN_PASSWORD;
 const freshInstallFixture = process.env.ILUNGU_FRESH_INSTALL === 'true';
@@ -17,7 +17,7 @@ const routes = {
 	home: '/',
 	portal: process.env.ILUNGU_PORTAL_PATH || '/club-management/',
 	gallery: '/gallery/',
-	dashboard: '/wp-admin/admin.php?page=tpw-flexiclub-dashboard',
+	dashboard: '/wp-admin/admin.php?page=ilungu-club-dashboard',
 };
 
 const optionalPortalPaths = [
@@ -37,7 +37,7 @@ const clubAssets = [
 	'ilunguclub-icon.svg',
 	'ilunguclub-icon-300.png',
 ];
-const frontendPluginContainer = '.tpw-frontend-ui.tpw-flexiclub-dashboard, .tpw-flexiclub-dashboard';
+const frontendPluginContainer = '.tpw-frontend-ui.ilungu-club-dashboard, .ilungu-club-dashboard';
 
 type PageSnapshot = {
 	path: string;
@@ -64,7 +64,7 @@ function canonicalSystemPagesWorkspaceUrl(): string {
 }
 
 async function systemPageRow(page: Page, title: string) {
-	const rows = page.locator('.tpw-flexiclub-system-pages__row');
+	const rows = page.locator('.ilungu-club-system-pages__row');
 	const rowIndex = await rows.evaluateAll((elements, expectedTitle) => elements.findIndex((row) =>
 		Array.from(row.children).some((cell) => cell.querySelector('.tpw-flexiclub-system-pages__page-title')?.textContent?.trim() === expectedTitle),
 	), title);
@@ -153,7 +153,7 @@ async function visitOptionalPage(page: Page, path: string, label: string, plugin
 }
 
 async function visitClubAdminMenuPage(page: Page, label: string): Promise<void> {
-	const menuLink = page.locator('#toplevel_page_tpw-flexiclub-dashboard .wp-submenu a').filter({ hasText: new RegExp(`^${label}$`, 'i') });
+	const menuLink = page.locator('#toplevel_page_ilungu-club-dashboard .wp-submenu a').filter({ hasText: new RegExp(`^${label}$`, 'i') });
 	await expect(menuLink, `${label} must be exposed by the iLungu Club admin menu`).toHaveCount(1);
 	const href = await menuLink.getAttribute('href');
 	expect(href, `${label} admin-menu link must have an href`).toBeTruthy();
@@ -164,6 +164,31 @@ async function visitClubAdminMenuPage(page: Page, label: string): Promise<void> 
 	expect(response?.ok(), `${label} must load from its iLungu Club admin-menu link`).toBeTruthy();
 	await expectCurrentPluginBranding(page, '#wpbody-content', label);
 	verifyPage();
+}
+
+async function expectClubAdminChrome(page: Page, label: string, requiresSharedHeader = true): Promise<void> {
+	await expect(page.locator('body')).toHaveClass(/tpw-origin/);
+	await expect(page.locator('link#tpw-core-admin-css-css')).toHaveCount(1);
+	await expect(page.locator('link#tpw-admin-ui-css')).toHaveCount(1);
+	await expect(page.locator('link#ilungu-club-dashboard-css')).toHaveCount(1);
+	await expect(page.locator('.tpw-admin-ui')).toHaveCount(1);
+
+	if (!requiresSharedHeader) {
+		return;
+	}
+
+	const header = page.locator('.tpw-fe-header');
+	await expect(header, `${label} must render the shared Club admin header`).toHaveCount(1);
+	await expect(header.locator('.tpw-fe-header-inner')).toHaveCount(1);
+	const pluginWorksLogo = header.locator('img.tpw-fe-logo');
+	await expect(pluginWorksLogo, `${label} must render the constrained PluginWorks mark`).toHaveCount(1);
+	const dimensions = await pluginWorksLogo.evaluate((image: HTMLImageElement) => {
+		const rectangle = image.getBoundingClientRect();
+		return { width: rectangle.width, height: rectangle.height };
+	});
+	expect(dimensions.width, `${label} PluginWorks mark must remain contained`).toBeGreaterThan(0);
+	expect(dimensions.width, `${label} PluginWorks mark must remain contained`).toBeLessThanOrEqual(140);
+	expect(dimensions.height, `${label} PluginWorks mark must remain contained`).toBeLessThanOrEqual(100);
 }
 
 async function signInAsAdmin(page: Page): Promise<void> {
@@ -209,7 +234,7 @@ test.describe('iLungu Club branding smoke test', () => {
 
 	test('optional portal workspaces use current visible and accessible branding', async ({ page }) => {
 		await visitOptionalPage(page, routes.portal, 'Club portal');
-		await expect(page.locator('.tpw-flexiclub-dashboard__permission-state')).toContainText('iLungu Club workspace');
+		await expect(page.locator('.ilungu-club-dashboard__permission-state')).toContainText('iLungu Club workspace');
 		for (const path of optionalPortalPaths) {
 			await visitOptionalPage(page, path, path);
 		}
@@ -296,8 +321,8 @@ test.describe('iLungu Club branding smoke test', () => {
 		expect(response?.ok(), 'System Pages workspace must load').toBeTruthy();
 		const clubManagementRow = await systemPageRow(page, 'Club Management');
 		await expect(systemPageCell(clubManagementRow, 2).locator('.tpw-flexiclub-dashboard__status')).toContainText('Complete');
-		await expect(systemPageCell(clubManagementRow, 0).locator('.tpw-flexiclub-system-pages__page-chip--plugin')).toHaveText('iLungu Club');
-		const linkedPage = systemPageCell(clubManagementRow, 6).getByRole('link', { name: 'View' });
+		await expect(systemPageCell(clubManagementRow, 0).locator('.ilungu-club-system-pages__page-chip--plugin')).toHaveText('iLungu Club');
+		const linkedPage = page.locator('.ilungu-club-system-pages__actions > a[href*="/club-management/"]').filter({ hasText: 'View' }).first();
 		await expect(linkedPage).toHaveAttribute('href', /\/club-management\/?$/);
 		const linkedPageUrl = await linkedPage.getAttribute('href');
 		expect(linkedPageUrl, 'Club Management linked page must have a target URL').toBeTruthy();
@@ -401,7 +426,35 @@ test.describe('iLungu Club branding smoke test', () => {
 			test.info().annotations.push({ type: 'skip', description: 'No Club icon image is rendered on this dashboard installation.' });
 		}
 		await expectCurrentPluginBranding(page, '#wpbody-content, #adminmenu', 'iLungu dashboard');
+		await expectClubAdminChrome(page, 'Dashboard', false);
+		const dashboardDimensions = await dashboardLogo.first().evaluate((image: HTMLImageElement) => {
+			const rectangle = image.getBoundingClientRect();
+			return { width: rectangle.width, height: rectangle.height };
+		});
+		expect(dashboardDimensions.width, 'Dashboard iLungu Club mark must remain contained').toBeGreaterThan(0);
+		expect(dashboardDimensions.width, 'Dashboard iLungu Club mark must remain contained').toBeLessThanOrEqual(340);
+		expect(dashboardDimensions.height, 'Dashboard iLungu Club mark must remain contained').toBeLessThanOrEqual(160);
 		verifyPage();
+
+		await page.goto(pageUrl('/wp-admin/admin.php?page=ilungu-club-settings'), { waitUntil: 'domcontentloaded' });
+		await expect(page.locator('#wpbody-content')).toContainText(/iLungu™? Club Settings/i);
+		await expectClubAdminChrome(page, 'Settings');
+
+		await page.goto(pageUrl('/wp-admin/admin.php?page=ilungu-club-settings&tab=system-pages'), { waitUntil: 'domcontentloaded' });
+		await expect(page.locator('#wpbody-content')).toContainText(/System Pages/i);
+		await expectClubAdminChrome(page, 'System Pages');
+
+		await page.goto(pageUrl('/wp-admin/admin.php?page=ilungu-club-manage-members&tpw_flexiclub_diagnostics=1'), { waitUntil: 'domcontentloaded' });
+		await expect(page.locator('#wpbody-content')).toContainText('Manage Members');
+		await expectClubAdminChrome(page, 'Manage Members');
+
+		await page.goto(pageUrl('/wp-admin/admin.php?page=ilungu-club-menu-manager'), { waitUntil: 'domcontentloaded' });
+		await expect(page.locator('#wpbody-content')).toContainText(/Menu Permissions/i);
+		await expectClubAdminChrome(page, 'Menu Manager');
+
+		await page.goto(pageUrl('/wp-admin/admin.php?page=ilungu-club-logs'), { waitUntil: 'domcontentloaded' });
+		await expect(page.locator('#wpbody-content')).toContainText(/iLungu Club Logs/i);
+		await expectClubAdminChrome(page, 'Logs');
 
 		await visitClubAdminMenuPage(page, 'Manage Members');
 		await expect(page.locator('#wpbody-content')).toContainText('Manage Members');

@@ -59,7 +59,7 @@ class TPW_Signup_Attempts_Admin {
 		}
 
 		add_submenu_page(
-			'tpw-flexiclub-dashboard',
+			'ilungu-club-dashboard',
 			esc_html__( 'Sign Ups (Debug)', 'tpw-core' ),
 			esc_html__( 'Sign Ups (Debug)', 'tpw-core' ),
 			'manage_options',
@@ -67,7 +67,7 @@ class TPW_Signup_Attempts_Admin {
 			array( __CLASS__, 'render_page' )
 		);
 
-		remove_submenu_page( 'tpw-flexiclub-dashboard', self::PAGE_SLUG );
+		remove_submenu_page( 'ilungu-club-dashboard', self::PAGE_SLUG );
 	}
 
 	/**

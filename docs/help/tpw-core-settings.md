@@ -2,7 +2,7 @@
 
 This page explains the settings available under wp-admin → iLungu Club → Settings.
 
-The canonical backend Settings URL is `/wp-admin/admin.php?page=tpw-flexiclub-settings`. Each tab uses this page with its own `tab` query argument, for example `/wp-admin/admin.php?page=tpw-flexiclub-settings&tab=system-pages`.
+The canonical backend Settings URL is `/wp-admin/admin.php?page=ilungu-club-settings`. Each tab uses this page with its own `tab` query argument, for example `/wp-admin/admin.php?page=ilungu-club-settings&tab=system-pages`. Legacy `tpw-flexiclub-settings` bookmarks redirect to this route while preserving valid query state.
 
 Legacy `/wp-admin/options-general.php?page=tpw-core-settings` bookmarks redirect to the canonical route when possible, but iLungu Club is not shown in the native WordPress Settings menu.
 
