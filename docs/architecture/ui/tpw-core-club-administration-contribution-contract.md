@@ -70,6 +70,8 @@ For canonical/legacy migration, the canonical row may declare `legacy_keys`. Cor
 
 Core applies declared visibility before exposing navigation or menus. Consumers must apply their own capability checks in render callbacks and at every destination. Consumer callbacks own their markup and may enqueue their own scoped assets using existing documented shared UI wrappers and handles. Core does not load consumer assets globally.
 
+When a frontend contribution also exposes an Overview card or active-catalogue action, that action must use its Club Management frontend workspace rather than a wp-admin fallback. Core-generated workspace navigation resolves the canonical `club-management` System Page and appends `workspace=<workspace.key>`; a consumer-owned action may add its documented view or tab query context. Consumer actions must not emit the legacy `/flexiclub/` base.
+
 ## Backwards compatibility and degradation
 
 All additions are optional. Without valid consumer registrations, current Core dashboard cards, Quick Actions, Extend cards, frontend workspaces, wp-admin menus, and legacy TPW Control section registration behave unchanged. Invalid, unavailable, or unauthorized contributions fail closed and do not prevent Core rendering. This contract does not replace TPW Control sections or raw consumer functionality.

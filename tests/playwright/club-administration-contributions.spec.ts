@@ -69,6 +69,69 @@ test.describe('Club administration contributions', () => {
 		await expect(page.getByText('Synthetic Club Tool', { exact: true })).toHaveCount(0);
 	});
 
+	test('emits canonical Club workspace URLs and keeps child navigation compact', async ({ page }) => {
+		await signInAsAdmin(page);
+		await disableContributions(page);
+		await openPortal(page);
+
+		await expect(page.locator('h1.wp-block-post-title')).toHaveCount(1);
+		await expect(page.locator('h1.wp-block-post-title')).toBeHidden();
+		await expect(page.locator('.ilungu-club-dashboard__portal--dashboard')).toBeVisible();
+		await expect(page.getByText('iLungu Club navigation', { exact: true })).toHaveCount(0);
+		await expect(page.locator('.ilungu-club-dashboard__portal a[href*="/flexiclub/"]')).toHaveCount(0);
+		await expect(page.locator('.ilungu-club-dashboard--frontend')).toHaveCSS('max-width', 'none');
+		const portalBounds = await page.locator('.ilungu-club-dashboard__portal').boundingBox();
+		const viewport = page.viewportSize();
+		expect(portalBounds).not.toBeNull();
+		expect(viewport).not.toBeNull();
+		expect(portalBounds!.x).toBeGreaterThan(0);
+		expect(viewport!.width - portalBounds!.x - portalBounds!.width).toBeGreaterThan(0);
+		await expect(page.locator('a[href*="/club-management/?workspace=system-pages"]').first()).toBeVisible();
+		await expect(page.locator('a[href*="/club-management/?workspace=settings&settings-tab=payment-methods"]').first()).toBeVisible();
+		await expect(page.locator('a[href*="/club-management/?workspace=settings"]').first()).toBeVisible();
+		await expect(page.locator('a[href*="/club-management/?workspace=logs"]').first()).toBeVisible();
+
+		await openPortal(page, false, 'settings');
+		await expect(page.locator('h1.wp-block-post-title')).toHaveCount(1);
+		await expect(page.locator('h1.wp-block-post-title')).toBeHidden();
+		const navigation = page.locator('.ilungu-club-dashboard__portal-sidebar-shell');
+		await expect(navigation).toBeVisible();
+		await navigation.getByText('iLungu Club navigation', { exact: true }).click();
+		await expect(navigation).toHaveAttribute('open', '');
+		const inactiveWorkspace = navigation.getByRole('link', { name: 'Dashboard Home', exact: true });
+		const activeWorkspace = navigation.getByRole('link', { name: 'Settings', exact: true });
+		await expect(inactiveWorkspace).toHaveClass(/\bbutton\b/);
+		await expect(activeWorkspace).toHaveClass(/\bbutton-primary\b/);
+		expect(await activeWorkspace.evaluate((element) => getComputedStyle(element).boxShadow)).not.toBe(
+			await inactiveWorkspace.evaluate((element) => getComputedStyle(element).boxShadow)
+		);
+		await expect(navigation.locator('.ilungu-club-dashboard__portal-brand-card')).toHaveCount(0);
+		await expect(navigation.getByText('Getting Started', { exact: true })).toHaveCount(0);
+		await expect(navigation.getByText('Club Overview', { exact: true })).toHaveCount(0);
+		await expect(navigation.getByText('Quick Actions', { exact: true })).toHaveCount(0);
+		await expect(navigation.getByText('On This Page', { exact: true })).toHaveCount(0);
+	});
+
+	test('does not suppress titles on unrelated WordPress pages', async ({ page }) => {
+		await signInAsAdmin(page);
+		await page.goto(url('/'), { waitUntil: 'domcontentloaded' });
+		await expect(page.locator('h1.wp-block-heading').filter({ hasText: /^Blog$/ })).toBeVisible();
+	});
+
+	test('uses one Lodge Meetings navigation action for the contribution RSVP destination', async ({ page }) => {
+		await signInAsAdmin(page);
+		await enableContributions(page);
+		await openPortal(page, true, 'settings');
+		const navigation = page.locator('.ilungu-club-dashboard__portal-sidebar-shell');
+		await navigation.getByText('iLungu Club navigation', { exact: true }).click();
+
+		const lodgeLink = navigation.getByRole('link', { name: 'Lodge Meetings', exact: true });
+		await expect(lodgeLink).toHaveCount(1);
+		await expect(lodgeLink).toHaveAttribute('href', /\/rsvp_submissions\/$/);
+		await expect(navigation.getByRole('link', { name: /Lodge Meetings/i })).toHaveCount(1);
+		await expect(navigation.getByRole('link', { name: /ilungu-lodge-meetings/i })).toHaveCount(0);
+	});
+
 	test('renders authorized Overview contributions with isolated contexts and deterministic duplicate handling', async ({ page }) => {
 		await signInAsAdmin(page);
 		await enableContributions(page);
@@ -87,6 +150,14 @@ test.describe('Club administration contributions', () => {
 		await expect(page.getByText('Malformed Synthetic Contribution', { exact: true })).toHaveCount(0);
 		await expect(page.getByText('Unsupported Context Contribution', { exact: true })).toHaveCount(0);
 		await expect(page.getByText('Unauthorized Synthetic Contribution', { exact: true })).toHaveCount(0);
+		await expect(page.getByRole('link', { name: 'Manage Synthetic Tool', exact: true })).toHaveAttribute(
+			'href',
+			/\/club-management\/\?workspace=synthetic-club&view=settings&tab=rsvp/
+		);
+		await expect(page.getByRole('link', { name: 'Manage Lodge Meetings', exact: true })).toHaveAttribute(
+			'href',
+			/\/rsvp_submissions\/$/
+		);
 
 		await openDashboard(page, true);
 		await expect(page.getByRole('heading', { name: 'Synthetic Club Tool', exact: true })).toHaveCount(1);

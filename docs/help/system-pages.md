@@ -21,6 +21,8 @@ That private set includes the default Noticeboard route as well as the other mem
 
 Club-owned System Pages retain the canonical slugs `club-management`, `menu-management`, `archival-system`, and `logs`. Club updates exact owned legacy FlexiClub shortcode content in place, preserving the existing page ID and never creating replacement pages. `[flexiclub]`, `[flexiclub_menu_management]`, and `[flexiclub_archival_system]` remain temporary shortcode aliases.
 
+Club-generated frontend workspace links resolve their base in this order: the configured and published `club-management` System Page, the canonical `/club-management/` route, then the current legacy portal page only when the canonical route cannot be resolved. New Club UI must not emit `/flexiclub/`; that route remains inbound compatibility only.
+
 ## Hooks
 - tpw/system_pages/defaults (filter) — Modify default registry rows.
 - tpw_system_page_url (filter) — Override URL for a registered slug.
@@ -38,6 +40,11 @@ Club-owned System Pages retain the canonical slugs `club-management`, `menu-mana
 - The shared framework does not rewrite arbitrary explicit site menus; only the shared-framework-managed iLungu Club Members Menu is seeded or repaired directly by the shared framework.
 - This does not remove or unpublish the pages.
 - Access control remains the responsibility of the page shortcode, router, or module permission checks.
+
+## Managed-site upgrade check
+- Check menu items, custom links, buttons, widgets, and customer-authored content for `/flexiclub/` and `/flexiclub/?workspace=...` destinations.
+- Update those authored links to their `/club-management/` equivalents during managed upgrades.
+- Do not bulk-rewrite arbitrary authored URLs. The Core-managed Members Menu may be repaired through its existing managed-item path only.
 
 ## References
 - Canonical contract: ../architecture/system-pages/tpw-core-system-page-protection-contract.md

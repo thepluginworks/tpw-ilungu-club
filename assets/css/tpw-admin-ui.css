@@ -198,6 +198,14 @@
     border-color: var(--tpw-border-color);
   }
 
+  .tpw-frontend-ui :where(.button.button-primary,
+                          .button-primary) {
+    background: var(--tpw-btn-primary);
+    color: var(--tpw-btn-text-light);
+    border-color: color-mix(in oklab, var(--tpw-btn-primary) 75%, black 25%);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--tpw-btn-primary) 35%, transparent);
+  }
+
   /* Ensure .tpw-btn-* variants keep their global styling (from tpw-buttons.css) */
   .tpw-admin-ui .tpw-btn[class*="tpw-btn-"],
   .tpw-frontend-ui .tpw-btn[class*="tpw-btn-"] {

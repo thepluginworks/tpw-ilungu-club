@@ -1096,6 +1096,12 @@ body.ilungu-club-portal-page .wp-block-post-content {
   padding-right: 0 !important;
 }
 
+body.ilungu-club-portal-page .wp-block-post-title,
+body.ilungu-club-portal-page .entry-title,
+body.ilungu-club-portal-page .page-title {
+  display: none !important;
+}
+
 body.ilungu-club-portal-page #secondary,
 body.ilungu-club-portal-page .site-sidebar,
 body.ilungu-club-portal-page .widget-area,
@@ -1107,10 +1113,8 @@ body.ilungu-club-portal-page .secondary-sidebar {
 
 .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page {
   --ilungu-club-page-gutter: clamp(16px, 2vw, 32px);
-  --ilungu-club-page-max-width: 1720px;
-  width: min(100%, var(--ilungu-club-page-max-width));
-  max-width: var(--ilungu-club-page-max-width);
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
   padding: 32px var(--ilungu-club-page-gutter) 48px;
   box-sizing: border-box;
 }
@@ -1177,12 +1181,6 @@ body.ilungu-club-portal-page .secondary-sidebar {
   align-items: center;
   min-height: 44px;
   min-width: 0;
-  border-radius: 12px;
-  padding: 10px 12px;
-  color: #0f172a;
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(203, 213, 225, 0.78);
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
@@ -1195,9 +1193,6 @@ body.ilungu-club-portal-page .secondary-sidebar {
 }
 
 .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal-nav-link--current {
-  background: linear-gradient(180deg, rgba(91, 61, 245, 0.12) 0%, rgba(91, 61, 245, 0.06) 100%);
-  border-color: rgba(91, 61, 245, 0.22);
-  color: var(--tpw-flexi-accent);
   font-weight: 700;
 }
 
@@ -1211,6 +1206,49 @@ body.ilungu-club-portal-page .secondary-sidebar {
   display: flex;
   flex-direction: column;
   gap: 22px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal--dashboard,
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal--workspace {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal--workspace .ilungu-club-dashboard__portal-nav-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  cursor: pointer;
+  border: 1px solid rgba(203, 213, 225, 0.78);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  box-shadow: var(--tpw-flexi-shadow);
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal--workspace .ilungu-club-dashboard__portal-nav-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal--workspace .ilungu-club-dashboard__portal-sidebar-shell:not([open]) > .ilungu-club-dashboard__portal-sidebar {
+  display: none;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal--workspace .ilungu-club-dashboard__portal-sidebar {
+  position: static;
+  margin-top: 12px;
+}
+
+.tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__portal--workspace .ilungu-club-dashboard__portal-nav-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--tpw-flexi-border);
+  border-radius: 8px;
+  background: #fff;
 }
 
 .tpw-frontend-ui.ilungu-club-dashboard--frontend.ilungu-club-portal-page .ilungu-club-dashboard__section--checklist-full {

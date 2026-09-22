@@ -331,7 +331,7 @@ class iLungu_Club_Admin_Menu {
 		$template  = defined( 'TPW_CORE_PATH' ) ? TPW_CORE_PATH . 'templates/frontend/ilungu-club-dashboard.php' : '';
 
 		ob_start();
-		echo '<div class="tpw-frontend-ui ilungu-club-dashboard --frontend ilungu-club-portal-page    flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
+		echo '<div class="tpw-frontend-ui ilungu-club-dashboard ilungu-club-dashboard--frontend --frontend ilungu-club-portal-page flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
 
 		if ( $template && file_exists( $template ) ) {
 			include $template;
@@ -346,7 +346,7 @@ class iLungu_Club_Admin_Menu {
 
 	protected static function render_frontend_permission_state( $message ) {
 		ob_start();
-		echo '<div class="tpw-frontend-ui ilungu-club-dashboard --frontend ilungu-club-portal-page    flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
+		echo '<div class="tpw-frontend-ui ilungu-club-dashboard ilungu-club-dashboard--frontend --frontend ilungu-club-portal-page flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
 		echo '<div class="tpw-card ilungu-club-dashboard__permission-state">';
 		echo '<span class="ilungu-club-dashboard__status ilungu-club-dashboard__status--warning">' . esc_html__( 'Access restricted', 'tpw-core' ) . '</span>';
 		echo '<h2>' . esc_html__( 'iLungu Club workspace', 'tpw-core' ) . '</h2>';
@@ -1100,6 +1100,9 @@ class iLungu_Club_Admin_Menu {
 
 	protected static function get_frontend_portal_shortcode_tags() {
 		return [
+			'ilungu_club',
+			'ilungu_club_menu_management',
+			'ilungu_club_archival_system',
 			'flexiclub',
 			'flexiclub_menu_management',
 			'flexiclub_archival_system',
@@ -1108,6 +1111,7 @@ class iLungu_Club_Admin_Menu {
 
 	protected static function get_frontend_portal_system_page_slugs() {
 		return [
+			'club-management',
 			'flexiclub',
 			'logs',
 			'menu-management',
@@ -1509,6 +1513,7 @@ class iLungu_Club_Admin_Menu {
 
 		return [
 			'workspace'              => $workspace,
+			'show_portal_navigation' => 'dashboard' !== $workspace,
 			'logo_url'               => self::get_dashboard_logo_url(),
 			'icon_url'               => self::get_dashboard_icon_url(),
 			'version'                => defined( 'TPW_CORE_VERSION' ) ? (string) TPW_CORE_VERSION : '',
@@ -1954,6 +1959,7 @@ class iLungu_Club_Admin_Menu {
 
 	protected static function get_frontend_portal_nav_items( $cards, $active_workspace ) {
 		$dashboard_url = self::get_frontend_workspace_url( 'dashboard' );
+		$lodge_contribution_key = 'ilungu-lodge-meetings';
 
 		$items = [
 			[
@@ -1965,16 +1971,32 @@ class iLungu_Club_Admin_Menu {
 		];
 
 		foreach ( (array) $cards as $card_key => $card ) {
+			$card_key = sanitize_key( (string) $card_key );
+			if ( $lodge_contribution_key === $card_key ) {
+				$items[] = [
+					'label'    => __( 'Lodge Meetings', 'tpw-core' ),
+					'url'      => ! empty( $card['action_url'] ) ? (string) $card['action_url'] : '',
+					'current'  => false,
+					'internal' => false,
+					'disabled' => empty( $card['action_url'] ),
+				];
+				continue;
+			}
+
 			$items[] = [
 				'label'    => isset( $card['title'] ) ? (string) $card['title'] : '',
 				'url'      => ! empty( $card['action_url'] ) ? (string) $card['action_url'] : '',
-				'current'  => (string) $card_key === (string) $active_workspace,
+				'current'  => $card_key === (string) $active_workspace,
 				'internal' => false,
 				'disabled' => empty( $card['action_url'] ),
 			];
 		}
 
 		foreach ( self::get_consumer_workspaces( 'frontend' ) as $workspace ) {
+			if ( $lodge_contribution_key === $workspace['key'] ) {
+				continue;
+			}
+
 			$items[] = [
 				'label'    => $workspace['label'],
 				'url'      => self::get_frontend_workspace_url( $workspace['key'] ),
@@ -2002,7 +2024,7 @@ class iLungu_Club_Admin_Menu {
 			return '';
 		}
 
-		if ( ! self::page_has_shortcode_tag( (string) $page->post_content, 'flexiclub' ) ) {
+		if ( ! self::page_has_any_shortcode_tag( (string) $page->post_content, self::get_frontend_portal_shortcode_tags() ) ) {
 			return '';
 		}
 
@@ -2056,6 +2078,18 @@ class iLungu_Club_Admin_Menu {
 	}
 
 	protected static function get_frontend_workspace_base_url() {
+		$dashboard_url = self::get_frontend_dashboard_page_url();
+		if ( '' !== $dashboard_url ) {
+			return remove_query_arg( 'workspace', $dashboard_url );
+		}
+
+		if ( class_exists( 'TPW_Core_System_Pages' ) && method_exists( 'TPW_Core_System_Pages', 'get_permalink' ) ) {
+			$canonical_url = (string) TPW_Core_System_Pages::get_permalink( 'club-management' );
+			if ( '' !== $canonical_url ) {
+				return remove_query_arg( 'workspace', $canonical_url );
+			}
+		}
+
 		if ( self::is_current_frontend_dashboard_page() ) {
 			$page = get_queried_object();
 			if ( $page instanceof WP_Post && 'page' === $page->post_type ) {
@@ -2065,15 +2099,6 @@ class iLungu_Club_Admin_Menu {
 					return remove_query_arg( 'workspace', $permalink );
 				}
 			}
-		}
-
-		$dashboard_url = self::get_frontend_dashboard_page_url();
-		if ( '' !== $dashboard_url ) {
-			return remove_query_arg( 'workspace', $dashboard_url );
-		}
-
-		if ( ! self::is_current_frontend_dashboard_page() ) {
-			return '';
 		}
 
 		return '';
@@ -4014,8 +4039,9 @@ class iLungu_Club_Admin_Menu {
 		foreach ( $cards as &$card ) {
 			unset( $card['key'], $card['position'] );
 		}
+		unset( $card );
 
-		return array_values( $cards );
+		return $cards;
 	}
 
 	protected static function get_consumer_workspace( $workspace_key, $context ) {

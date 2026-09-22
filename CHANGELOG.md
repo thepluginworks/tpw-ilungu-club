@@ -7,6 +7,7 @@
 - Core compatibility: added canonical/legacy aliases for email-template groups, payment-log sources, System Page providers, Club Administration contribution keys, and managed Members Menu item keys. The aliases use canonical writes and legacy reads without bulk rewriting site data.
 
 ### Fixed
+- Club Management: frontend dashboard, setup, diagnostics, and workspace links now resolve from the configured canonical `club-management` System Page instead of inheriting a legacy `/flexiclub/` page currently being viewed. The dashboard no longer renders its redundant workspace navigation control, while child workspaces use a compact workspace-only navigation list.
 - Notices: aligned `tpw_notices_manage` with the active Noticeboard management rule so the Core permission bridge recognises configured Noticeboard Admin members as well as WordPress Administrators.
 
 ### Changed

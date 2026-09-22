@@ -38,7 +38,7 @@ add_filter(
 				'status_label' => 'Active',
 				'status_tone'  => 'success',
 				'description'  => 'Playwright fixture contribution.',
-				'primary_action' => [ 'label' => 'Manage Synthetic Tool', 'url' => home_url( '/?synthetic=manage' ) ],
+				'primary_action' => [ 'label' => 'Manage Synthetic Tool', 'url' => home_url( '/club-management/?workspace=synthetic-club&view=settings&tab=rsvp' ) ],
 				'secondary_action' => [ 'label' => 'Synthetic Settings', 'url' => home_url( '/?synthetic=settings' ) ],
 			],
 			'extend_actions' => [
@@ -66,6 +66,26 @@ add_filter(
 						}
 
 						echo '<div class="wrap"><h1>Synthetic Club Admin Workspace</h1></div>';
+					},
+				],
+			],
+		];
+		$contributions[] = [
+			'key'        => 'ilungu-lodge-meetings',
+			'contexts'   => [ 'frontend' ],
+			'capability' => 'manage_options',
+			'overview_card' => [
+				'title'          => 'iLungu Lodge Meetings',
+				'primary_action' => [ 'label' => 'Manage Lodge Meetings', 'url' => home_url( '/rsvp_submissions/' ) ],
+			],
+			'workspace' => [
+				'key'      => 'ilungu-lodge-meetings',
+				'label'    => 'iLungu Lodge Meetings',
+				'frontend' => [
+					'render_callback' => static function() {
+						if ( current_user_can( 'manage_options' ) ) {
+							echo '<section class="tpw-club-playwright-workspace"><h1>Synthetic Lodge Meetings Workspace</h1></section>';
+						}
 					},
 				],
 			],

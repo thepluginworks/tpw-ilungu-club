@@ -3,36 +3,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="ilungu-club-dashboard__portal tpw-flexiclub-dashboard__portal">
-	<details class="ilungu-club-dashboard__portal-sidebar-shell tpw-flexiclub-dashboard__portal-sidebar-shell">
-		<summary class="ilungu-club-dashboard__portal-nav-toggle tpw-flexiclub-dashboard__portal-nav-toggle">
-			<span class="dashicons dashicons-menu-alt3" aria-hidden="true"></span>
-			<span><?php esc_html_e( 'iLungu Club navigation', 'tpw-core' ); ?></span>
-		</summary>
+<div class="ilungu-club-dashboard__portal tpw-flexiclub-dashboard__portal<?php echo ! empty( $dashboard['show_portal_navigation'] ) ? ' ilungu-club-dashboard__portal--workspace' : ' ilungu-club-dashboard__portal--dashboard'; ?>">
+	<?php if ( ! empty( $dashboard['show_portal_navigation'] ) ) : ?>
+		<details class="ilungu-club-dashboard__portal-sidebar-shell tpw-flexiclub-dashboard__portal-sidebar-shell">
+			<summary class="ilungu-club-dashboard__portal-nav-toggle tpw-flexiclub-dashboard__portal-nav-toggle">
+				<span class="dashicons dashicons-menu-alt3" aria-hidden="true"></span>
+				<span><?php esc_html_e( 'iLungu Club navigation', 'tpw-core' ); ?></span>
+			</summary>
 
-		<aside class="ilungu-club-dashboard__portal-sidebar tpw-flexiclub-dashboard__portal-sidebar">
-			<section class="tpw-card ilungu-club-dashboard__portal-brand-card tpw-flexiclub-dashboard__portal-brand-card">
-				<?php if ( ! empty( $dashboard['logo_url'] ) ) : ?>
-					<img class="ilungu-club-dashboard__portal-logo tpw-flexiclub-dashboard__portal-logo" src="<?php echo esc_url( $dashboard['logo_url'] ); ?>" alt="<?php esc_attr_e( 'iLungu™ Club', 'tpw-core' ); ?>" />
-				<?php else : ?>
-					<h1><?php esc_html_e( 'iLungu™ Club', 'tpw-core' ); ?></h1>
-				<?php endif; ?>
-				<p class="ilungu-club-dashboard__portal-tagline tpw-flexiclub-dashboard__portal-tagline"><?php esc_html_e( 'Club workspace for member operations, setup, and connected tools.', 'tpw-core' ); ?></p>
-				<?php if ( ! empty( $dashboard['version'] ) ) : ?>
-					<div class="ilungu-club-dashboard__version tpw-flexiclub-dashboard__version">
-						<span><?php esc_html_e( 'Version', 'tpw-core' ); ?></span>
-						<strong><?php echo esc_html( $dashboard['version'] ); ?></strong>
-					</div>
-				<?php endif; ?>
-			</section>
-
-			<section class="tpw-card ilungu-club-dashboard__portal-nav-group tpw-flexiclub-dashboard__portal-nav-group">
-				<h2><?php esc_html_e( 'Workspace', 'tpw-core' ); ?></h2>
+			<aside class="ilungu-club-dashboard__portal-sidebar tpw-flexiclub-dashboard__portal-sidebar">
 				<nav class="ilungu-club-dashboard__portal-nav-list tpw-flexiclub-dashboard__portal-nav-list" aria-label="<?php esc_attr_e( 'iLungu Club workspace navigation', 'tpw-core' ); ?>">
 					<?php foreach ( $dashboard['portal_nav_items'] as $item ) : ?>
-						<?php $item_classes = 'tpw-flexiclub-dashboard__portal-nav-link'; ?>
+						<?php $item_classes = 'button tpw-flexiclub-dashboard__portal-nav-link'; ?>
 						<?php if ( ! empty( $item['current'] ) ) : ?>
-							<?php $item_classes .= ' tpw-flexiclub-dashboard__portal-nav-link--current'; ?>
+							<?php $item_classes .= ' button-primary tpw-flexiclub-dashboard__portal-nav-link--current'; ?>
 						<?php endif; ?>
 						<?php if ( ! empty( $item['disabled'] ) ) : ?>
 							<?php $item_classes .= ' tpw-flexiclub-dashboard__portal-nav-link--disabled'; ?>
@@ -44,18 +28,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</nav>
-			</section>
-
-			<section class="tpw-card ilungu-club-dashboard__portal-nav-group tpw-flexiclub-dashboard__portal-nav-group">
-				<h2><?php esc_html_e( 'On This Page', 'tpw-core' ); ?></h2>
-				<nav class="ilungu-club-dashboard__portal-nav-list tpw-flexiclub-dashboard__portal-nav-list" aria-label="<?php esc_attr_e( 'iLungu Club dashboard sections', 'tpw-core' ); ?>">
-					<?php foreach ( $dashboard['section_nav_items'] as $item ) : ?>
-						<a class="ilungu-club-dashboard__portal-nav-link tpw-flexiclub-dashboard__portal-nav-link ilungu-club-dashboard__portal-nav-link--section tpw-flexiclub-dashboard__portal-nav-link--section" href="<?php echo esc_url( $item['url'] ); ?>"><span><?php echo esc_html( $item['label'] ); ?></span></a>
-					<?php endforeach; ?>
-				</nav>
-			</section>
-		</aside>
-	</details>
+			</aside>
+		</details>
+	<?php endif; ?>
 
 	<div class="ilungu-club-dashboard__portal-stage tpw-flexiclub-dashboard__portal-stage">
 		<?php if ( isset( $dashboard['workspace'] ) && 'menu-management' === $dashboard['workspace'] ) : ?>
