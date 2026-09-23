@@ -52,6 +52,6 @@ $legacy_url = isset( $workspace['legacy_url'] ) ? (string) $workspace['legacy_ur
 	</div>
 
 	<div class="ilungu-club-control-workspace__embed tpw-flexiclub-control-workspace__embed">
-		<?php TPW_FlexiClub_Admin_Menu::render_frontend_tpw_control_section( $workspace['section_key'] ?? 'menu-manager' ); ?>
+		<?php iLungu_Club_Admin_Menu::render_frontend_tpw_control_section( $workspace['section_key'] ?? 'menu-manager' ); ?>
 	</div>
 </section>

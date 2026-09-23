@@ -8,6 +8,19 @@ class iLungu_Club_Admin_Menu {
 	const TOP_LEVEL_SLUG              = 'ilungu-club-dashboard';
 	const DASHBOARD_SETUP_META        = 'ilungu_club_dashboard_setup_dismissed';
 	const LEGACY_DASHBOARD_SETUP_META = 'tpw_flexiclub_dashboard_setup_dismissed';
+	const DASHBOARD_SETUP_MIGRATION_META = 'ilungu_club_dashboard_setup_migrated';
+	const BRIDGE_ACTION_FIELD          = 'ilungu_club_bridge_action';
+	const LEGACY_BRIDGE_ACTION_FIELD   = 'tpw_flexiclub_bridge_action';
+	const BRIDGE_NONCE_FIELD           = 'ilungu_club_repair_nonce';
+	const LEGACY_BRIDGE_NONCE_FIELD    = 'tpw_flexiclub_repair_nonce';
+	const BRIDGE_NONCE_ACTION          = 'ilungu_club_repair_page';
+	const LEGACY_BRIDGE_NONCE_ACTION   = 'tpw_flexiclub_repair_page';
+	const BRIDGE_SLUG_FIELD            = 'ilungu_club_repair_slug';
+	const LEGACY_BRIDGE_SLUG_FIELD     = 'tpw_flexiclub_repair_slug';
+	const BRIDGE_RETURN_FIELD          = 'ilungu_club_return_page';
+	const LEGACY_BRIDGE_RETURN_FIELD   = 'tpw_flexiclub_return_page';
+	const BRIDGE_NOTICE_FIELD          = 'ilungu_club_notice';
+	const LEGACY_BRIDGE_NOTICE_FIELD   = 'tpw_flexiclub_notice';
 	const PAGE_MEMBERS                = 'ilungu-club-manage-members';
 	const PAGE_GALLERY                = 'ilungu-club-gallery-admin';
 	const PAGE_UPLOADS                = 'ilungu-club-upload-pages';
@@ -419,10 +432,10 @@ class iLungu_Club_Admin_Menu {
 		}
 		if ( $status['repair_supported'] ) {
 			echo '<form method="post" style="display:inline-block; margin-left:8px;">';
-			wp_nonce_field( 'tpw_flexiclub_repair_page', 'tpw_flexiclub_repair_nonce' );
-			echo '<input type="hidden" name="tpw_flexiclub_bridge_action" value="repair_page" />';
-			echo '<input type="hidden" name="tpw_flexiclub_repair_slug" value="' . esc_attr( $status['repair_slug'] ) . '" />';
-			echo '<input type="hidden" name="tpw_flexiclub_return_page" value="' . esc_attr( $config['page_slug'] ) . '" />';
+			wp_nonce_field( self::BRIDGE_NONCE_ACTION, self::BRIDGE_NONCE_FIELD );
+			echo '<input type="hidden" name="' . esc_attr( self::BRIDGE_ACTION_FIELD ) . '" value="repair_page" />';
+			echo '<input type="hidden" name="' . esc_attr( self::BRIDGE_SLUG_FIELD ) . '" value="' . esc_attr( $status['repair_slug'] ) . '" />';
+			echo '<input type="hidden" name="' . esc_attr( self::BRIDGE_RETURN_FIELD ) . '" value="' . esc_attr( $config['page_slug'] ) . '" />';
 			submit_button( __( 'Create / Repair Page', 'tpw-core' ), 'secondary', 'submit', false );
 			echo '</form>';
 		}
@@ -439,7 +452,9 @@ class iLungu_Club_Admin_Menu {
 		self::ensure_tpw_control_runtime();
 		self::render_page_start( $config['title'], __( 'Manage WordPress menu visibility and access rules.', 'tpw-core' ) );
 
-		$notice = isset( $_GET['tpw_flexiclub_menu_notice'] ) ? sanitize_key( wp_unslash( $_GET['tpw_flexiclub_menu_notice'] ) ) : '';
+		$notice = isset( $_GET[ self::BRIDGE_NOTICE_FIELD ] )
+			? sanitize_key( wp_unslash( $_GET[ self::BRIDGE_NOTICE_FIELD ] ) )
+			: ( isset( $_GET[ self::LEGACY_BRIDGE_NOTICE_FIELD ] ) ? sanitize_key( wp_unslash( $_GET[ self::LEGACY_BRIDGE_NOTICE_FIELD ] ) ) : '' );
 		if ( 'saved' === $notice ) {
 			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Menu permissions saved.', 'tpw-core' ) . '</p></div>';
 		}
@@ -523,11 +538,18 @@ class iLungu_Club_Admin_Menu {
 	}
 
 	public static function handle_bridge_actions() {
-		if ( ! isset( $_POST['tpw_flexiclub_bridge_action'] ) ) {
+		$is_legacy_request = ! isset( $_POST[ self::BRIDGE_ACTION_FIELD ] ) && isset( $_POST[ self::LEGACY_BRIDGE_ACTION_FIELD ] );
+		$action_field      = $is_legacy_request ? self::LEGACY_BRIDGE_ACTION_FIELD : self::BRIDGE_ACTION_FIELD;
+		$nonce_field       = $is_legacy_request ? self::LEGACY_BRIDGE_NONCE_FIELD : self::BRIDGE_NONCE_FIELD;
+		$nonce_action      = $is_legacy_request ? self::LEGACY_BRIDGE_NONCE_ACTION : self::BRIDGE_NONCE_ACTION;
+		$slug_field        = $is_legacy_request ? self::LEGACY_BRIDGE_SLUG_FIELD : self::BRIDGE_SLUG_FIELD;
+		$return_field      = $is_legacy_request ? self::LEGACY_BRIDGE_RETURN_FIELD : self::BRIDGE_RETURN_FIELD;
+
+		if ( ! isset( $_POST[ $action_field ] ) ) {
 			return;
 		}
 
-		$action = sanitize_key( wp_unslash( $_POST['tpw_flexiclub_bridge_action'] ) );
+		$action = sanitize_key( wp_unslash( $_POST[ $action_field ] ) );
 		if ( 'repair_page' !== $action ) {
 			return;
 		}
@@ -536,23 +558,23 @@ class iLungu_Club_Admin_Menu {
 			wp_die( esc_html__( 'Access denied.', 'tpw-core' ), 403 );
 		}
 
-		$nonce = isset( $_POST['tpw_flexiclub_repair_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['tpw_flexiclub_repair_nonce'] ) ) : '';
-		if ( ! wp_verify_nonce( $nonce, 'tpw_flexiclub_repair_page' ) ) {
+		$nonce = isset( $_POST[ $nonce_field ] ) ? sanitize_text_field( wp_unslash( $_POST[ $nonce_field ] ) ) : '';
+		if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
 			wp_die( esc_html__( 'Invalid request.', 'tpw-core' ), 400 );
 		}
 
-		$system_slug = isset( $_POST['tpw_flexiclub_repair_slug'] ) ? sanitize_key( wp_unslash( $_POST['tpw_flexiclub_repair_slug'] ) ) : '';
-		$return_page = isset( $_POST['tpw_flexiclub_return_page'] ) ? sanitize_key( wp_unslash( $_POST['tpw_flexiclub_return_page'] ) ) : self::PAGE_GALLERY;
+		$system_slug = isset( $_POST[ $slug_field ] ) ? sanitize_key( wp_unslash( $_POST[ $slug_field ] ) ) : '';
+		$return_page = isset( $_POST[ $return_field ] ) ? sanitize_key( wp_unslash( $_POST[ $return_field ] ) ) : self::PAGE_GALLERY;
 
 		$args = [ 'page' => $return_page ];
 		if ( '' === $system_slug || ! class_exists( 'TPW_Core_System_Pages' ) ) {
-			$args['tpw_flexiclub_notice'] = 'repair_failed';
+			$args[ self::BRIDGE_NOTICE_FIELD ] = 'repair_failed';
 			wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) );
 			exit;
 		}
 
 		$page_id = (int) TPW_Core_System_Pages::ensure_page( $system_slug );
-		$args['tpw_flexiclub_notice'] = $page_id > 0 ? 'repair_success' : 'repair_failed';
+		$args[ self::BRIDGE_NOTICE_FIELD ] = $page_id > 0 ? 'repair_success' : 'repair_failed';
 		wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) );
 		exit;
 	}
@@ -1530,7 +1552,7 @@ class iLungu_Club_Admin_Menu {
 			'checklist_progress'     => $checklist_total > 0 ? ( $completed_steps / $checklist_total ) * 100 : 0,
 			'checklist_complete'     => $checklist_complete,
 			'show_checklist'         => ! $checklist_complete,
-			'checklist_url'          => '#tpw-flexiclub-checklist',
+			'checklist_url'          => '#ilungu-club-checklist',
 			'checklist_primary_action' => self::get_frontend_primary_checklist_item( $checklist_items, $checklist_complete ),
 			'activity_items'         => self::get_dashboard_activity_items(),
 			'logs_workspace'         => $logs_workspace,
@@ -1556,14 +1578,14 @@ class iLungu_Club_Admin_Menu {
 			if ( empty( $item['done'] ) ) {
 				return [
 					'label' => __( 'Continue setup', 'tpw-core' ),
-					'url'   => ! empty( $item['url'] ) ? $item['url'] : '#tpw-flexiclub-checklist',
+					'url'   => ! empty( $item['url'] ) ? $item['url'] : '#ilungu-club-checklist',
 				];
 			}
 		}
 
 		return [
 			'label' => $complete ? __( 'Review checklist', 'tpw-core' ) : __( 'Open checklist', 'tpw-core' ),
-			'url'   => '#tpw-flexiclub-checklist',
+			'url'   => '#ilungu-club-checklist',
 		];
 	}
 
@@ -1964,7 +1986,7 @@ class iLungu_Club_Admin_Menu {
 		$items = [
 			[
 				'label'    => __( 'Dashboard Home', 'tpw-core' ),
-				'url'      => '' !== $dashboard_url ? $dashboard_url : '#flexiclub-home',
+				'url'      => '' !== $dashboard_url ? $dashboard_url : '#ilungu-club-home',
 				'current'  => 'dashboard' === $active_workspace,
 				'internal' => true,
 			],
@@ -2148,15 +2170,15 @@ class iLungu_Club_Admin_Menu {
 			return [
 				[
 					'label' => __( 'Workspace Overview', 'tpw-core' ),
-					'url'   => '#flexiclub-menu-management-overview',
+					'url'   => '#ilungu-club-menu-management-overview',
 				],
 				[
 					'label' => __( 'Menu Tool', 'tpw-core' ),
-					'url'   => '#flexiclub-menu-management-tool',
+					'url'   => '#ilungu-club-menu-management-tool',
 				],
 				[
 					'label' => __( 'Legacy Route', 'tpw-core' ),
-					'url'   => '#flexiclub-menu-management-legacy',
+					'url'   => '#ilungu-club-menu-management-legacy',
 				],
 			];
 		}
@@ -2165,15 +2187,15 @@ class iLungu_Club_Admin_Menu {
 			return [
 				[
 					'label' => __( 'Workspace Overview', 'tpw-core' ),
-					'url'   => '#flexiclub-archival-system-overview',
+					'url'   => '#ilungu-club-archival-system-overview',
 				],
 				[
 					'label' => __( 'Archive Tool', 'tpw-core' ),
-					'url'   => '#flexiclub-archival-system-tool',
+					'url'   => '#ilungu-club-archival-system-tool',
 				],
 				[
 					'label' => __( 'Legacy Route', 'tpw-core' ),
-					'url'   => '#flexiclub-archival-system-legacy',
+					'url'   => '#ilungu-club-archival-system-legacy',
 				],
 			];
 		}
@@ -2184,15 +2206,15 @@ class iLungu_Club_Admin_Menu {
 			return [
 				[
 					'label' => __( 'Workspace Overview', 'tpw-core' ),
-					'url'   => '#flexiclub-settings-overview',
+					'url'   => '#ilungu-club-settings-overview',
 				],
 				[
 					'label' => __( 'Settings Areas', 'tpw-core' ),
-					'url'   => '#flexiclub-settings-tabs',
+					'url'   => '#ilungu-club-settings-tabs',
 				],
 				[
 					'label' => $active_label,
-					'url'   => '#flexiclub-settings-panel',
+					'url'   => '#ilungu-club-settings-panel',
 				],
 			];
 		}
@@ -2201,15 +2223,15 @@ class iLungu_Club_Admin_Menu {
 			return [
 				[
 					'label' => __( 'Workspace Overview', 'tpw-core' ),
-					'url'   => '#flexiclub-system-pages-overview',
+					'url'   => '#ilungu-club-system-pages-overview',
 				],
 				[
 					'label' => __( 'Registered Pages', 'tpw-core' ),
-					'url'   => '#flexiclub-system-pages-list',
+					'url'   => '#ilungu-club-system-pages-list',
 				],
 				[
 					'label' => __( 'Action Guide', 'tpw-core' ),
-					'url'   => '#flexiclub-system-pages-help',
+					'url'   => '#ilungu-club-system-pages-help',
 				],
 			];
 		}
@@ -2220,15 +2242,15 @@ class iLungu_Club_Admin_Menu {
 			return [
 				[
 					'label' => __( 'Workspace Overview', 'tpw-core' ),
-					'url'   => '#flexiclub-logs-overview',
+					'url'   => '#ilungu-club-logs-overview',
 				],
 				[
 					'label' => __( 'Log Sources', 'tpw-core' ),
-					'url'   => '#flexiclub-logs-sources',
+					'url'   => '#ilungu-club-logs-sources',
 				],
 				[
 					'label' => $active_label,
-					'url'   => '#flexiclub-logs-table',
+					'url'   => '#ilungu-club-logs-table',
 				],
 			];
 		}
@@ -2237,7 +2259,7 @@ class iLungu_Club_Admin_Menu {
 			return [
 				[
 					'label' => __( 'Workspace', 'tpw-core' ),
-					'url'   => '#tpw-flexiclub-consumer-workspace',
+					'url'   => '#ilungu-club-consumer-workspace',
 				],
 			];
 		}
@@ -2245,32 +2267,32 @@ class iLungu_Club_Admin_Menu {
 		$items = [
 			[
 				'label' => __( 'KPI Snapshot', 'tpw-core' ),
-				'url'   => '#flexiclub-home',
+				'url'   => '#ilungu-club-home',
 			],
 		];
 
 		if ( $show_checklist ) {
 			$items[] = [
 				'label' => __( 'Getting Started', 'tpw-core' ),
-				'url'   => '#tpw-flexiclub-checklist',
+				'url'   => '#ilungu-club-checklist',
 			];
 		}
 
 		if ( $has_cards ) {
 			$items[] = [
 				'label' => __( 'Club Overview', 'tpw-core' ),
-				'url'   => '#flexiclub-tools',
+				'url'   => '#ilungu-club-tools',
 			];
 		}
 
 		$items[] = [
 			'label' => __( 'Extend iLungu Club', 'tpw-core' ),
-			'url'   => '#tpw-flexiclub-extend',
+			'url'   => '#ilungu-club-extend',
 		];
 
 		$items[] = [
 			'label' => __( 'Support', 'tpw-core' ),
-			'url'   => '#flexiclub-support',
+			'url'   => '#ilungu-club-support',
 		];
 
 		return $items;
@@ -2282,7 +2304,7 @@ class iLungu_Club_Admin_Menu {
 		if ( ! $checklist_complete ) {
 			$actions[] = [
 				'label'    => __( 'Setup Checklist', 'tpw-core' ),
-				'url'      => '#tpw-flexiclub-checklist',
+				'url'      => '#ilungu-club-checklist',
 				'disabled' => false,
 			];
 		}
@@ -3651,7 +3673,7 @@ class iLungu_Club_Admin_Menu {
 				'ilungu_club_show_checklist' => '1',
 			],
 			admin_url( 'admin.php' )
-		) . '#tpw-flexiclub-checklist';
+		) . '#ilungu-club-checklist';
 	}
 
 	protected static function get_dashboard_dismiss_setup_url() {
@@ -3681,12 +3703,17 @@ class iLungu_Club_Admin_Menu {
 			return true;
 		}
 
-		if ( '1' !== (string) get_user_meta( $user_id, self::LEGACY_DASHBOARD_SETUP_META, true ) ) {
+		if ( metadata_exists( 'user', $user_id, self::DASHBOARD_SETUP_META ) || '1' === (string) get_user_meta( $user_id, self::DASHBOARD_SETUP_MIGRATION_META, true ) ) {
 			return false;
 		}
 
-		update_user_meta( $user_id, self::DASHBOARD_SETUP_META, '1' );
-		return true;
+		$legacy_dismissed = '1' === (string) get_user_meta( $user_id, self::LEGACY_DASHBOARD_SETUP_META, true );
+		if ( $legacy_dismissed ) {
+			update_user_meta( $user_id, self::DASHBOARD_SETUP_META, '1' );
+		}
+
+		update_user_meta( $user_id, self::DASHBOARD_SETUP_MIGRATION_META, '1' );
+		return $legacy_dismissed;
 	}
 
 	protected static function get_dashboard_extend_cards( $prefer_frontend = false ) {
@@ -4398,13 +4425,13 @@ class iLungu_Club_Admin_Menu {
 		$is_active    = self::is_flexievent_active();
 		$table_exists = self::table_exists( $table_name );
 		$event_count  = __( 'Not installed', 'tpw-core' );
-		$metric_text  = __( 'Install FlexiEvent to manage club events.', 'tpw-core' );
-		$action_label = __( 'Add FlexiEvent', 'tpw-core' );
-		$action_url   = '#tpw-flexiclub-extend';
+		$metric_text  = __( 'Install iLungu Events to manage club events.', 'tpw-core' );
+		$action_label = __( 'Add iLungu Events', 'tpw-core' );
+		$action_url   = '#ilungu-club-extend';
 
 		if ( $is_active ) {
-			$event_count  = __( 'FlexiEvent active', 'tpw-core' );
-			$metric_text  = __( 'FlexiEvent is active.', 'tpw-core' );
+			$event_count  = __( 'iLungu Events active', 'tpw-core' );
+			$metric_text  = __( 'iLungu Events is active.', 'tpw-core' );
 			$action_label = __( 'View events', 'tpw-core' );
 			$action_url   = admin_url( 'edit.php?post_type=tpw_event' );
 		}
@@ -4434,8 +4461,8 @@ class iLungu_Club_Admin_Menu {
 					)
 					: __( 'No upcoming events at this time.', 'tpw-core' );
 			} else {
-				$event_count = __( 'FlexiEvent active', 'tpw-core' );
-				$metric_text = __( 'FlexiEvent is active, but the upcoming event count is not available right now.', 'tpw-core' );
+				$event_count = __( 'iLungu Events active', 'tpw-core' );
+				$metric_text = __( 'iLungu Events is active, but the upcoming event count is not available right now.', 'tpw-core' );
 			}
 		}
 
