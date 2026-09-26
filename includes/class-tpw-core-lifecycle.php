@@ -30,6 +30,56 @@ class TPW_Core_Lifecycle {
 		'tpw_core_profile_page_seeded',
 	);
 
+	const MEMBER_OPTIONS = array(
+		'tpw_members_settings',
+		'tpw_members_allow_deletion',
+		'tpw_default_member_status',
+		'tpw_members_enable_households',
+		'tpw_member_change_notify_email',
+		'tpw_members_default_view',
+		'tpw_members_default_per_page',
+		'tpw_members_default_per_page_card',
+		'tpw_members_show_adult_family_on_primary_profile',
+		'tpw_members_use_photos',
+		'tpw_members_enable_advanced_search',
+		'tpw_member_editable_fields',
+		'tpw_member_viewable_fields',
+		'tpw_member_profile_photo_mode',
+		'tpw_member_profile_page_id',
+		'tpw_member_searchable_fields',
+		'tpw_member_field_download',
+		'tpw_member_field_sections',
+		'tpw_conditional_field',
+		'tpw_conditional_fields',
+		'tpw_enable_signup_debug',
+		'tpw_gallery_db_version',
+		'tpw_control_files_migrated_to_registry',
+		'tpw_control_upload_pages_schema_repair_issue',
+	);
+
+	const MEMBER_TABLES = array(
+		'tpw_members_household_member',
+		'tpw_members_household',
+		'tpw_member_field_visibility',
+		'tpw_member_meta',
+		'tpw_field_settings',
+		'tpw_members',
+	);
+
+	const GALLERY_TABLES = array(
+		'tpw_gallery_images',
+		'tpw_galleries',
+		'tpw_gallery_categories',
+	);
+
+	const UPLOAD_PAGE_TABLES = array(
+		'tpw_upload_pages_files',
+		'tpw_upload_categories',
+		'tpw_upload_pages',
+		'tpw_upload_files',
+		'tpw_files',
+	);
+
 	const CORE_SYSTEM_PAGE_SLUGS = array(
 		'member-login',
 		'my-profile',
@@ -90,7 +140,12 @@ class TPW_Core_Lifecycle {
 
 		self::delete_removable_options();
 		self::delete_core_email_template_overrides();
-		self::remove_owned_system_page_mappings();
+		self::delete_member_data();
+		self::delete_gallery_data();
+		self::delete_upload_page_data();
+		self::delete_core_signup_attempts();
+		self::delete_noticeboard_data();
+		self::delete_owned_system_pages();
 		delete_option( self::DELETE_DATA_OPTION );
 
 		return true;
@@ -102,7 +157,7 @@ class TPW_Core_Lifecycle {
 	 * @return void
 	 */
 	private static function delete_removable_options() {
-		foreach ( self::REMOVABLE_OPTIONS as $option_name ) {
+		foreach ( array_merge( self::REMOVABLE_OPTIONS, self::MEMBER_OPTIONS ) as $option_name ) {
 			delete_option( $option_name );
 		}
 	}
@@ -126,12 +181,11 @@ class TPW_Core_Lifecycle {
 	}
 
 	/**
-	 * Remove mappings only when a mapped page carries complete Core ownership metadata.
-	 * Pages are deliberately retained for safe reactivation and reinstall.
+	 * Delete pages and mappings only when a mapped page carries complete Core ownership metadata.
 	 *
 	 * @return void
 	 */
-	private static function remove_owned_system_page_mappings() {
+	private static function delete_owned_system_pages() {
 		$mappings = get_option( 'tpw_core_system_pages', array() );
 		if ( ! is_array( $mappings ) ) {
 			return;
@@ -159,12 +213,111 @@ class TPW_Core_Lifecycle {
 				continue;
 			}
 
-			unset( $mappings[ $slug ] );
-			$changed = true;
+			if ( wp_delete_post( $page_id, true ) ) {
+				unset( $mappings[ $slug ] );
+				$changed = true;
+			}
 		}
 
 		if ( $changed ) {
 			update_option( 'tpw_core_system_pages', $mappings );
+		}
+	}
+
+	/**
+	 * Delete records stored solely by the Club member module, not WordPress users or user meta.
+	 *
+	 * @return void
+	 */
+	private static function delete_member_data() {
+		self::delete_all_rows_from_tables( self::MEMBER_TABLES );
+	}
+
+	/**
+	 * Delete Gallery records while preserving WordPress attachments and uploaded files.
+	 *
+	 * @return void
+	 */
+	private static function delete_gallery_data() {
+		self::delete_all_rows_from_tables( self::GALLERY_TABLES );
+	}
+
+	/**
+	 * Delete Club Control Upload Pages records while retaining the additive schemas.
+	 *
+	 * @return void
+	 */
+	private static function delete_upload_page_data() {
+		self::delete_all_rows_from_tables( self::UPLOAD_PAGE_TABLES );
+	}
+
+	/**
+	 * Delete only signup attempts explicitly owned by the Core member-join flow.
+	 *
+	 * @return void
+	 */
+	private static function delete_core_signup_attempts() {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'tpw_signup_attempts';
+		if ( self::table_exists( $table_name ) ) {
+			$wpdb->delete( $table_name, array( 'plugin_key' => 'tpw-core' ), array( '%s' ) );
+		}
+	}
+
+	/**
+	 * Delete the Core-owned Noticeboard post type and its exclusive taxonomy terms.
+	 *
+	 * @return void
+	 */
+	private static function delete_noticeboard_data() {
+		global $wpdb;
+
+		$notice_ids = $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s",
+				'tpw_notice'
+			)
+		);
+
+		foreach ( $notice_ids as $notice_id ) {
+			wp_delete_post( $notice_id, true );
+		}
+
+		if ( ! taxonomy_exists( 'tpw_notice_category' ) ) {
+			register_taxonomy( 'tpw_notice_category', array( 'tpw_notice' ) );
+		}
+
+		$term_ids = get_terms(
+			array(
+				'taxonomy'   => 'tpw_notice_category',
+				'hide_empty' => false,
+				'fields'     => 'ids',
+			)
+		);
+		if ( is_wp_error( $term_ids ) ) {
+			return;
+		}
+
+		foreach ( $term_ids as $term_id ) {
+			wp_delete_term( $term_id, 'tpw_notice_category' );
+		}
+	}
+
+	/**
+	 * Delete every row from an explicitly Core-owned table when its schema exists.
+	 *
+	 * @param string[] $table_suffixes Trusted table suffixes.
+	 * @return void
+	 */
+	private static function delete_all_rows_from_tables( $table_suffixes ) {
+		global $wpdb;
+
+		foreach ( $table_suffixes as $table_suffix ) {
+			$table_name = $wpdb->prefix . $table_suffix;
+			if ( self::table_exists( $table_name ) ) {
+				$wpdb->query( "DELETE FROM {$table_name}" );
+			}
 		}
 	}
 

@@ -61,7 +61,10 @@ test.describe.serial('Lifecycle data retention setting', () => {
 		const form = lifecycleForm(page);
 		const checkbox = form.locator('input[name="tpw_core_delete_data_on_uninstall"]');
 		await expect(checkbox).not.toBeChecked();
-		await expect(form.getByText(/This is irreversible\. Shared infrastructure, financial history, members and users/i)).toBeVisible();
+		await expect(form.getByText('Persistent iLungu Club data is retained by default when the plugin is deactivated, updated, or uninstalled.', { exact: true })).toBeVisible();
+		await expect(form.getByText('Delete all proven iLungu Club-owned data when the plugin is uninstalled', { exact: true })).toBeVisible();
+		await expect(form.getByText(/including Club member records and other Club-owned business data\. Back up or export anything you may need before uninstalling\./i)).toBeVisible();
+		await expect(form.getByText(/This cannot be undone\. WordPress users, uploads\/media, shared payment and email infrastructure, consumer or sibling-plugin data, provider-owned records, and ownership-ambiguous data are retained\./i)).toBeVisible();
 		await checkbox.check();
 		await form.getByRole('button', { name: 'Save Data Retention Setting', exact: true }).click();
 		await expect(page.getByText('Settings saved.', { exact: true })).toBeVisible();

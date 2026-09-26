@@ -571,11 +571,14 @@ if ( ! function_exists( 'tpw_core_render_lifecycle_tab' ) ) {
             <p>
                 <label>
                     <input type="checkbox" name="tpw_core_delete_data_on_uninstall" value="1" <?php checked( $delete_on_uninstall ); ?> />
-                    <?php esc_html_e( 'Delete removable iLungu Club data when the plugin is uninstalled', 'tpw-core' ); ?>
+                    <?php esc_html_e( 'Delete all proven iLungu Club-owned data when the plugin is uninstalled', 'tpw-core' ); ?>
                 </label>
             </p>
             <p class="description">
-                <?php esc_html_e( 'This is irreversible. Shared infrastructure, financial history, members and users, uploads, consumer data, and ownership-ambiguous records are deliberately retained.', 'tpw-core' ); ?>
+                <?php esc_html_e( 'If enabled, uninstalling iLungu Club will permanently delete data proven to be owned solely by iLungu Club, including Club member records and other Club-owned business data. Back up or export anything you may need before uninstalling.', 'tpw-core' ); ?>
+            </p>
+            <p class="description">
+                <?php esc_html_e( 'This cannot be undone. WordPress users, uploads/media, shared payment and email infrastructure, consumer or sibling-plugin data, provider-owned records, and ownership-ambiguous data are retained.', 'tpw-core' ); ?>
             </p>
             <?php tpw_core_render_settings_submit_button( __( 'Save Data Retention Setting', 'tpw-core' ) ); ?>
         </form>

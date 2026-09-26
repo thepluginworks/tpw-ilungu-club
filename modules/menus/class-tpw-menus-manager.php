@@ -61,8 +61,7 @@ class TPW_Menus_Manager {
             description TEXT,
             extra_cost DECIMAL(8,2) NOT NULL DEFAULT 0.00,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id),
-            FOREIGN KEY (menu_id) REFERENCES {$wpdb->prefix}tpw_menus(id) ON DELETE CASCADE
+            PRIMARY KEY (id)
         ) $charset_collate;";
 
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -202,8 +201,7 @@ class TPW_Menus_Manager {
             course_name VARCHAR(255) NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
-            UNIQUE KEY menu_course_unique (menu_id, course_number),
-            FOREIGN KEY (menu_id) REFERENCES {$wpdb->prefix}tpw_menus(id) ON DELETE CASCADE
+            UNIQUE KEY menu_course_unique (menu_id, course_number)
         ) $charset_collate;";
 
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';

@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Lifecycle: opted-in uninstall now permanently removes all proven iLungu Club-owned member, gallery, Noticeboard, Upload Pages, Core System Page, and Core member-signup data while retaining shared, consumer, provider, WordPress, and ownership-ambiguous data. The Data Retention control now requires administrators to back up or export needed data before enabling permanent cleanup.
+
 ## [2.12.0] - 2026-09-25
 
 ### Added

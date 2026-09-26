@@ -9,7 +9,7 @@ class TPW_Members_DB {
 
         // Members table
         $table_name = $wpdb->prefix . 'tpw_members';
-        $sql = "CREATE TABLE $table_name (
+        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
             id INT UNSIGNED NOT NULL AUTO_INCREMENT,
             society_id INT UNSIGNED NOT NULL,
             user_id BIGINT(20) UNSIGNED,
@@ -58,9 +58,8 @@ class TPW_Members_DB {
             KEY society_id (society_id)
         ) $charset_collate;";
         // Avoid running dbDelta on an existing members table to prevent parser edge-cases on some environments
-        $exists_members = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
-        if ( $exists_members !== $table_name ) {
-            dbDelta($sql);
+        if ( ! self::table_exists( $table_name ) ) {
+            $wpdb->query( $sql );
         }
 
         self::ensure_members_table_columns( $table_name );
@@ -113,69 +112,45 @@ class TPW_Members_DB {
 
         // Safety net: ensure the basic_search column exists on field settings table for upgrades
         $fs_table = $wpdb->prefix . 'tpw_field_settings';
-        $has_basic_search = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'basic_search'",
-            $fs_table
-        ) );
+        $has_basic_search = self::column_exists( $fs_table, 'basic_search' );
         if ( ! $has_basic_search ) {
             // Silent fail on error to avoid fatal during activation on constrained environments
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN basic_search TINYINT(1) NOT NULL DEFAULT 0 AFTER field_type" );
         }
 
         // New dependency column (one-level parent) – minimal, nullable.
-        $has_depends_on = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'depends_on'",
-            $fs_table
-        ) );
+        $has_depends_on = self::column_exists( $fs_table, 'depends_on' );
         if ( ! $has_depends_on ) {
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN depends_on VARCHAR(100) NULL AFTER basic_search" );
         }
 
         // Safety net: ensure the field_options column exists on field settings table for select option lists
-        $has_field_options = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'field_options'",
-            $fs_table
-        ) );
+        $has_field_options = self::column_exists( $fs_table, 'field_options' );
         if ( ! $has_field_options ) {
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN field_options TEXT NULL" );
         }
 
-        $has_signup_safe = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'signup_safe'",
-            $fs_table
-        ) );
+        $has_signup_safe = self::column_exists( $fs_table, 'signup_safe' );
         if ( ! $has_signup_safe ) {
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN signup_safe TINYINT(1) NOT NULL DEFAULT 0 AFTER basic_search" );
         }
 
-        $has_signup_enabled = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'signup_enabled'",
-            $fs_table
-        ) );
+        $has_signup_enabled = self::column_exists( $fs_table, 'signup_enabled' );
         if ( ! $has_signup_enabled ) {
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN signup_enabled TINYINT(1) NOT NULL DEFAULT 0 AFTER signup_safe" );
         }
 
-        $has_signup_required = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'signup_required'",
-            $fs_table
-        ) );
+        $has_signup_required = self::column_exists( $fs_table, 'signup_required' );
         if ( ! $has_signup_required ) {
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN signup_required TINYINT(1) NOT NULL DEFAULT 0 AFTER signup_enabled" );
         }
 
-        $has_signup_section = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'signup_section'",
-            $fs_table
-        ) );
+        $has_signup_section = self::column_exists( $fs_table, 'signup_section' );
         if ( ! $has_signup_section ) {
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN signup_section VARCHAR(100) NULL AFTER signup_required" );
         }
 
-        $has_signup_order = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'signup_order'",
-            $fs_table
-        ) );
+        $has_signup_order = self::column_exists( $fs_table, 'signup_order' );
         if ( ! $has_signup_order ) {
             $wpdb->query( "ALTER TABLE {$fs_table} ADD COLUMN signup_order INT(11) UNSIGNED NOT NULL DEFAULT 999 AFTER signup_section" );
         }
@@ -210,10 +185,7 @@ class TPW_Members_DB {
         dbDelta($sql_meta);
 
         // Optional performance index for future dependency lookups on meta table (meta_key + meta_value)
-        $has_meta_kv_index = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND INDEX_NAME = 'meta_key_value'",
-            $table_name_meta
-        ) );
+        $has_meta_kv_index = self::index_exists( $table_name_meta, 'meta_key_value' );
         if ( ! $has_meta_kv_index ) {
             // Best-effort – ignore errors silently
             $wpdb->query( "ALTER TABLE {$table_name_meta} ADD INDEX meta_key_value (meta_key, meta_value(50))" );
@@ -224,18 +196,34 @@ class TPW_Members_DB {
         global $wpdb;
 
         $table_name = $wpdb->prefix . 'tpw_members';
-        $exists_members = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
-        if ( $exists_members === $table_name ) {
+        if ( self::table_exists( $table_name ) ) {
             self::ensure_members_table_columns( $table_name );
         }
 
         $field_settings_table = $wpdb->prefix . 'tpw_field_settings';
-        $exists_field_settings = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $field_settings_table ) );
-        if ( $exists_field_settings === $field_settings_table ) {
+        if ( self::table_exists( $field_settings_table ) ) {
             self::ensure_member_field_settings_rows( $field_settings_table );
             self::ensure_member_field_sections_option();
             self::ensure_access_office_role_field_order( $field_settings_table );
         }
+    }
+
+    private static function table_exists( $table_name ) {
+        global $wpdb;
+
+        return in_array( $table_name, $wpdb->get_col( 'SHOW TABLES' ), true );
+    }
+
+    private static function column_exists( $table_name, $column_name ) {
+        global $wpdb;
+
+        return in_array( $column_name, $wpdb->get_col( "DESCRIBE {$table_name}", 0 ), true );
+    }
+
+    private static function index_exists( $table_name, $index_name ) {
+        global $wpdb;
+
+        return null !== $wpdb->get_var( $wpdb->prepare( "SHOW INDEX FROM {$table_name} WHERE Key_name = %s", $index_name ) );
     }
 
     private static function get_access_office_role_field_keys() {
@@ -340,66 +328,45 @@ class TPW_Members_DB {
         global $wpdb;
 
         // Safety net: ensure the member_photo column exists even if dbDelta skipped it
-        $has_member_photo = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'member_photo'",
-            $table_name
-        ) );
+        $has_member_photo = self::column_exists( $table_name, 'member_photo' );
         if ( ! $has_member_photo ) {
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN member_photo VARCHAR(255) NULL AFTER landline" );
         }
 
         // Safety net: ensure the dob column exists even if dbDelta skipped it
-        $has_dob = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'dob'",
-            $table_name
-        ) );
+        $has_dob = self::column_exists( $table_name, 'dob' );
         if ( ! $has_dob ) {
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN dob DATE NULL AFTER country" );
         }
 
         // Safety net: ensure the membership_entitlement column exists for upgraded installs
-        $has_membership_entitlement = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'membership_entitlement'",
-            $table_name
-        ) );
+        $has_membership_entitlement = self::column_exists( $table_name, 'membership_entitlement' );
         if ( ! $has_membership_entitlement ) {
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN membership_entitlement VARCHAR(32) NULL DEFAULT NULL AFTER status" );
         }
 
         // Safety net: ensure the is_gallery_admin column exists for upgraded installs
-        $has_is_gallery_admin = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'is_gallery_admin'",
-            $table_name
-        ) );
+        $has_is_gallery_admin = self::column_exists( $table_name, 'is_gallery_admin' );
         if ( ! $has_is_gallery_admin ) {
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN is_gallery_admin TINYINT(1) NOT NULL DEFAULT 0 AFTER is_noticeboard_admin" );
         }
 
         // Safety net: ensure the is_manage_members column exists for upgraded installs
-        $has_is_manage_members = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'is_manage_members'",
-            $table_name
-        ) );
+        $has_is_manage_members = self::column_exists( $table_name, 'is_manage_members' );
         if ( ! $has_is_manage_members ) {
             $after_column = $has_is_gallery_admin ? 'is_gallery_admin' : 'is_noticeboard_admin';
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN is_manage_members TINYINT(1) NOT NULL DEFAULT 0 AFTER {$after_column}" );
             $has_is_manage_members = 1;
         }
 
-        $has_is_secretary = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'is_secretary'",
-            $table_name
-        ) );
+        $has_is_secretary = self::column_exists( $table_name, 'is_secretary' );
         if ( ! $has_is_secretary ) {
             $after_column = $has_is_manage_members ? 'is_manage_members' : ( $has_is_gallery_admin ? 'is_gallery_admin' : 'is_noticeboard_admin' );
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN is_secretary TINYINT(1) NOT NULL DEFAULT 0 AFTER {$after_column}" );
             $has_is_secretary = 1;
         }
 
-        $has_is_treasurer = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'is_treasurer'",
-            $table_name
-        ) );
+        $has_is_treasurer = self::column_exists( $table_name, 'is_treasurer' );
         if ( ! $has_is_treasurer ) {
             $after_column = $has_is_secretary ? 'is_secretary' : ( $has_is_manage_members ? 'is_manage_members' : ( $has_is_gallery_admin ? 'is_gallery_admin' : 'is_noticeboard_admin' ) );
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN is_treasurer TINYINT(1) NOT NULL DEFAULT 0 AFTER {$after_column}" );
@@ -407,19 +374,13 @@ class TPW_Members_DB {
         }
 
         // Safety net: ensure the is_volunteer column exists for upgraded installs
-        $has_is_volunteer = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'is_volunteer'",
-            $table_name
-        ) );
+        $has_is_volunteer = self::column_exists( $table_name, 'is_volunteer' );
         if ( ! $has_is_volunteer ) {
             $after_column = $has_is_manage_members ? 'is_manage_members' : ( $has_is_gallery_admin ? 'is_gallery_admin' : 'is_noticeboard_admin' );
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN is_volunteer TINYINT(1) NOT NULL DEFAULT 0 AFTER {$after_column}" );
         }
 
-        $has_share_with_members = $wpdb->get_var( $wpdb->prepare(
-            "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'share_with_members'",
-            $table_name
-        ) );
+        $has_share_with_members = self::column_exists( $table_name, 'share_with_members' );
         if ( ! $has_share_with_members ) {
             $after_column = $has_is_volunteer ? 'is_volunteer' : ( $has_is_manage_members ? 'is_manage_members' : ( $has_is_gallery_admin ? 'is_gallery_admin' : 'is_noticeboard_admin' ) );
             $wpdb->query( "ALTER TABLE $table_name ADD COLUMN share_with_members TINYINT(1) NOT NULL DEFAULT 1 AFTER {$after_column}" );
