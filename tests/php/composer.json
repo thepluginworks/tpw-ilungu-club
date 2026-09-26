@@ -1,0 +1,16 @@
+{
+  "name": "thepluginworks/ilungu-club-php-tests",
+  "description": "Isolated WordPress PHPUnit harness for iLungu Club integration tests.",
+  "type": "project",
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "wp-phpunit/wp-phpunit": "7.1.1",
+    "yoast/phpunit-polyfills": "^3.1"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "test:upload-pages": "phpunit --filter TPW_Upload_Pages_Schema_Repair_Test"
+  }
+}

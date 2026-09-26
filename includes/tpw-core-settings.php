@@ -217,6 +217,7 @@ if ( ! function_exists( 'tpw_core_get_settings_tabs' ) ) {
             'email'           => __( 'Email Settings', 'tpw-core' ),
             'email-logs'      => __( 'Email Logs', 'tpw-core' ),
             'email-templates' => __( 'Email Templates', 'tpw-core' ),
+            'lifecycle'       => __( 'Data Retention', 'tpw-core' ),
         ];
 
         $payments_required = function_exists( 'tpw_core_payments_required' ) && tpw_core_payments_required();
@@ -471,6 +472,11 @@ if ( ! function_exists( 'tpw_core_render_settings_tab_content' ) ) {
             if ( function_exists( 'tpw_core_render_system_pages_tab' ) ) {
                 tpw_core_render_system_pages_tab();
             }
+        } elseif ( 'lifecycle' === $current_tab ) {
+            $tpw_core_builtin_tab_rendered = true;
+            if ( function_exists( 'tpw_core_render_lifecycle_tab' ) ) {
+                tpw_core_render_lifecycle_tab();
+            }
         }
 
         ob_start();
@@ -539,6 +545,41 @@ if ( ! function_exists( 'tpw_core_render_settings_page' ) ) {
         <?php
 
         tpw_core_reset_settings_view_context();
+    }
+}
+
+if ( ! function_exists( 'tpw_core_render_lifecycle_tab' ) ) {
+    /**
+     * Render the administrator-only lifecycle and data-retention control.
+     *
+     * @return void
+     */
+    function tpw_core_render_lifecycle_tab() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        $delete_on_uninstall = class_exists( 'TPW_Core_Lifecycle' ) && TPW_Core_Lifecycle::is_delete_data_on_uninstall_enabled();
+        ?>
+        <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+            <input type="hidden" name="action" value="tpw_core_save_lifecycle" />
+            <?php wp_nonce_field( 'tpw_core_save_lifecycle', 'tpw_core_lifecycle_nonce' ); ?>
+            <?php tpw_core_render_settings_context_fields( 'lifecycle' ); ?>
+
+            <h2><?php esc_html_e( 'Data Retention', 'tpw-core' ); ?></h2>
+            <p><?php esc_html_e( 'Persistent iLungu Club data is retained by default when the plugin is deactivated, updated, or uninstalled.', 'tpw-core' ); ?></p>
+            <p>
+                <label>
+                    <input type="checkbox" name="tpw_core_delete_data_on_uninstall" value="1" <?php checked( $delete_on_uninstall ); ?> />
+                    <?php esc_html_e( 'Delete removable iLungu Club data when the plugin is uninstalled', 'tpw-core' ); ?>
+                </label>
+            </p>
+            <p class="description">
+                <?php esc_html_e( 'This is irreversible. Shared infrastructure, financial history, members and users, uploads, consumer data, and ownership-ambiguous records are deliberately retained.', 'tpw-core' ); ?>
+            </p>
+            <?php tpw_core_render_settings_submit_button( __( 'Save Data Retention Setting', 'tpw-core' ) ); ?>
+        </form>
+        <?php
     }
 }
 
@@ -1759,6 +1800,24 @@ add_action( 'admin_post_tpw_core_reset_email_template', function() {
 } );
 
 // Old Settings API registration for Features & Member Menu removed (now using dedicated handlers)
+
+add_action( 'admin_post_tpw_core_save_lifecycle', function() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die( __( 'Permission denied', 'tpw-core' ) );
+    }
+
+    check_admin_referer( 'tpw_core_save_lifecycle', 'tpw_core_lifecycle_nonce' );
+
+    $stored_value = isset( $_POST['tpw_core_delete_data_on_uninstall'] ) ? wp_unslash( $_POST['tpw_core_delete_data_on_uninstall'] ) : '';
+    $enabled      = is_string( $stored_value ) && '1' === $stored_value;
+
+    if ( class_exists( 'TPW_Core_Lifecycle' ) ) {
+        TPW_Core_Lifecycle::set_delete_data_on_uninstall_enabled( $enabled );
+    }
+
+    wp_safe_redirect( tpw_core_get_settings_redirect_url( 'lifecycle', array( 'settings-updated' => '1' ) ) );
+    exit;
+} );
 
 // New save handler: Features tab
 add_action( 'admin_post_tpw_core_save_features', function() {

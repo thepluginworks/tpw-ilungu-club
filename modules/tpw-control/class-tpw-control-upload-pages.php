@@ -260,32 +260,8 @@ class TPW_Control_Upload_Pages {
         }
         return $uploads;
     }
-    public static function ensure_tables() {
-        global $wpdb;
-        $charset = $wpdb->get_charset_collate();
-        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-        $pages = $wpdb->prefix . 'tpw_upload_pages';
-        $files_old = $wpdb->prefix . 'tpw_upload_files';
-        $cats  = $wpdb->prefix . 'tpw_upload_categories';
-        $files = $wpdb->prefix . 'tpw_files';
-        $links = $wpdb->prefix . 'tpw_upload_pages_files';
-
-        // Recreate pages table if missing wp_page_id or layout (test site directive)
-        $pages_describe = $wpdb->get_results( "DESCRIBE {$pages}" );
-        $drop_pages = false;
-        if ( empty( $pages_describe ) ) {
-            $drop_pages = true;
-        } else {
-            $cols = array_map( function($r){ return isset($r->Field) ? $r->Field : ( $r['Field'] ?? '' ); }, (array)$pages_describe );
-            if ( ! in_array( 'wp_page_id', $cols, true ) || ! in_array( 'layout', $cols, true ) ) {
-                // On test sites we are allowed to drop and recreate to introduce new column
-                $drop_pages = true;
-            }
-        }
-        if ( $drop_pages ) {
-            $wpdb->query( "DROP TABLE IF EXISTS {$pages}" );
-        }
-        $sql_pages = "CREATE TABLE {$pages} (
+    private static function get_pages_table_sql( $table_name, $charset ) {
+        return "CREATE TABLE {$table_name} (
             id INT UNSIGNED NOT NULL AUTO_INCREMENT,
             slug VARCHAR(150) NOT NULL,
             title VARCHAR(255) NOT NULL,
@@ -299,7 +275,55 @@ class TPW_Control_Upload_Pages {
             UNIQUE KEY slug_unique (slug),
             KEY wp_page_id (wp_page_id)
         ) {$charset};";
-        dbDelta( $sql_pages );
+    }
+
+    public static function ensure_pages_table_schema( $table_name = '' ) {
+        global $wpdb;
+
+        $pages_table = is_string( $table_name ) && '' !== $table_name ? $table_name : $wpdb->prefix . 'tpw_upload_pages';
+        $charset     = $wpdb->get_charset_collate();
+
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+        $previous_suppress_errors = $wpdb->suppress_errors( true );
+        $columns                  = $wpdb->get_col( "DESCRIBE {$pages_table}", 0 );
+        $wpdb->suppress_errors( $previous_suppress_errors );
+        $table_exists = ! empty( $columns );
+        $identity_columns = array( 'id', 'slug', 'title' );
+
+        if ( $table_exists && ! empty( $columns ) && array_diff( $identity_columns, $columns ) ) {
+            update_option( 'tpw_control_upload_pages_schema_repair_issue', 'missing_identity_columns' );
+            error_log( 'TPW Control upload pages schema repair skipped: existing table is missing required identity columns.' );
+            return false;
+        }
+
+        dbDelta( self::get_pages_table_sql( $pages_table, $charset ) );
+
+        $required_columns = array( 'id', 'slug', 'title', 'description', 'visibility', 'wp_page_id', 'layout', 'created_at', 'updated_at' );
+        $repaired_columns = $wpdb->get_col( "DESCRIBE {$pages_table}", 0 );
+        if ( array_diff( $required_columns, $repaired_columns ) ) {
+            update_option( 'tpw_control_upload_pages_schema_repair_issue', 'required_columns_unavailable' );
+            error_log( 'TPW Control upload pages schema repair did not create all required columns.' );
+            return false;
+        }
+
+        delete_option( 'tpw_control_upload_pages_schema_repair_issue' );
+        return true;
+    }
+
+    public static function ensure_tables() {
+        global $wpdb;
+        $charset = $wpdb->get_charset_collate();
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        $pages = $wpdb->prefix . 'tpw_upload_pages';
+        $files_old = $wpdb->prefix . 'tpw_upload_files';
+        $cats  = $wpdb->prefix . 'tpw_upload_categories';
+        $files = $wpdb->prefix . 'tpw_files';
+        $links = $wpdb->prefix . 'tpw_upload_pages_files';
+
+        if ( ! self::ensure_pages_table_schema( $pages ) ) {
+            return false;
+        }
 
         // Categories table
         $sql_cats = "CREATE TABLE {$cats} (

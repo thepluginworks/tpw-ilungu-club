@@ -64,6 +64,16 @@ in `.env.local`; it is ignored. Generated `test-results`, Playwright reports, an
 blob reports are also ignored. The full `tests/playwright` directory is excluded
 from public release packages.
 
+## Lifecycle Data Retention Fixture
+
+`lifecycle-retention.spec.ts` is a Local-only Chromium suite. It creates or reuses one named subscriber fixture, verifies the backend and frontend Data Retention controls share the strict uninstall-consent option, and verifies the limited user cannot view or submit the control. The suite restores the Local site's prior consent value after it runs.
+
+Set `ILUNGU_LIFECYCLE_FIXTURE_ENABLED=true` plus the lifecycle limited-user credentials in `.env.local`, then run:
+
+```sh
+npm run test:ilungu-lifecycle-retention
+```
+
 ## Historical diagnostics
 
 The original May 2026 FlexiClub dashboard and payment investigation scripts were

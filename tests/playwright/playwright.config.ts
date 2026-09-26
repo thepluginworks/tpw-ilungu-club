@@ -32,6 +32,7 @@ export default defineConfig({
 		'smoke/ilungu-branding-smoke.spec.ts',
 		'club-administration-contributions.spec.ts',
 		'member-role-permissions.spec.ts',
+		'lifecycle-retention.spec.ts',
 	],
 	timeout: 45_000,
 	retries: 1,

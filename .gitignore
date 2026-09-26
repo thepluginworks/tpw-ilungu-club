@@ -29,6 +29,12 @@ core-testing.agent.md
 .env
 .env.*
 !/tests/playwright/.env.example
+!/tests/php/.env.example
+
+# PHP integration-test harness
+/tests/php/vendor/
+/tests/php/.phpunit.result.cache
+/tests/php/.env.local
 
 # === Composer installer files ===
 composer.phar

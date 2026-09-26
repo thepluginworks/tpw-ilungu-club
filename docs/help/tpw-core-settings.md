@@ -25,6 +25,10 @@ Controls UI theme tokens used in iLungu Club admin UIs and buttons. Adjust font,
 
 Configure email throttling, logging, and the fallback logo used in email templates. Edit registered templates’ subject and body where allowed.
 
+## Data Retention
+
+The Data Retention tab controls whether removable iLungu Club configuration is deleted when the plugin is uninstalled. It is off by default. Shared infrastructure, financial history, members and users, uploads, consumer data, and ownership-ambiguous records are deliberately retained. See the [lifecycle and data-retention contract](../architecture/lifecycle/tpw-core-lifecycle-retention-contract.md) for the exact scope.
+
 Notes
 - All iLungu Club add-ons consult the Default Login Page for redirecting users who need to sign in.
 - Site-specific overrides can still change the login URL using the `tpw_core/login_url` filter.

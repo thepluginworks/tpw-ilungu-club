@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	bootstrap="bootstrap.php"
+	colors="true"
+	cacheResult="false"
+>
+	<testsuites>
+		<testsuite name="iLungu Club PHP integration">
+			<directory suffix="-test.php">integration</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>
