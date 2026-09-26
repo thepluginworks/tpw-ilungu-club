@@ -315,7 +315,7 @@ Do not abandon the workflow just because other files are modified.
 
 ⸻
 
-4. Commit, push, tag, and deployment handoff
+4. Commit, push, tag, GitHub Release, and configured deployment
 
 For an internal/development-only classification:
 • create a normal checkpoint commit only
@@ -327,7 +327,7 @@ For an internal/development-only classification:
 • do NOT trigger or hand off to a deployment workflow
 • preserve repository history and stop after final reporting
 
-For a production release classification, use the following steps.
+For a production release classification, use the following steps. A pushed tag alone is not a completed production release.
 
 Pre-release completeness gate
 
@@ -375,20 +375,20 @@ After explicit tag and push authority, create and push the tag using the exact r
 • the tag MUST be created locally and pushed via git
 • do NOT rely on GitHub UI to create or modify tags
 
-After pushing the tag:
-- do NOT manually create a GitHub Release when the workflow is configured to do it automatically.
-- do NOT upload release assets manually unless explicitly asked.
-- rely on `.github/workflows/publish-release.yml` to build the package, upload `tpw-ilungu-club.zip`, and publish the version manifest.
-- treat the pushed version tag as the handoff point to the automated packaging workflow.
-- Freemius deployment is not applicable.
+For every production release, after pushing the version tag:
+• ensure a GitHub Release is created and published for that exact `vX.Y.Z` tag using the prepared release summary; if a repository workflow creates it automatically, monitor and verify that result instead of creating a duplicate
+• verify that the GitHub Release exists and references the pushed tag
+• do not treat a tag push, a workflow start, or an uploaded asset as a substitute for creating and verifying the GitHub Release
 
-Configured deployment workflow to monitor when applicable:
-.github/workflows/publish-release.yml
+Freemius applicability and deployment:
+• check whether `.github/workflows/deploy-to-freemius.yml` exists in the active repository
+• if it does not exist, report Freemius as not applicable; do not infer Freemius deployment from plugin type, configuration, a tag, or a GitHub Release
+• if it exists, inspect its configured triggers, job conditions, and deployment steps before releasing
+• use the workflow's actual configured mechanism to trigger Freemius deployment; do not assume that either a tag push or GitHub Release publication deploys to Freemius unless the workflow's upload step proves it
+• monitor the relevant workflow run and verify the configured Freemius deployment completed successfully
+• if the configured Freemius deployment fails, cannot be triggered, or cannot be verified, the production release is incomplete
 
-After pushing the tag:
-- do NOT manually create a GitHub Release.
-- do NOT run `gh release create`.
-- rely on `.github/workflows/publish-release.yml` to create or update the GitHub Release and upload the package asset automatically.
+Other repository-configured release targets discovered during workflow inspection are also required. Do not report completion until each configured target is complete and verified.
 
 After explicit authority, do not stop before the authorised commit, push, and tag actions unless there is a real blocker such as merge conflict or auth failure.
 
@@ -430,16 +430,20 @@ At the end, show:
 • tag (must include the v prefix) for production releases, or explicitly state that no tag was created for internal-only changes
 • whether main was pushed successfully
 • whether the tag was pushed successfully for production releases, or explicitly state that no tag push occurred for internal-only changes
+• whether the GitHub Release was created and verified for the production tag, or explicitly state that it was not applicable for internal-only changes
 • whether the post-release clean-state verification passed for production releases, or explicitly state that it was not applicable for internal-only changes
-• whether a deployment workflow is already known or configured by repository policy and, if so, the workflow name or file to monitor
-• whether Freemius deployment was triggered, skipped as not applicable, or blocked
-• whether a GitHub Release was created automatically, created manually, skipped as not applicable, or blocked
+• whether `.github/workflows/deploy-to-freemius.yml` was present, its actual Freemius trigger mechanism, and whether deployment was verified, not applicable, or blocked
+• the status of every other repository-configured release target
 • exact release summary prepared for production releases, or explicitly state that no customer release notes were created for internal-only changes
-• which optional steps were skipped because they were not applicable, including readme.txt stable tag updates, POT generation, deployment workflow handoff, Freemius deployment, and GitHub Release creation when relevant
+• which optional steps were skipped because they were not applicable, including readme.txt stable tag updates, POT generation, and Freemius deployment when no Freemius workflow exists
 • any separated internal-only file groups or suspicious development artefacts that were detected
 • confirmation that all intended runtime/distributable changes are included in the release tag
 • confirmation that no uncommitted runtime/distributable files existed at the time the tag was created
 • provide detailed file lists, commit ranges, tag comparisons, package contents, or omitted-file reports only when a blocker, release-risk concern, incomplete release concern, packaging concern, or explicit user request requires them
+
+For a production release, report exactly one of:
+• `Production release complete` only when the GitHub Release and every repository-configured release target, including Freemius when `.github/workflows/deploy-to-freemius.yml` exists, are complete and verified
+• `Production release incomplete — blockers: ...` in every other case
 
 ⸻
 
