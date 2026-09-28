@@ -21,6 +21,9 @@ require_once TPW_CORE_PATH . 'includes/class-tpw-core.php';
 require_once TPW_CORE_PATH . 'includes/class-tpw-core-updater.php';
 require_once TPW_CORE_PATH . 'includes/scheduler/class-tpw-core-scheduler.php';
 require_once TPW_CORE_PATH . 'includes/class-tpw-core-lifecycle.php';
+
+TPW_Core_Scheduler::init_if_needed();
+
 require_once TPW_CORE_PATH . 'includes/tpw-core-functions.php';
 require_once TPW_CORE_PATH . 'includes/class-tpw-core-create-menu.php';
 require_once TPW_CORE_PATH . 'includes/class-tpw-flexiclub-admin-menu.php';

@@ -519,6 +519,54 @@ class TPW_Core_Scheduler {
 	}
 
 	/**
+	 * Cancel all pending actions for one hook and group, regardless of arguments.
+	 *
+	 * @param string $hook  Hook name.
+	 * @param string $group Group.
+	 * @return int|false Number of actions cancelled, or false if unavailable.
+	 */
+	public static function unschedule_all_for_hook_group( $hook, $group = 'tpw' ) {
+		self::$last_error = '';
+		if ( false === self::init_if_needed() || ! self::is_ready() ) {
+			return false;
+		}
+
+		$hook  = (string) $hook;
+		$group = (string) $group;
+		if ( '' === $hook || '' === $group || ! class_exists( 'ActionScheduler', false ) ) {
+			self::$last_error = 'invalid scheduler hook or group';
+			return false;
+		}
+
+		try {
+			$store     = ActionScheduler::store();
+			$cancelled = 0;
+
+			do {
+				$action_ids = $store->query_actions(
+					array(
+						'hook'     => $hook,
+						'group'    => $group,
+						'status'   => ActionScheduler_Store::STATUS_PENDING,
+						'per_page' => 100,
+					),
+					'select'
+				);
+
+				foreach ( $action_ids as $action_id ) {
+					$store->cancel_action( (int) $action_id );
+					++$cancelled;
+				}
+			} while ( ! empty( $action_ids ) );
+
+			return $cancelled;
+		} catch ( Exception $e ) {
+			self::$last_error = $e->getMessage();
+			return false;
+		}
+	}
+
+	/**
 	 * Check if a matching action is scheduled (pending or running).
 	 *
 	 * @since 1.7.0
