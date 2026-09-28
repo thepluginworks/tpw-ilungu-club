@@ -258,6 +258,12 @@ Queue behaviour:
 - Durable queueing is opt-in through the explicit queue API, not the default behaviour of `TPW_Email::dispatch_mail()`.
 - `TPW_Email::enqueue_mail()` is the explicit durable queue API.
 - One queued email row schedules one Action Scheduler job through the shared-framework scheduler wrapper once Action Scheduler is fully ready.
+
+### Action Scheduler Provider Contract
+
+iLungu Club is the canonical Action Scheduler provider for the iLungu suite. It bundles Action Scheduler 3.9.3 at `includes/scheduler/action-scheduler/`; no Composer or external vendor package is required for the Club provider.
+
+`TPW_Core_Scheduler::init_if_needed()` treats Action Scheduler's version registry (`ActionScheduler_Versions`) as an available registered provider while its `plugins_loaded` bootstrap callbacks are pending. Consumers must use the Core wrapper and wait for `action_scheduler_init` (or `TPW_Core_Scheduler::is_ready()`) before scheduling, querying, or unscheduling actions. Consumers must not bundle or bootstrap Action Scheduler.
 - The shared framework distinguishes scheduler availability from scheduler readiness: loaded symbols alone are not treated as a safe scheduling signal.
 - If a queue row is created before Action Scheduler reaches `action_scheduler_init`, the row remains `pending` and scheduling is deferred until a safe lifecycle point.
 - In that deferred state, `TPW_Email::enqueue_mail()` still returns a successful queue result, but `action_id` may remain `0` until the deferred scheduling pass runs.

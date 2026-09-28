@@ -624,7 +624,9 @@ class TPW_Core_Scheduler {
 	 * @return bool
 	 */
 	private static function action_scheduler_is_loaded() {
-		return function_exists( 'as_schedule_single_action' ) || class_exists( 'ActionScheduler', false );
+		return function_exists( 'as_schedule_single_action' )
+			|| class_exists( 'ActionScheduler', false )
+			|| class_exists( 'ActionScheduler_Versions', false );
 	}
 
 	/**
