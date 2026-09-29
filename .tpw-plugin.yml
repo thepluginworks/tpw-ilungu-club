@@ -1,0 +1,38 @@
+standards_version: 1
+standards_checkpoint: 31885f3830334b42ab6fa3405551c5950c06c9bc
+profile: github-free
+package:
+  uninstall: include
+  exclude:
+    - .vscode/
+    - CHANGELOG.md
+    - CODING_STANDARDS.md
+    - RELEASE.md
+    - docs/
+    - modules/gallery/help/admin-guide-gallery.html
+    - modules/payments.zip
+    - package-lock.json
+    - package.json
+    - phpcs.xml
+    - reports/
+    - scripts/
+    - test-results/
+    - tests/
+    - tooling/
+  retain:
+    - docs/developer-guide.md
+    - docs/members/tpw_profile_badge.md
+    - modules/members/docs/admin-help/
+source:
+  ignore:
+    - .vscode/sftp.json
+    - modules/payments.zip
+    - phpcs.xml
+    - tests/php/.phpunit.result.cache
+    - tests/php/vendor/
+    - tests/playwright/blob-report/
+    - tests/playwright/playwright-report/
+    - tests/playwright/test-results/
+  unignore:
+    - tests/php/.env.example
+    - tests/playwright/.env.example
