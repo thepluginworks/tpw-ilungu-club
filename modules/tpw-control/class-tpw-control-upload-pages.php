@@ -32,8 +32,10 @@ add_action('wp_ajax_tpw_control_delete_file', function() {
     if ( ! $still_there ) {
         wp_send_json_success();
     }
-    $err = $wpdb->last_error ? (' DB: ' . $wpdb->last_error) : '';
-    wp_send_json_error(['message'=>'Delete failed.' . $err], 500);
+    if ( $wpdb->last_error ) {
+        error_log( 'TPW Upload Pages: unable to delete file link. Database error: ' . $wpdb->last_error );
+    }
+    wp_send_json_error( [ 'message' => __( 'Delete failed. Please try again or contact an administrator.', 'tpw-core' ) ], 500 );
 });
 
 // Provide a consistent JSON response for unauthenticated requests too (will return Not logged in.)

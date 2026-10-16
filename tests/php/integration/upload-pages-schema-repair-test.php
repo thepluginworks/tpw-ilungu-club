@@ -129,4 +129,34 @@ class TPW_Upload_Pages_Schema_Repair_Test extends WP_UnitTestCase {
 		$this->assertIsString( $source );
 		$this->assertSame( 0, preg_match( '/DROP\\s+TABLE/i', $source ) );
 	}
+
+	public function test_delete_file_failure_does_not_expose_database_errors() {
+		$source = file_get_contents( dirname( __DIR__, 3 ) . '/modules/tpw-control/class-tpw-control-upload-pages.php' );
+
+		$this->assertIsString( $source );
+		$this->assertStringNotContainsString( "'message'=>'Delete failed.' . \$err", $source );
+		$this->assertStringContainsString( "error_log( 'TPW Upload Pages: unable to delete file link. Database error: ' . \$wpdb->last_error );", $source );
+		$this->assertStringContainsString( "wp_send_json_error( [ 'message' => __( 'Delete failed. Please try again or contact an administrator.', 'tpw-core' ) ], 500 );", $source );
+	}
+
+	public function test_release_compatibility_claims_match_loaded_runtime() {
+		$plugin_source = file_get_contents( dirname( __DIR__, 3 ) . '/ilungu-club.php' );
+		$readme_source = file_get_contents( dirname( __DIR__, 3 ) . '/readme.txt' );
+		$feedback_sources = array(
+			file_get_contents( dirname( __DIR__, 3 ) . '/modules/feedback/admin/admin-feedback.php' ),
+			file_get_contents( dirname( __DIR__, 3 ) . '/modules/feedback/views/admin-feedback.php' ),
+		);
+
+		$this->assertIsString( $plugin_source );
+		$this->assertIsString( $readme_source );
+		$this->assertStringContainsString( 'Requires at least: 6.5', $plugin_source );
+		$this->assertStringContainsString( 'Requires PHP: 8.3', $plugin_source );
+		$this->assertStringContainsString( 'Requires at least: 6.5', $readme_source );
+		$this->assertStringContainsString( 'Requires PHP: 8.3', $readme_source );
+
+		foreach ( $feedback_sources as $feedback_source ) {
+			$this->assertIsString( $feedback_source );
+			$this->assertStringNotContainsString( 'match (', $feedback_source );
+		}
+	}
 }

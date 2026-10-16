@@ -1,9 +1,9 @@
 === iLungu™ Club ===
 Contributors: thepluginworks
 Tags: members, payments, rsvp, admin-tools, tpw
-Requires at least: 5.8
+Requires at least: 6.5
 Tested up to: 6.6
-Requires PHP: 7.4
+Requires PHP: 8.3
 Stable tag: 2.12.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

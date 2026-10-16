@@ -48,12 +48,16 @@ $results = $wpdb->get_results(
                     <td><?php echo $row->clarity_ok === '1' ? 'Yes' : 'No'; ?></td>
                     <td>
                         <?php
-                        echo match ($row->time_under_2min) {
-                            1 => 'Under 2min',
-                            0 => '2–5min',
-                            2 => 'Over 5min',
-                            default => 'N/A'
-                        };
+                        $time_under_two_minutes = (int) $row->time_under_2min;
+                        if ( 1 === $time_under_two_minutes ) {
+                            echo 'Under 2min';
+                        } elseif ( 0 === $time_under_two_minutes ) {
+                            echo '2–5min';
+                        } elseif ( 2 === $time_under_two_minutes ) {
+                            echo 'Over 5min';
+                        } else {
+                            echo 'N/A';
+                        }
                         ?>
                     </td>
                     <td><?php echo esc_html($row->suggestions); ?></td>

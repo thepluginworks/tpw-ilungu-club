@@ -6,6 +6,8 @@
  * Author: ThePluginWorks
  * Author URI: https://thepluginworks.com/
  * Version: 2.12.0
+ * Requires at least: 6.5
+ * Requires PHP: 8.3
  * Text Domain: tpw-core
  * Domain Path: /languages
  */
