@@ -1,6 +1,30 @@
-standards_version: 1
-standards_checkpoint: 31885f3830334b42ab6fa3405551c5950c06c9bc
+standards_version: 2
+standards_checkpoint: ca602ada8a01e40075c5b1475ba757f49d9b0065
 profile: github-free
+repository:
+  visibility: PUBLIC
+  disclosure:
+    - path: .github/copilot-instructions.md
+      classification: private-local
+      reason: Internal coding-agent instructions and repository workflow.
+    - path: RELEASE.md
+      classification: private-local
+      reason: Internal release procedure and local release tooling guidance.
+    - path: docs/backlog.md
+      classification: private-local
+      reason: Unshipped enhancement backlog and planning notes.
+    - path: docs/architecture/identity/identity-permissions-decisions.md
+      classification: private-local
+      reason: Internal implementation decision pack and pending migration direction.
+    - path: docs/architecture/identity/identity-permissions-implementation-roadmap.md
+      classification: private-local
+      reason: Internal phased implementation and migration roadmap.
+    - path: docs/architecture/permissions/vc-permissions-implementation-playbook.md
+      classification: private-local
+      reason: Internal Visual Core permissions implementation instructions.
+    - path: docs/signup-system/signup-system-design-spec.md
+      classification: private-local
+      reason: Draft internal sign-up system design and proposed schema.
 package:
   uninstall: include
   exclude:
@@ -25,7 +49,6 @@ package:
     - modules/members/docs/admin-help/
 source:
   ignore:
-    - .vscode/sftp.json
     - modules/payments.zip
     - phpcs.xml
     - tests/php/.phpunit.result.cache
