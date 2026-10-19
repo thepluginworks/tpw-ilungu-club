@@ -7,7 +7,6 @@
 .distignore
 .env
 .env.*
-.freemius
 .git
 .gitattributes
 .github
@@ -15,12 +14,12 @@
 .tpw-plugin.yml
 .vscode
 .vscode/sftp.json
+.wordpress-org
 CHANGELOG.md
 CODING_STANDARDS.md
 RELEASE.md
 build
 docs
-freemius
 modules/gallery/help/admin-guide-gallery.html
 modules/payments.zip
 node_modules

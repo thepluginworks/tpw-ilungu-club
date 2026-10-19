@@ -10,6 +10,7 @@
  * Requires PHP: 8.3
  * Text Domain: tpw-core
  * Domain Path: /languages
+ * License: GPLv2 or later
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

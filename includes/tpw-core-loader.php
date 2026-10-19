@@ -18,7 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once TPW_CORE_PATH . 'includes/class-tpw-core-activator.php';
 require_once TPW_CORE_PATH . 'includes/class-tpw-core-deactivator.php';
 require_once TPW_CORE_PATH . 'includes/class-tpw-core.php';
-require_once TPW_CORE_PATH . 'includes/class-tpw-core-updater.php';
 require_once TPW_CORE_PATH . 'includes/scheduler/class-tpw-core-scheduler.php';
 require_once TPW_CORE_PATH . 'includes/class-tpw-core-lifecycle.php';
 
@@ -31,7 +30,6 @@ require_once TPW_CORE_PATH . 'modules/costs/class-tpw-costs-save.php';
 require_once TPW_CORE_PATH . 'modules/costs/class-tpw-costs.php';
 require_once TPW_CORE_PATH . 'includes/admin-functions.php';
 
-TPW_Core_Updater::init();
 iLungu_Club_Admin_Menu::init();
 iLungu_Club_Admin_Menu::init_frontend();
 

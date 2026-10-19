@@ -43,12 +43,24 @@ rsync -a \
 	--exclude-from="$ROOT_DIR/.distignore" \
 	"$ROOT_DIR/" "$STAGE_DIR/"
 
+while IFS= read -r RULE; do
+	if [[ "$RULE" != !* ]]; then
+		continue
+	fi
+
+	RETAIN_PATH="${RULE#!}"
+	(
+		cd "$ROOT_DIR"
+		rsync -aR --exclude='.DS_Store' "$RETAIN_PATH" "$STAGE_DIR/"
+	)
+done < "$ROOT_DIR/.distignore"
+
 mkdir -p "$(dirname "$OUTPUT_PATH")"
 rm -f "$OUTPUT_PATH"
 
 (
 	cd "$WORK_DIR"
-	zip -qr "$OUTPUT_PATH" "$PLUGIN_SLUG"
+	find "$PLUGIN_SLUG" -type f -print | zip -q "$OUTPUT_PATH" -@
 )
 
 printf '%s\n' "$OUTPUT_PATH"

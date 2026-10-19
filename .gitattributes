@@ -3,7 +3,6 @@
 /.distignore export-ignore
 /.env export-ignore
 /.env.* export-ignore
-/.freemius export-ignore
 /.git export-ignore
 /.gitattributes export-ignore
 /.github export-ignore
@@ -11,6 +10,7 @@
 /.tpw-plugin.yml export-ignore
 /.vscode export-ignore
 /.vscode/sftp.json export-ignore
+/.wordpress-org export-ignore
 /CHANGELOG.md export-ignore
 /CODING_STANDARDS.md export-ignore
 /RELEASE.md export-ignore
@@ -18,7 +18,6 @@
 /docs export-ignore
 /docs/developer-guide.md -export-ignore
 /docs/members/tpw_profile_badge.md -export-ignore
-/freemius export-ignore
 /modules/gallery/help/admin-guide-gallery.html export-ignore
 /modules/members/docs/admin-help -export-ignore
 /modules/payments.zip export-ignore

@@ -30,12 +30,12 @@ If a plugin expects shared member, payment, or front-end account functionality, 
 
 ## Installation and updates
 
-1. Install and activate iLungu™ Club in WordPress.
+1. Install and activate iLungu™ Club from the WordPress.org plugin directory.
 2. Install any add-on plugins that depend on it.
 3. Review the shared settings under iLungu Club -> Settings in wp-admin.
 4. Confirm that required pages such as login, profile, join, or thank-you pages are set up for your site.
 
-iLungu Club includes its own update and packaging flow so production sites receive the intended install package structure.
+iLungu Club customer updates are provided through WordPress.org. This public source repository retains its development and CI tooling, but it is not a customer update channel.
 
 The physical WordPress plugin identity is `tpw-ilungu-club/ilungu-club.php`. When migrating an existing installation, deactivate `tpw-flexiclub/tpw-flexiclub.php` at its current activation scope before activating the new plugin. Do not activate both copies together.
 

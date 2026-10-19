@@ -1,6 +1,7 @@
-standards_version: 2
-standards_checkpoint: 15d368e52889f8e269983b1aacda4a7023e8b1e5
-profile: github-free
+standards_version: 3
+standards_checkpoint: ec8fd6e3e10caf74e7499c277e60409ac47fe341
+profile: wordpress-org
+package_root: tpw-ilungu-club
 repository:
   visibility: PUBLIC
   disclosure:
@@ -25,6 +26,16 @@ repository:
     - path: docs/signup-system/signup-system-design-spec.md
       classification: private-local
       reason: Draft internal sign-up system design and proposed schema.
+distribution:
+  channel: wordpress-org
+  updates: wordpress-org
+  publication: wordpress-org-svn
+  wordpress_org:
+    slug: tpw-ilungu-club
+    plugin_file: ilungu-club.php
+    readme: readme.txt
+    assets_directory: .wordpress-org
+    submission: prepared
 package:
   uninstall: include
   exclude:

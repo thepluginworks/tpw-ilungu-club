@@ -33,7 +33,7 @@ https://www.thepluginworks.com
 
 == Installation ==
 
-1. Upload the plugin folder to `/wp-content/plugins/tpw-ilungu-club/` or install it using your normal plugin deployment process.
+1. Install iLungu™ Club from the WordPress.org plugin directory, or upload the `tpw-ilungu-club` folder to `/wp-content/plugins/`.
 2. Activate `tpw-ilungu-club/ilungu-club.php` as iLungu™ Club in WordPress.
 3. When replacing the previous physical plugin identity, deactivate `tpw-flexiclub/tpw-flexiclub.php` first at the same single-site or network scope. Never activate both copies together.
 4. Activate any add-on plugins that require iLungu Club.
