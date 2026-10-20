@@ -805,6 +805,10 @@ if ( ! function_exists( 'tpw_core_render_email_settings_tab' ) ) {
         }
         $s = TPW_Core_Email_Settings::get();
         $brand_title = get_option('tpw_brand_title', get_bloginfo('name'));
+        $brand_primary_color = get_option( 'tpw_brand_primary_color', '' );
+        if ( ! is_string( $brand_primary_color ) ) {
+            $brand_primary_color = '';
+        }
         $action = esc_url( admin_url( 'admin-post.php' ) );
         ?>
         <form method="post" action="<?php echo $action; ?>">
@@ -818,6 +822,13 @@ if ( ! function_exists( 'tpw_core_render_email_settings_tab' ) ) {
                         <td>
                             <input type="text" class="regular-text" id="tpw_brand_title" name="brand_title" value="<?php echo esc_attr( $brand_title ); ?>" placeholder="<?php echo esc_attr( get_bloginfo('name') ); ?>" />
                             <p class="description"><?php esc_html_e( 'Displayed in email headers. Leave blank to use your Site Title.', 'tpw-core' ); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="tpw_brand_primary_color"><?php esc_html_e( 'Email Header Primary Colour', 'tpw-core' ); ?></label></th>
+                        <td>
+                            <input type="text" class="regular-text" id="tpw_brand_primary_color" name="brand_primary_color" value="<?php echo esc_attr( $brand_primary_color ); ?>" placeholder="#0b6cad" />
+                            <p class="description"><?php esc_html_e( 'Used by the shared email header renderer. Enter a valid hexadecimal colour.', 'tpw-core' ); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -1902,6 +1913,29 @@ add_action( 'admin_init', function() {
     }
 } );
 
+if ( ! function_exists( 'tpw_core_update_email_header_primary_color' ) ) {
+    /**
+     * Update the shared email header colour only when a valid value was submitted.
+     *
+     * Missing or invalid input must not overwrite a legacy customer branding value.
+     *
+     * @param array $request Submitted settings request.
+     * @return void
+     */
+    function tpw_core_update_email_header_primary_color( $request ) {
+        if ( ! is_array( $request ) || ! isset( $request['brand_primary_color'] ) || ! is_scalar( $request['brand_primary_color'] ) ) {
+            return;
+        }
+
+        $brand_primary_color = sanitize_hex_color( wp_unslash( $request['brand_primary_color'] ) );
+        if ( null === $brand_primary_color ) {
+            return;
+        }
+
+        update_option( 'tpw_brand_primary_color', $brand_primary_color );
+    }
+}
+
 // Handle Email Settings save (POST)
 add_action( 'admin_post_tpw_core_save_email_settings', function() {
     if ( ! tpw_core_current_user_can_manage_settings() ) {
@@ -1951,6 +1985,7 @@ add_action( 'admin_post_tpw_core_save_email_settings', function() {
             // If empty, clear to fall back to Site Title
             delete_option( 'tpw_brand_title' );
         }
+        tpw_core_update_email_header_primary_color( $_POST );
         $save_success = true;
     } else {
         $redirect_notice = 'email_settings_class_missing';
