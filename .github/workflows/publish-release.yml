@@ -28,6 +28,9 @@ concurrency:
 jobs:
   build-release:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: club
     outputs:
       manifest_url: ${{ steps.metadata.outputs.manifest_url }}
       release_url: ${{ steps.metadata.outputs.release_url }}
@@ -37,6 +40,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          path: club
 
       - name: Checkout requested tag when it exists
         if: github.event_name == 'workflow_dispatch' && inputs.tag != ''
@@ -104,11 +108,11 @@ jobs:
         run: |
           set -euo pipefail
 
-          php .tpw-plugin-standards/bin/tpw-standards validate-source \
+          php "$GITHUB_WORKSPACE/.tpw-plugin-standards/bin/tpw-standards" validate-source \
             --require-standards-checkpoint \
             --plugin ilungu-club \
             --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
-            --root "$GITHUB_WORKSPACE"
+            --root "$GITHUB_WORKSPACE/club"
 
       - name: Build plugin archive
         id: package
@@ -157,16 +161,16 @@ jobs:
         run: |
           set -euo pipefail
 
-          php .tpw-plugin-standards/bin/tpw-standards validate-package \
+          php "$GITHUB_WORKSPACE/.tpw-plugin-standards/bin/tpw-standards" validate-package \
             --plugin ilungu-club \
             --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
-            --root "$GITHUB_WORKSPACE" \
+            --root "$GITHUB_WORKSPACE/club" \
             --archive "${{ steps.package.outputs.zip_path }}"
 
-          php .tpw-plugin-standards/bin/tpw-standards validate-wordpress-org \
+          php "$GITHUB_WORKSPACE/.tpw-plugin-standards/bin/tpw-standards" validate-wordpress-org \
             --plugin ilungu-club \
             --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
-            --root "$GITHUB_WORKSPACE" \
+            --root "$GITHUB_WORKSPACE/club" \
             --archive "${{ steps.package.outputs.zip_path }}"
 
       - name: Create or update GitHub release asset
@@ -214,7 +218,7 @@ jobs:
         if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: club/dist
 
   deploy-pages:
     if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
