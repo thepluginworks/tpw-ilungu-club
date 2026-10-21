@@ -10,6 +10,11 @@ on:
         description: 'Tag to publish or refresh, for example v1.14.40'
         required: false
         type: string
+      validate_only:
+        description: 'Build and validate only; do not create a release or deploy Pages'
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: write
@@ -45,6 +50,25 @@ jobs:
             git checkout "${{ inputs.tag }}"
           fi
 
+      - name: Generate Standards read token
+        id: standards-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.TPW_STANDARDS_APP_ID }}
+          private-key: ${{ secrets.TPW_STANDARDS_APP_PRIVATE_KEY }}
+          owner: thepluginworks
+          repositories: tpw-plugin-standards
+          permission-contents: read
+
+      - name: Checkout pinned TPW Standards
+        uses: actions/checkout@v4
+        with:
+          repository: thepluginworks/tpw-plugin-standards
+          ref: 15504e1b59b990f2402a984855cb789efb62c232
+          path: .tpw-plugin-standards
+          token: ${{ steps.standards-token.outputs.token }}
+          persist-credentials: false
+
       - name: Resolve release metadata
         id: metadata
         shell: bash
@@ -75,6 +99,17 @@ jobs:
           echo "manifest_url=${MANIFEST_URL}" >> "$GITHUB_OUTPUT"
           echo "release_url=${RELEASE_URL}" >> "$GITHUB_OUTPUT"
 
+      - name: Validate source against TPW Standards
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          php .tpw-plugin-standards/bin/tpw-standards validate-source \
+            --require-standards-checkpoint \
+            --plugin ilungu-club \
+            --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
+            --root "$GITHUB_WORKSPACE"
+
       - name: Build plugin archive
         id: package
         shell: bash
@@ -91,14 +126,51 @@ jobs:
         run: |
           set -euo pipefail
 
-          FIRST_ENTRY="$(unzip -Z1 "${{ steps.package.outputs.zip_path }}" | head -n 1)"
+          ZIP_PATH="${{ steps.package.outputs.zip_path }}"
+          ARCHIVE_ENTRIES="$(mktemp)"
+          trap 'rm -f "$ARCHIVE_ENTRIES"' EXIT
 
-          if [ "$FIRST_ENTRY" != 'tpw-ilungu-club/' ]; then
-            echo "Expected archive root to be tpw-ilungu-club/, got: $FIRST_ENTRY" >&2
+          unzip -Z1 "$ZIP_PATH" > "$ARCHIVE_ENTRIES"
+
+          if [ ! -s "$ARCHIVE_ENTRIES" ]; then
+            echo "Archive is empty" >&2
             exit 1
           fi
 
+          while IFS= read -r ARCHIVE_ENTRY; do
+            case "$ARCHIVE_ENTRY" in
+              *'\'*|*/../*|../*|*/..|..)
+                echo "Archive entry contains a path traversal: $ARCHIVE_ENTRY" >&2
+                exit 1
+                ;;
+              tpw-ilungu-club/|tpw-ilungu-club/*)
+                ;;
+              *)
+                echo "Archive entry is outside tpw-ilungu-club/: $ARCHIVE_ENTRY" >&2
+                exit 1
+                ;;
+            esac
+          done < "$ARCHIVE_ENTRIES"
+
+      - name: Validate archive against TPW Standards
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          php .tpw-plugin-standards/bin/tpw-standards validate-package \
+            --plugin ilungu-club \
+            --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
+            --root "$GITHUB_WORKSPACE" \
+            --archive "${{ steps.package.outputs.zip_path }}"
+
+          php .tpw-plugin-standards/bin/tpw-standards validate-wordpress-org \
+            --plugin ilungu-club \
+            --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
+            --root "$GITHUB_WORKSPACE" \
+            --archive "${{ steps.package.outputs.zip_path }}"
+
       - name: Create or update GitHub release asset
+        if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -119,6 +191,7 @@ jobs:
           fi
 
       - name: Generate version manifest
+        if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
         shell: bash
         run: |
           set -euo pipefail
@@ -134,14 +207,17 @@ jobs:
           touch dist/.nojekyll
 
       - name: Configure GitHub Pages
+        if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
+        if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy-pages:
+    if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
     runs-on: ubuntu-latest
     needs: build-release
     environment:
