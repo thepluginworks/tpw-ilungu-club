@@ -2,6 +2,8 @@
 
 A quick index of module help topics for browsing in GitHub and for reference from Admin Help.
 
+- [Getting Started with iLungu Club](getting-started.md)
+  - Customer-facing installation, initial setup, System Pages, core workflows, shortcodes, and evidence-based troubleshooting.
 - [Shared UI Wrapper and Enqueue Contract](../architecture/ui/tpw-core-ui-wrapper-enqueue-contract.md)
   - Canonical wrapper, component-scope, and asset-loading contract for the shared plugin framework and consumer plugins.
 
