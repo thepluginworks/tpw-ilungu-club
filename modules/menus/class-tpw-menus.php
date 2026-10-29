@@ -191,6 +191,174 @@ class TPW_Menus {
     }
 
     /**
+     * Get a complete event menu payload from an iLungu Events WordPress post ID.
+     *
+     * This is the public read-only consumer contract. Unlike get_menu_payload(),
+     * it resolves the iLungu Events domain event ID, requires one unambiguous
+     * relationship, and includes stable choice IDs for server-side validation.
+     *
+     * @since 2.12.0
+     * @param int $event_post_id WordPress tpw_event post ID.
+     * @return array|null
+     */
+    public static function get_event_menu_payload_for_post( $event_post_id ) {
+        global $wpdb;
+
+        $event_post_id = absint( $event_post_id );
+        if ( $event_post_id <= 0 ) {
+            return null;
+        }
+
+        $event_post = get_post( $event_post_id );
+        if ( ! $event_post || 'tpw_event' !== $event_post->post_type ) {
+            return null;
+        }
+
+        $prefix    = $wpdb->prefix;
+        $event_ids = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT event_id
+                FROM {$prefix}tpw_events
+                WHERE post_id = %d
+                ORDER BY event_id ASC
+                LIMIT 2",
+                $event_post_id
+            )
+        );
+
+        if ( 1 !== count( $event_ids ) ) {
+            return null;
+        }
+
+        $event_id = absint( $event_ids[0] );
+        if ( $event_id <= 0 ) {
+            return null;
+        }
+
+        $menu_ids = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT menu_id
+                FROM {$prefix}tpw_event_menu_relationship
+                WHERE event_id = %d
+                ORDER BY id ASC
+                LIMIT 2",
+                $event_id
+            )
+        );
+
+        if ( 1 !== count( $menu_ids ) ) {
+            return null;
+        }
+
+        $menu_id = absint( $menu_ids[0] );
+        if ( $menu_id <= 0 ) {
+            return null;
+        }
+
+        $menu = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT id, name, description, number_of_courses, price
+                FROM {$prefix}tpw_menus
+                WHERE id = %d",
+                $menu_id
+            ),
+            ARRAY_A
+        );
+
+        if ( ! is_array( $menu ) ) {
+            return null;
+        }
+
+        $number_of_courses = absint( $menu['number_of_courses'] ?? 0 );
+        if ( $number_of_courses <= 0 ) {
+            return null;
+        }
+
+        $course_rows = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT course_number, course_name
+                FROM {$prefix}tpw_menu_courses
+                WHERE menu_id = %d
+                ORDER BY course_number ASC",
+                $menu_id
+            ),
+            ARRAY_A
+        );
+
+        if ( ! is_array( $course_rows ) || $number_of_courses !== count( $course_rows ) ) {
+            return null;
+        }
+
+        $courses = [];
+        foreach ( $course_rows as $course_row ) {
+            $course_number = absint( $course_row['course_number'] ?? 0 );
+            $course_name   = isset( $course_row['course_name'] ) ? (string) $course_row['course_name'] : '';
+
+            if (
+                $course_number !== count( $courses ) + 1
+                || '' === trim( $course_name )
+            ) {
+                return null;
+            }
+
+            $courses[ $course_number ] = [
+                'course_number' => $course_number,
+                'course_name'   => $course_name,
+                'choices'       => [],
+            ];
+        }
+
+        $choice_rows = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT id, course_number, label, description, extra_cost
+                FROM {$prefix}tpw_menu_choices
+                WHERE menu_id = %d
+                ORDER BY course_number ASC, id ASC",
+                $menu_id
+            ),
+            ARRAY_A
+        );
+
+        if ( ! is_array( $choice_rows ) ) {
+            return null;
+        }
+
+        foreach ( $choice_rows as $choice_row ) {
+            $choice_id     = absint( $choice_row['id'] ?? 0 );
+            $course_number = absint( $choice_row['course_number'] ?? 0 );
+            $label         = isset( $choice_row['label'] ) ? (string) $choice_row['label'] : '';
+
+            if (
+                $choice_id <= 0
+                || ! isset( $courses[ $course_number ] )
+                || '' === trim( $label )
+            ) {
+                return null;
+            }
+
+            $courses[ $course_number ]['choices'][] = [
+                'id'          => $choice_id,
+                'label'       => $label,
+                'description' => isset( $choice_row['description'] ) ? (string) $choice_row['description'] : '',
+                'extra_cost'  => isset( $choice_row['extra_cost'] ) ? (float) $choice_row['extra_cost'] : 0.00,
+            ];
+        }
+
+        foreach ( $courses as $course ) {
+            if ( empty( $course['choices'] ) ) {
+                return null;
+            }
+        }
+
+        return [
+            'event_post_id' => $event_post_id,
+            'event_id'      => $event_id,
+            'menu'          => $menu,
+            'courses'       => $courses,
+        ];
+    }
+
+    /**
      * Ensure UI CSS/JS is registered and enqueued on front-end.
      *
      * @since 1.0.0
@@ -301,6 +469,17 @@ if ( ! function_exists( 'tpw_core_event_has_menu' ) ) {
 }
 if ( ! function_exists( 'tpw_core_get_menu_payload' ) ) {
     function tpw_core_get_menu_payload( $event_id ) { return TPW_Menus::get_menu_payload( $event_id ); }
+}
+if ( ! function_exists( 'tpw_core_get_event_menu_payload_for_post' ) ) {
+    /**
+     * Get the complete menu linked to an iLungu Events WordPress event post.
+     *
+     * @param int $event_post_id WordPress tpw_event post ID.
+     * @return array|null
+     */
+    function tpw_core_get_event_menu_payload_for_post( $event_post_id ) {
+        return TPW_Menus::get_event_menu_payload_for_post( $event_post_id );
+    }
 }
 if ( ! function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
     function tpw_core_flag_need_ui_assets() { TPW_Menus::flag_need_ui_assets(); }

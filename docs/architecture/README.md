@@ -61,6 +61,10 @@ Payments architecture defines the distinction between stored active preferences 
 
 The canonical payment-method contract is [docs/architecture/payments/tpw-core-payment-method-contract.md](payments/tpw-core-payment-method-contract.md).
 
+## Dining Menus Architecture
+
+The canonical cross-plugin read contract for reusable Dining Menus is [docs/architecture/menus/tpw-core-event-menu-read-contract.md](menus/tpw-core-event-menu-read-contract.md).
+
 ## Lifecycle and Data Retention
 
 The canonical lifecycle and data-retention contract is [docs/architecture/lifecycle/tpw-core-lifecycle-retention-contract.md](lifecycle/tpw-core-lifecycle-retention-contract.md).
