@@ -84,3 +84,36 @@ Existing APIs remain unchanged:
 
 They accept the iLungu Events domain `event_id`, preserve their existing return
 shape, and remain available for current consumers such as Lodge Meetings.
+
+## Club-owned assignment interface
+
+```php
+TPW_Event_Menu_Rel::assign_menu_to_event_post( int $event_post_id, int $menu_id ): array
+```
+
+Only Club-owned administration flows may write an event-menu relationship, and
+they must use this interface. `$event_post_id` is the WordPress `tpw_event`
+post ID; the method resolves exactly one iLungu Events domain `event_id`.
+`$menu_id` must identify an existing Club menu.
+
+The method returns an array with `success`, a machine-readable `code`, a
+human-readable `message`, and the resolved `event_post_id`, `event_id`, and
+`menu_id`. On success, `code` is `created` or `updated`.
+
+The assignment behaviour is:
+
+1. an unlinked event receives one relationship;
+2. an event with exactly one relationship has that row's `menu_id` updated;
+3. the selected menu may be linked to other events;
+4. an event with multiple existing relationships fails with
+   `ambiguous_relationship` and no rows are deleted or changed.
+
+The relationship table has no unique `event_id` constraint. To retain this
+legacy schema while preventing concurrent Club assignments from inserting
+duplicates, the method locks only the relationship table for the brief
+read-and-write critical section. A lock acquisition or release failure is
+reported as a failed assignment; callers must not treat it as success.
+
+The legacy `assign_menu_to_event( $event_id, $menu_id )` domain-ID method is
+unchanged for compatibility. Consumers, including Lodge Meetings, must not
+write this table directly.

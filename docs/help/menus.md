@@ -19,6 +19,11 @@ Event Menus let you define menus (courses and choices) and attach them to events
   iLungu Events domain ID, returns stable dish IDs and additional costs, and
   returns `null` for missing, ambiguous, deleted, or incomplete definitions.
   The full contract is [Event Menu Read Contract](../architecture/menus/tpw-core-event-menu-read-contract.md).
+- Club administration flows assigning a menu to a WordPress event post must use
+  `TPW_Event_Menu_Rel::assign_menu_to_event_post( $event_post_id, $menu_id )`.
+  It returns a result array with an explicit success state and outcome code,
+  preserves relationships for other events, allows a menu to be reused, and
+  rejects pre-existing ambiguous relationships without deleting data.
 - Theme override: create template at `theme/tpw-ilungu-club/menus/menu-modal.php` to customize markup. The legacy `theme/tpw-flexiclub/menus/menu-modal.php` override remains supported during the compatibility window.
 - Legacy override support: existing theme/tpw-core/menus/menu-modal.php overrides still load for backward compatibility.
 
