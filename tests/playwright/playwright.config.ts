@@ -31,6 +31,7 @@ export default defineConfig({
 	testMatch: [
 		'smoke/ilungu-branding-smoke.spec.ts',
 		'club-administration-contributions.spec.ts',
+		'member-role-fixture.spec.ts',
 		'member-role-permissions.spec.ts',
 		'lifecycle-retention.spec.ts',
 	],
