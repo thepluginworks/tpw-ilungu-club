@@ -57,6 +57,16 @@ Only released, active, configured, and runtime-available methods may be presente
 
 See [Payments](payments.md) for the current payment-method guidance. Add-ons may require additional setup before their own customer workflows are available.
 
+## Optional external services and privacy
+
+Standard iLungu Club member, page, and administration features do not require an external service. Administrators may choose an optional provider only for a workflow that supports it:
+
+- **Square:** a compatible, separately installed and active TPW Square Gateway add-on is required before Square can be a usable checkout method. The configured payment integration may send relevant checkout data to Square.
+- **Ideal Postcodes:** live GB address lookup is available only when an administrator selects the provider and configures a valid API key. A lookup can send the entered postcode to Ideal Postcodes.
+- **Fetchify:** credentials can be stored for compatibility, but live Fetchify lookup is not wired in this release. It does not expose a lookup UI or perform a Fetchify lookup.
+
+The deploying site operator chooses whether to configure these services and is responsible for the provider terms and the site's own end-user privacy information. This guidance describes the plugin behavior; it does not provide legal or privacy-policy advice.
+
 ## Troubleshooting
 
 - **A member cannot open their profile:** confirm that the selected profile page is published and contains `[tpw_member_profile]`.

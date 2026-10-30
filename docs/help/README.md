@@ -13,6 +13,8 @@ A quick index of module help topics for browsing in GitHub and for reference fro
   - Gateway settings, webhooks, `tpw_payment_completed` action, and logger references.
 - [Payments Integration](payments-integration.md)
   - For external plugins (e.g., FlexiTicket, RSVP): enqueue shared-framework assets, radio input contract, Square container IDs, JS events, `TPW_Core_Payments::create_payment()`, config localization, and an example checkout flow.
+- [Optional External Services and Privacy](getting-started.md#optional-external-services-and-privacy)
+  - Factual behavior of optional Square, Ideal Postcodes, and Fetchify integrations, plus the operator's disclosure responsibility.
 - [System Pages](system-pages.md)
   - Register/ensure required front‑end pages and resolve links.
   - Canonical protection contract: [../architecture/system-pages/tpw-core-system-page-protection-contract.md](../architecture/system-pages/tpw-core-system-page-protection-contract.md)

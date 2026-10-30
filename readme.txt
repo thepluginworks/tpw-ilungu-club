@@ -54,6 +54,9 @@ Go to Settings > iLungu Club in the WordPress admin area.
 = Do I need to create any pages? =
 Many iLungu Club setups use shared pages such as login, profile, join, control, or thank-you pages. The exact pages depend on which plugins are active on your site.
 
+= Does iLungu Club require external services? =
+No. Standard member, page, and admin features do not require a third-party service. A site administrator may choose optional integrations for a supported workflow. Square card payments require a separately installed and active compatible Square gateway; Ideal Postcodes live address lookup requires an administrator-configured API key. Fetchify credentials can be stored, but live Fetchify lookup is not available in this release. Site operators are responsible for their own provider terms and end-user privacy information when they configure an optional service.
+
 == Shortcodes ==
 
 = [tpw_member_login] =
