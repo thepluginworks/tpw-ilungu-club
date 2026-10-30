@@ -2,7 +2,12 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { defineConfig } from '@playwright/test';
 
-const localEnvironmentFile = join(__dirname, '.env.local');
+const minimumRuntime = '1' === process.env.TPW_MINIMUM_RUNTIME;
+const localEnvironmentFile = join(__dirname, minimumRuntime ? '.env.minimum.local' : '.env.local');
+
+if (minimumRuntime && !existsSync(localEnvironmentFile)) {
+	throw new Error('TPW_MINIMUM_RUNTIME=1 requires the ignored tests/playwright/.env.minimum.local configuration file.');
+}
 
 if (existsSync(localEnvironmentFile)) {
 	for (const line of readFileSync(localEnvironmentFile, 'utf8').split(/\r?\n/)) {
@@ -24,7 +29,27 @@ if (existsSync(localEnvironmentFile)) {
 	}
 }
 
+if (minimumRuntime && process.env.ILUNGU_ADMIN_PASSWORD === undefined && process.env.TPW_MINIMUM_ADMIN_PASSWORD !== undefined) {
+	process.env.ILUNGU_ADMIN_PASSWORD = process.env.TPW_MINIMUM_ADMIN_PASSWORD;
+}
+
 const baseURL = process.env.ILUNGU_BASE_URL || 'https://ilungu-club.local';
+
+if (minimumRuntime && !process.env.ILUNGU_ADMIN_PASSWORD) {
+	throw new Error('TPW_MINIMUM_RUNTIME=1 requires TPW_MINIMUM_ADMIN_PASSWORD in the local environment.');
+}
+const minimumBaseURL = 'https://tpw-minimum.local';
+
+if (minimumRuntime && minimumBaseURL !== baseURL.replace(/\/$/, '')) {
+	throw new Error(`TPW_MINIMUM_RUNTIME=1 must target ${minimumBaseURL}; received ${baseURL}.`);
+}
+
+const outputDir = minimumRuntime
+	? join(__dirname, 'results', 'minimum-runtime')
+	: join(__dirname, 'test-results');
+const reporter = minimumRuntime
+	? [['list'], ['html', { outputFolder: join(__dirname, 'reports', 'minimum-runtime'), open: 'never' }]]
+	: [['list']];
 
 export default defineConfig({
 	testDir: __dirname,
@@ -43,8 +68,8 @@ export default defineConfig({
 		screenshot: 'only-on-failure',
 		trace: 'on-first-retry',
 	},
-	outputDir: join(__dirname, 'test-results'),
-	reporter: [['list']],
+	outputDir,
+	reporter,
 	projects: [
 		{ name: 'chromium', use: { browserName: 'chromium' } },
 		{ name: 'firefox', use: { browserName: 'firefox' } },

@@ -81,3 +81,24 @@ removed from the working tree because they contained hard-coded local login
 details, targeted a retired local site, and provided no unique maintained
 coverage. They remain available in Git history for forensic reference only; do
 not restore or run them as regression tests.
+
+## Opt-in minimum-runtime compatibility
+
+Run minimum-supported-runtime compatibility only when it is explicitly requested.
+Set `TPW_MINIMUM_RUNTIME=1` and create the ignored
+`tests/playwright/.env.minimum.local` from the local-site details. It must set
+`ILUNGU_BASE_URL=https://tpw-minimum.local` and `ILUNGU_ADMIN_USER=moodadmin`.
+Provide the local-only administrator password through
+`TPW_MINIMUM_ADMIN_PASSWORD`; do not store it in a tracked file.
+
+The Playwright configuration fails closed when the minimum environment file is
+missing or its effective target is not exactly `https://tpw-minimum.local`.
+This mode uses the isolated `tests/playwright/results/minimum-runtime` and
+`tests/playwright/reports/minimum-runtime` paths. Normal configuration, credential
+loading, and output paths remain unchanged.
+
+Run a focused maintained minimum-runtime scenario through the repository configuration:
+
+```sh
+TPW_MINIMUM_RUNTIME=1 npx playwright test --config=tests/playwright/playwright.config.ts <existing-relevant-spec>
+```

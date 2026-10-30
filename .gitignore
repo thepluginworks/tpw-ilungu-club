@@ -29,3 +29,6 @@ yarn-debug.log*
 yarn-error.log*
 !tests/php/.env.example
 !tests/playwright/.env.example
+/tests/playwright/.minimum-runtime-auth/
+tests/playwright/results/minimum-runtime/
+tests/playwright/reports/minimum-runtime/
