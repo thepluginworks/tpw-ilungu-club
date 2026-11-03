@@ -85,6 +85,28 @@ Existing APIs remain unchanged:
 They accept the iLungu Events domain `event_id`, preserve their existing return
 shape, and remain available for current consumers such as Lodge Meetings.
 
+## Shared View Menu presentation
+
+Club owns the shared View Menu trigger and modal. Its default presentation,
+including the menu base price and all modal content, remains the compatibility
+behaviour for existing consumers such as Lodge Meetings.
+
+For an event that both has a linked Club menu and is explicitly identified by
+the Tickets-owned `ilungu_tickets_is_event_ticketed( $event_post_id )`
+predicate, Club renders the same modal from the iLungu Events
+`tpw_event_details_after_meta` hook with Tickets Dining presentation:
+
+- the trigger is rendered in the event details panel, not by the later
+  `tpw_after_event_content` fallback;
+- the Club menu base price is not displayed, because Tickets owns two-course
+  and three-course ticket-type pricing;
+- non-zero dish `extra_cost` values are displayed as supplements.
+
+No menu relationship alone identifies a Tickets event. Club must not apply this
+presentation to another consumer merely because it has a Club menu. This is a
+presentation-only contract: it does not alter menu payloads, availability,
+selection, entitlement, checkout state, or pricing calculations.
+
 ## Club-owned assignment interface
 
 ```php

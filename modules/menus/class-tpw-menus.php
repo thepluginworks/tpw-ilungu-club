@@ -17,6 +17,13 @@ class TPW_Menus {
     protected static $last_rendered_block = '';
 
     /**
+     * Event IDs whose hook-driven modal block has already been rendered.
+     *
+     * @var array<int,bool>
+     */
+    protected static $rendered_event_ids = [];
+
+    /**
      * Wire actions/filters and the shortcode.
      *
      * @since 1.0.0
@@ -24,7 +31,7 @@ class TPW_Menus {
      */
     public static function init() {
         // Hook into the FlexiEvent event page (after main event content)
-        add_action( 'tpw_event_details_after_meta', [ __CLASS__, 'hook_after_event_content' ], 5 );
+        add_action( 'tpw_event_details_after_meta', [ __CLASS__, 'hook_event_details_after_meta' ], 5 );
         // Back-compat: also listen to the older hook
         add_action( 'tpw_after_event_content', [ __CLASS__, 'hook_after_event_content' ], 5 );
 
@@ -64,44 +71,173 @@ class TPW_Menus {
     public static function hook_after_event_content( $event ) {
         self::log('[TPW_Menus] hook_after_event_content() received: ' . print_r($event, true));
 
-        $event_id = 0;
-        // Accept multiple shapes: array, object, or direct int
-        if ( is_numeric( $event ) ) {
-            $event_id = (int) $event;
-        } elseif ( is_array( $event ) ) {
-            if ( isset( $event['event_id'] ) ) {
-                $event_id = (int) $event['event_id'];
-            } elseif ( isset( $event['id'] ) ) {
-                $event_id = (int) $event['id'];
-            }
-        } elseif ( is_object( $event ) ) {
-            if ( isset( $event->event_id ) ) {
-                $event_id = (int) $event->event_id;
-            } elseif ( isset( $event->id ) ) {
-                $event_id = (int) $event->id;
-            }
-        }
-
-        if ( $event_id === 0 && ( ( is_array( $event ) && isset( $event['post_id'] ) ) || ( is_object( $event ) && isset( $event->post_id ) ) ) ) {
-            global $wpdb;
-            $post_id = is_array( $event ) ? (int) $event['post_id'] : (int) $event->post_id;
-            $event_id = (int) $wpdb->get_var( $wpdb->prepare(
-                "SELECT event_id FROM {$wpdb->prefix}tpw_events WHERE post_id = %d LIMIT 1",
-                $post_id
-            ));
-        }
+        $event_id = self::get_event_id( $event );
 
         self::log('[TPW_Menus] Resolved event_id: ' . $event_id);
 
-        static $rendered = [];
-        if ( $event_id > 0 ) {
-            if ( isset( $rendered[ $event_id ] ) ) {
-                self::log('[TPW_Menus] Duplicate render skipped for event_id: ' . $event_id);
+        if ( $event_id <= 0 || self::has_rendered_event( $event_id ) ) {
+            return;
+        }
+
+        if ( null !== self::get_tickets_menu_presentation( $event ) ) {
+            return;
+        }
+
+        self::mark_event_rendered( $event_id );
+        self::render_menu_modal_trigger( $event_id );
+    }
+
+    /**
+     * Render a Tickets menu in the event details panel.
+     *
+     * Tickets owns response-mode and menu-presentation classification. Club
+     * changes only the presentation of an already linked Club menu.
+     *
+     * @param mixed $event Event context from iLungu Events.
+     * @return void
+     */
+    public static function hook_event_details_after_meta( $event ) {
+        $event_id = self::get_event_id( $event );
+
+        if ( $event_id <= 0 ) {
+            return;
+        }
+
+        $tickets_presentation = self::get_tickets_menu_presentation( $event );
+        if ( null !== $tickets_presentation ) {
+            if ( 'none' === $tickets_presentation ) {
                 return;
             }
-            $rendered[ $event_id ] = true;
-            self::render_menu_modal_trigger( $event_id );
+
+            if ( self::has_rendered_event( $event_id ) ) {
+                return;
+            }
+
+            self::mark_event_rendered( $event_id );
+            self::render_menu_modal_trigger( $event_id, false, 'fixed_menu' === $tickets_presentation ? 'tickets_fixed_menu' : 'tickets_selectable_courses' );
+            return;
         }
+
+        self::hook_after_event_content( $event );
+    }
+
+    /**
+     * Resolve an iLungu Events domain ID from supported event contexts.
+     *
+     * @param mixed $event Event context.
+     * @return int
+     */
+    protected static function get_event_id( $event ) {
+        $event_id = 0;
+        if ( is_numeric( $event ) ) {
+            $event_id = (int) $event;
+        } elseif ( is_array( $event ) ) {
+            $event_id = isset( $event['event_id'] ) ? (int) $event['event_id'] : ( isset( $event['id'] ) ? (int) $event['id'] : 0 );
+        } elseif ( is_object( $event ) ) {
+            $event_id = isset( $event->event_id ) ? (int) $event->event_id : ( isset( $event->id ) ? (int) $event->id : 0 );
+        }
+
+        if ( $event_id > 0 ) {
+            return $event_id;
+        }
+
+        $post_id = self::get_event_post_id( $event );
+        if ( $post_id <= 0 ) {
+            return 0;
+        }
+
+        global $wpdb;
+        return (int) $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT event_id FROM {$wpdb->prefix}tpw_events WHERE post_id = %d LIMIT 1",
+                $post_id
+            )
+        );
+    }
+
+    /**
+     * Resolve a Tickets-owned menu presentation without changing non-Tickets behaviour.
+     *
+     * @param mixed $event Event context.
+     * @return 'none'|'fixed_menu'|'selectable_courses'|null Null for non-Tickets events.
+     */
+    protected static function get_tickets_menu_presentation( $event ) {
+        if ( ! function_exists( 'ilungu_tickets_is_event_ticketed' ) ) {
+            return null;
+        }
+
+        $post_id = self::get_event_post_id( $event );
+        if ( $post_id <= 0 || ! ilungu_tickets_is_event_ticketed( $post_id ) ) {
+            return null;
+        }
+
+        if ( ! function_exists( 'ilungu_tickets_get_event_menu_presentation' ) ) {
+            return 'none';
+        }
+
+        $presentation = ilungu_tickets_get_event_menu_presentation( $post_id );
+        if ( ! in_array( $presentation, [ 'none', 'fixed_menu', 'selectable_courses' ], true ) ) {
+            return 'none';
+        }
+
+        return $presentation;
+    }
+
+    /**
+     * Resolve the WordPress event post ID from an Events context.
+     *
+     * @param mixed $event Event context.
+     * @return int
+     */
+    protected static function get_event_post_id( $event ) {
+        if ( is_array( $event ) && isset( $event['post_id'] ) ) {
+            return absint( $event['post_id'] );
+        }
+
+        if ( is_object( $event ) && isset( $event->post_id ) ) {
+            return absint( $event->post_id );
+        }
+
+        $event_id = 0;
+        if ( is_numeric( $event ) ) {
+            $event_id = absint( $event );
+        } elseif ( is_array( $event ) && isset( $event['event_id'] ) ) {
+            $event_id = absint( $event['event_id'] );
+        } elseif ( is_object( $event ) && isset( $event->event_id ) ) {
+            $event_id = absint( $event->event_id );
+        }
+
+        if ( $event_id <= 0 ) {
+            return 0;
+        }
+
+        global $wpdb;
+        return (int) $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT post_id FROM {$wpdb->prefix}tpw_events WHERE event_id = %d LIMIT 1",
+                $event_id
+            )
+        );
+    }
+
+    /**
+     * Whether a hook-driven modal block has already been rendered for an event.
+     *
+     * @param int $event_id iLungu Events domain event ID.
+     * @return bool
+     */
+    protected static function has_rendered_event( $event_id ) {
+        return isset( self::$rendered_event_ids[ $event_id ] );
+    }
+
+    /**
+     * Record an event after its hook-driven modal block is rendered.
+     *
+     * @param int $event_id iLungu Events domain event ID.
+     * @return void
+     */
+    protected static function mark_event_rendered( $event_id ) {
+        self::$rendered_event_ids[ $event_id ] = true;
     }
 
     /**
@@ -396,7 +532,7 @@ class TPW_Menus {
      * @param int $event_id
      * @param bool $internal_buffer_call When true we skip duplicate prevention (shortcode context) and just attempt render.
      */
-    public static function render_menu_modal_trigger( $event_id, $internal_buffer_call = false ) {
+    public static function render_menu_modal_trigger( $event_id, $internal_buffer_call = false, $presentation = 'default' ) {
         self::log('[TPW_Menus] render_menu_modal_trigger() called for event_id: ' . $event_id);
         if ( ! self::event_has_menu( $event_id ) ) {
             self::log('[TPW_Menus] event_has_menu() returned false for event_id: ' . $event_id . ' - aborting render.');
@@ -418,6 +554,7 @@ class TPW_Menus {
         }
         self::log('[TPW_Menus] Including menu modal template: ' . $template);
         $event_id = (int) $event_id;
+        $tpw_menu_modal_presentation = in_array( $presentation, [ 'tickets_dining', 'tickets_fixed_menu', 'tickets_selectable_courses' ], true ) ? $presentation : 'default';
 
         // Buffer output so we can both echo and retain a copy for fallback injection.
         $ob_level_before = ob_get_level();

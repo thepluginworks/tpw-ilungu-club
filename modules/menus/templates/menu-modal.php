@@ -36,6 +36,8 @@ $btn_label = apply_filters( 'tpw_core/menu_modal_button_label', __( 'View Menu',
 $title     = apply_filters( 'tpw_core/menu_modal_title', esc_html( $menu['name'] ), $event_id, $menu );
 
 $courses_count = is_array($courses) ? count($courses) : 0;
+$is_tickets_menu_presentation = isset( $tpw_menu_modal_presentation ) && in_array( $tpw_menu_modal_presentation, [ 'tickets_dining', 'tickets_fixed_menu', 'tickets_selectable_courses' ], true );
+$is_tickets_selectable_courses_presentation = isset( $tpw_menu_modal_presentation ) && in_array( $tpw_menu_modal_presentation, [ 'tickets_dining', 'tickets_selectable_courses' ], true );
 
 // Flag to let Core enqueue assets once per page.
 if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
@@ -63,7 +65,7 @@ if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
             <p class="tpw-menu__description"><?php echo wp_kses_post( nl2br( $menu['description'] ) ); ?></p>
         <?php endif; ?>
 
-        <?php if ( isset( $menu['price'] ) && $menu['price'] !== null ) : ?>
+        <?php if ( ! $is_tickets_menu_presentation && isset( $menu['price'] ) && $menu['price'] !== null ) : ?>
             <p class="tpw-menu__price">
                 <strong><?php esc_html_e( 'Price', 'tpw-core' ); ?>:</strong>
                 <?php
@@ -95,6 +97,18 @@ if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
                                     <span class="tpw-menu__choice-label"><?php echo esc_html( $choice['label'] ); ?></span>
                                     <?php if ( ! empty( $choice['description'] ) ) : ?>
                                         <div class="tpw-menu__choice-desc"><?php echo wp_kses_post( nl2br( $choice['description'] ) ); ?></div>
+                                    <?php endif; ?>
+                                    <?php if ( $is_tickets_selectable_courses_presentation && ! empty( $choice['extra_cost'] ) ) : ?>
+                                        <?php $currency_symbol = function_exists( 'tpw_core_get_currency_symbol' ) ? tpw_core_get_currency_symbol() : '£'; ?>
+                                        <span class="tpw-menu__choice-supplement">
+                                            <?php
+                                            printf(
+                                                esc_html__( 'Supplement: %s%s', 'tpw-core' ),
+                                                esc_html( $currency_symbol ),
+                                                esc_html( number_format( (float) $choice['extra_cost'], 2 ) )
+                                            );
+                                            ?>
+                                        </span>
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
