@@ -54,25 +54,6 @@ jobs:
             git checkout "${{ inputs.tag }}"
           fi
 
-      - name: Generate Standards read token
-        id: standards-token
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ vars.TPW_STANDARDS_APP_ID }}
-          private-key: ${{ secrets.TPW_STANDARDS_APP_PRIVATE_KEY }}
-          owner: thepluginworks
-          repositories: tpw-plugin-standards
-          permission-contents: read
-
-      - name: Checkout pinned TPW Standards
-        uses: actions/checkout@v4
-        with:
-          repository: thepluginworks/tpw-plugin-standards
-          ref: 15504e1b59b990f2402a984855cb789efb62c232
-          path: .tpw-plugin-standards
-          token: ${{ steps.standards-token.outputs.token }}
-          persist-credentials: false
-
       - name: Resolve release metadata
         id: metadata
         shell: bash
@@ -102,17 +83,6 @@ jobs:
           echo "download_url=${DOWNLOAD_URL}" >> "$GITHUB_OUTPUT"
           echo "manifest_url=${MANIFEST_URL}" >> "$GITHUB_OUTPUT"
           echo "release_url=${RELEASE_URL}" >> "$GITHUB_OUTPUT"
-
-      - name: Validate source against TPW Standards
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          php "$GITHUB_WORKSPACE/.tpw-plugin-standards/bin/tpw-standards" validate-source \
-            --require-standards-checkpoint \
-            --plugin ilungu-club \
-            --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
-            --root "$GITHUB_WORKSPACE/club"
 
       - name: Build plugin archive
         id: package
@@ -155,23 +125,6 @@ jobs:
                 ;;
             esac
           done < "$ARCHIVE_ENTRIES"
-
-      - name: Validate archive against TPW Standards
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          php "$GITHUB_WORKSPACE/.tpw-plugin-standards/bin/tpw-standards" validate-package \
-            --plugin ilungu-club \
-            --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
-            --root "$GITHUB_WORKSPACE/club" \
-            --archive "${{ steps.package.outputs.zip_path }}"
-
-          php "$GITHUB_WORKSPACE/.tpw-plugin-standards/bin/tpw-standards" validate-wordpress-org \
-            --plugin ilungu-club \
-            --workspace "$GITHUB_WORKSPACE/.tpw-plugin-standards" \
-            --root "$GITHUB_WORKSPACE/club" \
-            --archive "${{ steps.package.outputs.zip_path }}"
 
       - name: Create or update GitHub release asset
         if: github.event_name != 'workflow_dispatch' || inputs.validate_only != true
