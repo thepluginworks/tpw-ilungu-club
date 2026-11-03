@@ -11,12 +11,16 @@ if ( ! class_exists( 'WP_UnitTestCase' ) ) {
 
 class TPW_Upload_Pages_Schema_Repair_Test extends WP_UnitTestCase {
 	private $table_name;
+	private $protected_upload_base;
+	private $protected_upload_url;
 
 	public function set_up() {
 		parent::set_up();
 
 		global $wpdb;
 		$this->table_name = $wpdb->prefix . 'tpw_upload_pages_schema_repair_test';
+		$this->protected_upload_base = WP_CONTENT_DIR . '/uploads/tpw-upload-pages-test-' . wp_generate_uuid4();
+		$this->protected_upload_url  = content_url( 'uploads/' . basename( $this->protected_upload_base ) );
 		$wpdb->query( "DROP TABLE IF EXISTS {$this->table_name}" );
 		delete_option( 'tpw_control_upload_pages_schema_repair_issue' );
 	}
@@ -25,8 +29,55 @@ class TPW_Upload_Pages_Schema_Repair_Test extends WP_UnitTestCase {
 		global $wpdb;
 		$wpdb->query( "DROP TABLE IF EXISTS {$this->table_name}" );
 		delete_option( 'tpw_control_upload_pages_schema_repair_issue' );
+		$base = $this->protected_upload_base . '/tpw-upload-pages';
+		@unlink( $base . '/.htaccess' );
+		@unlink( $base . '/index.html' );
+		@rmdir( $base );
+		@rmdir( $this->protected_upload_base );
 
 		parent::tear_down();
+	}
+
+	public function filter_protected_upload_base( $uploads ) {
+		$uploads['basedir'] = $this->protected_upload_base;
+		$uploads['baseurl'] = $this->protected_upload_url;
+		$uploads['path']    = $this->protected_upload_base;
+		$uploads['url']     = $this->protected_upload_url;
+		$uploads['subdir']  = '';
+
+		return $uploads;
+	}
+
+	public function test_public_bootstrap_provisions_protected_upload_storage_idempotently() {
+		$helper = new ReflectionMethod( 'TPW_Control_Upload_Pages', 'ensure_protected_upload_base' );
+		$control_source = file_get_contents( dirname( __DIR__, 3 ) . '/modules/tpw-control/class-tpw-control.php' );
+
+		$this->assertTrue( $helper->isProtected() );
+		$this->assertTrue( is_callable( array( 'TPW_Control_Upload_Pages', 'ensure_protected_upload_storage' ) ) );
+		$this->assertIsString( $control_source );
+		$this->assertStringContainsString( "TPW_Control_Upload_Pages::ensure_protected_upload_storage();", $control_source );
+		$this->assertStringNotContainsString( "TPW_Control_Upload_Pages::ensure_protected_upload_base();", $control_source );
+		$this->assertStringContainsString( '}, 11 );', $control_source );
+
+		add_filter( 'upload_dir', array( $this, 'filter_protected_upload_base' ) );
+
+		try {
+			TPW_Control_Upload_Pages::ensure_protected_upload_storage();
+			$base = $this->protected_upload_base . '/tpw-upload-pages';
+			$htaccess = $base . '/.htaccess';
+			$index = $base . '/index.html';
+
+			$this->assertDirectoryExists( $base );
+			$this->assertFileExists( $htaccess );
+			$this->assertFileExists( $index );
+			$this->assertStringContainsString( 'Require all denied', (string) file_get_contents( $htaccess ) );
+
+			$rules = (string) file_get_contents( $htaccess );
+			TPW_Control_Upload_Pages::ensure_protected_upload_storage();
+			$this->assertSame( $rules, (string) file_get_contents( $htaccess ) );
+		} finally {
+			remove_filter( 'upload_dir', array( $this, 'filter_protected_upload_base' ) );
+		}
 	}
 
 	public function test_repair_adds_missing_columns_without_losing_legacy_rows() {

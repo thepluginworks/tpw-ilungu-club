@@ -29,8 +29,8 @@ class TPW_Control {
             if ( class_exists( 'TPW_Control_Upload_Pages' ) ) {
                 TPW_Control_Upload_Pages::ensure_tables();
                 // Ensure the protected uploads base exists and is blocked from direct web access
-                if ( method_exists( 'TPW_Control_Upload_Pages', 'ensure_protected_upload_base' ) ) {
-                    TPW_Control_Upload_Pages::ensure_protected_upload_base();
+                if ( method_exists( 'TPW_Control_Upload_Pages', 'ensure_protected_upload_storage' ) ) {
+                    TPW_Control_Upload_Pages::ensure_protected_upload_storage();
                 }
             } else {
                 // Lazy-load the class if not loaded yet
@@ -39,13 +39,13 @@ class TPW_Control {
                     require_once $path;
                     if ( class_exists( 'TPW_Control_Upload_Pages' ) ) {
                         TPW_Control_Upload_Pages::ensure_tables();
-                        if ( method_exists( 'TPW_Control_Upload_Pages', 'ensure_protected_upload_base' ) ) {
-                            TPW_Control_Upload_Pages::ensure_protected_upload_base();
+                        if ( method_exists( 'TPW_Control_Upload_Pages', 'ensure_protected_upload_storage' ) ) {
+                            TPW_Control_Upload_Pages::ensure_protected_upload_storage();
                         }
                     }
                 }
             }
-        }, 9 );
+        }, 11 );
 
         // Register custom query vars used by TPW Control
         add_filter( 'query_vars', function( $vars ){

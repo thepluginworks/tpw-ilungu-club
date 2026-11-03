@@ -1627,6 +1627,15 @@ class TPW_Control_Upload_Pages {
     }
 
     /**
+     * Provision the protected Upload Pages storage base during plugin bootstrap.
+     *
+     * @return void
+     */
+    public static function ensure_protected_upload_storage() {
+        self::ensure_protected_upload_base();
+    }
+
+    /**
      * Create a .htaccess file inside wp-content/uploads/tpw-upload-pages/ to deny direct access.
      */
     protected static function ensure_protected_upload_base() {
