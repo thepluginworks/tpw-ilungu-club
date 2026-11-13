@@ -84,12 +84,26 @@ class TPW_Email_Logo_Helper {
         if ( empty( $uploads['baseurl'] ) || empty( $uploads['basedir'] ) ) {
             return '';
         }
-        // Only allow files under uploads baseurl
-        if ( strpos( $url, $uploads['baseurl'] ) !== 0 ) {
+
+        $base_url = trailingslashit( $uploads['baseurl'] );
+        if ( 0 !== strpos( $url, $base_url ) ) {
             return '';
         }
-        $rel = ltrim( substr( $url, strlen( $uploads['baseurl'] ) ), '/' );
+
+        $rel = ltrim( substr( $url, strlen( $base_url ) ), '/' );
         $path = trailingslashit( $uploads['basedir'] ) . $rel;
-        return $path;
+        $uploads_root = realpath( $uploads['basedir'] );
+        $resolved_path = realpath( $path );
+
+        if ( false === $uploads_root || false === $resolved_path ) {
+            return '';
+        }
+
+        $uploads_root = trailingslashit( $uploads_root );
+        if ( 0 !== strpos( $resolved_path, $uploads_root ) ) {
+            return '';
+        }
+
+        return $resolved_path;
     }
 }

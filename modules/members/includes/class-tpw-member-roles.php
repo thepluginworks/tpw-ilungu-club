@@ -43,7 +43,7 @@ class TPW_Member_Roles {
 
 		if ( ! is_array( $caps ) ) {
 			if ( is_string( $caps ) && '' !== $caps ) {
-				$maybe = @unserialize( $caps );
+				$maybe = @unserialize( $caps, array( 'allowed_classes' => false ) );
 				if ( is_array( $maybe ) ) {
 					$caps = $maybe;
 				} else {
