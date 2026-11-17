@@ -216,7 +216,7 @@ class TPW_Signup_Form_Controller {
 		$submitted = isset( $_POST['tpw_signup'] ) && is_array( $_POST['tpw_signup'] ) ? wp_unslash( $_POST['tpw_signup'] ) : array();
 
 		if ( empty( $_POST['tpw_join_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tpw_join_nonce'] ) ), 'tpw_join_submit' ) ) {
-			$state['form_error'] = __( 'Security check failed. Please refresh the page and try again.', 'tpw-core' );
+			$state['form_error'] = __( 'Security check failed. Please refresh the page and try again.', 'tpw-ilungu-club' );
 			return $state;
 		}
 
@@ -239,13 +239,13 @@ class TPW_Signup_Form_Controller {
 		);
 
 		if ( empty( $payloads['attempt_data']['email'] ) || ! is_email( $payloads['attempt_data']['email'] ) ) {
-			$state['form_error'] = __( 'A valid email address is required to continue.', 'tpw-core' );
+			$state['form_error'] = __( 'A valid email address is required to continue.', 'tpw-ilungu-club' );
 			return $state;
 		}
 
 		$attempt = $this->attempt_service->create_attempt( $payloads['attempt_data'] );
 		if ( is_wp_error( $attempt ) ) {
-			$state['form_error'] = __( 'The join request could not be recorded right now. Please try again.', 'tpw-core' );
+			$state['form_error'] = __( 'The join request could not be recorded right now. Please try again.', 'tpw-ilungu-club' );
 			return $state;
 		}
 

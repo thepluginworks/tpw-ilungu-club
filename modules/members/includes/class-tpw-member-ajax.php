@@ -712,12 +712,12 @@ class TPW_Member_Ajax {
                         $has_updated = ! empty( $m->updated_at );
                         if ( $has_created || $has_updated ) {
                             echo '<fieldset class="tpw-section">';
-                            echo '<legend class="tpw-section__legend">' . esc_html__( 'Admin Section', 'tpw-core' ) . '</legend>';
+                            echo '<legend class="tpw-section__legend">' . esc_html__( 'Admin Section', 'tpw-ilungu-club' ) . '</legend>';
                             if ( $has_created ) {
-                                echo '<p><strong>' . esc_html__( 'Created', 'tpw-core' ) . ':</strong> ' . esc_html( tpw_format_datetime( $m->created_at ) ) . '</p>';
+                                echo '<p><strong>' . esc_html__( 'Created', 'tpw-ilungu-club' ) . ':</strong> ' . esc_html( tpw_format_datetime( $m->created_at ) ) . '</p>';
                             }
                             if ( $has_updated ) {
-                                echo '<p><strong>' . esc_html__( 'Updated', 'tpw-core' ) . ':</strong> ' . esc_html( tpw_format_datetime( $m->updated_at ) ) . '</p>';
+                                echo '<p><strong>' . esc_html__( 'Updated', 'tpw-ilungu-club' ) . ':</strong> ' . esc_html( tpw_format_datetime( $m->updated_at ) ) . '</p>';
                             }
                             echo '</fieldset>';
                         }
@@ -757,9 +757,9 @@ class TPW_Member_Ajax {
 
                             if ( ! empty( $partner_names ) ) {
                                 echo '<fieldset class="tpw-section">';
-                                echo '<legend class="tpw-section__legend">' . esc_html__( 'Family membership', 'tpw-core' ) . '</legend>';
+                                echo '<legend class="tpw-section__legend">' . esc_html__( 'Family membership', 'tpw-ilungu-club' ) . '</legend>';
                                 foreach ( $partner_names as $n ) {
-                                    echo '<p><strong>' . esc_html__( 'Partner', 'tpw-core' ) . ':</strong> ' . esc_html( $n ) . '</p>';
+                                    echo '<p><strong>' . esc_html__( 'Partner', 'tpw-ilungu-club' ) . ':</strong> ' . esc_html( $n ) . '</p>';
                                 }
                                 echo '</fieldset>';
                             }

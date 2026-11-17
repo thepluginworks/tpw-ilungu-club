@@ -31,10 +31,10 @@ $password_setup_recipient = ! empty( $linked_email_state['password_setup_recipie
 
 $email_error = isset( $_GET['tpw_member_email_error'] ) ? sanitize_key( wp_unslash( $_GET['tpw_member_email_error'] ) ) : '';
 $email_error_messages = [
-    'invalid'     => __( 'Please enter a valid email address.', 'tpw-core' ),
-    'broken_link' => __( 'This member is linked to a WordPress user that could not be loaded. Repair the account link before changing the email.', 'tpw-core' ),
-    'conflict'    => __( 'That email address is already in use by another WordPress account. Use a different email or link the correct account first.', 'tpw-core' ),
-    'sync_failed' => __( 'The member email could not be synchronized with the linked WordPress account. No email change was saved.', 'tpw-core' ),
+    'invalid'     => __( 'Please enter a valid email address.', 'tpw-ilungu-club' ),
+    'broken_link' => __( 'This member is linked to a WordPress user that could not be loaded. Repair the account link before changing the email.', 'tpw-ilungu-club' ),
+    'conflict'    => __( 'That email address is already in use by another WordPress account. Use a different email or link the correct account first.', 'tpw-ilungu-club' ),
+    'sync_failed' => __( 'The member email could not be synchronized with the linked WordPress account. No email change was saved.', 'tpw-ilungu-club' ),
 ];
 
 // Precompute Create WP User availability and ids for detached form wiring
@@ -304,14 +304,14 @@ if ( ! $member ) {
                             if ( ! ( $linked_wp_user instanceof WP_User ) || $has_linked_email_drift ) {
                                 $status_style = 'margin-top:8px;color:#9a3412;background:#fff7ed;border:1px solid #fdba74;padding:8px;border-radius:6px;';
                                 echo '<div class="description" style="' . esc_attr( $status_style ) . '">';
-                                echo '<strong>' . esc_html__( 'Linked account email status', 'tpw-core' ) . '</strong><br>';
-                                echo esc_html__( 'Member Email:', 'tpw-core' ) . ' <strong>' . esc_html( $member_email_display ) . '</strong><br>';
-                                echo esc_html__( 'WordPress/Login Email:', 'tpw-core' ) . ' <strong>' . esc_html( $wp_email_display ) . '</strong><br>';
+                                echo '<strong>' . esc_html__( 'Linked account email status', 'tpw-ilungu-club' ) . '</strong><br>';
+                                echo esc_html__( 'Member Email:', 'tpw-ilungu-club' ) . ' <strong>' . esc_html( $member_email_display ) . '</strong><br>';
+                                echo esc_html__( 'WordPress/Login Email:', 'tpw-ilungu-club' ) . ' <strong>' . esc_html( $wp_email_display ) . '</strong><br>';
                                 if ( ! ( $linked_wp_user instanceof WP_User ) ) {
-                                    echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Warning: This member is linked to a WordPress account that could not be loaded.', 'tpw-core' ) . '</span>';
+                                    echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Warning: This member is linked to a WordPress account that could not be loaded.', 'tpw-ilungu-club' ) . '</span>';
                                 } else {
-                                    echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Warning: Member email and linked WordPress account email do not match.', 'tpw-core' ) . '</span>';
-                                    echo '<span style="display:block;margin-top:6px;">' . esc_html__( 'Password setup emails are blocked until the mismatch is resolved.', 'tpw-core' ) . '</span>';
+                                    echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Warning: Member email and linked WordPress account email do not match.', 'tpw-ilungu-club' ) . '</span>';
+                                    echo '<span style="display:block;margin-top:6px;">' . esc_html__( 'Password setup emails are blocked until the mismatch is resolved.', 'tpw-ilungu-club' ) . '</span>';
                                 }
                                 echo '</div>';
                             }
@@ -321,17 +321,17 @@ if ( ! $member ) {
                                 : 'margin-top:8px;color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;padding:8px;border-radius:6px;';
                             echo '<div class="description" style="' . esc_attr( $password_box_style ) . '">';
                             if ( $linked_wp_user instanceof WP_User && ! empty( $linked_wp_user->user_email ) ) {
-                                echo esc_html__( 'Password setup emails will be sent to:', 'tpw-core' ) . ' <strong>' . esc_html( $password_setup_recipient ) . '</strong><br>';
+                                echo esc_html__( 'Password setup emails will be sent to:', 'tpw-ilungu-club' ) . ' <strong>' . esc_html( $password_setup_recipient ) . '</strong><br>';
                             } else {
-                                echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Password setup is unavailable because the linked WordPress account does not have a valid email address.', 'tpw-core' ) . '</span>';
+                                echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Password setup is unavailable because the linked WordPress account does not have a valid email address.', 'tpw-ilungu-club' ) . '</span>';
                             }
                             if ( $linked_wp_user instanceof WP_User && ! empty( $linked_wp_user->user_email ) && $has_linked_email_drift ) {
-                                echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Resolve the email mismatch before sending a password setup link.', 'tpw-core' ) . '</span>';
+                                echo '<span style="display:block;margin-top:6px;font-weight:600;">' . esc_html__( 'Resolve the email mismatch before sending a password setup link.', 'tpw-ilungu-club' ) . '</span>';
                             }
                                     echo '</div>';
                             if ( $linked_wp_user instanceof WP_User && ! empty( $linked_wp_user->user_email ) ) {
                                 echo '<div class="tpw-inline-create-user" style="margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;">';
-                                echo '<button type="button" id="' . esc_attr($send_password_setup_btn_id) . '" class="tpw-btn tpw-btn-secondary"' . ( $can_submit_password_setup ? '' : ' disabled aria-disabled="true" title="' . esc_attr__( 'Resolve the email mismatch before sending a password setup link.', 'tpw-core' ) . '"' ) . '>Send Password Setup Link</button>';
+                                echo '<button type="button" id="' . esc_attr($send_password_setup_btn_id) . '" class="tpw-btn tpw-btn-secondary"' . ( $can_submit_password_setup ? '' : ' disabled aria-disabled="true" title="' . esc_attr__( 'Resolve the email mismatch before sending a password setup link.', 'tpw-ilungu-club' ) . '"' ) . '>Send Password Setup Link</button>';
                                 echo '</div>';
                             }
                                 }

@@ -12,7 +12,7 @@ class TPW_Elementor_Widget_Gallery extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return __( 'TPW Gallery', 'tpw-core' );
+        return __( 'TPW Gallery', 'tpw-ilungu-club' );
     }
 
     public function get_icon() {
@@ -29,32 +29,32 @@ class TPW_Elementor_Widget_Gallery extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'section_content',
             [
-                'label' => __( 'Content', 'tpw-core' ),
+                'label' => __( 'Content', 'tpw-ilungu-club' ),
             ]
         );
 
         $this->add_control(
             'gallery_id',
             [
-                'label'       => __( 'Gallery', 'tpw-core' ),
+                'label'       => __( 'Gallery', 'tpw-ilungu-club' ),
                 'type'        => \Elementor\Controls_Manager::SELECT2,
                 'options'     => [],
                 'multiple'    => false,
                 'label_block' => true,
-                'description' => __( 'Search by title to select a gallery.', 'tpw-core' ),
+                'description' => __( 'Search by title to select a gallery.', 'tpw-ilungu-club' ),
             ]
         );
 
         $this->add_control(
             'view',
             [
-                'label'   => __( 'View', 'tpw-core' ),
+                'label'   => __( 'View', 'tpw-ilungu-club' ),
                 'type'    => \Elementor\Controls_Manager::SELECT,
                 'default' => 'grid',
                 'options' => [
-                    'grid'  => __( 'Grid', 'tpw-core' ),
-                    'list'  => __( 'List', 'tpw-core' ),
-                    'story' => __( 'Story', 'tpw-core' ),
+                    'grid'  => __( 'Grid', 'tpw-ilungu-club' ),
+                    'list'  => __( 'List', 'tpw-ilungu-club' ),
+                    'story' => __( 'Story', 'tpw-ilungu-club' ),
                 ],
             ]
         );
@@ -62,20 +62,20 @@ class TPW_Elementor_Widget_Gallery extends \Elementor\Widget_Base {
         $this->add_control(
             'show_heading',
             [
-                'label'        => __( 'Show heading', 'tpw-core' ),
+                'label'        => __( 'Show heading', 'tpw-ilungu-club' ),
                 'type'         => \Elementor\Controls_Manager::SWITCHER,
-                'label_on'     => __( 'Yes', 'tpw-core' ),
-                'label_off'    => __( 'No', 'tpw-core' ),
+                'label_on'     => __( 'Yes', 'tpw-ilungu-club' ),
+                'label_off'    => __( 'No', 'tpw-ilungu-club' ),
                 'return_value' => 'yes',
                 'default'      => 'yes',
-                'description'  => __( 'Show the gallery title/description above the images.', 'tpw-core' ),
+                'description'  => __( 'Show the gallery title/description above the images.', 'tpw-ilungu-club' ),
             ]
         );
 
         $this->add_control(
             'columns',
             [
-                'label'     => __( 'Columns', 'tpw-core' ),
+                'label'     => __( 'Columns', 'tpw-ilungu-club' ),
                 'type'      => \Elementor\Controls_Manager::SELECT,
                 'default'   => '3',
                 'options'   => [
@@ -95,10 +95,10 @@ class TPW_Elementor_Widget_Gallery extends \Elementor\Widget_Base {
         $this->add_control(
             'paginate',
             [
-                'label'        => __( 'Paginate', 'tpw-core' ),
+                'label'        => __( 'Paginate', 'tpw-ilungu-club' ),
                 'type'         => \Elementor\Controls_Manager::SWITCHER,
-                'label_on'     => __( 'Yes', 'tpw-core' ),
-                'label_off'    => __( 'No', 'tpw-core' ),
+                'label_on'     => __( 'Yes', 'tpw-ilungu-club' ),
+                'label_off'    => __( 'No', 'tpw-ilungu-club' ),
                 'return_value' => 'yes',
                 'default'      => '',
                 'condition'    => [
@@ -110,13 +110,13 @@ class TPW_Elementor_Widget_Gallery extends \Elementor\Widget_Base {
         $this->add_control(
             'per_page',
             [
-                'label'       => __( 'Per page', 'tpw-core' ),
+                'label'       => __( 'Per page', 'tpw-ilungu-club' ),
                 'type'        => \Elementor\Controls_Manager::NUMBER,
                 'min'         => 1,
                 'max'         => 200,
                 'step'        => 1,
                 'default'     => 12,
-                'description' => __( 'Number of images per page when pagination is enabled.', 'tpw-core' ),
+                'description' => __( 'Number of images per page when pagination is enabled.', 'tpw-ilungu-club' ),
                 'condition'   => [
                     'view'     => [ 'grid', 'list' ],
                     'paginate' => 'yes',

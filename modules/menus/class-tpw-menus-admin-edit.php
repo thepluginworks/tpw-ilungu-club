@@ -26,8 +26,8 @@ class TPW_Menus_Admin_Edit {
             return;
         }
 
-        $header_title = __( 'Edit Menu', 'tpw-core' );
-        $header_desc  = __( 'Update menu details, courses, and pricing for your events.', 'tpw-core' );
+        $header_title = __( 'Edit Menu', 'tpw-ilungu-club' );
+        $header_desc  = __( 'Update menu details, courses, and pricing for your events.', 'tpw-ilungu-club' );
 
         if ( function_exists( 'tpw_admin_output_header' ) ) {
             tpw_admin_output_header( $header_title, $header_desc );

@@ -43,7 +43,7 @@ class TPW_Email_Queue {
 			$tabs = [];
 		}
 
-		$tabs['email-queue'] = __( 'Email Queue', 'tpw-core' );
+		$tabs['email-queue'] = __( 'Email Queue', 'tpw-ilungu-club' );
 
 		return $tabs;
 	}
@@ -219,7 +219,7 @@ class TPW_Email_Queue {
 				'queue_id'  => 0,
 				'action_id' => 0,
 				'error'     => (string) $wpdb->last_error,
-				'message'   => __( 'Failed to insert email queue row.', 'tpw-core' ),
+				'message'   => __( 'Failed to insert email queue row.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -300,7 +300,7 @@ class TPW_Email_Queue {
 				continue;
 			}
 
-			self::update_schedule_failure( $queue_id, self::build_scheduler_failure_message( __( 'Failed to schedule queued email processing.', 'tpw-core' ) ) );
+			self::update_schedule_failure( $queue_id, self::build_scheduler_failure_message( __( 'Failed to schedule queued email processing.', 'tpw-ilungu-club' ) ) );
 		}
 
 		return $scheduled;
@@ -409,10 +409,10 @@ class TPW_Email_Queue {
 			$result = TPW_Email::dispatch_mail( $to, $subject, $body, $headers, $attachments, $context );
 			$sent = (bool) $result;
 			if ( ! $sent ) {
-				$error_message = __( 'Immediate dispatch returned false.', 'tpw-core' );
+				$error_message = __( 'Immediate dispatch returned false.', 'tpw-ilungu-club' );
 			}
 		} else {
-			$error_message = __( 'TPW_Email dispatcher unavailable.', 'tpw-core' );
+			$error_message = __( 'TPW_Email dispatcher unavailable.', 'tpw-ilungu-club' );
 		}
 
 		$attempts = isset( $row['attempts'] ) ? (int) $row['attempts'] + 1 : 1;
@@ -470,8 +470,8 @@ class TPW_Email_Queue {
 			if ( false === $scheduled_action_id ) {
 				self::update_schedule_failure( $queue_id, sprintf(
 					/* translators: %s: original send failure message */
-					__( 'Retry scheduling failed after email send failure: %s', 'tpw-core' ),
-					$error_message !== '' ? $error_message : __( 'Unknown send failure.', 'tpw-core' )
+					__( 'Retry scheduling failed after email send failure: %s', 'tpw-ilungu-club' ),
+					$error_message !== '' ? $error_message : __( 'Unknown send failure.', 'tpw-ilungu-club' )
 				) );
 			}
 		}
@@ -642,12 +642,12 @@ class TPW_Email_Queue {
 		$base_url = function_exists( 'tpw_core_build_settings_tab_url' ) ? tpw_core_build_settings_tab_url( 'email-queue' ) : '';
 		$action = esc_url( admin_url( 'admin-post.php' ) );
 		$statuses = [
-			'all'        => __( 'All', 'tpw-core' ),
-			'pending'    => __( 'Pending', 'tpw-core' ),
-			'processing' => __( 'Processing', 'tpw-core' ),
-			'sent'       => __( 'Sent', 'tpw-core' ),
-			'failed'     => __( 'Failed', 'tpw-core' ),
-			'cancelled'  => __( 'Cancelled', 'tpw-core' ),
+			'all'        => __( 'All', 'tpw-ilungu-club' ),
+			'pending'    => __( 'Pending', 'tpw-ilungu-club' ),
+			'processing' => __( 'Processing', 'tpw-ilungu-club' ),
+			'sent'       => __( 'Sent', 'tpw-ilungu-club' ),
+			'failed'     => __( 'Failed', 'tpw-ilungu-club' ),
+			'cancelled'  => __( 'Cancelled', 'tpw-ilungu-club' ),
 		];
 
 		if ( isset( $_GET['tpw_queue_notice'] ) ) {
@@ -655,23 +655,23 @@ class TPW_Email_Queue {
 			if ( '' !== $notice ) {
 				echo '<div class="notice notice-success is-dismissible"><p>';
 				if ( 'processed' === $notice ) {
-					esc_html_e( 'Email queue reconciliation triggered.', 'tpw-core' );
+					esc_html_e( 'Email queue reconciliation triggered.', 'tpw-ilungu-club' );
 				} elseif ( 'retried' === $notice ) {
-					esc_html_e( 'Queued email moved back to pending and rescheduled.', 'tpw-core' );
+					esc_html_e( 'Queued email moved back to pending and rescheduled.', 'tpw-ilungu-club' );
 				} elseif ( 'cancelled' === $notice ) {
-					esc_html_e( 'Queued email cancelled.', 'tpw-core' );
+					esc_html_e( 'Queued email cancelled.', 'tpw-ilungu-club' );
 				} elseif ( 'cleared' === $notice ) {
-					esc_html_e( 'Old sent queue items cleared.', 'tpw-core' );
+					esc_html_e( 'Old sent queue items cleared.', 'tpw-ilungu-club' );
 				} else {
-					esc_html_e( 'Email queue action completed.', 'tpw-core' );
+					esc_html_e( 'Email queue action completed.', 'tpw-ilungu-club' );
 				}
 				echo '</p></div>';
 			}
 		}
 		?>
 		<div class="tpw-email-queue-tab">
-			<p><?php esc_html_e( 'Queued outbound emails are stored durably before delivery. This screen is the business-level email payload and status view. Scheduled Actions remains the infrastructure view for job execution.', 'tpw-core' ); ?></p>
-			<p><a class="button button-secondary" href="<?php echo esc_url( admin_url( 'tools.php?page=action-scheduler' ) ); ?>"><?php esc_html_e( 'View Scheduled Actions', 'tpw-core' ); ?></a></p>
+			<p><?php esc_html_e( 'Queued outbound emails are stored durably before delivery. This screen is the business-level email payload and status view. Scheduled Actions remains the infrastructure view for job execution.', 'tpw-ilungu-club' ); ?></p>
+			<p><a class="button button-secondary" href="<?php echo esc_url( admin_url( 'tools.php?page=action-scheduler' ) ); ?>"><?php esc_html_e( 'View Scheduled Actions', 'tpw-ilungu-club' ); ?></a></p>
 
 			<p>
 				<?php foreach ( $statuses as $status_key => $label ) : ?>
@@ -684,33 +684,33 @@ class TPW_Email_Queue {
 				<?php wp_nonce_field( 'tpw_core_process_email_queue', 'tpw_core_email_queue_nonce' ); ?>
 				<input type="hidden" name="action" value="tpw_core_process_email_queue" />
 				<?php if ( function_exists( 'tpw_core_render_settings_context_fields' ) ) { tpw_core_render_settings_context_fields( 'email-queue' ); } ?>
-				<?php submit_button( __( 'Reconcile Queue Now', 'tpw-core' ), 'secondary', 'tpw_process_email_queue', false ); ?>
+				<?php submit_button( __( 'Reconcile Queue Now', 'tpw-ilungu-club' ), 'secondary', 'tpw_process_email_queue', false ); ?>
 			</form>
 
 			<form method="post" action="<?php echo $action; ?>" style="display:inline-block;margin:0 0 1rem;">
 				<?php wp_nonce_field( 'tpw_core_clear_sent_queue_items', 'tpw_core_clear_sent_queue_nonce' ); ?>
 				<input type="hidden" name="action" value="tpw_core_clear_sent_queue_items" />
 				<?php if ( function_exists( 'tpw_core_render_settings_context_fields' ) ) { tpw_core_render_settings_context_fields( 'email-queue' ); } ?>
-				<?php submit_button( __( 'Clear Sent Queue Items', 'tpw-core' ), 'delete', 'tpw_clear_sent_queue_items', false, [ 'onclick' => "return confirm('Are you sure you want to clear old sent queue items?');" ] ); ?>
+				<?php submit_button( __( 'Clear Sent Queue Items', 'tpw-ilungu-club' ), 'delete', 'tpw_clear_sent_queue_items', false, [ 'onclick' => "return confirm('Are you sure you want to clear old sent queue items?');" ] ); ?>
 			</form>
 
 			<table class="widefat fixed striped">
 				<thead>
 					<tr>
-						<th scope="col"><?php esc_html_e( 'Created', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Recipient', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Subject', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Context', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Status', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Attempts', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Scheduled Action', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Last Error', 'tpw-core' ); ?></th>
-						<th scope="col"><?php esc_html_e( 'Actions', 'tpw-core' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Created', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Recipient', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Subject', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Context', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Status', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Attempts', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Scheduled Action', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Last Error', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Actions', 'tpw-ilungu-club' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php if ( empty( $items ) ) : ?>
-						<tr><td colspan="9"><?php esc_html_e( 'No queue items found.', 'tpw-core' ); ?></td></tr>
+						<tr><td colspan="9"><?php esc_html_e( 'No queue items found.', 'tpw-ilungu-club' ); ?></td></tr>
 					<?php else : ?>
 						<?php foreach ( $items as $item ) : ?>
 							<tr>
@@ -724,10 +724,10 @@ class TPW_Email_Queue {
 								<td><?php echo esc_html( (string) $item->last_error ); ?></td>
 								<td>
 									<?php if ( 'failed' === $item->status ) : ?>
-										<a class="button button-secondary" href="<?php echo esc_url( wp_nonce_url( add_query_arg( [ 'action' => 'tpw_core_retry_email_queue_item', 'queue_id' => (int) $item->id, 'tpw_settings_context' => isset( tpw_core_get_settings_view_context()['mode'] ) ? tpw_core_get_settings_view_context()['mode'] : 'admin', 'tpw_settings_return_url' => add_query_arg( [ 'queue_status' => $status, 'queue_page' => $page ], $base_url ) ], admin_url( 'admin-post.php' ) ), 'tpw_core_retry_email_queue_item', 'tpw_core_email_queue_nonce' ) ); ?>"><?php esc_html_e( 'Retry', 'tpw-core' ); ?></a>
+										<a class="button button-secondary" href="<?php echo esc_url( wp_nonce_url( add_query_arg( [ 'action' => 'tpw_core_retry_email_queue_item', 'queue_id' => (int) $item->id, 'tpw_settings_context' => isset( tpw_core_get_settings_view_context()['mode'] ) ? tpw_core_get_settings_view_context()['mode'] : 'admin', 'tpw_settings_return_url' => add_query_arg( [ 'queue_status' => $status, 'queue_page' => $page ], $base_url ) ], admin_url( 'admin-post.php' ) ), 'tpw_core_retry_email_queue_item', 'tpw_core_email_queue_nonce' ) ); ?>"><?php esc_html_e( 'Retry', 'tpw-ilungu-club' ); ?></a>
 									<?php endif; ?>
 									<?php if ( in_array( $item->status, [ 'pending', 'failed' ], true ) ) : ?>
-										<a class="button button-link-delete" href="<?php echo esc_url( wp_nonce_url( add_query_arg( [ 'action' => 'tpw_core_cancel_email_queue_item', 'queue_id' => (int) $item->id, 'tpw_settings_context' => isset( tpw_core_get_settings_view_context()['mode'] ) ? tpw_core_get_settings_view_context()['mode'] : 'admin', 'tpw_settings_return_url' => add_query_arg( [ 'queue_status' => $status, 'queue_page' => $page ], $base_url ) ], admin_url( 'admin-post.php' ) ), 'tpw_core_cancel_email_queue_item', 'tpw_core_email_queue_nonce' ) ); ?>"><?php esc_html_e( 'Cancel', 'tpw-core' ); ?></a>
+										<a class="button button-link-delete" href="<?php echo esc_url( wp_nonce_url( add_query_arg( [ 'action' => 'tpw_core_cancel_email_queue_item', 'queue_id' => (int) $item->id, 'tpw_settings_context' => isset( tpw_core_get_settings_view_context()['mode'] ) ? tpw_core_get_settings_view_context()['mode'] : 'admin', 'tpw_settings_return_url' => add_query_arg( [ 'queue_status' => $status, 'queue_page' => $page ], $base_url ) ], admin_url( 'admin-post.php' ) ), 'tpw_core_cancel_email_queue_item', 'tpw_core_email_queue_nonce' ) ); ?>"><?php esc_html_e( 'Cancel', 'tpw-ilungu-club' ); ?></a>
 									<?php endif; ?>
 								</td>
 							</tr>
@@ -749,7 +749,7 @@ class TPW_Email_Queue {
 
 	public static function handle_process_queue() {
 		if ( ! function_exists( 'tpw_core_current_user_can_manage_settings' ) || ! tpw_core_current_user_can_manage_settings() ) {
-			wp_die( __( 'You do not have permission to manage settings.', 'tpw-core' ) );
+			wp_die( __( 'You do not have permission to manage settings.', 'tpw-ilungu-club' ) );
 		}
 
 		check_admin_referer( 'tpw_core_process_email_queue', 'tpw_core_email_queue_nonce' );
@@ -759,7 +759,7 @@ class TPW_Email_Queue {
 
 	public static function handle_retry_item() {
 		if ( ! function_exists( 'tpw_core_current_user_can_manage_settings' ) || ! tpw_core_current_user_can_manage_settings() ) {
-			wp_die( __( 'You do not have permission to manage settings.', 'tpw-core' ) );
+			wp_die( __( 'You do not have permission to manage settings.', 'tpw-ilungu-club' ) );
 		}
 
 		check_admin_referer( 'tpw_core_retry_email_queue_item', 'tpw_core_email_queue_nonce' );
@@ -772,7 +772,7 @@ class TPW_Email_Queue {
 
 	public static function handle_cancel_item() {
 		if ( ! function_exists( 'tpw_core_current_user_can_manage_settings' ) || ! tpw_core_current_user_can_manage_settings() ) {
-			wp_die( __( 'You do not have permission to manage settings.', 'tpw-core' ) );
+			wp_die( __( 'You do not have permission to manage settings.', 'tpw-ilungu-club' ) );
 		}
 
 		check_admin_referer( 'tpw_core_cancel_email_queue_item', 'tpw_core_email_queue_nonce' );
@@ -785,7 +785,7 @@ class TPW_Email_Queue {
 
 	public static function handle_clear_sent_items() {
 		if ( ! function_exists( 'tpw_core_current_user_can_manage_settings' ) || ! tpw_core_current_user_can_manage_settings() ) {
-			wp_die( __( 'You do not have permission to manage settings.', 'tpw-core' ) );
+			wp_die( __( 'You do not have permission to manage settings.', 'tpw-ilungu-club' ) );
 		}
 
 		check_admin_referer( 'tpw_core_clear_sent_queue_items', 'tpw_core_clear_sent_queue_nonce' );
@@ -856,8 +856,8 @@ class TPW_Email_Queue {
 			return [
 				'status'     => 'failed',
 				'action_id'  => 0,
-				'diagnostic' => __( 'Failed to schedule queued email processing. Scheduler wrapper unavailable.', 'tpw-core' ),
-				'message'    => __( 'Failed to schedule queued email processing.', 'tpw-core' ),
+				'diagnostic' => __( 'Failed to schedule queued email processing. Scheduler wrapper unavailable.', 'tpw-ilungu-club' ),
+				'message'    => __( 'Failed to schedule queued email processing.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -866,7 +866,7 @@ class TPW_Email_Queue {
 				'status'     => 'deferred',
 				'action_id'  => 0,
 				'diagnostic' => self::build_scheduler_waiting_message(),
-				'message'    => __( 'Email queued for sending. Processing will begin when Action Scheduler is ready.', 'tpw-core' ),
+				'message'    => __( 'Email queued for sending. Processing will begin when Action Scheduler is ready.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -877,15 +877,15 @@ class TPW_Email_Queue {
 					'status'     => 'deferred',
 					'action_id'  => 0,
 					'diagnostic' => self::build_scheduler_waiting_message(),
-					'message'    => __( 'Email queued for sending. Processing will begin when Action Scheduler is ready.', 'tpw-core' ),
+					'message'    => __( 'Email queued for sending. Processing will begin when Action Scheduler is ready.', 'tpw-ilungu-club' ),
 				];
 			}
 
 			return [
 				'status'     => 'failed',
 				'action_id'  => 0,
-				'diagnostic' => self::build_scheduler_failure_message( __( 'Failed to schedule queued email processing.', 'tpw-core' ) ),
-				'message'    => __( 'Failed to schedule queued email processing. The queue row is still pending and includes scheduler diagnostics.', 'tpw-core' ),
+				'diagnostic' => self::build_scheduler_failure_message( __( 'Failed to schedule queued email processing.', 'tpw-ilungu-club' ) ),
+				'message'    => __( 'Failed to schedule queued email processing. The queue row is still pending and includes scheduler diagnostics.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -893,7 +893,7 @@ class TPW_Email_Queue {
 			'status'     => 'scheduled',
 			'action_id'  => (int) $action_id,
 			'diagnostic' => '',
-			'message'    => __( 'Email queued for sending.', 'tpw-core' ),
+			'message'    => __( 'Email queued for sending.', 'tpw-ilungu-club' ),
 		];
 	}
 
@@ -1019,7 +1019,7 @@ class TPW_Email_Queue {
 	}
 
 	protected static function build_scheduler_waiting_message() {
-		$message = __( 'Queued email is waiting for Action Scheduler initialization.', 'tpw-core' );
+		$message = __( 'Queued email is waiting for Action Scheduler initialization.', 'tpw-ilungu-club' );
 
 		if ( class_exists( 'TPW_Core_Scheduler' ) ) {
 			$last_error = trim( (string) TPW_Core_Scheduler::get_last_error() );
@@ -1034,7 +1034,7 @@ class TPW_Email_Queue {
 	protected static function build_scheduler_failure_message( $message ) {
 		$message = trim( (string) $message );
 		if ( '' === $message ) {
-			$message = __( 'Failed to schedule queued email processing.', 'tpw-core' );
+			$message = __( 'Failed to schedule queued email processing.', 'tpw-ilungu-club' );
 		}
 
 		if ( ! class_exists( 'TPW_Core_Scheduler' ) ) {

@@ -187,7 +187,7 @@ class TPW_Upload_Pages_Schema_Repair_Test extends WP_UnitTestCase {
 		$this->assertIsString( $source );
 		$this->assertStringNotContainsString( "'message'=>'Delete failed.' . \$err", $source );
 		$this->assertStringContainsString( "error_log( 'TPW Upload Pages: unable to delete file link. Database error: ' . \$wpdb->last_error );", $source );
-		$this->assertStringContainsString( "wp_send_json_error( [ 'message' => __( 'Delete failed. Please try again or contact an administrator.', 'tpw-core' ) ], 500 );", $source );
+		$this->assertStringContainsString( "wp_send_json_error( [ 'message' => __( 'Delete failed. Please try again or contact an administrator.', 'tpw-ilungu-club' ) ], 500 );", $source );
 	}
 
 	public function test_release_compatibility_claims_match_loaded_runtime() {

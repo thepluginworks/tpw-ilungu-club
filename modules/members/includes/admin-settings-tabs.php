@@ -28,14 +28,14 @@ if ( ! function_exists( 'tpw_members_render_settings_tabs' ) ) {
 		$GLOBALS['active_tab_for_tpw_tabs'] = $active;
 
 	echo '<h3 class="tpw-tabs">';
-	echo $mk( __( 'General', 'tpw-core' ), 'general', [ 'action' => 'settings', 'tab' => 'general' ] );
-	echo $mk( __( 'Privacy', 'tpw-core' ), 'privacy', [ 'action' => 'settings', 'tab' => 'privacy' ] );
-	echo $mk( __( 'Sign-Ups', 'tpw-core' ), 'signups', [ 'action' => 'settings', 'tab' => 'signups' ] );
-	echo $mk( __( 'Field Settings', 'tpw-core' ), 'field_settings', [ 'action' => 'field_settings' ] );
-	echo $mk( __( 'Directory Field Visibility', 'tpw-core' ), 'visibility', [ 'action' => 'member-field-visibility' ] );
-	echo $mk( __( 'Member Profile', 'tpw-core' ), 'profile', [ 'action' => 'settings', 'tab' => 'profile' ] );
-	echo $mk( __( 'Address Lookup', 'tpw-core' ), 'postcodes', [ 'action' => 'settings', 'tab' => 'postcodes' ] );
-	echo $mk( __( 'Help', 'tpw-core' ), 'help', [ 'action' => 'settings', 'tab' => 'help' ] );
+	echo $mk( __( 'General', 'tpw-ilungu-club' ), 'general', [ 'action' => 'settings', 'tab' => 'general' ] );
+	echo $mk( __( 'Privacy', 'tpw-ilungu-club' ), 'privacy', [ 'action' => 'settings', 'tab' => 'privacy' ] );
+	echo $mk( __( 'Sign-Ups', 'tpw-ilungu-club' ), 'signups', [ 'action' => 'settings', 'tab' => 'signups' ] );
+	echo $mk( __( 'Field Settings', 'tpw-ilungu-club' ), 'field_settings', [ 'action' => 'field_settings' ] );
+	echo $mk( __( 'Directory Field Visibility', 'tpw-ilungu-club' ), 'visibility', [ 'action' => 'member-field-visibility' ] );
+	echo $mk( __( 'Member Profile', 'tpw-ilungu-club' ), 'profile', [ 'action' => 'settings', 'tab' => 'profile' ] );
+	echo $mk( __( 'Address Lookup', 'tpw-ilungu-club' ), 'postcodes', [ 'action' => 'settings', 'tab' => 'postcodes' ] );
+	echo $mk( __( 'Help', 'tpw-ilungu-club' ), 'help', [ 'action' => 'settings', 'tab' => 'help' ] );
 	echo '</h3>';
 	}
 }

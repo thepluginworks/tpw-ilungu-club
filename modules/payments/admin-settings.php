@@ -163,22 +163,22 @@ if ( ! function_exists( 'tpw_core_payments_get_frontend_detail_method_map' ) ) {
 
         return [
             'bacs' => [
-                'label'    => __( 'Bank Transfer', 'tpw-core' ),
+                'label'    => __( 'Bank Transfer', 'tpw-ilungu-club' ),
                 'file'     => $base . 'class-tpw-bacs-settings.php',
                 'callback' => [ 'TPW_BACS_Settings', 'render_settings_form' ],
             ],
             'cheque' => [
-                'label'    => __( 'Cheque', 'tpw-core' ),
+                'label'    => __( 'Cheque', 'tpw-ilungu-club' ),
                 'file'     => $base . 'class-tpw-cheque-settings.php',
                 'callback' => [ 'TPW_Cheque_Settings', 'render_settings_form' ],
             ],
             'cash' => [
-                'label'    => __( 'Cash', 'tpw-core' ),
+                'label'    => __( 'Cash', 'tpw-ilungu-club' ),
                 'file'     => $base . 'class-tpw-cash-settings.php',
                 'callback' => [ 'TPW_Cash_Settings', 'render_settings_form' ],
             ],
             'card-on-the-day' => [
-                'label'    => __( 'Card on the day', 'tpw-core' ),
+                'label'    => __( 'Card on the day', 'tpw-ilungu-club' ),
                 'file'     => $base . 'class-tpw-card-on-the-day-settings.php',
                 'callback' => [ 'TPW_Card_On_The_Day_Settings', 'render_settings_form' ],
             ],
@@ -196,7 +196,7 @@ if ( ! function_exists( 'tpw_core_payments_get_method_label' ) ) {
         }
 
         $fixed_names = [
-            'square' => __( 'Square', 'tpw-core' ),
+            'square' => __( 'Square', 'tpw-ilungu-club' ),
         ];
 
         if ( isset( $fixed_names[ $method_slug ] ) ) {
@@ -222,13 +222,13 @@ if ( ! function_exists( 'tpw_core_payments_get_frontend_fallback_message' ) ) {
         switch ( sanitize_key( (string) $method_slug ) ) {
             case 'square':
                 if ( function_exists( 'tpw_core_get_square_settings_route_owner' ) && 'addon' === tpw_core_get_square_settings_route_owner() ) {
-                    return __( 'Square settings are currently owned by the TPW Square Gateway add-on. Use the existing admin route until a front-end-safe compatibility wrapper is available.', 'tpw-core' );
+                    return __( 'Square settings are currently owned by the TPW Square Gateway add-on. Use the existing admin route until a front-end-safe compatibility wrapper is available.', 'tpw-ilungu-club' );
                 }
 
-                return __( 'Square configuration includes credential fields and still relies on the existing admin settings surface. Use the admin route for now.', 'tpw-core' );
+                return __( 'Square configuration includes credential fields and still relies on the existing admin settings surface. Use the admin route for now.', 'tpw-ilungu-club' );
 
             default:
-                return __( 'This payment method is registered, but a front-end-safe configuration screen is not available yet. Use the existing admin route for now.', 'tpw-core' );
+                return __( 'This payment method is registered, but a front-end-safe configuration screen is not available yet. Use the existing admin route for now.', 'tpw-ilungu-club' );
         }
     }
 }
@@ -264,20 +264,20 @@ if ( ! function_exists( 'tpw_core_payments_render_frontend_method_detail' ) ) {
 
         echo '<div class="tpw-payment-method-detail">';
         echo '<div class="tpw-payment-method-detail__header">';
-        echo '<p class="tpw-payment-method-detail__eyebrow">' . esc_html__( 'Payment Methods', 'tpw-core' ) . '</p>';
+        echo '<p class="tpw-payment-method-detail__eyebrow">' . esc_html__( 'Payment Methods', 'tpw-ilungu-club' ) . '</p>';
         echo '<div class="tpw-payment-method-detail__header-row">';
         echo '<div>';
         echo '<h4 class="tpw-payment-method-detail__title">' . esc_html( $method_label ) . '</h4>';
-        echo '<p class="tpw-payment-method-detail__intro">' . esc_html__( 'Configure this payment method without leaving the iLungu Club Settings workspace.', 'tpw-core' ) . '</p>';
+        echo '<p class="tpw-payment-method-detail__intro">' . esc_html__( 'Configure this payment method without leaving the iLungu Club Settings workspace.', 'tpw-ilungu-club' ) . '</p>';
         echo '</div>';
         if ( '' !== $back_url ) {
-            echo '<a class="button button-secondary" href="' . esc_url( $back_url ) . '">' . esc_html__( 'Back to Payment Methods', 'tpw-core' ) . '</a>';
+            echo '<a class="button button-secondary" href="' . esc_url( $back_url ) . '">' . esc_html__( 'Back to Payment Methods', 'tpw-ilungu-club' ) . '</a>';
         }
         echo '</div>';
         echo '</div>';
 
         if ( ! $can_manage_page ) {
-            echo '<div class="notice notice-error"><p>' . esc_html__( 'You do not have permission to configure payment methods.', 'tpw-core' ) . '</p></div>';
+            echo '<div class="notice notice-error"><p>' . esc_html__( 'You do not have permission to configure payment methods.', 'tpw-ilungu-club' ) . '</p></div>';
             echo '</div>';
             return true;
         }
@@ -299,7 +299,7 @@ if ( ! function_exists( 'tpw_core_payments_render_frontend_method_detail' ) ) {
         echo '<div class="notice notice-warning"><p>' . esc_html( tpw_core_payments_get_frontend_fallback_message( $method_slug ) ) . '</p></div>';
 
         if ( '' !== $admin_url ) {
-            echo '<p><a class="button button-primary" href="' . esc_url( $admin_url ) . '">' . esc_html__( 'Open Admin Settings', 'tpw-core' ) . '</a></p>';
+            echo '<p><a class="button button-primary" href="' . esc_url( $admin_url ) . '">' . esc_html__( 'Open Admin Settings', 'tpw-ilungu-club' ) . '</a></p>';
         }
 
         echo '</div>';
@@ -314,7 +314,7 @@ add_action( 'tpw_core_settings_tab_content_payment-methods', function( $active_t
         : current_user_can( 'manage_options' );
 
     if ( ! $can_manage ) {
-        echo '<p>' . esc_html__( 'You do not have permission to view this page.', 'tpw-core' ) . '</p>';
+        echo '<p>' . esc_html__( 'You do not have permission to view this page.', 'tpw-ilungu-club' ) . '</p>';
         return;
     }
 
@@ -343,5 +343,5 @@ add_action( 'tpw_core_settings_tab_content_payment-methods', function( $active_t
         return;
     }
 
-    echo '<p>' . esc_html__( 'Payment Methods UI is unavailable (missing admin renderer).', 'tpw-core' ) . '</p>';
+    echo '<p>' . esc_html__( 'Payment Methods UI is unavailable (missing admin renderer).', 'tpw-ilungu-club' ) . '</p>';
 }, 10, 1 );

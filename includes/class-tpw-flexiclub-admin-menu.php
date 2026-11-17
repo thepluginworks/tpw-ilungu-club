@@ -137,8 +137,8 @@ class iLungu_Club_Admin_Menu {
 		}
 
 		add_menu_page(
-			__( 'iLungu™ Club', 'tpw-core' ),
-			__( 'iLungu™ Club', 'tpw-core' ),
+			__( 'iLungu™ Club', 'tpw-ilungu-club' ),
+			__( 'iLungu™ Club', 'tpw-ilungu-club' ),
 			'read',
 			self::TOP_LEVEL_SLUG,
 			[ __CLASS__, 'render_dashboard' ],
@@ -149,8 +149,8 @@ class iLungu_Club_Admin_Menu {
 		if ( $dashboard_visible ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Dashboard', 'tpw-core' ),
-				__( 'Dashboard', 'tpw-core' ),
+				__( 'Dashboard', 'tpw-ilungu-club' ),
+				__( 'Dashboard', 'tpw-ilungu-club' ),
 				'manage_options',
 				self::TOP_LEVEL_SLUG,
 				[ __CLASS__, 'render_dashboard' ]
@@ -160,8 +160,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::PAGE_MEMBERS, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Manage Members', 'tpw-core' ),
-				__( 'Manage Members', 'tpw-core' ),
+				__( 'Manage Members', 'tpw-ilungu-club' ),
+				__( 'Manage Members', 'tpw-ilungu-club' ),
 				'read',
 				self::PAGE_MEMBERS,
 				[ __CLASS__, 'render_bridge_page' ]
@@ -171,8 +171,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::NOTICEBOARD_ROUTE, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Noticeboard', 'tpw-core' ),
-				__( 'Noticeboard', 'tpw-core' ),
+				__( 'Noticeboard', 'tpw-ilungu-club' ),
+				__( 'Noticeboard', 'tpw-ilungu-club' ),
 				'edit_posts',
 				self::NOTICEBOARD_ROUTE
 			);
@@ -181,8 +181,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::PAGE_GALLERY, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Gallery Admin', 'tpw-core' ),
-				__( 'Gallery Admin', 'tpw-core' ),
+				__( 'Gallery Admin', 'tpw-ilungu-club' ),
+				__( 'Gallery Admin', 'tpw-ilungu-club' ),
 				'read',
 				self::PAGE_GALLERY,
 				[ __CLASS__, 'render_bridge_page' ]
@@ -192,8 +192,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::PAGE_UPLOADS, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Upload Pages / Archive', 'tpw-core' ),
-				__( 'Upload Pages / Archive', 'tpw-core' ),
+				__( 'Upload Pages / Archive', 'tpw-ilungu-club' ),
+				__( 'Upload Pages / Archive', 'tpw-ilungu-club' ),
 				'read',
 				self::PAGE_UPLOADS,
 				[ __CLASS__, 'render_bridge_page' ]
@@ -203,8 +203,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::PAGE_MENU_MANAGER, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Menu Permissions', 'tpw-core' ),
-				__( 'Menu Permissions', 'tpw-core' ),
+				__( 'Menu Permissions', 'tpw-ilungu-club' ),
+				__( 'Menu Permissions', 'tpw-ilungu-club' ),
 				'read',
 				self::PAGE_MENU_MANAGER,
 				[ __CLASS__, 'render_bridge_page' ]
@@ -214,8 +214,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::SYSTEM_PAGES_ROUTE, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'System Pages', 'tpw-core' ),
-				__( 'System Pages', 'tpw-core' ),
+				__( 'System Pages', 'tpw-ilungu-club' ),
+				__( 'System Pages', 'tpw-ilungu-club' ),
 				'manage_options',
 				self::SYSTEM_PAGES_ROUTE
 			);
@@ -224,8 +224,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::PAYMENTS_ROUTE, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Payments', 'tpw-core' ),
-				__( 'Payments', 'tpw-core' ),
+				__( 'Payments', 'tpw-ilungu-club' ),
+				__( 'Payments', 'tpw-ilungu-club' ),
 				'manage_options',
 				self::PAYMENTS_ROUTE
 			);
@@ -234,8 +234,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::SETTINGS_ROUTE, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Settings', 'tpw-core' ),
-				__( 'Settings', 'tpw-core' ),
+				__( 'Settings', 'tpw-ilungu-club' ),
+				__( 'Settings', 'tpw-ilungu-club' ),
 				'manage_options',
 				self::PAGE_SETTINGS,
 				'tpw_core_render_settings_page'
@@ -245,8 +245,8 @@ class iLungu_Club_Admin_Menu {
 		if ( in_array( self::PAGE_LOGS, $visible_items, true ) ) {
 			add_submenu_page(
 				self::TOP_LEVEL_SLUG,
-				__( 'Logs', 'tpw-core' ),
-				__( 'Logs', 'tpw-core' ),
+				__( 'Logs', 'tpw-ilungu-club' ),
+				__( 'Logs', 'tpw-ilungu-club' ),
 				'manage_options',
 				self::PAGE_LOGS,
 				[ __CLASS__, 'render_logs_page' ]
@@ -273,7 +273,7 @@ class iLungu_Club_Admin_Menu {
 		if ( $template && file_exists( $template ) ) {
 			include $template;
 		} else {
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'iLungu Club Dashboard template is missing.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'iLungu Club Dashboard template is missing.', 'tpw-ilungu-club' ) . '</p></div>';
 		}
 
 		echo '</div>';
@@ -313,13 +313,13 @@ class iLungu_Club_Admin_Menu {
 
 		if ( ! is_user_logged_in() ) {
 			return self::render_frontend_permission_state(
-				esc_html__( 'Please sign in with a club administrator account to access the iLungu Club workspace.', 'tpw-core' )
+				esc_html__( 'Please sign in with a club administrator account to access the iLungu Club workspace.', 'tpw-ilungu-club' )
 			);
 		}
 
 		if ( ! self::current_user_can_frontend_dashboard() ) {
 			return self::render_frontend_permission_state(
-				esc_html__( 'You do not have permission to access the iLungu Club workspace.', 'tpw-core' )
+				esc_html__( 'You do not have permission to access the iLungu Club workspace.', 'tpw-ilungu-club' )
 			);
 		}
 
@@ -329,8 +329,8 @@ class iLungu_Club_Admin_Menu {
 		if ( '' !== $control_section && ! self::current_user_can_tpw_control_section( $control_section ) ) {
 			return self::render_frontend_permission_state(
 				'menu-manager' === $control_section
-					? esc_html__( 'You do not have permission to access the Menu Management workspace.', 'tpw-core' )
-					: esc_html__( 'You do not have permission to access the Archival System workspace.', 'tpw-core' )
+					? esc_html__( 'You do not have permission to access the Menu Management workspace.', 'tpw-ilungu-club' )
+					: esc_html__( 'You do not have permission to access the Archival System workspace.', 'tpw-ilungu-club' )
 			);
 		}
 
@@ -349,7 +349,7 @@ class iLungu_Club_Admin_Menu {
 		if ( $template && file_exists( $template ) ) {
 			include $template;
 		} else {
-			echo '<div class="tpw-card ilungu-club-dashboard__permission-state"><h2>' . esc_html__( 'iLungu Club workspace unavailable', 'tpw-core' ) . '</h2><p>' . esc_html__( 'The front-end iLungu Club dashboard template could not be found.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="tpw-card ilungu-club-dashboard__permission-state"><h2>' . esc_html__( 'iLungu Club workspace unavailable', 'tpw-ilungu-club' ) . '</h2><p>' . esc_html__( 'The front-end iLungu Club dashboard template could not be found.', 'tpw-ilungu-club' ) . '</p></div>';
 		}
 
 		echo '</div>';
@@ -361,8 +361,8 @@ class iLungu_Club_Admin_Menu {
 		ob_start();
 		echo '<div class="tpw-frontend-ui ilungu-club-dashboard ilungu-club-dashboard--frontend --frontend ilungu-club-portal-page flexiclub-portal-page" style="' . esc_attr( function_exists( 'tpw_core_build_ui_theme_style_attr' ) ? tpw_core_build_ui_theme_style_attr() : '' ) . '">';
 		echo '<div class="tpw-card ilungu-club-dashboard__permission-state">';
-		echo '<span class="ilungu-club-dashboard__status ilungu-club-dashboard__status--warning">' . esc_html__( 'Access restricted', 'tpw-core' ) . '</span>';
-		echo '<h2>' . esc_html__( 'iLungu Club workspace', 'tpw-core' ) . '</h2>';
+		echo '<span class="ilungu-club-dashboard__status ilungu-club-dashboard__status--warning">' . esc_html__( 'Access restricted', 'tpw-ilungu-club' ) . '</span>';
+		echo '<h2>' . esc_html__( 'iLungu Club workspace', 'tpw-ilungu-club' ) . '</h2>';
 		echo '<p>' . esc_html( $message ) . '</p>';
 		echo '</div>';
 		echo '</div>';
@@ -373,15 +373,15 @@ class iLungu_Club_Admin_Menu {
 	public static function render_bridge_page() {
 		$config = self::get_current_bridge_config();
 		if ( empty( $config ) ) {
-			wp_die( esc_html__( 'Unknown iLungu Club bridge page.', 'tpw-core' ) );
+			wp_die( esc_html__( 'Unknown iLungu Club bridge page.', 'tpw-ilungu-club' ) );
 		}
 
 		if ( ! self::current_user_can_bridge( $config ) ) {
 			self::render_page_start(
 				$config['title'],
-				esc_html__( 'You do not have permission to access this iLungu Club bridge page.', 'tpw-core' )
+				esc_html__( 'You do not have permission to access this iLungu Club bridge page.', 'tpw-ilungu-club' )
 			);
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'Access denied.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Access denied.', 'tpw-ilungu-club' ) . '</p></div>';
 			self::render_page_end();
 			return;
 		}
@@ -409,15 +409,15 @@ class iLungu_Club_Admin_Menu {
 		echo '<div class="tpw-card">';
 		echo '<table class="widefat striped">';
 		echo '<tbody>';
-		echo '<tr><th>' . esc_html__( 'Screen type', 'tpw-core' ) . '</th><td>' . esc_html__( 'Bridge / launcher', 'tpw-core' ) . '</td></tr>';
-		echo '<tr><th>' . esc_html__( 'Front-end page', 'tpw-core' ) . '</th><td>' . esc_html( $status['page_text'] ) . '</td></tr>';
-		echo '<tr><th>' . esc_html__( 'Expected shortcode', 'tpw-core' ) . '</th><td><code>' . esc_html( $status['shortcode'] ) . '</code></td></tr>';
-		echo '<tr><th>' . esc_html__( 'Shortcode status', 'tpw-core' ) . '</th><td>' . esc_html( $status['shortcode_text'] ) . '</td></tr>';
+		echo '<tr><th>' . esc_html__( 'Screen type', 'tpw-ilungu-club' ) . '</th><td>' . esc_html__( 'Bridge / launcher', 'tpw-ilungu-club' ) . '</td></tr>';
+		echo '<tr><th>' . esc_html__( 'Front-end page', 'tpw-ilungu-club' ) . '</th><td>' . esc_html( $status['page_text'] ) . '</td></tr>';
+		echo '<tr><th>' . esc_html__( 'Expected shortcode', 'tpw-ilungu-club' ) . '</th><td><code>' . esc_html( $status['shortcode'] ) . '</code></td></tr>';
+		echo '<tr><th>' . esc_html__( 'Shortcode status', 'tpw-ilungu-club' ) . '</th><td>' . esc_html( $status['shortcode_text'] ) . '</td></tr>';
 		if ( isset( $status['route_text'] ) && $status['route_text'] !== '' ) {
-			echo '<tr><th>' . esc_html__( 'Target route', 'tpw-core' ) . '</th><td>' . esc_html( $status['route_text'] ) . '</td></tr>';
+			echo '<tr><th>' . esc_html__( 'Target route', 'tpw-ilungu-club' ) . '</th><td>' . esc_html( $status['route_text'] ) . '</td></tr>';
 		}
 		if ( isset( $status['section_text'] ) && $status['section_text'] !== '' ) {
-			echo '<tr><th>' . esc_html__( 'Section status', 'tpw-core' ) . '</th><td>' . esc_html( $status['section_text'] ) . '</td></tr>';
+			echo '<tr><th>' . esc_html__( 'Section status', 'tpw-ilungu-club' ) . '</th><td>' . esc_html( $status['section_text'] ) . '</td></tr>';
 		}
 		echo '</tbody>';
 		echo '</table>';
@@ -428,7 +428,7 @@ class iLungu_Club_Admin_Menu {
 			echo '<a class="button button-primary" href="' . esc_url( $status['open_url'] ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $config['open_label'] ) . '</a> ';
 		}
 		if ( $status['edit_url'] !== '' ) {
-			echo '<a class="button button-secondary" href="' . esc_url( $status['edit_url'] ) . '">' . esc_html__( 'Edit Page', 'tpw-core' ) . '</a> ';
+			echo '<a class="button button-secondary" href="' . esc_url( $status['edit_url'] ) . '">' . esc_html__( 'Edit Page', 'tpw-ilungu-club' ) . '</a> ';
 		}
 		if ( $status['repair_supported'] ) {
 			echo '<form method="post" style="display:inline-block; margin-left:8px;">';
@@ -436,7 +436,7 @@ class iLungu_Club_Admin_Menu {
 			echo '<input type="hidden" name="' . esc_attr( self::BRIDGE_ACTION_FIELD ) . '" value="repair_page" />';
 			echo '<input type="hidden" name="' . esc_attr( self::BRIDGE_SLUG_FIELD ) . '" value="' . esc_attr( $status['repair_slug'] ) . '" />';
 			echo '<input type="hidden" name="' . esc_attr( self::BRIDGE_RETURN_FIELD ) . '" value="' . esc_attr( $config['page_slug'] ) . '" />';
-			submit_button( __( 'Create / Repair Page', 'tpw-core' ), 'secondary', 'submit', false );
+			submit_button( __( 'Create / Repair Page', 'tpw-ilungu-club' ), 'secondary', 'submit', false );
 			echo '</form>';
 		}
 		echo '</p>';
@@ -450,17 +450,17 @@ class iLungu_Club_Admin_Menu {
 
 	protected static function render_menu_permissions_page( $config ) {
 		self::ensure_tpw_control_runtime();
-		self::render_page_start( $config['title'], __( 'Manage WordPress menu visibility and access rules.', 'tpw-core' ) );
+		self::render_page_start( $config['title'], __( 'Manage WordPress menu visibility and access rules.', 'tpw-ilungu-club' ) );
 
 		$notice = isset( $_GET[ self::BRIDGE_NOTICE_FIELD ] )
 			? sanitize_key( wp_unslash( $_GET[ self::BRIDGE_NOTICE_FIELD ] ) )
 			: ( isset( $_GET[ self::LEGACY_BRIDGE_NOTICE_FIELD ] ) ? sanitize_key( wp_unslash( $_GET[ self::LEGACY_BRIDGE_NOTICE_FIELD ] ) ) : '' );
 		if ( 'saved' === $notice ) {
-			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Menu permissions saved.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Menu permissions saved.', 'tpw-ilungu-club' ) . '</p></div>';
 		}
 
 		if ( ! class_exists( 'TPW_Control', false ) || ! class_exists( 'TPW_Control_Router', false ) ) {
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'Menu Permissions is unavailable because the iLungu Club Control module could not be loaded.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Menu Permissions is unavailable because the iLungu Club Control module could not be loaded.', 'tpw-ilungu-club' ) . '</p></div>';
 			self::render_page_end();
 			return;
 		}
@@ -469,7 +469,7 @@ class iLungu_Club_Admin_Menu {
 		$section  = isset( $sections['menu-manager'] ) && is_array( $sections['menu-manager'] ) ? $sections['menu-manager'] : [];
 		$callback = isset( $section['callback'] ) ? $section['callback'] : null;
 		if ( ! is_callable( $callback ) ) {
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'Menu Permissions is unavailable because its renderer is not registered.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Menu Permissions is unavailable because its renderer is not registered.', 'tpw-ilungu-club' ) . '</p></div>';
 			self::render_page_end();
 			return;
 		}
@@ -480,10 +480,10 @@ class iLungu_Club_Admin_Menu {
 
 	protected static function render_upload_pages_page( $config ) {
 		self::ensure_tpw_control_runtime();
-		self::render_page_start( $config['title'], __( 'Manage protected upload pages and their files.', 'tpw-core' ) );
+		self::render_page_start( $config['title'], __( 'Manage protected upload pages and their files.', 'tpw-ilungu-club' ) );
 
 		if ( ! class_exists( 'TPW_Control', false ) || ! class_exists( 'TPW_Control_Upload_Pages', false ) ) {
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'Upload Pages is unavailable because the iLungu Club Control module could not be loaded.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Upload Pages is unavailable because the iLungu Club Control module could not be loaded.', 'tpw-ilungu-club' ) . '</p></div>';
 			self::render_page_end();
 			return;
 		}
@@ -493,7 +493,7 @@ class iLungu_Club_Admin_Menu {
 		$section  = isset( $sections['upload-pages'] ) && is_array( $sections['upload-pages'] ) ? $sections['upload-pages'] : [];
 		$callback = isset( $section['callback'] ) ? $section['callback'] : null;
 		if ( ! is_callable( $callback ) ) {
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'Upload Pages is unavailable because its renderer is not registered.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Upload Pages is unavailable because its renderer is not registered.', 'tpw-ilungu-club' ) . '</p></div>';
 			self::render_page_end();
 			return;
 		}
@@ -504,31 +504,31 @@ class iLungu_Club_Admin_Menu {
 
 	public static function render_logs_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access denied.', 'tpw-core' ) );
+			wp_die( esc_html__( 'Access denied.', 'tpw-ilungu-club' ) );
 		}
 
 		self::render_page_start(
-			__( 'iLungu Club Logs', 'tpw-core' ),
-			__( 'Open the existing log screens without duplicating their implementations.', 'tpw-core' )
+			__( 'iLungu Club Logs', 'tpw-ilungu-club' ),
+			__( 'Open the existing log screens without duplicating their implementations.', 'tpw-ilungu-club' )
 		);
 
 		echo '<div class="tpw-card">';
 		echo '<table class="widefat striped">';
 		echo '<thead><tr>';
-		echo '<th>' . esc_html__( 'Log screen', 'tpw-core' ) . '</th>';
-		echo '<th>' . esc_html__( 'Current route', 'tpw-core' ) . '</th>';
-		echo '<th>' . esc_html__( 'Open', 'tpw-core' ) . '</th>';
+		echo '<th>' . esc_html__( 'Log screen', 'tpw-ilungu-club' ) . '</th>';
+		echo '<th>' . esc_html__( 'Current route', 'tpw-ilungu-club' ) . '</th>';
+		echo '<th>' . esc_html__( 'Open', 'tpw-ilungu-club' ) . '</th>';
 		echo '</tr></thead>';
 		echo '<tbody>';
 		echo '<tr>';
-		echo '<td><strong>' . esc_html__( 'Email Logs', 'tpw-core' ) . '</strong><br />' . esc_html__( 'Existing iLungu Club settings tab for outbound email diagnostics.', 'tpw-core' ) . '</td>';
+		echo '<td><strong>' . esc_html__( 'Email Logs', 'tpw-ilungu-club' ) . '</strong><br />' . esc_html__( 'Existing iLungu Club settings tab for outbound email diagnostics.', 'tpw-ilungu-club' ) . '</td>';
 		echo '<td>' . esc_html( self::EMAIL_LOGS_ROUTE ) . '</td>';
-		echo '<td><a class="button button-secondary" href="' . esc_url( admin_url( self::EMAIL_LOGS_ROUTE ) ) . '">' . esc_html__( 'Open', 'tpw-core' ) . '</a></td>';
+		echo '<td><a class="button button-secondary" href="' . esc_url( admin_url( self::EMAIL_LOGS_ROUTE ) ) . '">' . esc_html__( 'Open', 'tpw-ilungu-club' ) . '</a></td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td><strong>' . esc_html__( 'Payment Logs', 'tpw-core' ) . '</strong><br />' . esc_html__( 'Existing Tools screen for payment log inspection.', 'tpw-core' ) . '</td>';
+		echo '<td><strong>' . esc_html__( 'Payment Logs', 'tpw-ilungu-club' ) . '</strong><br />' . esc_html__( 'Existing Tools screen for payment log inspection.', 'tpw-ilungu-club' ) . '</td>';
 		echo '<td>' . esc_html( 'tools.php?page=tpw-payment-logs' ) . '</td>';
-		echo '<td><a class="button button-secondary" href="' . esc_url( admin_url( self::PAYMENT_LOGS_ROUTE ) ) . '">' . esc_html__( 'Open', 'tpw-core' ) . '</a></td>';
+		echo '<td><a class="button button-secondary" href="' . esc_url( admin_url( self::PAYMENT_LOGS_ROUTE ) ) . '">' . esc_html__( 'Open', 'tpw-ilungu-club' ) . '</a></td>';
 		echo '</tr>';
 		echo '</tbody>';
 		echo '</table>';
@@ -555,12 +555,12 @@ class iLungu_Club_Admin_Menu {
 		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Access denied.', 'tpw-core' ), 403 );
+			wp_die( esc_html__( 'Access denied.', 'tpw-ilungu-club' ), 403 );
 		}
 
 		$nonce = isset( $_POST[ $nonce_field ] ) ? sanitize_text_field( wp_unslash( $_POST[ $nonce_field ] ) ) : '';
 		if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-			wp_die( esc_html__( 'Invalid request.', 'tpw-core' ), 400 );
+			wp_die( esc_html__( 'Invalid request.', 'tpw-ilungu-club' ), 400 );
 		}
 
 		$system_slug = isset( $_POST[ $slug_field ] ) ? sanitize_key( wp_unslash( $_POST[ $slug_field ] ) ) : '';
@@ -596,7 +596,7 @@ class iLungu_Club_Admin_Menu {
 		}
 
 		if ( ! self::current_user_can_view_dashboard() ) {
-			wp_die( esc_html__( 'Access denied.', 'tpw-core' ), 403 );
+			wp_die( esc_html__( 'Access denied.', 'tpw-ilungu-club' ), 403 );
 		}
 
 		check_admin_referer( isset( $_GET['ilungu_club_dashboard_action'] ) ? 'ilungu_club_dismiss_setup_banner' : 'tpw_flexiclub_dismiss_setup_banner' );
@@ -608,14 +608,14 @@ class iLungu_Club_Admin_Menu {
 
 	public static function handle_frontend_plugin_activation() {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
-			wp_die( esc_html__( 'Access denied.', 'tpw-core' ), 403 );
+			wp_die( esc_html__( 'Access denied.', 'tpw-ilungu-club' ), 403 );
 		}
 
 		$plugin_file = isset( $_GET['plugin'] ) ? sanitize_text_field( wp_unslash( $_GET['plugin'] ) ) : '';
 		$plugin_file = is_string( $plugin_file ) ? trim( $plugin_file ) : '';
 
 		if ( '' === $plugin_file ) {
-			wp_die( esc_html__( 'Invalid plugin request.', 'tpw-core' ), 400 );
+			wp_die( esc_html__( 'Invalid plugin request.', 'tpw-ilungu-club' ), 400 );
 		}
 
 		$is_legacy_action = isset( $_REQUEST['action'] ) && 'tpw_flexiclub_activate_plugin' === sanitize_key( wp_unslash( $_REQUEST['action'] ) );
@@ -723,81 +723,81 @@ class iLungu_Club_Admin_Menu {
 
 		if ( in_array( self::PAGE_MEMBERS, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Manage Members', 'tpw-core' ),
-				'description' => __( 'Bridge to the existing front-end Manage Members screen.', 'tpw-core' ),
-				'type'        => __( 'Bridge', 'tpw-core' ),
+				'label'       => __( 'Manage Members', 'tpw-ilungu-club' ),
+				'description' => __( 'Bridge to the existing front-end Manage Members screen.', 'tpw-ilungu-club' ),
+				'type'        => __( 'Bridge', 'tpw-ilungu-club' ),
 				'url'         => self::get_menu_item_url( self::PAGE_MEMBERS ),
 			];
 		}
 
 		if ( in_array( self::NOTICEBOARD_ROUTE, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Noticeboard', 'tpw-core' ),
-				'description' => __( 'Existing wp-admin Noticeboard CPT screen.', 'tpw-core' ),
-				'type'        => __( 'WP Admin', 'tpw-core' ),
+				'label'       => __( 'Noticeboard', 'tpw-ilungu-club' ),
+				'description' => __( 'Existing wp-admin Noticeboard CPT screen.', 'tpw-ilungu-club' ),
+				'type'        => __( 'WP Admin', 'tpw-ilungu-club' ),
 				'url'         => admin_url( self::NOTICEBOARD_ROUTE ),
 			];
 		}
 
 		if ( in_array( self::PAGE_GALLERY, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Gallery Admin', 'tpw-core' ),
-				'description' => __( 'Bridge to the existing front-end Gallery Admin page.', 'tpw-core' ),
-				'type'        => __( 'Bridge', 'tpw-core' ),
+				'label'       => __( 'Gallery Admin', 'tpw-ilungu-club' ),
+				'description' => __( 'Bridge to the existing front-end Gallery Admin page.', 'tpw-ilungu-club' ),
+				'type'        => __( 'Bridge', 'tpw-ilungu-club' ),
 				'url'         => self::get_menu_item_url( self::PAGE_GALLERY ),
 			];
 		}
 
 		if ( in_array( self::PAGE_UPLOADS, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Upload Pages / Archive', 'tpw-core' ),
-				'description' => __( 'Bridge to the existing archive and upload-pages feature on its current front-end compatibility route.', 'tpw-core' ),
-				'type'        => __( 'Bridge', 'tpw-core' ),
+				'label'       => __( 'Upload Pages / Archive', 'tpw-ilungu-club' ),
+				'description' => __( 'Bridge to the existing archive and upload-pages feature on its current front-end compatibility route.', 'tpw-ilungu-club' ),
+				'type'        => __( 'Bridge', 'tpw-ilungu-club' ),
 				'url'         => self::get_menu_item_url( self::PAGE_UPLOADS ),
 			];
 		}
 
 		if ( in_array( self::PAGE_MENU_MANAGER, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Menu Permissions', 'tpw-core' ),
-				'description' => __( 'Bridge to the front-end feature that controls WordPress menu visibility and permissions across the iLungu Club ecosystem.', 'tpw-core' ),
-				'type'        => __( 'Bridge', 'tpw-core' ),
+				'label'       => __( 'Menu Permissions', 'tpw-ilungu-club' ),
+				'description' => __( 'Bridge to the front-end feature that controls WordPress menu visibility and permissions across the iLungu Club ecosystem.', 'tpw-ilungu-club' ),
+				'type'        => __( 'Bridge', 'tpw-ilungu-club' ),
 				'url'         => self::get_menu_item_url( self::PAGE_MENU_MANAGER ),
 			];
 		}
 
 		if ( in_array( self::SYSTEM_PAGES_ROUTE, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'System Pages', 'tpw-core' ),
-				'description' => __( 'Existing System Pages tab inside iLungu Club Settings.', 'tpw-core' ),
-				'type'        => __( 'WP Admin', 'tpw-core' ),
+				'label'       => __( 'System Pages', 'tpw-ilungu-club' ),
+				'description' => __( 'Existing System Pages tab inside iLungu Club Settings.', 'tpw-ilungu-club' ),
+				'type'        => __( 'WP Admin', 'tpw-ilungu-club' ),
 				'url'         => admin_url( self::SYSTEM_PAGES_ROUTE ),
 			];
 		}
 
 		if ( in_array( self::PAYMENTS_ROUTE, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Payments', 'tpw-core' ),
-				'description' => __( 'Existing Payment Methods settings tab.', 'tpw-core' ),
-				'type'        => __( 'WP Admin', 'tpw-core' ),
+				'label'       => __( 'Payments', 'tpw-ilungu-club' ),
+				'description' => __( 'Existing Payment Methods settings tab.', 'tpw-ilungu-club' ),
+				'type'        => __( 'WP Admin', 'tpw-ilungu-club' ),
 				'url'         => admin_url( self::PAYMENTS_ROUTE ),
 			];
 		}
 
 		if ( in_array( self::SETTINGS_ROUTE, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Settings', 'tpw-core' ),
-				'description' => __( 'Existing iLungu Club settings screen.', 'tpw-core' ),
-				'type'        => __( 'WP Admin', 'tpw-core' ),
+				'label'       => __( 'Settings', 'tpw-ilungu-club' ),
+				'description' => __( 'Existing iLungu Club settings screen.', 'tpw-ilungu-club' ),
+				'type'        => __( 'WP Admin', 'tpw-ilungu-club' ),
 				'url'         => self::get_settings_admin_url(),
 			];
 		}
 
 		if ( in_array( self::PAGE_LOGS, $visible, true ) ) {
 			$items[] = [
-				'label'       => __( 'Logs', 'tpw-core' ),
-				'description' => __( 'Launcher for the existing email and payment log screens.', 'tpw-core' ),
-				'type'        => __( 'WP Admin', 'tpw-core' ),
+				'label'       => __( 'Logs', 'tpw-ilungu-club' ),
+				'description' => __( 'Launcher for the existing email and payment log screens.', 'tpw-ilungu-club' ),
+				'type'        => __( 'WP Admin', 'tpw-ilungu-club' ),
 				'url'         => admin_url( 'admin.php?page=' . self::PAGE_LOGS ),
 			];
 		}
@@ -809,9 +809,9 @@ class iLungu_Club_Admin_Menu {
 		return [
 			self::PAGE_MEMBERS => [
 				'page_slug'      => self::PAGE_MEMBERS,
-				'title'          => __( 'Manage Members', 'tpw-core' ),
-				'description'    => __( 'Launch the existing front-end Manage Members interface. No duplicate wp-admin member CRUD is created here.', 'tpw-core' ),
-				'open_label'     => __( 'Open Manage Members', 'tpw-core' ),
+				'title'          => __( 'Manage Members', 'tpw-ilungu-club' ),
+				'description'    => __( 'Launch the existing front-end Manage Members interface. No duplicate wp-admin member CRUD is created here.', 'tpw-ilungu-club' ),
+				'open_label'     => __( 'Open Manage Members', 'tpw-ilungu-club' ),
 				'detector'       => 'members',
 				'shortcode'      => '[tpw_manage_members]',
 				'system_slug'    => 'manage-members',
@@ -819,9 +819,9 @@ class iLungu_Club_Admin_Menu {
 			],
 			self::PAGE_GALLERY => [
 				'page_slug'      => self::PAGE_GALLERY,
-				'title'          => __( 'Gallery Admin', 'tpw-core' ),
-				'description'    => __( 'Launch the existing front-end Gallery Admin system page. The wp-admin bridge only reports status and opens the current page.', 'tpw-core' ),
-				'open_label'     => __( 'Open Gallery Admin', 'tpw-core' ),
+				'title'          => __( 'Gallery Admin', 'tpw-ilungu-club' ),
+				'description'    => __( 'Launch the existing front-end Gallery Admin system page. The wp-admin bridge only reports status and opens the current page.', 'tpw-ilungu-club' ),
+				'open_label'     => __( 'Open Gallery Admin', 'tpw-ilungu-club' ),
 				'detector'       => 'gallery',
 				'shortcode'      => '[tpw_gallery_admin]',
 				'system_slug'    => 'gallery-admin',
@@ -829,9 +829,9 @@ class iLungu_Club_Admin_Menu {
 			],
 			self::PAGE_UPLOADS => [
 				'page_slug'      => self::PAGE_UPLOADS,
-				'title'          => __( 'Upload Pages / Archive', 'tpw-core' ),
-				'description'    => __( 'This bridge describes the archive and upload-pages feature, checks the current front-end compatibility page, and opens the existing front-end implementation without duplicating it in wp-admin.', 'tpw-core' ),
-				'open_label'     => __( 'Open Upload Pages / Archive', 'tpw-core' ),
+				'title'          => __( 'Upload Pages / Archive', 'tpw-ilungu-club' ),
+				'description'    => __( 'This bridge describes the archive and upload-pages feature, checks the current front-end compatibility page, and opens the existing front-end implementation without duplicating it in wp-admin.', 'tpw-ilungu-club' ),
+				'open_label'     => __( 'Open Upload Pages / Archive', 'tpw-ilungu-club' ),
 				'detector'       => 'tpw-control-section',
 				'shortcode'      => '[tpw-control]',
 				'section'        => 'upload-pages',
@@ -842,9 +842,9 @@ class iLungu_Club_Admin_Menu {
 			],
 			self::PAGE_MENU_MANAGER => [
 				'page_slug'      => self::PAGE_MENU_MANAGER,
-				'title'          => __( 'Menu Permissions', 'tpw-core' ),
-				'description'    => __( 'This bridge describes the menu-permissions feature that controls WordPress menu visibility and access across the iLungu Club ecosystem, then opens the existing front-end implementation without duplicating it in wp-admin.', 'tpw-core' ),
-				'open_label'     => __( 'Open Menu Permissions', 'tpw-core' ),
+				'title'          => __( 'Menu Permissions', 'tpw-ilungu-club' ),
+				'description'    => __( 'This bridge describes the menu-permissions feature that controls WordPress menu visibility and access across the iLungu Club ecosystem, then opens the existing front-end implementation without duplicating it in wp-admin.', 'tpw-ilungu-club' ),
+				'open_label'     => __( 'Open Menu Permissions', 'tpw-ilungu-club' ),
 				'detector'       => 'tpw-control-section',
 				'shortcode'      => '[tpw-control]',
 				'section'        => 'menu-manager',
@@ -934,17 +934,17 @@ class iLungu_Club_Admin_Menu {
 		$section_text = '';
 		if ( $with_section ) {
 			$section_text = $section_registered
-				? __( 'Registered on the existing compatibility route.', 'tpw-core' )
-				: __( 'This feature section is not currently registered on the existing compatibility route.', 'tpw-core' );
+				? __( 'Registered on the existing compatibility route.', 'tpw-ilungu-club' )
+				: __( 'This feature section is not currently registered on the existing compatibility route.', 'tpw-ilungu-club' );
 		}
 
 		$message = '';
 		if ( ! $status['page_exists'] ) {
-			$message = __( 'No compatible front-end page is currently configured. Page creation or repair is not yet supported from this bridge.', 'tpw-core' );
+			$message = __( 'No compatible front-end page is currently configured. Page creation or repair is not yet supported from this bridge.', 'tpw-ilungu-club' );
 		} elseif ( ! $status['shortcode_present'] ) {
-			$message = __( 'A compatible front-end page exists, but the expected shortcode is missing from its content. Page creation or repair is not yet supported from this bridge.', 'tpw-core' );
+			$message = __( 'A compatible front-end page exists, but the expected shortcode is missing from its content. Page creation or repair is not yet supported from this bridge.', 'tpw-ilungu-club' );
 		} elseif ( $with_section && ! $section_registered ) {
-			$message = __( 'The front-end page exists, but the requested tool is not currently registered on that compatibility route.', 'tpw-core' );
+			$message = __( 'The front-end page exists, but the requested tool is not currently registered on that compatibility route.', 'tpw-ilungu-club' );
 		}
 
 		return [
@@ -967,9 +967,9 @@ class iLungu_Club_Admin_Menu {
 		$message = '';
 
 		if ( ! $status['page_exists'] ) {
-			$message = __( 'No published front-end page is currently configured for this feature.', 'tpw-core' );
+			$message = __( 'No published front-end page is currently configured for this feature.', 'tpw-ilungu-club' );
 		} elseif ( ! $status['shortcode_present'] ) {
-			$message = __( 'A published page was found, but the expected shortcode is missing from its content.', 'tpw-core' );
+			$message = __( 'A published page was found, but the expected shortcode is missing from its content.', 'tpw-ilungu-club' );
 		}
 
 		return [
@@ -1009,18 +1009,18 @@ class iLungu_Club_Admin_Menu {
 		$page_text = $page_exists
 			? sprintf(
 				/* translators: 1: page title, 2: page ID */
-				__( 'Found: %1$s (#%2$d)', 'tpw-core' ),
+				__( 'Found: %1$s (#%2$d)', 'tpw-ilungu-club' ),
 				(string) $page->post_title,
 				(int) $page->ID
 			)
-			: __( 'Not found.', 'tpw-core' );
+			: __( 'Not found.', 'tpw-ilungu-club' );
 
 		return [
 			'page_exists'     => $page_exists,
 			'page_url'        => $page_url,
 			'page_text'       => $page_text,
 			'edit_url'        => $edit_url,
-			'shortcode_text'  => $shortcode_found ? __( 'Present on the published page.', 'tpw-core' ) : __( 'Missing from the published page.', 'tpw-core' ),
+			'shortcode_text'  => $shortcode_found ? __( 'Present on the published page.', 'tpw-ilungu-club' ) : __( 'Missing from the published page.', 'tpw-ilungu-club' ),
 			'shortcode'       => $shortcode_markup,
 			'shortcode_present' => $shortcode_found,
 		];
@@ -1040,7 +1040,7 @@ class iLungu_Club_Admin_Menu {
 			$page_url = (string) get_permalink( $page );
 			$edit_url = (string) get_edit_post_link( $page->ID, '' );
 			if ( ! $has_sc ) {
-				$message = __( 'Automatic repair is unavailable here because the current system-pages tooling does not overwrite existing page content.', 'tpw-core' );
+				$message = __( 'Automatic repair is unavailable here because the current system-pages tooling does not overwrite existing page content.', 'tpw-ilungu-club' );
 			}
 		} elseif ( class_exists( 'TPW_Core_System_Pages' ) ) {
 			$page_url = (string) TPW_Core_System_Pages::get_permalink( $system_slug );
@@ -1050,12 +1050,12 @@ class iLungu_Club_Admin_Menu {
 			'page_text'        => $exists
 				? sprintf(
 					/* translators: 1: page title, 2: page ID */
-					__( 'Found: %1$s (#%2$d)', 'tpw-core' ),
+					__( 'Found: %1$s (#%2$d)', 'tpw-ilungu-club' ),
 					(string) $page->post_title,
 					(int) $page->ID
 				)
-				: __( 'Not found.', 'tpw-core' ),
-			'shortcode_text'   => $has_sc ? __( 'Present on the published page.', 'tpw-core' ) : __( 'Missing from the published page.', 'tpw-core' ),
+				: __( 'Not found.', 'tpw-ilungu-club' ),
+			'shortcode_text'   => $has_sc ? __( 'Present on the published page.', 'tpw-ilungu-club' ) : __( 'Missing from the published page.', 'tpw-ilungu-club' ),
 			'route_text'       => '/' . ltrim( (string) $system_slug, '/' ) . '/',
 			'open_url'         => $has_sc ? $page_url : '',
 			'edit_url'         => $edit_url,
@@ -1419,7 +1419,7 @@ class iLungu_Club_Admin_Menu {
 			exit;
 		}
 
-		wp_die( esc_html__( 'You do not have permission to access this page.', 'tpw-core' ) );
+		wp_die( esc_html__( 'You do not have permission to access this page.', 'tpw-ilungu-club' ) );
 	}
 
 	protected static function get_dashboard_redirect_url() {
@@ -1539,7 +1539,7 @@ class iLungu_Club_Admin_Menu {
 			'logo_url'               => self::get_dashboard_logo_url(),
 			'icon_url'               => self::get_dashboard_icon_url(),
 			'version'                => defined( 'TPW_CORE_VERSION' ) ? (string) TPW_CORE_VERSION : '',
-			'welcome_name'           => $current_user instanceof WP_User ? (string) $current_user->display_name : __( 'Admin', 'tpw-core' ),
+			'welcome_name'           => $current_user instanceof WP_User ? (string) $current_user->display_name : __( 'Admin', 'tpw-ilungu-club' ),
 			'portal_nav_items'       => self::get_frontend_portal_nav_items( $card_data, $active_portal_item ),
 			'section_nav_items'      => self::get_frontend_section_nav_items( $workspace, ! $checklist_complete, ! empty( $card_data ), $workspace_nav_context ),
 			'summary_cards'          => self::get_frontend_summary_cards( $members_summary, $notices_summary, $events_summary, $route_map ),
@@ -1577,14 +1577,14 @@ class iLungu_Club_Admin_Menu {
 		foreach ( $items as $item ) {
 			if ( empty( $item['done'] ) ) {
 				return [
-					'label' => __( 'Continue setup', 'tpw-core' ),
+					'label' => __( 'Continue setup', 'tpw-ilungu-club' ),
 					'url'   => ! empty( $item['url'] ) ? $item['url'] : '#ilungu-club-checklist',
 				];
 			}
 		}
 
 		return [
-			'label' => $complete ? __( 'Review checklist', 'tpw-core' ) : __( 'Open checklist', 'tpw-core' ),
+			'label' => $complete ? __( 'Review checklist', 'tpw-ilungu-club' ) : __( 'Open checklist', 'tpw-ilungu-club' ),
 			'url'   => '#ilungu-club-checklist',
 		];
 	}
@@ -1793,19 +1793,19 @@ class iLungu_Club_Admin_Menu {
 
 		return [
 			[
-				'title'        => __( 'Total Members', 'tpw-core' ),
+				'title'        => __( 'Total Members', 'tpw-ilungu-club' ),
 				'value'        => self::format_metric_value( $members_summary['count'] ),
-				'action_label' => __( 'Manage members', 'tpw-core' ),
+				'action_label' => __( 'Manage members', 'tpw-ilungu-club' ),
 				'action_url'   => self::get_members_management_url(),
 			],
 			[
-				'title'        => __( 'Active Notices', 'tpw-core' ),
+				'title'        => __( 'Active Notices', 'tpw-ilungu-club' ),
 				'value'        => self::format_metric_value( $notices_summary['count'] ),
-				'action_label' => ! empty( $noticeboard_route['action_label'] ) ? $noticeboard_route['action_label'] : __( 'Open noticeboard', 'tpw-core' ),
+				'action_label' => ! empty( $noticeboard_route['action_label'] ) ? $noticeboard_route['action_label'] : __( 'Open noticeboard', 'tpw-ilungu-club' ),
 				'action_url'   => ! empty( $noticeboard_route['url'] ) ? $noticeboard_route['url'] : '',
 			],
 			[
-				'title'        => __( 'Upcoming Events', 'tpw-core' ),
+				'title'        => __( 'Upcoming Events', 'tpw-ilungu-club' ),
 				'value'        => self::format_metric_value( $events_summary['count'], false ),
 				'action_label' => $events_summary['action_label'],
 				'action_url'   => $events_url,
@@ -1830,7 +1830,7 @@ class iLungu_Club_Admin_Menu {
 			: self::current_user_can_frontend_dashboard();
 
 		$cards['members'] = [
-			'title'        => __( 'Manage Members', 'tpw-core' ),
+			'title'        => __( 'Manage Members', 'tpw-ilungu-club' ),
 			'metric'       => self::format_metric_value( $members_summary['count'] ),
 			'tone'         => 'members',
 			'status_label' => ! empty( $members_route['configured'] ) ? $members_summary['status_label'] : $members_route['status_label'],
@@ -1845,7 +1845,7 @@ class iLungu_Club_Admin_Menu {
 
 		if ( current_user_can( 'edit_posts' ) ) {
 			$cards['noticeboard'] = [
-				'title'        => __( 'Noticeboard', 'tpw-core' ),
+				'title'        => __( 'Noticeboard', 'tpw-ilungu-club' ),
 				'metric'       => self::format_metric_value( $notices_summary['count'] ),
 				'tone'         => 'noticeboard',
 				'status_label' => ! empty( $noticeboard_route['configured'] ) ? $notices_summary['status_label'] : $noticeboard_route['status_label'],
@@ -1861,7 +1861,7 @@ class iLungu_Club_Admin_Menu {
 
 		if ( self::current_user_can_gallery_manage() ) {
 			$cards['gallery'] = [
-				'title'        => __( 'Gallery Admin', 'tpw-core' ),
+				'title'        => __( 'Gallery Admin', 'tpw-ilungu-club' ),
 				'metric'       => $gallery_summary['metric_value'],
 				'tone'         => 'gallery',
 				'status_label' => ! empty( $gallery_route['configured'] ) ? $gallery_summary['status_label'] : $gallery_route['status_label'],
@@ -1877,7 +1877,7 @@ class iLungu_Club_Admin_Menu {
 
 		if ( self::current_user_can_tpw_control_section( 'menu-manager' ) ) {
 			$cards['menu-management'] = [
-				'title'        => __( 'Menu Management', 'tpw-core' ),
+				'title'        => __( 'Menu Management', 'tpw-ilungu-club' ),
 				'metric'       => $menu_summary['metric_value'],
 				'tone'         => 'permissions',
 				'status_label' => ! empty( $menu_management_route['configured'] ) ? $menu_summary['status_label'] : $menu_management_route['status_label'],
@@ -1896,7 +1896,7 @@ class iLungu_Club_Admin_Menu {
 
 		if ( self::current_user_can_tpw_control_section( 'upload-pages' ) ) {
 			$cards['archival-system'] = [
-				'title'        => __( 'Archival System', 'tpw-core' ),
+				'title'        => __( 'Archival System', 'tpw-ilungu-club' ),
 				'metric'       => $uploads_summary['metric_value'],
 				'tone'         => 'uploads',
 				'status_label' => ! empty( $archival_system_route['configured'] ) ? $uploads_summary['status_label'] : $archival_system_route['status_label'],
@@ -1915,7 +1915,7 @@ class iLungu_Club_Admin_Menu {
 
 		if ( $can_manage_system_pages ) {
 			$cards['system-pages'] = [
-				'title'        => __( 'System Pages', 'tpw-core' ),
+				'title'        => __( 'System Pages', 'tpw-ilungu-club' ),
 				'metric'       => $system_summary['metric_value'],
 				'tone'         => 'system-pages',
 				'status_label' => $system_summary['status_label'],
@@ -1933,7 +1933,7 @@ class iLungu_Club_Admin_Menu {
 		if ( $can_access_settings_workspace ) {
 			if ( ! empty( $payments_summary['payments_required'] ) ) {
 				$cards['payments'] = [
-					'title'        => __( 'Payments', 'tpw-core' ),
+					'title'        => __( 'Payments', 'tpw-ilungu-club' ),
 					'metric'       => $payments_summary['metric_value'],
 					'tone'         => 'payments',
 					'status_label' => $payments_summary['status_label'],
@@ -1948,7 +1948,7 @@ class iLungu_Club_Admin_Menu {
 			}
 
 			$cards['settings'] = [
-				'title'        => __( 'Settings', 'tpw-core' ),
+				'title'        => __( 'Settings', 'tpw-ilungu-club' ),
 				'metric'       => $settings_summary['metric_value'],
 				'tone'         => 'settings',
 				'status_label' => $settings_summary['status_label'],
@@ -1963,7 +1963,7 @@ class iLungu_Club_Admin_Menu {
 
 		if ( self::current_user_can_frontend_dashboard() ) {
 			$cards['logs'] = [
-				'title'        => __( 'Logs', 'tpw-core' ),
+				'title'        => __( 'Logs', 'tpw-ilungu-club' ),
 				'metric'       => $logs_summary['metric_value'],
 				'tone'         => 'logs',
 				'status_label' => $logs_summary['status_label'],
@@ -1985,7 +1985,7 @@ class iLungu_Club_Admin_Menu {
 
 		$items = [
 			[
-				'label'    => __( 'Dashboard Home', 'tpw-core' ),
+				'label'    => __( 'Dashboard Home', 'tpw-ilungu-club' ),
 				'url'      => '' !== $dashboard_url ? $dashboard_url : '#ilungu-club-home',
 				'current'  => 'dashboard' === $active_workspace,
 				'internal' => true,
@@ -1996,7 +1996,7 @@ class iLungu_Club_Admin_Menu {
 			$card_key = sanitize_key( (string) $card_key );
 			if ( $lodge_contribution_key === $card_key ) {
 				$items[] = [
-					'label'    => __( 'Lodge Meetings', 'tpw-core' ),
+					'label'    => __( 'Lodge Meetings', 'tpw-ilungu-club' ),
 					'url'      => ! empty( $card['action_url'] ) ? (string) $card['action_url'] : '',
 					'current'  => false,
 					'internal' => false,
@@ -2169,15 +2169,15 @@ class iLungu_Club_Admin_Menu {
 		if ( 'menu-management' === $workspace ) {
 			return [
 				[
-					'label' => __( 'Workspace Overview', 'tpw-core' ),
+					'label' => __( 'Workspace Overview', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-menu-management-overview',
 				],
 				[
-					'label' => __( 'Menu Tool', 'tpw-core' ),
+					'label' => __( 'Menu Tool', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-menu-management-tool',
 				],
 				[
-					'label' => __( 'Legacy Route', 'tpw-core' ),
+					'label' => __( 'Legacy Route', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-menu-management-legacy',
 				],
 			];
@@ -2186,30 +2186,30 @@ class iLungu_Club_Admin_Menu {
 		if ( 'archival-system' === $workspace ) {
 			return [
 				[
-					'label' => __( 'Workspace Overview', 'tpw-core' ),
+					'label' => __( 'Workspace Overview', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-archival-system-overview',
 				],
 				[
-					'label' => __( 'Archive Tool', 'tpw-core' ),
+					'label' => __( 'Archive Tool', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-archival-system-tool',
 				],
 				[
-					'label' => __( 'Legacy Route', 'tpw-core' ),
+					'label' => __( 'Legacy Route', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-archival-system-legacy',
 				],
 			];
 		}
 
 		if ( 'settings' === $workspace ) {
-			$active_label = isset( $workspace_data['active_label'] ) ? (string) $workspace_data['active_label'] : __( 'Active Settings Area', 'tpw-core' );
+			$active_label = isset( $workspace_data['active_label'] ) ? (string) $workspace_data['active_label'] : __( 'Active Settings Area', 'tpw-ilungu-club' );
 
 			return [
 				[
-					'label' => __( 'Workspace Overview', 'tpw-core' ),
+					'label' => __( 'Workspace Overview', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-settings-overview',
 				],
 				[
-					'label' => __( 'Settings Areas', 'tpw-core' ),
+					'label' => __( 'Settings Areas', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-settings-tabs',
 				],
 				[
@@ -2222,30 +2222,30 @@ class iLungu_Club_Admin_Menu {
 		if ( 'system-pages' === $workspace ) {
 			return [
 				[
-					'label' => __( 'Workspace Overview', 'tpw-core' ),
+					'label' => __( 'Workspace Overview', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-system-pages-overview',
 				],
 				[
-					'label' => __( 'Registered Pages', 'tpw-core' ),
+					'label' => __( 'Registered Pages', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-system-pages-list',
 				],
 				[
-					'label' => __( 'Action Guide', 'tpw-core' ),
+					'label' => __( 'Action Guide', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-system-pages-help',
 				],
 			];
 		}
 
 		if ( 'logs' === $workspace ) {
-			$active_label = isset( $workspace_data['active_label'] ) ? (string) $workspace_data['active_label'] : __( 'Active Log Source', 'tpw-core' );
+			$active_label = isset( $workspace_data['active_label'] ) ? (string) $workspace_data['active_label'] : __( 'Active Log Source', 'tpw-ilungu-club' );
 
 			return [
 				[
-					'label' => __( 'Workspace Overview', 'tpw-core' ),
+					'label' => __( 'Workspace Overview', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-logs-overview',
 				],
 				[
-					'label' => __( 'Log Sources', 'tpw-core' ),
+					'label' => __( 'Log Sources', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-logs-sources',
 				],
 				[
@@ -2258,7 +2258,7 @@ class iLungu_Club_Admin_Menu {
 		if ( ! empty( self::get_consumer_workspace( $workspace, 'frontend' ) ) ) {
 			return [
 				[
-					'label' => __( 'Workspace', 'tpw-core' ),
+					'label' => __( 'Workspace', 'tpw-ilungu-club' ),
 					'url'   => '#ilungu-club-consumer-workspace',
 				],
 			];
@@ -2266,32 +2266,32 @@ class iLungu_Club_Admin_Menu {
 
 		$items = [
 			[
-				'label' => __( 'KPI Snapshot', 'tpw-core' ),
+				'label' => __( 'KPI Snapshot', 'tpw-ilungu-club' ),
 				'url'   => '#ilungu-club-home',
 			],
 		];
 
 		if ( $show_checklist ) {
 			$items[] = [
-				'label' => __( 'Getting Started', 'tpw-core' ),
+				'label' => __( 'Getting Started', 'tpw-ilungu-club' ),
 				'url'   => '#ilungu-club-checklist',
 			];
 		}
 
 		if ( $has_cards ) {
 			$items[] = [
-				'label' => __( 'Club Overview', 'tpw-core' ),
+				'label' => __( 'Club Overview', 'tpw-ilungu-club' ),
 				'url'   => '#ilungu-club-tools',
 			];
 		}
 
 		$items[] = [
-			'label' => __( 'Extend iLungu Club', 'tpw-core' ),
+			'label' => __( 'Extend iLungu Club', 'tpw-ilungu-club' ),
 			'url'   => '#ilungu-club-extend',
 		];
 
 		$items[] = [
-			'label' => __( 'Support', 'tpw-core' ),
+			'label' => __( 'Support', 'tpw-ilungu-club' ),
 			'url'   => '#ilungu-club-support',
 		];
 
@@ -2303,7 +2303,7 @@ class iLungu_Club_Admin_Menu {
 
 		if ( ! $checklist_complete ) {
 			$actions[] = [
-				'label'    => __( 'Setup Checklist', 'tpw-core' ),
+				'label'    => __( 'Setup Checklist', 'tpw-ilungu-club' ),
 				'url'      => '#ilungu-club-checklist',
 				'disabled' => false,
 			];
@@ -2348,63 +2348,63 @@ class iLungu_Club_Admin_Menu {
 
 		return [
 			[
-				'label'        => __( 'Create or confirm your system pages', 'tpw-core' ),
+				'label'        => __( 'Create or confirm your system pages', 'tpw-ilungu-club' ),
 				'description'  => self::append_frontend_route_note(
-					__( 'Make sure the required member and operational workspace pages are linked and published.', 'tpw-core' ),
+					__( 'Make sure the required member and operational workspace pages are linked and published.', 'tpw-ilungu-club' ),
 					isset( $system_pages_route['message'] ) ? (string) $system_pages_route['message'] : ''
 				),
 				'done'         => ! empty( $system_summary['required_complete'] ),
 				'url'          => isset( $system_pages_route['url'] ) ? (string) $system_pages_route['url'] : '',
-				'action_label' => __( 'Open', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-ilungu-club' ),
 			],
 			[
-				'label'       => __( 'Add your first members', 'tpw-core' ),
-				'description' => __( 'Start building the club member register and linked accounts.', 'tpw-core' ),
+				'label'       => __( 'Add your first members', 'tpw-ilungu-club' ),
+				'description' => __( 'Start building the club member register and linked accounts.', 'tpw-ilungu-club' ),
 				'done'        => ! empty( $members_summary['count'] ),
 				'url'         => self::get_members_management_url( 'add' ),
 			],
 			[
-				'label'       => __( 'Configure menu permissions', 'tpw-core' ),
+				'label'       => __( 'Configure menu permissions', 'tpw-ilungu-club' ),
 				'description' => self::append_frontend_route_note(
-					__( 'Control which audiences can see and access club navigation items.', 'tpw-core' ),
+					__( 'Control which audiences can see and access club navigation items.', 'tpw-ilungu-club' ),
 					isset( $menu_management_route['message'] ) ? (string) $menu_management_route['message'] : ''
 				),
 				'done'        => ! empty( $menu_summary['configured'] ),
 				'url'         => isset( $menu_management_route['url'] ) ? (string) $menu_management_route['url'] : '',
-				'action_label' => __( 'Open', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-ilungu-club' ),
 			],
 			[
-				'label'        => __( 'Configure settings', 'tpw-core' ),
+				'label'        => __( 'Configure settings', 'tpw-ilungu-club' ),
 				'description'  => self::append_frontend_route_note(
-					__( 'Review branding, login, and shared iLungu Club platform settings.', 'tpw-core' ),
+					__( 'Review branding, login, and shared iLungu Club platform settings.', 'tpw-ilungu-club' ),
 					isset( $settings_route['message'] ) ? (string) $settings_route['message'] : ''
 				),
 				'done'         => ! empty( $settings_summary['configured'] ),
 				'url'          => isset( $settings_route['url'] ) ? (string) $settings_route['url'] : '',
-				'action_label' => __( 'Open', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-ilungu-club' ),
 			],
 			[
-				'label'        => __( 'Configure payments', 'tpw-core' ),
+				'label'        => __( 'Configure payments', 'tpw-ilungu-club' ),
 				'description'  => self::append_frontend_route_note(
-					__( 'Enable and set up the payment methods your club wants to offer.', 'tpw-core' ),
+					__( 'Enable and set up the payment methods your club wants to offer.', 'tpw-ilungu-club' ),
 					isset( $payments_route['message'] ) ? (string) $payments_route['message'] : ''
 				),
 				'done'         => ! empty( $payments_summary['configured'] ) || ! empty( $payments_summary['optional'] ),
 				'url'          => isset( $payments_route['url'] ) ? (string) $payments_route['url'] : '',
 				'optional'     => ! empty( $payments_summary['optional'] ),
-				'action_label' => __( 'Open', 'tpw-core' ),
+				'action_label' => __( 'Open', 'tpw-ilungu-club' ),
 			],
 			[
-				'label'        => __( 'Publish your first notice', 'tpw-core' ),
+				'label'        => __( 'Publish your first notice', 'tpw-ilungu-club' ),
 				'description'  => ! empty( $noticeboard_route['configured'] )
-					? __( 'Share updates, reminders, and announcements from the Noticeboard.', 'tpw-core' )
+					? __( 'Share updates, reminders, and announcements from the Noticeboard.', 'tpw-ilungu-club' )
 					: self::append_frontend_route_note(
-						__( 'Share updates, reminders, and announcements from the Noticeboard.', 'tpw-core' ),
+						__( 'Share updates, reminders, and announcements from the Noticeboard.', 'tpw-ilungu-club' ),
 						isset( $noticeboard_route['message'] ) ? (string) $noticeboard_route['message'] : ''
 					),
 				'done'         => ! empty( $notices_summary['count'] ),
 				'url'          => isset( $noticeboard_route['url'] ) ? (string) $noticeboard_route['url'] : '',
-					'action_label' => __( 'Open', 'tpw-core' ),
+					'action_label' => __( 'Open', 'tpw-ilungu-club' ),
 			],
 		];
 	}
@@ -2420,12 +2420,12 @@ class iLungu_Club_Admin_Menu {
 		$route = self::build_frontend_route_state(
 			$status,
 			'',
-			__( 'Open Noticeboard', 'tpw-core' )
+			__( 'Open Noticeboard', 'tpw-ilungu-club' )
 		);
 
 		if ( empty( $route['configured'] ) ) {
-			$route['action_label'] = __( 'Needs front-end screen', 'tpw-core' );
-			$route['status_label'] = __( 'Needs front-end screen', 'tpw-core' );
+			$route['action_label'] = __( 'Needs front-end screen', 'tpw-ilungu-club' );
+			$route['status_label'] = __( 'Needs front-end screen', 'tpw-ilungu-club' );
 			$route['status_tone']  = 'warning';
 			$route['url']          = '';
 		}
@@ -2438,16 +2438,16 @@ class iLungu_Club_Admin_Menu {
 
 		if ( '' === $workspace_url ) {
 			return self::build_frontend_pending_route_state(
-				__( 'The iLungu Club portal page must be available before the front-end System Pages workspace can be opened.', 'tpw-core' )
+				__( 'The iLungu Club portal page must be available before the front-end System Pages workspace can be opened.', 'tpw-ilungu-club' )
 			);
 		}
 
 		return [
 			'configured'   => true,
 			'url'          => $workspace_url,
-			'action_label' => __( 'Open System Pages', 'tpw-core' ),
-			'message'      => __( 'Validate, repair, and recreate registered system pages from the iLungu Club portal.', 'tpw-core' ),
-			'status_label' => __( 'Ready', 'tpw-core' ),
+			'action_label' => __( 'Open System Pages', 'tpw-ilungu-club' ),
+			'message'      => __( 'Validate, repair, and recreate registered system pages from the iLungu Club portal.', 'tpw-ilungu-club' ),
+			'status_label' => __( 'Ready', 'tpw-ilungu-club' ),
 			'status_tone'  => 'neutral',
 		];
 	}
@@ -2460,9 +2460,9 @@ class iLungu_Club_Admin_Menu {
 			return [
 				'configured'   => true,
 				'url'          => $workspace_url,
-				'action_label' => __( 'Open Logs', 'tpw-core' ),
-				'message'      => __( 'Review email and payment logs from the iLungu Club portal.', 'tpw-core' ),
-				'status_label' => __( 'Ready', 'tpw-core' ),
+				'action_label' => __( 'Open Logs', 'tpw-ilungu-club' ),
+				'message'      => __( 'Review email and payment logs from the iLungu Club portal.', 'tpw-ilungu-club' ),
+				'status_label' => __( 'Ready', 'tpw-ilungu-club' ),
 				'status_tone'  => 'neutral',
 			];
 		}
@@ -2471,16 +2471,16 @@ class iLungu_Club_Admin_Menu {
 			return [
 				'configured'   => true,
 				'url'          => (string) $direct_status['open_url'],
-				'action_label' => __( 'Open Logs page', 'tpw-core' ),
-				'message'      => __( 'Dedicated front-end Logs page using the iLungu Club portal shell.', 'tpw-core' ),
-				'status_label' => __( 'Ready', 'tpw-core' ),
+				'action_label' => __( 'Open Logs page', 'tpw-ilungu-club' ),
+				'message'      => __( 'Dedicated front-end Logs page using the iLungu Club portal shell.', 'tpw-ilungu-club' ),
+				'status_label' => __( 'Ready', 'tpw-ilungu-club' ),
 				'status_tone'  => 'neutral',
 			];
 		}
 
 		return self::build_frontend_pending_route_state(
-			__( 'The iLungu Club portal page must be available before the front-end Logs workspace can be opened.', 'tpw-core' ),
-			__( 'Open admin logs (temporary)', 'tpw-core' ),
+			__( 'The iLungu Club portal page must be available before the front-end Logs workspace can be opened.', 'tpw-ilungu-club' ),
+			__( 'Open admin logs (temporary)', 'tpw-ilungu-club' ),
 			admin_url( 'admin.php?page=' . self::PAGE_LOGS )
 		);
 	}
@@ -2490,8 +2490,8 @@ class iLungu_Club_Admin_Menu {
 
 		if ( '' === $workspace_url ) {
 			return self::build_frontend_pending_route_state(
-				__( 'The iLungu Club portal page must be available before the front-end Settings workspace can be opened.', 'tpw-core' ),
-				__( 'Open admin settings (temporary)', 'tpw-core' ),
+				__( 'The iLungu Club portal page must be available before the front-end Settings workspace can be opened.', 'tpw-ilungu-club' ),
+				__( 'Open admin settings (temporary)', 'tpw-ilungu-club' ),
 				self::get_settings_admin_url( 'payment-methods' === $tab ? 'payment-methods' : '' )
 			);
 		}
@@ -2502,11 +2502,11 @@ class iLungu_Club_Admin_Menu {
 		return [
 			'configured'   => true,
 			'url'          => $url,
-			'action_label' => 'payment-methods' === $tab ? __( 'Open Payments', 'tpw-core' ) : __( 'Open Settings', 'tpw-core' ),
+			'action_label' => 'payment-methods' === $tab ? __( 'Open Payments', 'tpw-ilungu-club' ) : __( 'Open Settings', 'tpw-ilungu-club' ),
 			'message'      => 'payment-methods' === $tab
-				? __( 'Manage payment methods from the front-end Settings workspace.', 'tpw-core' )
-				: __( 'Review branding, login, email, and shared iLungu Club platform settings from the portal.', 'tpw-core' ),
-			'status_label' => __( 'Ready', 'tpw-core' ),
+				? __( 'Manage payment methods from the front-end Settings workspace.', 'tpw-ilungu-club' )
+				: __( 'Review branding, login, email, and shared iLungu Club platform settings from the portal.', 'tpw-ilungu-club' ),
+			'status_label' => __( 'Ready', 'tpw-ilungu-club' ),
 			'status_tone'  => 'neutral',
 		];
 	}
@@ -2518,7 +2518,7 @@ class iLungu_Club_Admin_Menu {
 			'menu-management',
 			'flexiclub_menu_management',
 			self::PAGE_MENU_MANAGER,
-			__( 'Open Menu Management', 'tpw-core' )
+			__( 'Open Menu Management', 'tpw-ilungu-club' )
 		);
 	}
 
@@ -2529,7 +2529,7 @@ class iLungu_Club_Admin_Menu {
 			'archival-system',
 			'flexiclub_archival_system',
 			self::PAGE_UPLOADS,
-			__( 'Open Archival System', 'tpw-core' )
+			__( 'Open Archival System', 'tpw-ilungu-club' )
 		);
 	}
 
@@ -2546,9 +2546,9 @@ class iLungu_Club_Admin_Menu {
 			return [
 				'configured'   => false,
 				'url'          => $diagnostics_url,
-				'action_label' => __( 'Open diagnostics', 'tpw-core' ),
-				'message'      => __( 'The legacy Control compatibility layer does not currently expose this workspace section.', 'tpw-core' ),
-				'status_label' => __( 'Needs review', 'tpw-core' ),
+				'action_label' => __( 'Open diagnostics', 'tpw-ilungu-club' ),
+				'message'      => __( 'The legacy Control compatibility layer does not currently expose this workspace section.', 'tpw-ilungu-club' ),
+				'status_label' => __( 'Needs review', 'tpw-ilungu-club' ),
 				'status_tone'  => 'warning',
 				'direct_url'   => $direct_url,
 			];
@@ -2559,8 +2559,8 @@ class iLungu_Club_Admin_Menu {
 				'configured'   => true,
 				'url'          => $workspace_url,
 				'action_label' => $workspace_label,
-				'message'      => __( 'Preferred front-end workspace route inside the iLungu Club portal.', 'tpw-core' ),
-				'status_label' => __( 'Ready', 'tpw-core' ),
+				'message'      => __( 'Preferred front-end workspace route inside the iLungu Club portal.', 'tpw-ilungu-club' ),
+				'status_label' => __( 'Ready', 'tpw-ilungu-club' ),
 				'status_tone'  => 'neutral',
 				'direct_url'   => $direct_url,
 			];
@@ -2570,9 +2570,9 @@ class iLungu_Club_Admin_Menu {
 			return [
 				'configured'   => false,
 				'url'          => $direct_url,
-				'action_label' => __( 'Open dedicated page', 'tpw-core' ),
-				'message'      => __( 'The iLungu Club portal page is not currently available, so the dedicated workspace page is being used instead.', 'tpw-core' ),
-				'status_label' => __( 'Needs review', 'tpw-core' ),
+				'action_label' => __( 'Open dedicated page', 'tpw-ilungu-club' ),
+				'message'      => __( 'The iLungu Club portal page is not currently available, so the dedicated workspace page is being used instead.', 'tpw-ilungu-club' ),
+				'status_label' => __( 'Needs review', 'tpw-ilungu-club' ),
 				'status_tone'  => 'warning',
 				'direct_url'   => $direct_url,
 			];
@@ -2581,9 +2581,9 @@ class iLungu_Club_Admin_Menu {
 		return [
 			'configured'   => false,
 			'url'          => $diagnostics_url,
-			'action_label' => __( 'Open diagnostics', 'tpw-core' ),
-			'message'      => __( 'The iLungu Club portal page must be available before this front-end workspace can be opened.', 'tpw-core' ),
-			'status_label' => __( 'Needs review', 'tpw-core' ),
+			'action_label' => __( 'Open diagnostics', 'tpw-ilungu-club' ),
+			'message'      => __( 'The iLungu Club portal page must be available before this front-end workspace can be opened.', 'tpw-ilungu-club' ),
+			'status_label' => __( 'Needs review', 'tpw-ilungu-club' ),
 			'status_tone'  => 'warning',
 			'direct_url'   => '',
 		];
@@ -2597,11 +2597,11 @@ class iLungu_Club_Admin_Menu {
 			'url'          => $url,
 			'action_label' => '' !== $url
 				? (string) $action_label
-				: __( 'Needs front-end screen', 'tpw-core' ),
+				: __( 'Needs front-end screen', 'tpw-ilungu-club' ),
 			'message'      => (string) $message,
 			'status_label' => '' !== $url
-				? __( 'Front-end pending', 'tpw-core' )
-				: __( 'Needs front-end screen', 'tpw-core' ),
+				? __( 'Front-end pending', 'tpw-ilungu-club' )
+				: __( 'Needs front-end screen', 'tpw-ilungu-club' ),
 			'status_tone'  => 'warning',
 		];
 	}
@@ -2611,7 +2611,7 @@ class iLungu_Club_Admin_Menu {
 		$dashboard_url    = self::get_frontend_workspace_url( 'dashboard' );
 		$system_pages_url = self::get_frontend_workspace_url( 'system-pages' );
 		$active_tab       = function_exists( 'tpw_core_get_settings_default_tab' ) ? tpw_core_get_settings_default_tab() : 'member-menu';
-		$active_label     = __( 'Active Settings Area', 'tpw-core' );
+		$active_label     = __( 'Active Settings Area', 'tpw-ilungu-club' );
 		$current_url      = $workspace_url;
 		$tabs             = [];
 		$notices          = [];
@@ -2717,18 +2717,18 @@ class iLungu_Club_Admin_Menu {
 		$total_rows   = 0;
 		$total_pages  = 1;
 		$rows         = [];
-		$active_label = __( 'Logs', 'tpw-core' );
-		$empty_text   = __( 'No log entries found.', 'tpw-core' );
+		$active_label = __( 'Logs', 'tpw-ilungu-club' );
+		$empty_text   = __( 'No log entries found.', 'tpw-ilungu-club' );
 		$clear_form   = [];
 
 		if ( class_exists( 'TPW_Email_Logs' ) ) {
 			$sources['email'] = [
 				'key'          => 'email',
-				'label'        => __( 'Email Logs', 'tpw-core' ),
+				'label'        => __( 'Email Logs', 'tpw-ilungu-club' ),
 				'count'        => $email_total,
-				'status_label' => $email_failed > 0 ? __( 'Needs review', 'tpw-core' ) : __( 'Healthy', 'tpw-core' ),
+				'status_label' => $email_failed > 0 ? __( 'Needs review', 'tpw-ilungu-club' ) : __( 'Healthy', 'tpw-ilungu-club' ),
 				'status_tone'  => $email_failed > 0 ? 'warning' : 'success',
-				'description'  => __( 'Outbound email dispatch attempts recorded by the shared email dispatcher.', 'tpw-core' ),
+				'description'  => __( 'Outbound email dispatch attempts recorded by the shared email dispatcher.', 'tpw-ilungu-club' ),
 				'url'          => self::get_frontend_logs_source_url( $current_url, 'email' ),
 				'current'      => 'email' === $current_source,
 			];
@@ -2737,11 +2737,11 @@ class iLungu_Club_Admin_Menu {
 		if ( class_exists( 'TPW_Payment_Logs_Admin' ) ) {
 			$sources['payment'] = [
 				'key'          => 'payment',
-				'label'        => __( 'Payment Logs', 'tpw-core' ),
+				'label'        => __( 'Payment Logs', 'tpw-ilungu-club' ),
 				'count'        => $payment_total,
-				'status_label' => $payment_failed > 0 ? __( 'Needs review', 'tpw-core' ) : __( 'Healthy', 'tpw-core' ),
+				'status_label' => $payment_failed > 0 ? __( 'Needs review', 'tpw-ilungu-club' ) : __( 'Healthy', 'tpw-ilungu-club' ),
 				'status_tone'  => $payment_failed > 0 ? 'warning' : 'success',
-				'description'  => __( 'Payment method and gateway activity recorded by the shared payment logger.', 'tpw-core' ),
+				'description'  => __( 'Payment method and gateway activity recorded by the shared payment logger.', 'tpw-ilungu-club' ),
 				'url'          => self::get_frontend_logs_source_url( $current_url, 'payment' ),
 				'current'      => 'payment' === $current_source,
 			];
@@ -2751,8 +2751,8 @@ class iLungu_Club_Admin_Menu {
 			$total_rows   = $payment_total;
 			$total_pages  = max( 1, (int) ceil( $total_rows / $per_page ) );
 			$current_page = min( $current_page, $total_pages );
-			$active_label = __( 'Payment Logs', 'tpw-core' );
-			$empty_text   = __( 'No payment log entries found.', 'tpw-core' );
+			$active_label = __( 'Payment Logs', 'tpw-ilungu-club' );
+			$empty_text   = __( 'No payment log entries found.', 'tpw-ilungu-club' );
 			$clear_form   = [
 				'enabled'      => TPW_Payment_Logs_Admin::current_user_can_clear_logs(),
 				'action_url'   => admin_url( 'admin-post.php' ),
@@ -2761,8 +2761,8 @@ class iLungu_Club_Admin_Menu {
 				'nonce_field'  => TPW_Payment_Logs_Admin::CLEAR_NONCE_FIELD,
 				'redirect_key' => 'tpw_payment_logs_redirect',
 				'redirect_url' => $current_url,
-				'button_label' => __( 'Clear Payment Logs', 'tpw-core' ),
-				'confirm_text' => __( 'Are you sure you want to clear all payment logs?', 'tpw-core' ),
+				'button_label' => __( 'Clear Payment Logs', 'tpw-ilungu-club' ),
+				'confirm_text' => __( 'Are you sure you want to clear all payment logs?', 'tpw-ilungu-club' ),
 			];
 
 			foreach ( TPW_Payment_Logs_Admin::get_page( $current_page, $per_page ) as $row ) {
@@ -2770,13 +2770,13 @@ class iLungu_Club_Admin_Menu {
 
 				if ( isset( $row->plugin ) && '' !== (string) $row->plugin ) {
 					$source = '' !== $source
-						? sprintf( __( '%1$s via %2$s', 'tpw-core' ), $source, (string) $row->plugin )
+						? sprintf( __( '%1$s via %2$s', 'tpw-ilungu-club' ), $source, (string) $row->plugin )
 						: (string) $row->plugin;
 				}
 
 				$rows[] = [
 					'date'      => isset( $row->created_at ) ? (string) $row->created_at : '',
-					'source'    => '' !== $source ? $source : __( 'Payment', 'tpw-core' ),
+					'source'    => '' !== $source ? $source : __( 'Payment', 'tpw-ilungu-club' ),
 					'status'    => isset( $row->status ) ? (string) $row->status : '',
 					'message'   => isset( $row->message ) ? (string) $row->message : '',
 					'reference' => isset( $row->reference ) ? (string) $row->reference : '',
@@ -2786,8 +2786,8 @@ class iLungu_Club_Admin_Menu {
 			$total_rows   = $email_total;
 			$total_pages  = max( 1, (int) ceil( $total_rows / $per_page ) );
 			$current_page = min( $current_page, $total_pages );
-			$active_label = __( 'Email Logs', 'tpw-core' );
-			$empty_text   = __( 'No email log entries found.', 'tpw-core' );
+			$active_label = __( 'Email Logs', 'tpw-ilungu-club' );
+			$empty_text   = __( 'No email log entries found.', 'tpw-ilungu-club' );
 			$clear_form   = [
 				'enabled'       => function_exists( 'tpw_core_current_user_can_manage_settings' ) ? tpw_core_current_user_can_manage_settings() : false,
 				'action_url'    => admin_url( 'admin-post.php' ),
@@ -2796,8 +2796,8 @@ class iLungu_Club_Admin_Menu {
 				'nonce_field'   => 'tpw_core_email_logs_nonce',
 				'redirect_key'  => 'tpw_settings_return_url',
 				'redirect_url'  => $current_url,
-				'button_label'  => __( 'Clear Email Logs', 'tpw-core' ),
-				'confirm_text'  => __( 'Are you sure you want to clear all email logs?', 'tpw-core' ),
+				'button_label'  => __( 'Clear Email Logs', 'tpw-ilungu-club' ),
+				'confirm_text'  => __( 'Are you sure you want to clear all email logs?', 'tpw-ilungu-club' ),
 				'hidden_fields' => [
 					[
 						'name'  => 'tpw_settings_context',
@@ -2811,13 +2811,13 @@ class iLungu_Club_Admin_Menu {
 
 				if ( isset( $row->error_message ) && '' !== (string) $row->error_message ) {
 					$message = '' !== $message
-						? sprintf( __( '%1$s (%2$s)', 'tpw-core' ), $message, (string) $row->error_message )
+						? sprintf( __( '%1$s (%2$s)', 'tpw-ilungu-club' ), $message, (string) $row->error_message )
 						: (string) $row->error_message;
 				}
 
 				$rows[] = [
 					'date'      => isset( $row->timestamp ) ? TPW_Email_Logs::format_display_timestamp( (string) $row->timestamp ) : '',
-					'source'    => ! empty( $row->context ) ? (string) $row->context : __( 'Email', 'tpw-core' ),
+					'source'    => ! empty( $row->context ) ? (string) $row->context : __( 'Email', 'tpw-ilungu-club' ),
 					'status'    => isset( $row->status ) ? (string) $row->status : '',
 					'message'   => $message,
 					'reference' => isset( $row->recipient ) ? (string) $row->recipient : '',
@@ -2842,20 +2842,20 @@ class iLungu_Club_Admin_Menu {
 			'total_pages'             => $total_pages,
 			'pagination'              => self::get_frontend_logs_pagination( $current_url, $current_source, $current_page, $total_pages ),
 			'notice'                  => self::get_frontend_logs_request_notice(),
-			'additional_sources_text' => __( 'No additional Core/System log screens are currently registered beyond Email Logs and Payment Logs.', 'tpw-core' ),
+			'additional_sources_text' => __( 'No additional Core/System log screens are currently registered beyond Email Logs and Payment Logs.', 'tpw-ilungu-club' ),
 			'summary_cards'           => [
 				[
-					'label' => __( 'Email Logs', 'tpw-core' ),
+					'label' => __( 'Email Logs', 'tpw-ilungu-club' ),
 					'value' => self::format_metric_value( $email_total ),
 					'tone'  => $email_failed > 0 ? 'warning' : 'success',
 				],
 				[
-					'label' => __( 'Payment Logs', 'tpw-core' ),
+					'label' => __( 'Payment Logs', 'tpw-ilungu-club' ),
 					'value' => self::format_metric_value( $payment_total ),
 					'tone'  => $payment_failed > 0 ? 'warning' : 'success',
 				],
 				[
-					'label' => __( 'Issues', 'tpw-core' ),
+					'label' => __( 'Issues', 'tpw-ilungu-club' ),
 					'value' => self::format_metric_value( $issue_total ),
 					'tone'  => $issue_total > 0 ? 'warning' : 'neutral',
 				],
@@ -2875,14 +2875,14 @@ class iLungu_Club_Admin_Menu {
 			'needs_attention' => 0,
 		];
 		$notice_tone   = 'info';
-		$notice_text   = __( 'Review each registered system page and use the available actions only when they are needed.', 'tpw-core' );
+		$notice_text   = __( 'Review each registered system page and use the available actions only when they are needed.', 'tpw-ilungu-club' );
 		$request_notice = class_exists( 'TPW_Core_System_Pages' ) && method_exists( 'TPW_Core_System_Pages', 'get_request_notice' )
 			? (array) TPW_Core_System_Pages::get_request_notice()
 			: array();
 
 		if ( ! class_exists( 'TPW_Core_System_Pages' ) || ! method_exists( 'TPW_Core_System_Pages', 'get_all' ) ) {
 			$notice_tone = 'error';
-			$notice_text = __( 'The System Pages manager is not available on this request.', 'tpw-core' );
+			$notice_text = __( 'The System Pages manager is not available on this request.', 'tpw-ilungu-club' );
 		} else {
 			foreach ( (array) TPW_Core_System_Pages::get_all() as $row ) {
 				if ( ! is_object( $row ) || empty( $row->slug ) ) {
@@ -2911,15 +2911,15 @@ class iLungu_Club_Admin_Menu {
 
 			if ( 0 === $summary['registered'] ) {
 				$notice_tone = 'warning';
-				$notice_text = __( 'No registered system pages were found in the current iLungu Club ecosystem registry.', 'tpw-core' );
+				$notice_text = __( 'No registered system pages were found in the current iLungu Club ecosystem registry.', 'tpw-ilungu-club' );
 			} elseif ( 0 === $summary['missing'] && 0 === $summary['needs_attention'] ) {
 				$notice_tone = 'success';
-				$notice_text = __( 'All registered system pages are linked, published, and ready to use.', 'tpw-core' );
+				$notice_text = __( 'All registered system pages are linked, published, and ready to use.', 'tpw-ilungu-club' );
 			} else {
 				$notice_tone = 'warning';
 				$notice_text = sprintf(
 					/* translators: 1: missing page count, 2: needs attention count */
-					__( '%1$s page(s) are missing and %2$s page(s) need attention.', 'tpw-core' ),
+					__( '%1$s page(s) are missing and %2$s page(s) need attention.', 'tpw-ilungu-club' ),
 					number_format_i18n( $summary['missing'] ),
 					number_format_i18n( $summary['needs_attention'] )
 				);
@@ -2942,27 +2942,27 @@ class iLungu_Club_Admin_Menu {
 			'ajax_nonce'    => wp_create_nonce( 'tpw_system_pages_ajax' ),
 			'summary_cards' => [
 				[
-					'label' => __( 'Registered', 'tpw-core' ),
+					'label' => __( 'Registered', 'tpw-ilungu-club' ),
 					'value' => number_format_i18n( $summary['registered'] ),
 					'tone'  => 'neutral',
 				],
 				[
-					'label' => __( 'Complete', 'tpw-core' ),
+					'label' => __( 'Complete', 'tpw-ilungu-club' ),
 					'value' => number_format_i18n( $summary['complete'] ),
 					'tone'  => 'success',
 				],
 				[
-					'label' => __( 'Ready', 'tpw-core' ),
+					'label' => __( 'Ready', 'tpw-ilungu-club' ),
 					'value' => number_format_i18n( $summary['ready'] ),
 					'tone'  => 'neutral',
 				],
 				[
-					'label' => __( 'Needs Attention', 'tpw-core' ),
+					'label' => __( 'Needs Attention', 'tpw-ilungu-club' ),
 					'value' => number_format_i18n( $summary['needs_attention'] ),
 					'tone'  => 'warning',
 				],
 				[
-					'label' => __( 'Missing', 'tpw-core' ),
+					'label' => __( 'Missing', 'tpw-ilungu-club' ),
 					'value' => number_format_i18n( $summary['missing'] ),
 					'tone'  => 'error',
 				],
@@ -3034,14 +3034,14 @@ class iLungu_Club_Admin_Menu {
 		if ( 'cleared' === $payment_notice ) {
 			return [
 				'tone'    => 'success',
-				'message' => __( 'Payment logs cleared.', 'tpw-core' ),
+				'message' => __( 'Payment logs cleared.', 'tpw-ilungu-club' ),
 			];
 		}
 
 		if ( 'failed' === $payment_notice ) {
 			return [
 				'tone'    => 'error',
-				'message' => __( 'Payment logs could not be cleared.', 'tpw-core' ),
+				'message' => __( 'Payment logs could not be cleared.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -3055,11 +3055,11 @@ class iLungu_Club_Admin_Menu {
 		$slug              = isset( $row->slug ) ? sanitize_key( (string) $row->slug ) : '';
 		$registered_title  = isset( $row->title ) ? (string) $row->title : $slug;
 		$registered_plugin = isset( $row->plugin ) ? (string) $row->plugin : '';
-		$plugin_label      = 'tpw-core' === $registered_plugin ? __( 'iLungu Club', 'tpw-core' ) : $registered_plugin;
+		$plugin_label      = 'tpw-core' === $registered_plugin ? __( 'iLungu Club', 'tpw-ilungu-club' ) : $registered_plugin;
 		$shortcode         = isset( $row->shortcode ) ? trim( (string) $row->shortcode ) : '';
 		$is_legacy_workspace = 'tpw-control' === $slug;
 		$required          = ! empty( $row->required );
-		$required_label    = $required ? __( 'Required', 'tpw-core' ) : __( 'Optional', 'tpw-core' );
+		$required_label    = $required ? __( 'Required', 'tpw-ilungu-club' ) : __( 'Optional', 'tpw-ilungu-club' );
 		$required_tone     = $required ? 'info' : 'neutral';
 		$shortcode_tag     = '';
 		$shortcode_display = $shortcode;
@@ -3090,24 +3090,24 @@ class iLungu_Club_Admin_Menu {
 		$has_shortcode  = '' === $shortcode_tag;
 		$can_unlink     = false;
 		$status_key     = 'missing';
-		$status_label   = __( 'Missing', 'tpw-core' );
+		$status_label   = __( 'Missing', 'tpw-ilungu-club' );
 		$status_tone    = 'error';
-		$action_label   = __( 'Recreate available', 'tpw-core' );
-		$action_message = __( 'No published page is currently linked for this registered slug.', 'tpw-core' );
+		$action_label   = __( 'Recreate available', 'tpw-ilungu-club' );
+		$action_message = __( 'No published page is currently linked for this registered slug.', 'tpw-ilungu-club' );
 		$action_tone    = 'info';
 		$can_recreate   = true;
-		$recreate_label = __( 'Recreate page', 'tpw-core' );
-		$legacy_label   = $is_legacy_workspace ? __( 'Legacy Workspace', 'tpw-core' ) : '';
-		$legacy_message = $is_legacy_workspace ? __( 'Use Menu Management and Archival System for new launches. Keep this page only for compatibility during the transition.', 'tpw-core' ) : '';
+		$recreate_label = __( 'Recreate page', 'tpw-ilungu-club' );
+		$legacy_label   = $is_legacy_workspace ? __( 'Legacy Workspace', 'tpw-ilungu-club' ) : '';
+		$legacy_message = $is_legacy_workspace ? __( 'Use Menu Management and Archival System for new launches. Keep this page only for compatibility during the transition.', 'tpw-ilungu-club' ) : '';
 
 		if ( $is_unlinked ) {
 			$status_key     = $required ? 'needs-attention' : 'missing';
-			$status_label   = $required ? __( 'Needs Attention', 'tpw-core' ) : __( 'Missing', 'tpw-core' );
+			$status_label   = $required ? __( 'Needs Attention', 'tpw-ilungu-club' ) : __( 'Missing', 'tpw-ilungu-club' );
 			$status_tone    = $required ? 'warning' : 'error';
-			$action_label   = __( 'Recreate available', 'tpw-core' );
+			$action_label   = __( 'Recreate available', 'tpw-ilungu-club' );
 			$action_message = $required
-				? __( 'The stored assignment was cleared for this required system page. The WordPress page was not deleted, but you need to repair or recreate the mapping before this page is ready again.', 'tpw-core' )
-				: __( 'The stored assignment was cleared for this optional system page. The WordPress page was not deleted, and you can recreate the mapping whenever you need this page again.', 'tpw-core' );
+				? __( 'The stored assignment was cleared for this required system page. The WordPress page was not deleted, but you need to repair or recreate the mapping before this page is ready again.', 'tpw-ilungu-club' )
+				: __( 'The stored assignment was cleared for this optional system page. The WordPress page was not deleted, and you can recreate the mapping whenever you need this page again.', 'tpw-ilungu-club' );
 			$action_tone    = 'info';
 			$can_recreate   = true;
 			$can_unlink     = false;
@@ -3123,40 +3123,40 @@ class iLungu_Club_Admin_Menu {
 
 				if ( $has_shortcode ) {
 					$status_key     = $required ? 'complete' : 'ready';
-					$status_label   = $required ? __( 'Complete', 'tpw-core' ) : __( 'Ready', 'tpw-core' );
+					$status_label   = $required ? __( 'Complete', 'tpw-ilungu-club' ) : __( 'Ready', 'tpw-ilungu-club' );
 					$status_tone    = $required ? 'success' : 'neutral';
-					$action_label   = __( 'No action needed', 'tpw-core' );
+					$action_label   = __( 'No action needed', 'tpw-ilungu-club' );
 					$action_message = $required
-						? __( 'The linked page is published and contains the expected shortcode. View or edit it as needed.', 'tpw-core' )
-						: __( 'This optional page is published and usable. You can still view, edit, or unlink it if needed.', 'tpw-core' );
+						? __( 'The linked page is published and contains the expected shortcode. View or edit it as needed.', 'tpw-ilungu-club' )
+						: __( 'This optional page is published and usable. You can still view, edit, or unlink it if needed.', 'tpw-ilungu-club' );
 					$action_tone    = 'neutral';
 					$can_recreate   = false;
 				} else {
 					$status_key     = 'needs-attention';
-					$status_label   = __( 'Needs Attention', 'tpw-core' );
+					$status_label   = __( 'Needs Attention', 'tpw-ilungu-club' );
 					$status_tone    = 'warning';
-					$action_label   = __( 'Repair available', 'tpw-core' );
-					$action_message = __( 'The page exists, but the expected shortcode is missing. Edit the page to repair it. Recreate is not offered here because current logic does not overwrite published content automatically.', 'tpw-core' );
+					$action_label   = __( 'Repair available', 'tpw-ilungu-club' );
+					$action_message = __( 'The page exists, but the expected shortcode is missing. Edit the page to repair it. Recreate is not offered here because current logic does not overwrite published content automatically.', 'tpw-ilungu-club' );
 					$action_tone    = 'warning';
 					$can_recreate   = false;
 				}
 			} elseif ( 'trash' === $page_status ) {
 				$status_key     = 'needs-attention';
-				$status_label   = __( 'Needs Attention', 'tpw-core' );
+				$status_label   = __( 'Needs Attention', 'tpw-ilungu-club' );
 				$status_tone    = 'warning';
-				$action_label   = __( 'Repair available', 'tpw-core' );
-				$action_message = __( 'A page with this slug is currently in Trash. Restore it or clear the current link before recreating the system page.', 'tpw-core' );
+				$action_label   = __( 'Repair available', 'tpw-ilungu-club' );
+				$action_message = __( 'A page with this slug is currently in Trash. Restore it or clear the current link before recreating the system page.', 'tpw-ilungu-club' );
 				$action_tone    = 'warning';
 				$can_recreate   = false;
 			} else {
 				$status_key     = 'needs-attention';
-				$status_label   = __( 'Needs Attention', 'tpw-core' );
+				$status_label   = __( 'Needs Attention', 'tpw-ilungu-club' );
 				$status_tone    = 'warning';
-				$action_label   = __( 'Repair available', 'tpw-core' );
-				$action_message = __( 'A page for this slug exists but is not published. Recreate will publish the current page using the existing System Pages logic.', 'tpw-core' );
+				$action_label   = __( 'Repair available', 'tpw-ilungu-club' );
+				$action_message = __( 'A page for this slug exists but is not published. Recreate will publish the current page using the existing System Pages logic.', 'tpw-ilungu-club' );
 				$action_tone    = 'warning';
 				$can_recreate   = true;
-				$recreate_label = __( 'Repair / publish page', 'tpw-core' );
+				$recreate_label = __( 'Repair / publish page', 'tpw-ilungu-club' );
 			}
 		}
 
@@ -3167,29 +3167,29 @@ class iLungu_Club_Admin_Menu {
 		$linked_page_text = $page_exists
 			? sprintf(
 				/* translators: 1: page title, 2: page ID */
-				__( '%1$s (#%2$d)', 'tpw-core' ),
+				__( '%1$s (#%2$d)', 'tpw-ilungu-club' ),
 				$page_title,
 				(int) $page->ID
 			)
-			: __( 'Not linked', 'tpw-core' );
+			: __( 'Not linked', 'tpw-ilungu-club' );
 
 		$linked_page_meta = $page_exists
 			? sprintf(
 				/* translators: %s: WordPress post status */
-				__( 'WordPress status: %s', 'tpw-core' ),
+				__( 'WordPress status: %s', 'tpw-ilungu-club' ),
 				ucfirst( $page_status )
 			)
-			: __( 'Recreate will generate the linked page from the registered system-page definition.', 'tpw-core' );
+			: __( 'Recreate will generate the linked page from the registered system-page definition.', 'tpw-ilungu-club' );
 
 		return [
 			'slug'             => $slug,
 			'title'            => $registered_title,
-			'plugin'           => '' !== $registered_plugin ? $registered_plugin : __( 'tpw-core', 'tpw-core' ),
-			'plugin_label'     => '' !== $plugin_label ? $plugin_label : __( 'tpw-core', 'tpw-core' ),
+			'plugin'           => '' !== $registered_plugin ? $registered_plugin : __( 'tpw-core', 'tpw-ilungu-club' ),
+			'plugin_label'     => '' !== $plugin_label ? $plugin_label : __( 'tpw-core', 'tpw-ilungu-club' ),
 			'legacy_label'     => $legacy_label,
 			'legacy_message'   => $legacy_message,
-			'shortcode'        => '' !== $shortcode ? $shortcode : __( 'No shortcode registered', 'tpw-core' ),
-			'shortcode_display' => '' !== $shortcode_display ? $shortcode_display : __( 'No shortcode registered', 'tpw-core' ),
+			'shortcode'        => '' !== $shortcode ? $shortcode : __( 'No shortcode registered', 'tpw-ilungu-club' ),
+			'shortcode_display' => '' !== $shortcode_display ? $shortcode_display : __( 'No shortcode registered', 'tpw-ilungu-club' ),
 			'required'         => $required,
 			'required_label'   => $required_label,
 			'required_tone'    => $required_tone,
@@ -3231,7 +3231,7 @@ class iLungu_Club_Admin_Menu {
 		return self::build_frontend_route_state(
 			$status,
 			self::get_bridge_diagnostics_url( self::PAGE_MEMBERS ),
-			__( 'Open Manage Members', 'tpw-core' )
+			__( 'Open Manage Members', 'tpw-ilungu-club' )
 		);
 	}
 
@@ -3242,7 +3242,7 @@ class iLungu_Club_Admin_Menu {
 		return self::build_frontend_route_state(
 			$status,
 			self::get_bridge_diagnostics_url( self::PAGE_GALLERY ),
-			__( 'Open Gallery Admin', 'tpw-core' )
+			__( 'Open Gallery Admin', 'tpw-ilungu-club' )
 		);
 	}
 
@@ -3256,27 +3256,27 @@ class iLungu_Club_Admin_Menu {
 
 		return [
 			'workspace_key'       => $workspace_key,
-			'title'               => $is_menu ? __( 'Menu Management', 'tpw-core' ) : __( 'Archival System', 'tpw-core' ),
-			'hero_title'          => $is_menu ? __( 'Menu Management Workspace', 'tpw-core' ) : __( 'Archival System Workspace', 'tpw-core' ),
+			'title'               => $is_menu ? __( 'Menu Management', 'tpw-ilungu-club' ) : __( 'Archival System', 'tpw-ilungu-club' ),
+			'hero_title'          => $is_menu ? __( 'Menu Management Workspace', 'tpw-ilungu-club' ) : __( 'Archival System Workspace', 'tpw-ilungu-club' ),
 			'hero_copy'           => $is_menu
-				? __( 'Manage the existing front-end menu visibility and navigation controls from the iLungu Club portal without changing the underlying permissions engine.', 'tpw-core' )
-				: __( 'Manage the existing archive pages and file uploads from the iLungu Club portal without changing the underlying archive logic.', 'tpw-core' ),
-			'status_label'        => isset( $summary['status_label'] ) ? (string) $summary['status_label'] : ( isset( $route['status_label'] ) ? (string) $route['status_label'] : __( 'Ready', 'tpw-core' ) ),
+				? __( 'Manage the existing front-end menu visibility and navigation controls from the iLungu Club portal without changing the underlying permissions engine.', 'tpw-ilungu-club' )
+				: __( 'Manage the existing archive pages and file uploads from the iLungu Club portal without changing the underlying archive logic.', 'tpw-ilungu-club' ),
+			'status_label'        => isset( $summary['status_label'] ) ? (string) $summary['status_label'] : ( isset( $route['status_label'] ) ? (string) $route['status_label'] : __( 'Ready', 'tpw-ilungu-club' ) ),
 			'status_tone'         => isset( $summary['status_tone'] ) ? (string) $summary['status_tone'] : ( isset( $route['status_tone'] ) ? (string) $route['status_tone'] : 'neutral' ),
-			'metric_label'        => $is_menu ? __( 'Menus', 'tpw-core' ) : __( 'Archive Pages', 'tpw-core' ),
-			'metric_value'        => isset( $summary['metric_value'] ) ? (string) $summary['metric_value'] : __( 'Unavailable', 'tpw-core' ),
+			'metric_label'        => $is_menu ? __( 'Menus', 'tpw-ilungu-club' ) : __( 'Archive Pages', 'tpw-ilungu-club' ),
+			'metric_value'        => isset( $summary['metric_value'] ) ? (string) $summary['metric_value'] : __( 'Unavailable', 'tpw-ilungu-club' ),
 			'metric_text'         => isset( $summary['card_text'] ) ? (string) $summary['card_text'] : '',
 			'dashboard_url'       => self::get_frontend_workspace_url( 'dashboard' ),
 			'dedicated_url'       => ! empty( $route['direct_url'] ) ? (string) $route['direct_url'] : '',
-			'dedicated_label'     => $is_menu ? __( 'Open dedicated Menu Management page', 'tpw-core' ) : __( 'Open dedicated Archival System page', 'tpw-core' ),
+			'dedicated_label'     => $is_menu ? __( 'Open dedicated Menu Management page', 'tpw-ilungu-club' ) : __( 'Open dedicated Archival System page', 'tpw-ilungu-club' ),
 			'legacy_url'          => $legacy_url,
-			'legacy_notice_label' => __( 'Legacy Workspace', 'tpw-core' ),
-			'legacy_notice_text'  => __( 'iLungu Club Control has been split. Keep the legacy combined page only for compatibility during the transition; new launches should use the separate workspaces.', 'tpw-core' ),
+			'legacy_notice_label' => __( 'Legacy Workspace', 'tpw-ilungu-club' ),
+			'legacy_notice_text'  => __( 'iLungu Club Control has been split. Keep the legacy combined page only for compatibility during the transition; new launches should use the separate workspaces.', 'tpw-ilungu-club' ),
 			'section_key'         => $is_menu ? 'menu-manager' : 'upload-pages',
-			'tool_heading'        => $is_menu ? __( 'Current Menu Management tool', 'tpw-core' ) : __( 'Current Archival System tool', 'tpw-core' ),
+			'tool_heading'        => $is_menu ? __( 'Current Menu Management tool', 'tpw-ilungu-club' ) : __( 'Current Archival System tool', 'tpw-ilungu-club' ),
 			'tool_copy'           => $is_menu
-				? __( 'This workspace embeds the existing front-end menu-management section inside the iLungu Club portal shell.', 'tpw-core' )
-				: __( 'This workspace embeds the existing front-end archive section inside the iLungu Club portal shell.', 'tpw-core' ),
+				? __( 'This workspace embeds the existing front-end menu-management section inside the iLungu Club portal shell.', 'tpw-ilungu-club' )
+				: __( 'This workspace embeds the existing front-end archive section inside the iLungu Club portal shell.', 'tpw-ilungu-club' ),
 		];
 	}
 
@@ -3302,19 +3302,19 @@ class iLungu_Club_Admin_Menu {
 
 		$message = '';
 		if ( empty( $section_keys ) ) {
-			$message = __( 'No iLungu Club Control admin sections are currently available for your role.', 'tpw-core' );
+			$message = __( 'No iLungu Club Control admin sections are currently available for your role.', 'tpw-ilungu-club' );
 		} elseif ( ! empty( $status['page_exists'] ) && empty( $status['shortcode_present'] ) ) {
-			$message = __( 'A compatible iLungu Club Control page exists, but the expected shortcode is missing from its content.', 'tpw-core' );
+			$message = __( 'A compatible iLungu Club Control page exists, but the expected shortcode is missing from its content.', 'tpw-ilungu-club' );
 		} elseif ( empty( $status['page_exists'] ) ) {
-			$message = __( 'No compatible iLungu Club Control page is currently configured.', 'tpw-core' );
+			$message = __( 'No compatible iLungu Club Control page is currently configured.', 'tpw-ilungu-club' );
 		}
 
 		return [
 			'configured'    => $configured,
 			'url'           => $configured ? (string) $status['page_url'] : $diagnostics_url,
-			'action_label'  => $configured ? __( 'Open iLungu Club Control', 'tpw-core' ) : ( '' !== $diagnostics_url ? __( 'Open diagnostics', 'tpw-core' ) : '' ),
+			'action_label'  => $configured ? __( 'Open iLungu Club Control', 'tpw-ilungu-club' ) : ( '' !== $diagnostics_url ? __( 'Open diagnostics', 'tpw-ilungu-club' ) : '' ),
 			'message'       => $message,
-			'status_label'  => '' !== $diagnostics_url ? __( 'Needs review', 'tpw-core' ) : __( 'Missing', 'tpw-core' ),
+			'status_label'  => '' !== $diagnostics_url ? __( 'Needs review', 'tpw-ilungu-club' ) : __( 'Missing', 'tpw-ilungu-club' ),
 			'status_tone'   => '' !== $diagnostics_url ? 'warning' : 'error',
 			'section_count' => count( $section_keys ),
 		];
@@ -3339,19 +3339,19 @@ class iLungu_Club_Admin_Menu {
 		self::ensure_tpw_control_runtime();
 
 		if ( '' === $section_key || ! class_exists( 'TPW_Control', false ) || ! class_exists( 'TPW_Control_UI', false ) ) {
-			echo '<div class="tpw-flexiclub-control-workspace__empty"><p>' . esc_html__( 'The requested workspace tool is not currently available.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="tpw-flexiclub-control-workspace__empty"><p>' . esc_html__( 'The requested workspace tool is not currently available.', 'tpw-ilungu-club' ) . '</p></div>';
 			return;
 		}
 
 		$sections = TPW_Control::get_sections();
 		if ( empty( $sections[ $section_key ] ) || ! is_array( $sections[ $section_key ] ) ) {
-			echo '<div class="tpw-flexiclub-control-workspace__empty"><p>' . esc_html__( 'The requested workspace tool is not currently registered on this site.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="tpw-flexiclub-control-workspace__empty"><p>' . esc_html__( 'The requested workspace tool is not currently registered on this site.', 'tpw-ilungu-club' ) . '</p></div>';
 			return;
 		}
 
 		$section = $sections[ $section_key ];
 		if ( ! TPW_Control_UI::section_is_visible( $section ) ) {
-			echo '<div class="tpw-flexiclub-control-workspace__empty"><p>' . esc_html__( 'You do not have permission to access this workspace tool.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="tpw-flexiclub-control-workspace__empty"><p>' . esc_html__( 'You do not have permission to access this workspace tool.', 'tpw-ilungu-club' ) . '</p></div>';
 			return;
 		}
 
@@ -3370,9 +3370,9 @@ class iLungu_Club_Admin_Menu {
 		return [
 			'configured'   => $configured,
 			'url'          => $configured ? (string) $status['open_url'] : (string) $diagnostics_url,
-			'action_label' => $configured ? $open_label : ( '' !== $diagnostics_url ? __( 'Open diagnostics', 'tpw-core' ) : '' ),
+			'action_label' => $configured ? $open_label : ( '' !== $diagnostics_url ? __( 'Open diagnostics', 'tpw-ilungu-club' ) : '' ),
 			'message'      => $message,
-			'status_label' => '' !== $diagnostics_url ? __( 'Needs review', 'tpw-core' ) : __( 'Missing', 'tpw-core' ),
+			'status_label' => '' !== $diagnostics_url ? __( 'Needs review', 'tpw-ilungu-club' ) : __( 'Missing', 'tpw-ilungu-club' ),
 			'status_tone'  => '' !== $diagnostics_url ? 'warning' : 'error',
 		];
 	}
@@ -3426,26 +3426,26 @@ class iLungu_Club_Admin_Menu {
 			'logo_url'        => self::get_dashboard_logo_url(),
 			'icon_url'        => self::get_dashboard_icon_url(),
 			'version'         => defined( 'TPW_CORE_VERSION' ) ? (string) TPW_CORE_VERSION : '',
-			'welcome_name'    => $current_user instanceof WP_User ? (string) $current_user->display_name : __( 'Admin', 'tpw-core' ),
+			'welcome_name'    => $current_user instanceof WP_User ? (string) $current_user->display_name : __( 'Admin', 'tpw-ilungu-club' ),
 			'summary_cards'   => [
 				[
-					'title'         => __( 'Total Members', 'tpw-core' ),
+					'title'         => __( 'Total Members', 'tpw-ilungu-club' ),
 					'value'         => self::format_metric_value( $members_summary['count'] ),
 					'description'   => $members_summary['metric_text'],
-					'action_label'  => __( 'View members', 'tpw-core' ),
+					'action_label'  => __( 'View members', 'tpw-ilungu-club' ),
 					'action_url'    => self::get_members_management_url(),
 					'icon'          => 'dashicons-groups',
 				],
 				[
-					'title'         => __( 'Active Notices', 'tpw-core' ),
+					'title'         => __( 'Active Notices', 'tpw-ilungu-club' ),
 					'value'         => self::format_metric_value( $notices_summary['count'] ),
 					'description'   => $notices_summary['metric_text'],
-					'action_label'  => __( 'View notices', 'tpw-core' ),
+					'action_label'  => __( 'View notices', 'tpw-ilungu-club' ),
 					'action_url'    => admin_url( self::NOTICEBOARD_ROUTE ),
 					'icon'          => 'dashicons-megaphone',
 				],
 				[
-					'title'         => __( 'Upcoming Events', 'tpw-core' ),
+					'title'         => __( 'Upcoming Events', 'tpw-ilungu-club' ),
 					'value'         => self::format_metric_value( $events_summary['count'], false ),
 					'description'   => $events_summary['metric_text'],
 					'action_label'  => $events_summary['action_label'],
@@ -3455,110 +3455,110 @@ class iLungu_Club_Admin_Menu {
 			],
 			'overview_cards'  => array_merge( [
 				[
-					'title'         => __( 'Members', 'tpw-core' ),
+					'title'         => __( 'Members', 'tpw-ilungu-club' ),
 					'metric'        => self::format_metric_value( $members_summary['count'] ),
 					'tone'          => 'members',
 					'status_label'  => $members_summary['status_label'],
 					'status_tone'   => $members_summary['status_tone'],
 					'description'   => $members_summary['card_text'],
-					'action_label'  => __( 'Manage members', 'tpw-core' ),
+					'action_label'  => __( 'Manage members', 'tpw-ilungu-club' ),
 					'action_url'    => self::get_members_management_url(),
 					'icon'          => 'dashicons-groups',
 					'disabled'      => false,
 				],
 				[
-					'title'         => __( 'Noticeboard', 'tpw-core' ),
+					'title'         => __( 'Noticeboard', 'tpw-ilungu-club' ),
 					'metric'        => self::format_metric_value( $notices_summary['count'] ),
 					'tone'          => 'noticeboard',
 					'status_label'  => $notices_summary['status_label'],
 					'status_tone'   => $notices_summary['status_tone'],
 					'description'   => $notices_summary['card_text'],
-					'action_label'  => __( 'Open noticeboard', 'tpw-core' ),
+					'action_label'  => __( 'Open noticeboard', 'tpw-ilungu-club' ),
 					'action_url'    => admin_url( self::NOTICEBOARD_ROUTE ),
 					'icon'          => 'dashicons-megaphone',
 					'disabled'      => false,
 				],
 				[
-					'title'         => __( 'Gallery Admin', 'tpw-core' ),
+					'title'         => __( 'Gallery Admin', 'tpw-ilungu-club' ),
 					'metric'        => $gallery_summary['metric_value'],
 					'tone'          => 'gallery',
 					'status_label'  => $gallery_summary['status_label'],
 					'status_tone'   => $gallery_summary['status_tone'],
 					'description'   => $gallery_summary['card_text'],
-					'action_label'  => __( 'Open gallery admin', 'tpw-core' ),
+					'action_label'  => __( 'Open gallery admin', 'tpw-ilungu-club' ),
 					'action_url'    => self::get_menu_item_url( self::PAGE_GALLERY ),
 					'icon'          => 'dashicons-format-gallery',
 					'disabled'      => false,
 				],
 				[
-					'title'         => __( 'Upload Pages / Archive', 'tpw-core' ),
+					'title'         => __( 'Upload Pages / Archive', 'tpw-ilungu-club' ),
 					'metric'        => $uploads_summary['metric_value'],
 					'tone'          => 'uploads',
 					'status_label'  => $uploads_summary['status_label'],
 					'status_tone'   => $uploads_summary['status_tone'],
 					'description'   => $uploads_summary['card_text'],
-					'action_label'  => __( 'Open archive tools', 'tpw-core' ),
+					'action_label'  => __( 'Open archive tools', 'tpw-ilungu-club' ),
 					'action_url'    => self::get_menu_item_url( self::PAGE_UPLOADS ),
 					'icon'          => 'dashicons-cloud-upload',
 					'disabled'      => false,
 				],
 				[
-					'title'         => __( 'Menu Permissions', 'tpw-core' ),
+					'title'         => __( 'Menu Permissions', 'tpw-ilungu-club' ),
 					'metric'        => $menu_summary['metric_value'],
 					'tone'          => 'permissions',
 					'status_label'  => $menu_summary['status_label'],
 					'status_tone'   => $menu_summary['status_tone'],
 					'description'   => $menu_summary['card_text'],
-					'action_label'  => __( 'Review permissions', 'tpw-core' ),
+					'action_label'  => __( 'Review permissions', 'tpw-ilungu-club' ),
 					'action_url'    => self::get_menu_item_url( self::PAGE_MENU_MANAGER ),
 					'icon'          => 'dashicons-lock',
 					'disabled'      => false,
 				],
 				[
-					'title'         => __( 'System Pages', 'tpw-core' ),
+					'title'         => __( 'System Pages', 'tpw-ilungu-club' ),
 					'metric'        => $system_summary['metric_value'],
 					'tone'          => 'system-pages',
 					'status_label'  => $system_summary['status_label'],
 					'status_tone'   => $system_summary['status_tone'],
 					'description'   => $system_summary['card_text'],
-					'action_label'  => __( 'Open system pages', 'tpw-core' ),
+					'action_label'  => __( 'Open system pages', 'tpw-ilungu-club' ),
 					'action_url'    => admin_url( self::SYSTEM_PAGES_ROUTE ),
 					'icon'          => 'dashicons-admin-page',
 					'disabled'      => false,
 				],
 				[
-					'title'         => __( 'Payments', 'tpw-core' ),
+					'title'         => __( 'Payments', 'tpw-ilungu-club' ),
 					'metric'        => $payments_summary['metric_value'],
 					'tone'          => 'payments',
 					'status_label'  => $payments_summary['status_label'],
 					'status_tone'   => $payments_summary['status_tone'],
 					'description'   => $payments_summary['card_text'],
-					'action_label'  => __( 'Configure payments', 'tpw-core' ),
+					'action_label'  => __( 'Configure payments', 'tpw-ilungu-club' ),
 					'action_url'    => $payments_summary['action_url'],
 					'icon'          => 'dashicons-money-alt',
 					'disabled'      => empty( $payments_summary['action_url'] ),
 					'show_action'   => ! empty( $payments_summary['action_url'] ),
 				],
 				[
-					'title'         => __( 'Settings', 'tpw-core' ),
+					'title'         => __( 'Settings', 'tpw-ilungu-club' ),
 					'metric'        => $settings_summary['metric_value'],
 					'tone'          => 'settings',
 					'status_label'  => $settings_summary['status_label'],
 					'status_tone'   => $settings_summary['status_tone'],
 					'description'   => $settings_summary['card_text'],
-					'action_label'  => __( 'Open settings', 'tpw-core' ),
+					'action_label'  => __( 'Open settings', 'tpw-ilungu-club' ),
 					'action_url'    => self::get_settings_admin_url(),
 					'icon'          => 'dashicons-admin-generic',
 					'disabled'      => false,
 				],
 				[
-					'title'         => __( 'Logs', 'tpw-core' ),
+					'title'         => __( 'Logs', 'tpw-ilungu-club' ),
 					'metric'        => $logs_summary['metric_value'],
 					'tone'          => 'logs',
 					'status_label'  => $logs_summary['status_label'],
 					'status_tone'   => $logs_summary['status_tone'],
 					'description'   => $logs_summary['card_text'],
-					'action_label'  => __( 'View logs', 'tpw-core' ),
+					'action_label'  => __( 'View logs', 'tpw-ilungu-club' ),
 					'action_url'    => self::get_menu_item_url( self::PAGE_LOGS ),
 					'icon'          => 'dashicons-chart-line',
 					'disabled'      => false,
@@ -3591,32 +3591,32 @@ class iLungu_Club_Admin_Menu {
 	protected static function get_dashboard_quick_actions( $payments_summary ) {
 		$actions = [
 			[
-				'label'    => __( 'Setup Checklist', 'tpw-core' ),
+				'label'    => __( 'Setup Checklist', 'tpw-ilungu-club' ),
 				'url'      => self::get_dashboard_checklist_url(),
 				'disabled' => false,
 			],
 			[
-				'label'    => __( 'Add New Member', 'tpw-core' ),
+				'label'    => __( 'Add New Member', 'tpw-ilungu-club' ),
 				'url'      => self::get_members_management_url( 'add' ),
 				'disabled' => false,
 			],
 			[
-				'label'    => __( 'Add New Notice', 'tpw-core' ),
+				'label'    => __( 'Add New Notice', 'tpw-ilungu-club' ),
 				'url'      => admin_url( 'post-new.php?post_type=tpw_notice' ),
 				'disabled' => false,
 			],
 			[
-				'label'    => __( 'Add Gallery Images', 'tpw-core' ),
+				'label'    => __( 'Add Gallery Images', 'tpw-ilungu-club' ),
 				'url'      => self::get_gallery_launch_url(),
 				'disabled' => false,
 			],
 			[
-				'label'    => __( 'Create or Check System Pages', 'tpw-core' ),
+				'label'    => __( 'Create or Check System Pages', 'tpw-ilungu-club' ),
 				'url'      => admin_url( self::SYSTEM_PAGES_ROUTE ),
 				'disabled' => false,
 			],
 			[
-				'label'    => __( 'Review Menu Permissions', 'tpw-core' ),
+				'label'    => __( 'Review Menu Permissions', 'tpw-ilungu-club' ),
 				'url'      => self::get_tpw_control_launch_url( 'menu-manager', self::PAGE_MENU_MANAGER ),
 				'disabled' => false,
 			],
@@ -3624,14 +3624,14 @@ class iLungu_Club_Admin_Menu {
 
 		if ( ! empty( $payments_summary['payments_required'] ) && ! empty( $payments_summary['action_url'] ) ) {
 			$actions[] = [
-				'label'    => __( 'Configure Payments', 'tpw-core' ),
+				'label'    => __( 'Configure Payments', 'tpw-ilungu-club' ),
 				'url'      => $payments_summary['action_url'],
 				'disabled' => false,
 			];
 		}
 
 		$actions[] = [
-			'label'    => __( 'View Logs', 'tpw-core' ),
+			'label'    => __( 'View Logs', 'tpw-ilungu-club' ),
 			'url'      => self::get_menu_item_url( self::PAGE_LOGS ),
 			'disabled' => false,
 		];
@@ -3645,14 +3645,14 @@ class iLungu_Club_Admin_Menu {
 		foreach ( $items as $item ) {
 			if ( empty( $item['done'] ) ) {
 				return [
-					'label' => __( 'Continue setup', 'tpw-core' ),
+					'label' => __( 'Continue setup', 'tpw-ilungu-club' ),
 					'url'   => isset( $item['url'] ) ? $item['url'] : self::get_dashboard_checklist_url(),
 				];
 			}
 		}
 
 		return [
-			'label' => $complete ? __( 'Review checklist', 'tpw-core' ) : __( 'Open checklist', 'tpw-core' ),
+			'label' => $complete ? __( 'Review checklist', 'tpw-ilungu-club' ) : __( 'Open checklist', 'tpw-ilungu-club' ),
 			'url'   => self::get_dashboard_checklist_url(),
 		];
 	}
@@ -3720,8 +3720,8 @@ class iLungu_Club_Admin_Menu {
 		$definitions = [
 			[
 				'key'              => 'events',
-				'name'             => __( 'iLungu Events', 'tpw-core' ),
-				'description'      => __( 'Events, scheduling, and club activities.', 'tpw-core' ),
+				'name'             => __( 'iLungu Events', 'tpw-ilungu-club' ),
+				'description'      => __( 'Events, scheduling, and club activities.', 'tpw-ilungu-club' ),
 				'icon_url'         => self::get_plugin_icon_url( 'ilunguevent-icon.svg' ),
 				'plugin_names'     => [ 'iLungu Events', 'TPW FlexiEvent' ],
 				'text_domains'     => [ 'ilungu-events', 'tpw-flexievent' ],
@@ -3732,12 +3732,12 @@ class iLungu_Club_Admin_Menu {
 				'frontend_route_family' => 'flexievent-events',
 				'product_url'      => 'https://thepluginworks.com/FlexiEvent',
 				'active_url'       => admin_url( 'edit.php?post_type=tpw_event' ),
-				'active_label'     => __( 'Manage events', 'tpw-core' ),
+				'active_label'     => __( 'Manage events', 'tpw-ilungu-club' ),
 			],
 			[
 				'key'          => 'subscriptions',
-				'name'         => __( 'iLungu Subscriptions', 'tpw-core' ),
-				'description'  => __( 'Membership subscriptions and renewals.', 'tpw-core' ),
+				'name'         => __( 'iLungu Subscriptions', 'tpw-ilungu-club' ),
+				'description'  => __( 'Membership subscriptions and renewals.', 'tpw-ilungu-club' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungusubscriptions-icon.svg' ),
 				'plugin_names' => [ 'iLungu Subscriptions', 'TPW FlexiSubscriptions' ],
 				'text_domains' => [ 'ilungusubscriptions', 'tpw-flexisubscriptions' ],
@@ -3745,12 +3745,12 @@ class iLungu_Club_Admin_Menu {
 				'frontend_route_family' => 'flexisubscriptions',
 				'product_url'  => 'https://thepluginworks.com/FlexiSubscriptions',
 				'active_url'   => admin_url( 'admin.php?page=csp_dashboard_home' ),
-				'active_label' => __( 'Manage subscriptions', 'tpw-core' ),
+				'active_label' => __( 'Manage subscriptions', 'tpw-ilungu-club' ),
 			],
 			[
 				'key'          => 'tickets',
-				'name'         => __( 'iLungu Tickets', 'tpw-core' ),
-				'description'  => __( 'Ticketing and event sales for members.', 'tpw-core' ),
+				'name'         => __( 'iLungu Tickets', 'tpw-ilungu-club' ),
+				'description'  => __( 'Ticketing and event sales for members.', 'tpw-ilungu-club' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungutickets-icon.svg' ),
 				'plugin_names' => [ 'iLungu Tickets', 'TPW FlexiTicket' ],
 				'text_domains' => [ 'ilungutickets', 'tpw-flexiticket' ],
@@ -3758,24 +3758,24 @@ class iLungu_Club_Admin_Menu {
 				'frontend_route_family' => 'flexiticket-checkin',
 				'product_url'  => 'https://thepluginworks.com/FlexiTicket',
 				'active_url'   => admin_url( 'edit.php?post_type=tpw_event' ),
-				'active_label' => __( 'Manage ticketing', 'tpw-core' ),
+				'active_label' => __( 'Manage ticketing', 'tpw-ilungu-club' ),
 			],
 			[
 				'key'          => 'ledger',
-				'name'         => __( 'iLungu Ledger', 'tpw-core' ),
-				'description'  => __( 'Financial tracking and reconciliation tools.', 'tpw-core' ),
+				'name'         => __( 'iLungu Ledger', 'tpw-ilungu-club' ),
+				'description'  => __( 'Financial tracking and reconciliation tools.', 'tpw-ilungu-club' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilunguledger-icon.svg' ),
 				'plugin_names' => [ 'iLungu Ledger', 'TPW FlexiLedger' ],
 				'text_domains' => [ 'ilunguledger', 'tpw-flexiledger' ],
 				'basenames'    => [ 'ilungu-ledger/ilungu-ledger.php', 'tpw-flexiledger/flexiledger.php', 'tpw-flexiledger/tpw-flexiledger.php' ],
 				'frontend_route_family' => 'flexiledger',
 				'product_url'  => 'https://thepluginworks.com/FlexiLedger',
-				'active_label' => __( 'Manage ledger', 'tpw-core' ),
+				'active_label' => __( 'Manage ledger', 'tpw-ilungu-club' ),
 			],
 			[
 				'key'              => 'golf',
-				'name'             => __( 'iLungu Golf', 'tpw-core' ),
-				'description'      => __( 'Fixtures, results, and match administration.', 'tpw-core' ),
+				'name'             => __( 'iLungu Golf', 'tpw-ilungu-club' ),
+				'description'      => __( 'Fixtures, results, and match administration.', 'tpw-ilungu-club' ),
 				'icon_url'         => self::get_plugin_icon_url( 'ilungugolf-icon.svg' ),
 				'plugin_names'     => [ 'iLungu Golf', 'TPW FlexiGolf' ],
 				'text_domains'     => [ 'ilungugolf', 'tpw-flexigolf' ],
@@ -3786,8 +3786,8 @@ class iLungu_Club_Admin_Menu {
 			],
 			[
 				'key'          => 'policy',
-				'name'         => __( 'iLungu Policy', 'tpw-core' ),
-				'description'  => __( 'Club documents, policy delivery, and acknowledgements.', 'tpw-core' ),
+				'name'         => __( 'iLungu Policy', 'tpw-ilungu-club' ),
+				'description'  => __( 'Club documents, policy delivery, and acknowledgements.', 'tpw-ilungu-club' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungupolicy-icon.svg' ),
 				'plugin_names' => [ 'iLungu Policy', 'TPW FlexiPolicy' ],
 				'text_domains' => [ 'ilungu-policies', 'tpw-flexipolicy' ],
@@ -3796,8 +3796,8 @@ class iLungu_Club_Admin_Menu {
 			],
 			[
 				'key'          => 'rota',
-				'name'         => __( 'iLungu Rota', 'tpw-core' ),
-				'description'  => __( 'Volunteer and duty rota planning.', 'tpw-core' ),
+				'name'         => __( 'iLungu Rota', 'tpw-ilungu-club' ),
+				'description'  => __( 'Volunteer and duty rota planning.', 'tpw-ilungu-club' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungurota-icon.svg' ),
 				'plugin_names' => [ 'iLungu Rota', 'TPW FlexiRota' ],
 				'text_domains' => [ 'ilungurota', 'tpw-flexirota' ],
@@ -3806,8 +3806,8 @@ class iLungu_Club_Admin_Menu {
 			],
 			[
 				'key'          => 'lodge',
-				'name'         => __( 'iLungu Lodge', 'tpw-core' ),
-				'description'  => __( 'Responses, attendance, and payment-ready RSVPs.', 'tpw-core' ),
+				'name'         => __( 'iLungu Lodge', 'tpw-ilungu-club' ),
+				'description'  => __( 'Responses, attendance, and payment-ready RSVPs.', 'tpw-ilungu-club' ),
 				'icon_url'     => self::get_plugin_icon_url( 'ilungulodgemeetings-icon.svg' ),
 				'plugin_names' => [ 'iLungu Lodge', 'TPW RSVP Lodge Meetings', 'RSVP Lodge Meetings' ],
 				'text_domains' => [ 'lodge-rsvp', 'tpw-lodge-rsvp', 'tpw-rsvp-lodge-meetings' ],
@@ -3815,7 +3815,7 @@ class iLungu_Club_Admin_Menu {
 				'frontend_route_family' => 'lodge-rsvp-summary',
 				'product_url'  => 'https://thepluginworks.com/lodge-rsvp-plugin-for-wordpress/',
 				'active_url'   => admin_url( 'edit.php?post_type=tpw_event' ),
-				'active_label' => __( 'Manage RSVPs', 'tpw-core' ),
+				'active_label' => __( 'Manage RSVPs', 'tpw-ilungu-club' ),
 			],
 		];
 
@@ -3835,14 +3835,14 @@ class iLungu_Club_Admin_Menu {
 			'name'         => isset( $definition['name'] ) ? $definition['name'] : '',
 			'description'  => isset( $definition['description'] ) ? $definition['description'] : '',
 			'icon_url'     => isset( $definition['icon_url'] ) ? $definition['icon_url'] : '',
-			'status_label' => __( 'Available', 'tpw-core' ),
+			'status_label' => __( 'Available', 'tpw-ilungu-club' ),
 			'status_tone'  => 'neutral',
 			'action_label' => '',
 			'action_url'   => '',
 		];
 
 		if ( ! empty( $plugin_state['active'] ) ) {
-			$card['status_label'] = __( 'Active', 'tpw-core' );
+			$card['status_label'] = __( 'Active', 'tpw-ilungu-club' );
 			$card['status_tone']  = 'success';
 
 			$action_url = ! empty( $prefer_frontend )
@@ -3850,7 +3850,7 @@ class iLungu_Club_Admin_Menu {
 				: ( isset( $definition['active_url'] ) ? $definition['active_url'] : '' );
 
 			if ( is_string( $action_url ) && '' !== $action_url ) {
-				$card['action_label'] = ! empty( $definition['active_label'] ) ? $definition['active_label'] : __( 'Open plugin', 'tpw-core' );
+				$card['action_label'] = ! empty( $definition['active_label'] ) ? $definition['active_label'] : __( 'Open plugin', 'tpw-ilungu-club' );
 				$card['action_url']   = $action_url;
 			}
 
@@ -3860,17 +3860,17 @@ class iLungu_Club_Admin_Menu {
 		}
 
 		if ( ! empty( $plugin_state['installed'] ) ) {
-			$card['status_label'] = __( 'Installed', 'tpw-core' );
+			$card['status_label'] = __( 'Installed', 'tpw-ilungu-club' );
 			$card['status_tone']  = 'info';
 
 			if ( ! empty( $prefer_frontend ) && ! empty( $plugin_state['can_activate'] ) ) {
-				$card['action_label'] = __( 'Activate plugin', 'tpw-core' );
+				$card['action_label'] = __( 'Activate plugin', 'tpw-ilungu-club' );
 				$card['action_url']   = self::get_frontend_dashboard_plugin_activation_url( $definition, $plugin_state );
 			} elseif ( ! empty( $plugin_state['activation_url'] ) ) {
-				$card['action_label'] = ! empty( $plugin_state['can_activate'] ) ? __( 'Activate plugin', 'tpw-core' ) : __( 'View plugins', 'tpw-core' );
+				$card['action_label'] = ! empty( $plugin_state['can_activate'] ) ? __( 'Activate plugin', 'tpw-ilungu-club' ) : __( 'View plugins', 'tpw-ilungu-club' );
 				$card['action_url']   = $plugin_state['activation_url'];
 			} else {
-				$card['action_label'] = __( 'View plugins', 'tpw-core' );
+				$card['action_label'] = __( 'View plugins', 'tpw-ilungu-club' );
 				$card['action_url']   = admin_url( 'plugins.php' );
 			}
 
@@ -3878,7 +3878,7 @@ class iLungu_Club_Admin_Menu {
 		}
 
 		if ( ! empty( $definition['product_url'] ) ) {
-			$card['action_label'] = __( 'Learn more', 'tpw-core' );
+			$card['action_label'] = __( 'Learn more', 'tpw-ilungu-club' );
 			$card['action_url']   = $definition['product_url'];
 		}
 
@@ -4250,39 +4250,39 @@ class iLungu_Club_Admin_Menu {
 	protected static function get_dashboard_checklist_items( $members_summary, $notices_summary, $system_summary, $menu_summary, $settings_summary, $payments_summary ) {
 		return [
 			[
-				'label'       => __( 'Create or confirm your system pages', 'tpw-core' ),
-				'description' => __( 'Make sure the required member and control pages are linked and published.', 'tpw-core' ),
+				'label'       => __( 'Create or confirm your system pages', 'tpw-ilungu-club' ),
+				'description' => __( 'Make sure the required member and control pages are linked and published.', 'tpw-ilungu-club' ),
 				'done'        => ! empty( $system_summary['required_complete'] ),
 				'url'         => admin_url( self::SYSTEM_PAGES_ROUTE ),
 			],
 			[
-				'label'       => __( 'Add your first members', 'tpw-core' ),
-				'description' => __( 'Start building the club member register and linked accounts.', 'tpw-core' ),
+				'label'       => __( 'Add your first members', 'tpw-ilungu-club' ),
+				'description' => __( 'Start building the club member register and linked accounts.', 'tpw-ilungu-club' ),
 				'done'        => ! empty( $members_summary['count'] ),
 				'url'         => self::get_members_management_url( 'add' ),
 			],
 			[
-				'label'       => __( 'Configure menu permissions', 'tpw-core' ),
-				'description' => __( 'Control which audiences can see and access club navigation items.', 'tpw-core' ),
+				'label'       => __( 'Configure menu permissions', 'tpw-ilungu-club' ),
+				'description' => __( 'Control which audiences can see and access club navigation items.', 'tpw-ilungu-club' ),
 				'done'        => ! empty( $menu_summary['configured'] ),
 				'url'         => self::get_tpw_control_launch_url( 'menu-manager', self::PAGE_MENU_MANAGER ),
 			],
 			[
-				'label'       => __( 'Configure settings', 'tpw-core' ),
-				'description' => __( 'Review branding, login, and shared iLungu Club platform settings.', 'tpw-core' ),
+				'label'       => __( 'Configure settings', 'tpw-ilungu-club' ),
+				'description' => __( 'Review branding, login, and shared iLungu Club platform settings.', 'tpw-ilungu-club' ),
 				'done'        => ! empty( $settings_summary['configured'] ),
 				'url'         => self::get_settings_admin_url(),
 			],
 			[
-				'label'       => __( 'Configure payments', 'tpw-core' ),
-				'description' => __( 'Enable and set up the payment methods your club wants to offer.', 'tpw-core' ),
+				'label'       => __( 'Configure payments', 'tpw-ilungu-club' ),
+				'description' => __( 'Enable and set up the payment methods your club wants to offer.', 'tpw-ilungu-club' ),
 				'done'        => ! empty( $payments_summary['configured'] ) || ! empty( $payments_summary['optional'] ),
 				'url'         => ! empty( $payments_summary['action_url'] ) ? $payments_summary['action_url'] : self::get_settings_admin_url(),
 				'optional'    => ! empty( $payments_summary['optional'] ),
 			],
 			[
-				'label'       => __( 'Publish your first notice', 'tpw-core' ),
-				'description' => __( 'Share updates, reminders, and announcements from the Noticeboard.', 'tpw-core' ),
+				'label'       => __( 'Publish your first notice', 'tpw-ilungu-club' ),
+				'description' => __( 'Share updates, reminders, and announcements from the Noticeboard.', 'tpw-ilungu-club' ),
 				'done'        => ! empty( $notices_summary['count'] ),
 				'url'         => admin_url( 'post-new.php?post_type=tpw_notice' ),
 			],
@@ -4319,9 +4319,9 @@ class iLungu_Club_Admin_Menu {
 
 		if ( empty( $items ) ) {
 			$items[] = [
-				'title'     => __( 'Activity will appear here as your club starts using iLungu Club.', 'tpw-core' ),
-				'meta'      => __( 'System activity', 'tpw-core' ),
-				'time'      => __( 'Just now', 'tpw-core' ),
+				'title'     => __( 'Activity will appear here as your club starts using iLungu Club.', 'tpw-ilungu-club' ),
+				'meta'      => __( 'System activity', 'tpw-ilungu-club' ),
+				'time'      => __( 'Just now', 'tpw-ilungu-club' ),
 				'timestamp' => time(),
 			];
 		}
@@ -4332,17 +4332,17 @@ class iLungu_Club_Admin_Menu {
 	protected static function get_dashboard_system_items( $members_summary, $system_summary, $payments_summary, $logs_summary ) {
 		$items = [
 			[
-				'label' => __( 'Members module', 'tpw-core' ),
+				'label' => __( 'Members module', 'tpw-ilungu-club' ),
 				'value' => $members_summary['status_label'],
 				'tone'  => $members_summary['status_tone'],
 			],
 			[
-				'label' => __( 'Required pages', 'tpw-core' ),
+				'label' => __( 'Required pages', 'tpw-ilungu-club' ),
 				'value' => $system_summary['status_label'],
 				'tone'  => $system_summary['status_tone'],
 			],
 			[
-				'label' => __( 'Recent logs', 'tpw-core' ),
+				'label' => __( 'Recent logs', 'tpw-ilungu-club' ),
 				'value' => $logs_summary['status_label'],
 				'tone'  => $logs_summary['status_tone'],
 			],
@@ -4355,7 +4355,7 @@ class iLungu_Club_Admin_Menu {
 				0,
 				[
 					[
-						'label' => __( 'Payment methods', 'tpw-core' ),
+						'label' => __( 'Payment methods', 'tpw-ilungu-club' ),
 						'value' => $payments_summary['status_label'],
 						'tone'  => $payments_summary['status_tone'],
 					],
@@ -4377,18 +4377,18 @@ class iLungu_Club_Admin_Menu {
 
 		return [
 			'count'       => $count,
-			'status_label'=> null === $count ? __( 'Missing', 'tpw-core' ) : ( $count > 0 ? __( 'Active', 'tpw-core' ) : __( 'Ready', 'tpw-core' ) ),
+			'status_label'=> null === $count ? __( 'Missing', 'tpw-ilungu-club' ) : ( $count > 0 ? __( 'Active', 'tpw-ilungu-club' ) : __( 'Ready', 'tpw-ilungu-club' ) ),
 			'status_tone' => null === $count ? 'error' : ( $count > 0 ? 'success' : 'neutral' ),
 			'metric_text' => null === $count
-				? __( 'Members are not set up on this site yet.', 'tpw-core' )
+				? __( 'Members are not set up on this site yet.', 'tpw-ilungu-club' )
 				: sprintf(
 					/* translators: %s: total members */
-					_n( '%s member recorded', '%s members recorded', $count, 'tpw-core' ),
+					_n( '%s member recorded', '%s members recorded', $count, 'tpw-ilungu-club' ),
 					number_format_i18n( $count )
 				),
 			'card_text'   => null === $count
-				? __( 'The member register is not available yet.', 'tpw-core' )
-				: __( 'Member records are ready to manage across the club workspace.', 'tpw-core' ),
+				? __( 'The member register is not available yet.', 'tpw-ilungu-club' )
+				: __( 'Member records are ready to manage across the club workspace.', 'tpw-ilungu-club' ),
 		];
 	}
 
@@ -4401,20 +4401,20 @@ class iLungu_Club_Admin_Menu {
 
 		return [
 			'count'       => $count,
-			'status_label'=> null === $count ? __( 'Missing', 'tpw-core' ) : ( $count > 0 ? __( 'Active', 'tpw-core' ) : __( 'Ready', 'tpw-core' ) ),
+			'status_label'=> null === $count ? __( 'Missing', 'tpw-ilungu-club' ) : ( $count > 0 ? __( 'Active', 'tpw-ilungu-club' ) : __( 'Ready', 'tpw-ilungu-club' ) ),
 			'status_tone' => null === $count ? 'error' : ( $count > 0 ? 'success' : 'neutral' ),
 			'metric_text' => null === $count
-				? __( 'Noticeboard data is currently unavailable.', 'tpw-core' )
+				? __( 'Noticeboard data is currently unavailable.', 'tpw-ilungu-club' )
 				: sprintf(
 					/* translators: %s: published notices */
-					_n( '%s published notice', '%s published notices', $count, 'tpw-core' ),
+					_n( '%s published notice', '%s published notices', $count, 'tpw-ilungu-club' ),
 					number_format_i18n( $count )
 				),
 			'card_text'   => null === $count
-				? __( 'Open the Noticeboard when the content type is available.', 'tpw-core' )
+				? __( 'Open the Noticeboard when the content type is available.', 'tpw-ilungu-club' )
 				: ( $count > 0
-					? __( 'Share updates, reminders, and club announcements from one place.', 'tpw-core' )
-					: __( 'The Noticeboard is ready for your next club update.', 'tpw-core' ) ),
+					? __( 'Share updates, reminders, and club announcements from one place.', 'tpw-ilungu-club' )
+					: __( 'The Noticeboard is ready for your next club update.', 'tpw-ilungu-club' ) ),
 		];
 	}
 
@@ -4424,15 +4424,15 @@ class iLungu_Club_Admin_Menu {
 		$table_name   = $wpdb->prefix . 'tpw_events';
 		$is_active    = self::is_flexievent_active();
 		$table_exists = self::table_exists( $table_name );
-		$event_count  = __( 'Not installed', 'tpw-core' );
-		$metric_text  = __( 'Install iLungu Events to manage club events.', 'tpw-core' );
-		$action_label = __( 'Add iLungu Events', 'tpw-core' );
+		$event_count  = __( 'Not installed', 'tpw-ilungu-club' );
+		$metric_text  = __( 'Install iLungu Events to manage club events.', 'tpw-ilungu-club' );
+		$action_label = __( 'Add iLungu Events', 'tpw-ilungu-club' );
 		$action_url   = '#ilungu-club-extend';
 
 		if ( $is_active ) {
-			$event_count  = __( 'iLungu Events active', 'tpw-core' );
-			$metric_text  = __( 'iLungu Events is active.', 'tpw-core' );
-			$action_label = __( 'View events', 'tpw-core' );
+			$event_count  = __( 'iLungu Events active', 'tpw-ilungu-club' );
+			$metric_text  = __( 'iLungu Events is active.', 'tpw-ilungu-club' );
+			$action_label = __( 'View events', 'tpw-ilungu-club' );
 			$action_url   = admin_url( 'edit.php?post_type=tpw_event' );
 		}
 
@@ -4456,13 +4456,13 @@ class iLungu_Club_Admin_Menu {
 				$metric_text = $event_count > 0
 					? sprintf(
 						/* translators: %s: number of upcoming events */
-						__( '%s upcoming events scheduled.', 'tpw-core' ),
+						__( '%s upcoming events scheduled.', 'tpw-ilungu-club' ),
 						number_format_i18n( $event_count )
 					)
-					: __( 'No upcoming events at this time.', 'tpw-core' );
+					: __( 'No upcoming events at this time.', 'tpw-ilungu-club' );
 			} else {
-				$event_count = __( 'iLungu Events active', 'tpw-core' );
-				$metric_text = __( 'iLungu Events is active, but the upcoming event count is not available right now.', 'tpw-core' );
+				$event_count = __( 'iLungu Events active', 'tpw-ilungu-club' );
+				$metric_text = __( 'iLungu Events is active, but the upcoming event count is not available right now.', 'tpw-ilungu-club' );
 			}
 		}
 
@@ -4480,11 +4480,11 @@ class iLungu_Club_Admin_Menu {
 				'configured_count' => null,
 				'registered_total' => 0,
 				'required_complete'=> false,
-				'status_label'     => __( 'Missing', 'tpw-core' ),
+				'status_label'     => __( 'Missing', 'tpw-ilungu-club' ),
 				'status_tone'      => 'error',
-				'metric_text'      => __( 'Review the current system page assignments for iLungu Club and add-on features.', 'tpw-core' ),
-				'metric_value'     => __( 'Missing', 'tpw-core' ),
-				'card_text'        => __( 'The full registered system-page set could not be resolved safely on this request.', 'tpw-core' ),
+				'metric_text'      => __( 'Review the current system page assignments for iLungu Club and add-on features.', 'tpw-ilungu-club' ),
+				'metric_value'     => __( 'Missing', 'tpw-ilungu-club' ),
+				'card_text'        => __( 'The full registered system-page set could not be resolved safely on this request.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -4511,21 +4511,21 @@ class iLungu_Club_Admin_Menu {
 				'configured_count' => null,
 				'registered_total' => 0,
 				'required_complete'=> false,
-				'status_label'     => __( 'Missing', 'tpw-core' ),
+				'status_label'     => __( 'Missing', 'tpw-ilungu-club' ),
 				'status_tone'      => 'error',
-				'metric_text'      => __( 'Review the current system page assignments for iLungu Club and add-on features.', 'tpw-core' ),
-				'metric_value'     => __( 'Missing', 'tpw-core' ),
-				'card_text'        => __( 'No registered system pages were found in the resolved ecosystem registry.', 'tpw-core' ),
+				'metric_text'      => __( 'Review the current system page assignments for iLungu Club and add-on features.', 'tpw-ilungu-club' ),
+				'metric_value'     => __( 'Missing', 'tpw-ilungu-club' ),
+				'card_text'        => __( 'No registered system pages were found in the resolved ecosystem registry.', 'tpw-ilungu-club' ),
 			];
 		}
 
 		$complete      = $registered_total === $configured_count;
 		$missing_count = $registered_total - $configured_count;
-		$status_label  = $complete ? __( 'Complete', 'tpw-core' ) : __( 'Needs review', 'tpw-core' );
+		$status_label  = $complete ? __( 'Complete', 'tpw-ilungu-club' ) : __( 'Needs review', 'tpw-ilungu-club' );
 		$status_tone   = $complete ? 'success' : 'warning';
 		$metric_value = sprintf(
 			/* translators: 1: configured pages, 2: registered pages */
-			__( '%1$s / %2$s', 'tpw-core' ),
+			__( '%1$s / %2$s', 'tpw-ilungu-club' ),
 			number_format_i18n( $configured_count ),
 			number_format_i18n( $registered_total )
 		);
@@ -4538,16 +4538,16 @@ class iLungu_Club_Admin_Menu {
 			'status_tone'      => $status_tone,
 			'metric_text'      => sprintf(
 				/* translators: 1: configured pages, 2: registered pages */
-				__( '%1$s of %2$s registered system pages are linked.', 'tpw-core' ),
+				__( '%1$s of %2$s registered system pages are linked.', 'tpw-ilungu-club' ),
 				number_format_i18n( $configured_count ),
 				number_format_i18n( $registered_total )
 			),
 			'metric_value'     => $metric_value,
 			'card_text'        => $complete
-				? __( 'All required system pages are published and ready to use.', 'tpw-core' )
+				? __( 'All required system pages are published and ready to use.', 'tpw-ilungu-club' )
 				: sprintf(
 					/* translators: 1: configured pages, 2: missing pages */
-					_n( '%1$s required page is ready and %2$s still needs review.', '%1$s required pages are ready and %2$s still need review.', $missing_count, 'tpw-core' ),
+					_n( '%1$s required page is ready and %2$s still needs review.', '%1$s required pages are ready and %2$s still need review.', $missing_count, 'tpw-ilungu-club' ),
 					number_format_i18n( $configured_count ),
 					number_format_i18n( $missing_count )
 				),
@@ -4575,12 +4575,12 @@ class iLungu_Club_Admin_Menu {
 		$has_content = $galleries > 0 || $image_count > 0;
 
 		return [
-			'status_label' => $ready ? ( $has_content ? __( 'Active', 'tpw-core' ) : __( 'Ready', 'tpw-core' ) ) : __( 'Needs review', 'tpw-core' ),
+			'status_label' => $ready ? ( $has_content ? __( 'Active', 'tpw-ilungu-club' ) : __( 'Ready', 'tpw-ilungu-club' ) ) : __( 'Needs review', 'tpw-ilungu-club' ),
 			'status_tone'  => $ready ? ( $has_content ? 'success' : 'neutral' ) : 'warning',
 			'metric_value' => self::format_metric_value( $image_count ),
 			'card_text'    => $ready
-				? __( 'Manage gallery collections and image libraries for club content.', 'tpw-core' )
-				: __( 'The Gallery Admin page needs to be checked before launch.', 'tpw-core' ),
+				? __( 'Manage gallery collections and image libraries for club content.', 'tpw-ilungu-club' )
+				: __( 'The Gallery Admin page needs to be checked before launch.', 'tpw-ilungu-club' ),
 		];
 	}
 
@@ -4597,19 +4597,19 @@ class iLungu_Club_Admin_Menu {
 		$has_usage   = $page_count > 0 || $file_count > 0;
 
 		return [
-			'status_label' => $ready ? ( $has_usage ? __( 'Active', 'tpw-core' ) : __( 'Ready', 'tpw-core' ) ) : __( 'Needs review', 'tpw-core' ),
+			'status_label' => $ready ? ( $has_usage ? __( 'Active', 'tpw-ilungu-club' ) : __( 'Ready', 'tpw-ilungu-club' ) ) : __( 'Needs review', 'tpw-ilungu-club' ),
 			'status_tone'  => $ready ? ( $has_usage ? 'success' : 'neutral' ) : 'warning',
 			'metric_value' => self::format_metric_value( $page_count ),
 			'card_text'    => ! $ready
-				? __( 'The archive tools need review before members can rely on them.', 'tpw-core' )
+				? __( 'The archive tools need review before members can rely on them.', 'tpw-ilungu-club' )
 				: ( $has_usage
 					? sprintf(
 						/* translators: 1: archive pages count, 2: archived file count */
-						__( '%1$s archive pages and %2$s files are currently in use.', 'tpw-core' ),
+						__( '%1$s archive pages and %2$s files are currently in use.', 'tpw-ilungu-club' ),
 						number_format_i18n( $page_count ),
 						number_format_i18n( $file_count )
 					)
-					: __( 'Archive tools are available whenever you need to add upload and archive pages.', 'tpw-core' ) ),
+					: __( 'Archive tools are available whenever you need to add upload and archive pages.', 'tpw-ilungu-club' ) ),
 		];
 	}
 
@@ -4660,20 +4660,20 @@ class iLungu_Club_Admin_Menu {
 
 		$configured = $valid_rule_item_count > 0;
 		$status_label = $invalid_rule_count > 0
-			? __( 'Needs review', 'tpw-core' )
-			: ( $configured ? __( 'In use', 'tpw-core' ) : __( 'Ready', 'tpw-core' ) );
+			? __( 'Needs review', 'tpw-ilungu-club' )
+			: ( $configured ? __( 'In use', 'tpw-ilungu-club' ) : __( 'Ready', 'tpw-ilungu-club' ) );
 		$status_tone  = $invalid_rule_count > 0
 			? 'warning'
 			: ( $configured ? 'success' : 'neutral' );
 		$card_text    = $invalid_rule_count > 0
-			? __( 'Some menu permission rules could not be read and should be reviewed.', 'tpw-core' )
+			? __( 'Some menu permission rules could not be read and should be reviewed.', 'tpw-ilungu-club' )
 			: ( $configured
 				? sprintf(
 					/* translators: %s: count of protected menu items */
-					_n( '%s menu item uses permission rules.', '%s menu items use permission rules.', $valid_rule_item_count, 'tpw-core' ),
+					_n( '%s menu item uses permission rules.', '%s menu items use permission rules.', $valid_rule_item_count, 'tpw-ilungu-club' ),
 					number_format_i18n( $valid_rule_item_count )
 				)
-				: __( 'Menu permissions are available when you need to restrict navigation.', 'tpw-core' ) );
+				: __( 'Menu permissions are available when you need to restrict navigation.', 'tpw-ilungu-club' ) );
 
 		return [
 			'configured'   => $configured,
@@ -4703,15 +4703,15 @@ class iLungu_Club_Admin_Menu {
 				'configured'   => false,
 				'optional'     => true,
 				'payments_required' => false,
-				'status_label' => __( 'Inactive', 'tpw-core' ),
+				'status_label' => __( 'Inactive', 'tpw-ilungu-club' ),
 				'status_tone'  => 'warning',
-				'metric_value' => __( 'Optional', 'tpw-core' ),
-				'card_text'    => __( 'No payment-enabled modules are currently active.', 'tpw-core' ),
+				'metric_value' => __( 'Optional', 'tpw-ilungu-club' ),
+				'card_text'    => __( 'No payment-enabled modules are currently active.', 'tpw-ilungu-club' ),
 				'action_url'   => '',
 			];
 		}
 
-		$status_label = $active_count > 0 ? __( 'Active', 'tpw-core' ) : __( 'Needs review', 'tpw-core' );
+		$status_label = $active_count > 0 ? __( 'Active', 'tpw-ilungu-club' ) : __( 'Needs review', 'tpw-ilungu-club' );
 		$status_tone  = $active_count > 0 ? 'success' : 'warning';
 
 		return [
@@ -4722,8 +4722,8 @@ class iLungu_Club_Admin_Menu {
 			'status_tone'  => $status_tone,
 			'metric_value' => self::format_metric_value( $active_count ),
 			'card_text'    => $configured_count > 0
-				? __( 'Club payment methods are configured for member payments and checkout.', 'tpw-core' )
-				: __( 'No payment methods have been configured yet.', 'tpw-core' ),
+				? __( 'Club payment methods are configured for member payments and checkout.', 'tpw-ilungu-club' )
+				: __( 'No payment methods have been configured yet.', 'tpw-ilungu-club' ),
 			'action_url'   => admin_url( self::PAYMENTS_ROUTE ),
 		];
 	}
@@ -4736,12 +4736,12 @@ class iLungu_Club_Admin_Menu {
 
 		return [
 			'configured'   => $configured,
-			'status_label' => __( 'Ready', 'tpw-core' ),
+			'status_label' => __( 'Ready', 'tpw-ilungu-club' ),
 			'status_tone'  => 'neutral',
-			'metric_value' => __( 'Available', 'tpw-core' ),
+			'metric_value' => __( 'Available', 'tpw-ilungu-club' ),
 			'card_text'    => $configured
-				? __( 'Core branding, login, and platform settings are ready to review or refine.', 'tpw-core' )
-				: __( 'Review the main iLungu Club settings to tailor the platform for your club.', 'tpw-core' ),
+				? __( 'Core branding, login, and platform settings are ready to review or refine.', 'tpw-ilungu-club' )
+				: __( 'Review the main iLungu Club settings to tailor the platform for your club.', 'tpw-ilungu-club' ),
 		];
 	}
 
@@ -4767,12 +4767,12 @@ class iLungu_Club_Admin_Menu {
 		$issue_count    = $email_failed + $payment_failed;
 
 		return [
-			'status_label' => $issue_count > 0 ? __( 'Needs review', 'tpw-core' ) : __( 'Healthy', 'tpw-core' ),
+			'status_label' => $issue_count > 0 ? __( 'Needs review', 'tpw-ilungu-club' ) : __( 'Healthy', 'tpw-ilungu-club' ),
 			'status_tone'  => $issue_count > 0 ? 'warning' : 'success',
 			'metric_value' => self::format_metric_value( $email_total + $payment_total ),
 			'card_text'    => $issue_count > 0
-				? __( 'Recent operational logs need review for email or payment issues.', 'tpw-core' )
-				: __( 'Email and payment logs are available for operational review.', 'tpw-core' ),
+				? __( 'Recent operational logs need review for email or payment issues.', 'tpw-ilungu-club' )
+				: __( 'Email and payment logs are available for operational review.', 'tpw-ilungu-club' ),
 		];
 	}
 
@@ -4861,10 +4861,10 @@ class iLungu_Club_Admin_Menu {
 			$items[] = [
 				'title'     => sprintf(
 					/* translators: %s: member name */
-					__( '%s profile updated', 'tpw-core' ),
-					$name !== '' ? $name : __( 'Member', 'tpw-core' )
+					__( '%s profile updated', 'tpw-ilungu-club' ),
+					$name !== '' ? $name : __( 'Member', 'tpw-ilungu-club' )
 				),
-				'meta'      => __( 'Members', 'tpw-core' ),
+				'meta'      => __( 'Members', 'tpw-ilungu-club' ),
 				'time'      => self::format_relative_time( $timestamp ),
 				'timestamp' => $timestamp,
 			];
@@ -4898,10 +4898,10 @@ class iLungu_Club_Admin_Menu {
 			$items[] = [
 				'title'     => sprintf(
 					/* translators: %s: notice title */
-					__( 'Notice published: %s', 'tpw-core' ),
+					__( 'Notice published: %s', 'tpw-ilungu-club' ),
 					$notice->post_title
 				),
-				'meta'      => __( 'Noticeboard', 'tpw-core' ),
+				'meta'      => __( 'Noticeboard', 'tpw-ilungu-club' ),
 				'time'      => self::format_relative_time( $timestamp ),
 				'timestamp' => $timestamp,
 			];
@@ -4928,9 +4928,9 @@ class iLungu_Club_Admin_Menu {
 
 			$items[] = [
 				'title'     => 'failed' === (string) $row->status
-					? __( 'Email delivery failed', 'tpw-core' )
-					: __( 'Email sent successfully', 'tpw-core' ),
-				'meta'      => (string) $row->recipient !== '' ? sprintf( __( 'Email to %s', 'tpw-core' ), (string) $row->recipient ) : __( 'Email logs', 'tpw-core' ),
+					? __( 'Email delivery failed', 'tpw-ilungu-club' )
+					: __( 'Email sent successfully', 'tpw-ilungu-club' ),
+				'meta'      => (string) $row->recipient !== '' ? sprintf( __( 'Email to %s', 'tpw-ilungu-club' ), (string) $row->recipient ) : __( 'Email logs', 'tpw-ilungu-club' ),
 				'time'      => self::format_relative_time( $timestamp ),
 				'timestamp' => $timestamp,
 			];
@@ -4957,9 +4957,9 @@ class iLungu_Club_Admin_Menu {
 
 			$items[] = [
 				'title'     => 'failed' === (string) $row->status
-					? __( 'Payment log requires review', 'tpw-core' )
-					: __( 'Payment activity recorded', 'tpw-core' ),
-				'meta'      => (string) $row->reference !== '' ? sprintf( __( 'Reference %s', 'tpw-core' ), (string) $row->reference ) : __( 'Payment logs', 'tpw-core' ),
+					? __( 'Payment log requires review', 'tpw-ilungu-club' )
+					: __( 'Payment activity recorded', 'tpw-ilungu-club' ),
+				'meta'      => (string) $row->reference !== '' ? sprintf( __( 'Reference %s', 'tpw-ilungu-club' ), (string) $row->reference ) : __( 'Payment logs', 'tpw-ilungu-club' ),
 				'time'      => self::format_relative_time( $timestamp ),
 				'timestamp' => $timestamp,
 			];
@@ -5002,7 +5002,7 @@ class iLungu_Club_Admin_Menu {
 
 	protected static function format_metric_value( $value, $allow_placeholder = true ) {
 		if ( null === $value ) {
-			return $allow_placeholder ? '—' : __( 'Not available', 'tpw-core' );
+			return $allow_placeholder ? '—' : __( 'Not available', 'tpw-ilungu-club' );
 		}
 
 		if ( is_numeric( $value ) ) {
@@ -5015,12 +5015,12 @@ class iLungu_Club_Admin_Menu {
 	protected static function format_relative_time( $timestamp ) {
 		$timestamp = (int) $timestamp;
 		if ( $timestamp <= 0 ) {
-			return __( 'Recently', 'tpw-core' );
+			return __( 'Recently', 'tpw-ilungu-club' );
 		}
 
 		return sprintf(
 			/* translators: %s: relative time string */
-			__( '%s ago', 'tpw-core' ),
+			__( '%s ago', 'tpw-ilungu-club' ),
 			human_time_diff( $timestamp, current_time( 'timestamp' ) )
 		);
 	}
@@ -5046,12 +5046,12 @@ class iLungu_Club_Admin_Menu {
 		}
 
 		if ( 'repair_success' === $notice ) {
-			echo '<div class="notice notice-success"><p>' . esc_html__( 'The front-end page was created or repaired.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-success"><p>' . esc_html__( 'The front-end page was created or repaired.', 'tpw-ilungu-club' ) . '</p></div>';
 			return;
 		}
 
 		if ( 'repair_failed' === $notice ) {
-			echo '<div class="notice notice-error"><p>' . esc_html__( 'The front-end page could not be created or repaired.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'The front-end page could not be created or repaired.', 'tpw-ilungu-club' ) . '</p></div>';
 		}
 	}
 }

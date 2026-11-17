@@ -4,8 +4,11 @@
 
 ### Changed
 - Distribution: prepared iLungu Club for WordPress.org customer distribution and updates. The public GitHub source repository and its development tooling remain available, while the package no longer includes the legacy GitHub customer updater.
+- Translations: use the `tpw-ilungu-club` gettext domain while retaining the legacy domain for consumers and falling back to existing legacy catalogues when no Club-domain translation is available.
 
 ### Fixed
+- Assets: serve Member Fields and Signups, Menu Manager, Feedback charts, and the Members datepicker theme using bundled dependencies.
+- Members: repaired the Member Fields settings script so sorting and its existing input guards can initialize.
 - Lifecycle: opted-in uninstall now permanently removes all proven iLungu Club-owned member, gallery, Noticeboard, Upload Pages, Core System Page, and Core member-signup data while retaining shared, consumer, provider, WordPress, and ownership-ambiguous data. The Data Retention control now requires administrators to back up or export needed data before enabling permanent cleanup.
 - Menus: added the Club-owned WordPress event-post assignment API. It validates the Events-domain event and selected Club menu, updates only an existing single relationship, permits menus to be reused across events, rejects ambiguous legacy relationships without cleanup, and serializes relationship writes without a schema migration.
 

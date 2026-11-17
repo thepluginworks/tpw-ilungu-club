@@ -27,7 +27,7 @@ class TPW_Member_Payments {
         if ( ! empty( $usable_methods ) ) {
             $sections['payments'] = [
                 'slug'     => 'payments',
-                'label'    => __( 'My Payments', 'tpw-core' ),
+                'label'    => __( 'My Payments', 'tpw-ilungu-club' ),
                 'callback' => [ __CLASS__, 'render_profile_payments' ],
                 'template' => 'members/profile/payments/index.php',
                 'icon'     => 'credit-card',
@@ -82,7 +82,7 @@ class TPW_Member_Payments {
         if ( ! is_array( $sources ) ) { $sources = []; }
         if ( ! isset( $sources['methods'] ) ) {
             $sources['methods'] = [
-                'label'    => __( 'Payment Methods', 'tpw-core' ),
+                'label'    => __( 'Payment Methods', 'tpw-ilungu-club' ),
                 'priority' => 10,
                 'callback' => [ __CLASS__, 'render_source_methods' ],
                 'icon'     => 'list',
@@ -108,7 +108,7 @@ class TPW_Member_Payments {
         }
 
         echo '<div class="tpw-card">';
-        echo '  <h3>' . esc_html__( 'Active payment methods', 'tpw-core' ) . '</h3>';
+        echo '  <h3>' . esc_html__( 'Active payment methods', 'tpw-ilungu-club' ) . '</h3>';
         if ( ! empty( $active_slugs ) ) {
             echo '<ul class="tpw-list">';
             foreach ( $active_slugs as $s ) {
@@ -116,7 +116,7 @@ class TPW_Member_Payments {
             }
             echo '</ul>';
         } else {
-            echo '<p>' . esc_html__( 'No active methods detected.', 'tpw-core' ) . '</p>';
+            echo '<p>' . esc_html__( 'No active methods detected.', 'tpw-ilungu-club' ) . '</p>';
         }
         echo '</div>';
     }
@@ -190,7 +190,7 @@ class TPW_Member_Payments {
         if ( ! self::has_active_methods() ) { return; }
         $url = add_query_arg( 'section', 'payments' );
         echo '<div class="tpw-section" style="margin-top:16px;">';
-        echo '  <a class="tpw-btn tpw-btn-primary" href="' . esc_url( $url ) . '">' . esc_html__( 'My Payments', 'tpw-core' ) . '</a>';
+        echo '  <a class="tpw-btn tpw-btn-primary" href="' . esc_url( $url ) . '">' . esc_html__( 'My Payments', 'tpw-ilungu-club' ) . '</a>';
         echo '</div>';
     }
 

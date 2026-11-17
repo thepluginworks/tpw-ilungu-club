@@ -10,7 +10,7 @@ function tpw_member_profile_get_builtin_sections() {
   return [
     'profile' => [
       'slug'     => 'profile',
-      'label'    => __( 'My Profile', 'tpw-core' ),
+      'label'    => __( 'My Profile', 'tpw-ilungu-club' ),
       'icon'     => '',
       'priority' => 10,
       'callback' => 'tpw_member_profile_render_profile_section',
@@ -18,7 +18,7 @@ function tpw_member_profile_get_builtin_sections() {
     ],
     'password' => [
       'slug'     => 'password',
-      'label'    => __( 'Change Password', 'tpw-core' ),
+      'label'    => __( 'Change Password', 'tpw-ilungu-club' ),
       'icon'     => '',
       'priority' => 20,
       'callback' => 'tpw_member_profile_render_password_section',
@@ -255,18 +255,18 @@ function tpw_member_profile_enqueue_frontend_assets( $member, array $args = [] )
   wp_localize_script( $handle, 'TPW_MEMBER_PROFILE', [
     'nonce'   => wp_create_nonce('tpw_member_profile_update'),
     'ajaxUrl' => admin_url('admin-ajax.php'),
-    'labels'  => [ 'edit' => __('Edit','tpw-core'), 'confirm' => __('Confirm','tpw-core') ],
+    'labels'  => [ 'edit' => __('Edit','tpw-ilungu-club'), 'confirm' => __('Confirm','tpw-ilungu-club') ],
     'passwordMeterEnabled' => $password_meter_enabled,
     'passwordUserInputs'   => array_values( $password_user_inputs ),
     'passwordMeterLabels'  => [
-      'empty'    => __( 'Use a strong password that you do not use elsewhere.', 'tpw-core' ),
-      '0'        => __( 'Too short', 'tpw-core' ),
-      '1'        => __( 'Very weak', 'tpw-core' ),
-      '2'        => __( 'Weak', 'tpw-core' ),
-      '3'        => __( 'Medium', 'tpw-core' ),
-      '4'        => __( 'Strong', 'tpw-core' ),
-      '5'        => __( 'Passwords do not match', 'tpw-core' ),
-      'unknown'  => __( 'Password strength could not be determined.', 'tpw-core' ),
+      'empty'    => __( 'Use a strong password that you do not use elsewhere.', 'tpw-ilungu-club' ),
+      '0'        => __( 'Too short', 'tpw-ilungu-club' ),
+      '1'        => __( 'Very weak', 'tpw-ilungu-club' ),
+      '2'        => __( 'Weak', 'tpw-ilungu-club' ),
+      '3'        => __( 'Medium', 'tpw-ilungu-club' ),
+      '4'        => __( 'Strong', 'tpw-ilungu-club' ),
+      '5'        => __( 'Passwords do not match', 'tpw-ilungu-club' ),
+      'unknown'  => __( 'Password strength could not be determined.', 'tpw-ilungu-club' ),
     ],
   ] );
 
@@ -280,7 +280,7 @@ function tpw_member_profile_enqueue_frontend_assets( $member, array $args = [] )
 function tpw_member_profile_get_password_notice_message( $code ) {
   switch ( sanitize_key( (string) $code ) ) {
     case 'changed':
-      return __( 'Your password has been updated.', 'tpw-core' );
+      return __( 'Your password has been updated.', 'tpw-ilungu-club' );
     default:
       return '';
   }
@@ -289,25 +289,25 @@ function tpw_member_profile_get_password_notice_message( $code ) {
 function tpw_member_profile_get_password_error_message( $code ) {
   switch ( sanitize_key( (string) $code ) ) {
     case 'access_denied':
-      return __( 'You do not have permission to change that password.', 'tpw-core' );
+      return __( 'You do not have permission to change that password.', 'tpw-ilungu-club' );
     case 'member_not_found':
-      return __( 'Your linked member record could not be loaded.', 'tpw-core' );
+      return __( 'Your linked member record could not be loaded.', 'tpw-ilungu-club' );
     case 'invalid_nonce':
-      return __( 'Your password change request expired. Please try again.', 'tpw-core' );
+      return __( 'Your password change request expired. Please try again.', 'tpw-ilungu-club' );
     case 'current_required':
-      return __( 'Enter your current password.', 'tpw-core' );
+      return __( 'Enter your current password.', 'tpw-ilungu-club' );
     case 'new_required':
-      return __( 'Enter and confirm your new password.', 'tpw-core' );
+      return __( 'Enter and confirm your new password.', 'tpw-ilungu-club' );
     case 'mismatch':
-      return __( 'Your new passwords do not match.', 'tpw-core' );
+      return __( 'Your new passwords do not match.', 'tpw-ilungu-club' );
     case 'same_as_current':
-      return __( 'Your new password must be different from your current password.', 'tpw-core' );
+      return __( 'Your new password must be different from your current password.', 'tpw-ilungu-club' );
     case 'current_invalid':
-      return __( 'Your current password is incorrect.', 'tpw-core' );
+      return __( 'Your current password is incorrect.', 'tpw-ilungu-club' );
     case 'update_failed':
-      return __( 'Your password could not be updated. Please try again.', 'tpw-core' );
+      return __( 'Your password could not be updated. Please try again.', 'tpw-ilungu-club' );
     default:
-      return __( 'Your password could not be updated.', 'tpw-core' );
+      return __( 'Your password could not be updated.', 'tpw-ilungu-club' );
   }
 }
 
@@ -319,7 +319,7 @@ function tpw_member_profile_render_password_section( $member ) {
 
   ob_start();
   echo '<div class="tpw-section">';
-  echo '<h2>' . esc_html__( 'Change Password', 'tpw-core' ) . '</h2>';
+  echo '<h2>' . esc_html__( 'Change Password', 'tpw-ilungu-club' ) . '</h2>';
 
   if ( '' !== $notice ) {
     echo '<div class="notice notice-success"><p>' . esc_html( $notice ) . '</p></div>';
@@ -332,21 +332,21 @@ function tpw_member_profile_render_password_section( $member ) {
   wp_nonce_field( 'tpw_member_profile_change_password' );
   echo '<input type="hidden" name="action" value="tpw_member_profile_change_password">';
   echo '<div class="form-group">';
-  echo '<label for="tpw-member-current-password"><strong>' . esc_html__( 'Current password', 'tpw-core' ) . '</strong></label>';
+  echo '<label for="tpw-member-current-password"><strong>' . esc_html__( 'Current password', 'tpw-ilungu-club' ) . '</strong></label>';
   echo '<input type="password" id="tpw-member-current-password" name="current_password" autocomplete="current-password" required>';
   echo '</div>';
   echo '<div class="form-group">';
-  echo '<label for="tpw-member-new-password"><strong>' . esc_html__( 'New password', 'tpw-core' ) . '</strong></label>';
+  echo '<label for="tpw-member-new-password"><strong>' . esc_html__( 'New password', 'tpw-ilungu-club' ) . '</strong></label>';
   echo '<input type="password" id="tpw-member-new-password" name="new_password" autocomplete="new-password" required>';
-  echo '<p class="description" id="tpw-member-password-guidance">' . esc_html__( 'Use a strong password that you do not use elsewhere.', 'tpw-core' ) . '</p>';
+  echo '<p class="description" id="tpw-member-password-guidance">' . esc_html__( 'Use a strong password that you do not use elsewhere.', 'tpw-ilungu-club' ) . '</p>';
   echo '<progress id="tpw-member-password-strength" class="tpw-member-password-strength" max="4" value="0" aria-describedby="tpw-member-password-guidance tpw-member-password-strength-result"></progress>';
-  echo '<p class="description" id="tpw-member-password-strength-result" aria-live="polite">' . esc_html__( 'Use a strong password that you do not use elsewhere.', 'tpw-core' ) . '</p>';
+  echo '<p class="description" id="tpw-member-password-strength-result" aria-live="polite">' . esc_html__( 'Use a strong password that you do not use elsewhere.', 'tpw-ilungu-club' ) . '</p>';
   echo '</div>';
   echo '<div class="form-group">';
-  echo '<label for="tpw-member-confirm-password"><strong>' . esc_html__( 'Confirm new password', 'tpw-core' ) . '</strong></label>';
+  echo '<label for="tpw-member-confirm-password"><strong>' . esc_html__( 'Confirm new password', 'tpw-ilungu-club' ) . '</strong></label>';
   echo '<input type="password" id="tpw-member-confirm-password" name="confirm_password" autocomplete="new-password" required>';
   echo '</div>';
-  echo '<p><button type="submit" class="tpw-btn tpw-btn-primary">' . esc_html__( 'Update Password', 'tpw-core' ) . '</button></p>';
+  echo '<p><button type="submit" class="tpw-btn tpw-btn-primary">' . esc_html__( 'Update Password', 'tpw-ilungu-club' ) . '</button></p>';
   echo '</form>';
   echo '</div>';
 
@@ -372,10 +372,10 @@ function tpw_member_profile_render_profile_section( $member ) {
   $known_checkbox_fields = [ 'share_with_members' ];
 
   ob_start();
-  echo '<h2>' . esc_html__( 'My Profile', 'tpw-core' ) . '</h2>';
+  echo '<h2>' . esc_html__( 'My Profile', 'tpw-ilungu-club' ) . '</h2>';
 
   echo '<div class="tpw-table">';
-  echo '  <div class="tpw-table-header"><div class="tpw-table-cell">' . esc_html__( 'Field', 'tpw-core' ) . '</div><div class="tpw-table-cell">' . esc_html__( 'Value', 'tpw-core' ) . '</div><div class="tpw-table-cell">&nbsp;</div></div>';
+  echo '  <div class="tpw-table-header"><div class="tpw-table-cell">' . esc_html__( 'Field', 'tpw-ilungu-club' ) . '</div><div class="tpw-table-cell">' . esc_html__( 'Value', 'tpw-ilungu-club' ) . '</div><div class="tpw-table-cell">&nbsp;</div></div>';
 
   if ( empty($viewable) ) {
     // When no viewable fields are configured, show no rows and display a simple note.
@@ -428,7 +428,7 @@ function tpw_member_profile_render_profile_section( $member ) {
     echo '  <div class="tpw-table-cell">' . esc_html( $display_value ) . '</div>';
     echo '  <div class="tpw-table-cell">';
     if ( in_array( $key, $editable, true ) ) {
-      echo '    <button class="tpw-btn tpw-btn-secondary tpw-profile-edit" data-key="' . esc_attr($key) . '" data-field-type="' . esc_attr( isset( $f['type'] ) ? $f['type'] : 'text' ) . '" data-field-value="' . esc_attr( ( ( isset($f['type']) && $f['type'] === 'checkbox' ) || in_array( $key, $known_checkbox_fields, true ) ) ? ( ! empty( $value ) ? '1' : '0' ) : (string) $value ) . '">' . esc_html__( 'Edit', 'tpw-core' ) . '</button>';
+      echo '    <button class="tpw-btn tpw-btn-secondary tpw-profile-edit" data-key="' . esc_attr($key) . '" data-field-type="' . esc_attr( isset( $f['type'] ) ? $f['type'] : 'text' ) . '" data-field-value="' . esc_attr( ( ( isset($f['type']) && $f['type'] === 'checkbox' ) || in_array( $key, $known_checkbox_fields, true ) ) ? ( ! empty( $value ) ? '1' : '0' ) : (string) $value ) . '">' . esc_html__( 'Edit', 'tpw-ilungu-club' ) . '</button>';
     } else {
       echo '&nbsp;';
     }
@@ -443,7 +443,7 @@ function tpw_member_profile_render_profile_section( $member ) {
     ) {
       $raw = (string) ($member->whi_updated ?? '');
       $disp = $raw !== '' ? tpw_format_date( $raw ) : '';
-      echo '<div class="tpw-table-row"><div class="tpw-table-cell"></div><div class="tpw-table-cell"><em>' . esc_html__( 'Last updated:', 'tpw-core' ) . ' ' . esc_html($disp ?: '—') . '</em></div><div class="tpw-table-cell"></div></div>';
+      echo '<div class="tpw-table-row"><div class="tpw-table-cell"></div><div class="tpw-table-cell"><em>' . esc_html__( 'Last updated:', 'tpw-ilungu-club' ) . ' ' . esc_html($disp ?: '—') . '</em></div><div class="tpw-table-cell"></div></div>';
     }
   }
   echo '</div>';
@@ -472,18 +472,18 @@ function tpw_member_profile_render_profile_section( $member ) {
     }
     echo '<div class="tpw-section" style="margin-top:16px;">';
     echo '  <fieldset class="tpw-section">';
-    echo '    <legend class="tpw-section__legend">' . esc_html__( 'Member Photo', 'tpw-core' ) . '</legend>';
+    echo '    <legend class="tpw-section__legend">' . esc_html__( 'Member Photo', 'tpw-ilungu-club' ) . '</legend>';
 
     if ( $photo_mode === 'edit' ) {
       // Editable layout mirrors admin edit form
       echo '<div class="form-group">';
-      echo '  <label for="tpw-member-photo-input"><strong>' . esc_html__('Upload Member Photo','tpw-core') . '</strong></label>';
+      echo '  <label for="tpw-member-photo-input"><strong>' . esc_html__('Upload Member Photo','tpw-ilungu-club') . '</strong></label>';
       echo '  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">';
       echo '    <input type="file" id="tpw-member-photo-input" accept=".jpg,.jpeg,.png" style="display:none;">';
-      echo '    <button type="button" class="tpw-btn tpw-btn-light" id="tpw-member-photo-choose">' . esc_html__('Choose file','tpw-core') . '</button>';
-      echo '    <span id="tpw-member-photo-filename" style="color:#555;">' . esc_html__('No file chosen','tpw-core') . '</span>';
+      echo '    <button type="button" class="tpw-btn tpw-btn-light" id="tpw-member-photo-choose">' . esc_html__('Choose file','tpw-ilungu-club') . '</button>';
+      echo '    <span id="tpw-member-photo-filename" style="color:#555;">' . esc_html__('No file chosen','tpw-ilungu-club') . '</span>';
       echo '  </div>';
-      echo '  <p class="description" style="margin-top:6px;">' . esc_html__('Recommended size: 300x300px. Max file size: 2MB.','tpw-core') . '</p>';
+      echo '  <p class="description" style="margin-top:6px;">' . esc_html__('Recommended size: 300x300px. Max file size: 2MB.','tpw-ilungu-club') . '</p>';
       echo '  <div style="margin:8px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">';
       if ( $photo_url ) {
         echo '    <img id="tpw-member-photo-current" src="' . esc_url($photo_url) . '" alt="" style="width:100px;height:100px;object-fit:cover;border-radius:8px;" />';
@@ -491,8 +491,8 @@ function tpw_member_profile_render_profile_section( $member ) {
         echo '    <img id="tpw-member-photo-current" src="" alt="" style="display:none;width:100px;height:100px;object-fit:cover;border-radius:8px;" />';
       }
       echo '    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">';
-      echo '      <button type="button" class="tpw-btn tpw-btn-danger" id="tpw-member-photo-delete-btn">' . esc_html__('Delete','tpw-core') . '</button>';
-      echo '      <button type="button" class="tpw-btn tpw-btn-secondary" id="tpw-member-photo-replace-btn">' . esc_html__('Replace','tpw-core') . '</button>';
+      echo '      <button type="button" class="tpw-btn tpw-btn-danger" id="tpw-member-photo-delete-btn">' . esc_html__('Delete','tpw-ilungu-club') . '</button>';
+      echo '      <button type="button" class="tpw-btn tpw-btn-secondary" id="tpw-member-photo-replace-btn">' . esc_html__('Replace','tpw-ilungu-club') . '</button>';
       echo '    </div>';
       echo '  </div>';
       echo '  <div id="tpw-member-photo-error" style="display:none; font-size:12px; color:#b45309; background:#fff7ed; border:1px solid #fed7aa; padding:6px 8px; border-radius:4px; margin-top:6px;"></div>';
@@ -502,7 +502,7 @@ function tpw_member_profile_render_profile_section( $member ) {
       if ( $photo_url ) {
         echo '<img src="' . esc_url($photo_url) . '" alt="" style="width:120px;height:120px;object-fit:cover;border-radius:10px;" />';
       } else {
-        echo '<p class="description">' . esc_html__('No photo uploaded yet.','tpw-core') . '</p>';
+        echo '<p class="description">' . esc_html__('No photo uploaded yet.','tpw-ilungu-club') . '</p>';
       }
     }
 
@@ -529,7 +529,7 @@ function tpw_member_profile_render_profile_section( $member ) {
             </div>
             <label id="tpw-profile-checkbox-field" class="tpw-profile-checkbox-field" style="display:none;">
               <input type="checkbox" name="field_value_checkbox" value="1" />
-              <span><?php echo esc_html__( 'Yes', 'tpw-core' ); ?></span>
+              <span><?php echo esc_html__( 'Yes', 'tpw-ilungu-club' ); ?></span>
             </label>
           </div>
           <div id="tpw-profile-result" style="margin-top:8px;"></div>
@@ -645,7 +645,7 @@ function tpw_member_profile_render_profile_section( $member ) {
 add_shortcode('tpw_member_profile', function(){
   // Must be logged-in. Admins can be allowed to view via filter.
   if ( ! is_user_logged_in() ) {
-    return '<div class="tpw-error">' . esc_html__('Access Denied', 'tpw-core') . '</div>';
+    return '<div class="tpw-error">' . esc_html__('Access Denied', 'tpw-ilungu-club') . '</div>';
   }
 
   $admin_can_view = apply_filters('tpw_members/wp_admin_can_view_profile', true);
@@ -658,15 +658,15 @@ add_shortcode('tpw_member_profile', function(){
   // If no linked member record, deny (admins get a clearer message)
   if ( ! $member ) {
     if ( current_user_can('manage_options') ) {
-      return '<div class="tpw-error">' . esc_html__('Member record not found for your user. As an admin you can still preview via this page, but creating a member record is recommended.', 'tpw-core') . '</div>';
+      return '<div class="tpw-error">' . esc_html__('Member record not found for your user. As an admin you can still preview via this page, but creating a member record is recommended.', 'tpw-ilungu-club') . '</div>';
     }
-    return '<div class="tpw-error">' . esc_html__('Member record not found for your user.', 'tpw-core') . '</div>';
+    return '<div class="tpw-error">' . esc_html__('Member record not found for your user.', 'tpw-ilungu-club') . '</div>';
   }
 
   // Enforce status only when opted-in via filter; admins can always view
   if ( ! ( current_user_can('manage_options') && $admin_can_view ) ) {
     if ( ! $allow_all_statuses && ! TPW_Member_Access::is_member_current() ) {
-      return '<div class="tpw-error">' . esc_html__('Access Denied', 'tpw-core') . '</div>';
+      return '<div class="tpw-error">' . esc_html__('Access Denied', 'tpw-ilungu-club') . '</div>';
     }
   }
 
@@ -676,7 +676,7 @@ add_shortcode('tpw_member_profile', function(){
   $active_section = $sections[ $active_slug ] ?? $sections['profile'] ?? [];
 
   if ( empty( $active_section ) ) {
-    return '<div class="tpw-error">' . esc_html__('Profile section unavailable.', 'tpw-core') . '</div>';
+    return '<div class="tpw-error">' . esc_html__('Profile section unavailable.', 'tpw-ilungu-club') . '</div>';
   }
 
   ob_start();

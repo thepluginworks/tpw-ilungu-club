@@ -83,7 +83,7 @@ class TPW_Payments_Admin {
                 }
 
                 echo '<div class="notice notice-warning"><p>'
-                    . esc_html__( 'Square settings are retained, but Square cannot be enabled until the TPW Square Gateway add-on is active.', 'tpw-core' )
+                    . esc_html__( 'Square settings are retained, but Square cannot be enabled until the TPW Square Gateway add-on is active.', 'tpw-ilungu-club' )
                     . '</p></div>';
             }
         }
@@ -144,7 +144,7 @@ class TPW_Payments_Admin {
 
         if ( ! $square_addon_active ) {
             echo '<div class="notice notice-warning"><p>'
-                . esc_html__( 'Square remains configured in Core, but it is unavailable on forms until the TPW Square Gateway add-on is active.', 'tpw-core' )
+                . esc_html__( 'Square remains configured in Core, but it is unavailable on forms until the TPW Square Gateway add-on is active.', 'tpw-ilungu-club' )
                 . '</p></div>';
         }
 
@@ -201,11 +201,11 @@ class TPW_Payments_Admin {
                                     : '<span class="tpw-status-chip disconnected">Add-on required</span>';
 
                                 $summary_parts = [
-                                    esc_html__( 'Unavailable on forms until the TPW Square Gateway add-on is active.', 'tpw-core' ),
+                                    esc_html__( 'Unavailable on forms until the TPW Square Gateway add-on is active.', 'tpw-ilungu-club' ),
                                 ];
 
                                 if ( $will_restore ) {
-                                    $summary_parts[] = esc_html__( 'The previous enabled state will be restored when the add-on becomes active again.', 'tpw-core' );
+                                    $summary_parts[] = esc_html__( 'The previous enabled state will be restored when the add-on becomes active again.', 'tpw-ilungu-club' );
                                 }
 
                                 $summary = '<span class="tpw-pay-summary">' . esc_html( implode( ' ', $summary_parts ) ) . '</span>';
@@ -215,9 +215,9 @@ class TPW_Payments_Admin {
                                     : false;
                                 $status_chip = $has_square_config ? '<span class="tpw-status-chip configured">Configured</span>' : '<span class="tpw-status-chip needs-setup">Needs setup</span>';
                                 $needs_setup = ! $has_square_config;
-                                $summary = '<span class="tpw-pay-summary">' . esc_html__( 'Square configuration remains on the existing settings surface.', 'tpw-core' ) . '</span>';
+                                $summary = '<span class="tpw-pay-summary">' . esc_html__( 'Square configuration remains on the existing settings surface.', 'tpw-ilungu-club' ) . '</span>';
                             } else {
-                                $summary = '<span class="tpw-pay-summary">' . esc_html__( 'Uses the currently registered payment method settings.', 'tpw-core' ) . '</span>';
+                                $summary = '<span class="tpw-pay-summary">' . esc_html__( 'Uses the currently registered payment method settings.', 'tpw-ilungu-club' ) . '</span>';
                             }
 
                             $disabled_attr = '';
@@ -253,7 +253,7 @@ class TPW_Payments_Admin {
                                 <div class="tpw-pay-status-stack">
                                     <label class="tpw-pay-enable">
                                         <input type="checkbox" name="payment_methods[]" value="<?php echo esc_attr($method->slug); ?>" <?php checked($method->active, 1); ?> <?php echo $disabled_attr; ?> />
-                                        <span><?php esc_html_e('Enable', 'tpw-core'); ?></span>
+                                        <span><?php esc_html_e('Enable', 'tpw-ilungu-club'); ?></span>
                                     </label>
                                     <div class="tpw-pay-status-chips"><?php echo $status_chip; ?></div>
                                 </div>
@@ -263,13 +263,13 @@ class TPW_Payments_Admin {
 							$action_label = $needs_setup
 								? sprintf(
 									/* translators: %s: payment method name */
-									__( 'Configure %s', 'tpw-core' ),
+									__( 'Configure %s', 'tpw-ilungu-club' ),
 									esc_html( $display_name )
 								)
-								: __( 'Edit', 'tpw-core' );
+								: __( 'Edit', 'tpw-ilungu-club' );
 							$action_class = $needs_setup ? 'button button-primary' : 'button';
 							if ($frontend_mode && !in_array((string) $method->slug, ['bacs', 'cheque', 'cash', 'card-on-the-day'], true)) {
-								$action_label = $needs_setup ? __( 'Open details', 'tpw-core' ) : __( 'View details', 'tpw-core' );
+								$action_label = $needs_setup ? __( 'Open details', 'tpw-ilungu-club' ) : __( 'View details', 'tpw-ilungu-club' );
 							}
 						?>
                                 <a href="<?php echo esc_url($action_url); ?>" class="<?php echo esc_attr($action_class); ?>"><?php echo esc_html($action_label); ?></a>
@@ -343,18 +343,18 @@ class TPW_Payments_Admin {
     public static function render_page() {
         if ( function_exists( 'tpw_admin_output_header' ) ) {
             tpw_admin_output_header(
-                __( 'Manage Payment Methods', 'tpw-core' ),
-                __( 'Enable, disable, and configure payment methods for your events. For Admins and Treasurers.', 'tpw-core' )
+                __( 'Manage Payment Methods', 'tpw-ilungu-club' ),
+                __( 'Enable, disable, and configure payment methods for your events. For Admins and Treasurers.', 'tpw-ilungu-club' )
             );
             echo '<div class="tpw-admin-ui"><div class="wrap">';
         } elseif ( function_exists( 'flexievent_output_header' ) ) {
             flexievent_output_header(
-                __( 'Manage Payment Methods', 'tpw-core' ),
-                __( 'Enable, disable, and configure payment methods for your events. For Admins and Treasurers.', 'tpw-core' )
+                __( 'Manage Payment Methods', 'tpw-ilungu-club' ),
+                __( 'Enable, disable, and configure payment methods for your events. For Admins and Treasurers.', 'tpw-ilungu-club' )
             );
             echo '<div class="tpw-admin-ui"><div class="wrap">';
         } else {
-            echo '<div class="tpw-admin-ui"><div class="wrap"><h1>' . esc_html__( 'Manage Payment Methods', 'tpw-core' ) . '</h1>';
+            echo '<div class="tpw-admin-ui"><div class="wrap"><h1>' . esc_html__( 'Manage Payment Methods', 'tpw-ilungu-club' ) . '</h1>';
         }
 
         self::render_manage_methods_content();

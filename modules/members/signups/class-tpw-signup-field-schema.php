@@ -272,7 +272,7 @@ class TPW_Signup_Field_Schema {
 
 		return array(
 			'form_key' => 'members_join',
-			'title'    => __( 'Join', 'tpw-core' ),
+			'title'    => __( 'Join', 'tpw-ilungu-club' ),
 			'nodes'    => $nodes,
 			'meta'     => array(
 				'node_types' => array( 'field', 'section', 'group', 'repeater' ),

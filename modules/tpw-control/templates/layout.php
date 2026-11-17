@@ -5,7 +5,7 @@
 <div class="tpw-control">
     <aside class="tpw-control__sidebar">
         <div class="tpw-control__header">
-            <h2 class="tpw-control__title"><?php echo esc_html__( 'TPW Control', 'tpw-core' ); ?></h2>
+            <h2 class="tpw-control__title"><?php echo esc_html__( 'TPW Control', 'tpw-ilungu-club' ); ?></h2>
         </div>
         <ul class="tpw-control__menu">
             <?php foreach ( $sections as $key => $section ) :

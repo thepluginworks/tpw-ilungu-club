@@ -17,7 +17,7 @@ class TPW_Member_Password_Setup {
 		if ( ! $wp_user ) {
 			return [
 				'success' => false,
-				'message' => __( 'Linked WordPress user could not be loaded.', 'tpw-core' ),
+				'message' => __( 'Linked WordPress user could not be loaded.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -25,14 +25,14 @@ class TPW_Member_Password_Setup {
 		if ( '' === $recipient || ! is_email( $recipient ) ) {
 			return [
 				'success' => false,
-				'message' => __( 'Linked WordPress user does not have a valid email address.', 'tpw-core' ),
+				'message' => __( 'Linked WordPress user does not have a valid email address.', 'tpw-ilungu-club' ),
 			];
 		}
 
 		if ( ! function_exists( 'get_password_reset_key' ) ) {
 			return [
 				'success' => false,
-				'message' => __( 'Password reset functions are unavailable.', 'tpw-core' ),
+				'message' => __( 'Password reset functions are unavailable.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -48,14 +48,14 @@ class TPW_Member_Password_Setup {
 		if ( '' === $setup_url ) {
 			return [
 				'success' => false,
-				'message' => __( 'Password setup URL could not be generated.', 'tpw-core' ),
+				'message' => __( 'Password setup URL could not be generated.', 'tpw-ilungu-club' ),
 			];
 		}
 
 		if ( ! class_exists( 'TPW_Email' ) ) {
 			return [
 				'success' => false,
-				'message' => __( 'TPW email service is unavailable.', 'tpw-core' ),
+				'message' => __( 'TPW email service is unavailable.', 'tpw-ilungu-club' ),
 			];
 		}
 
@@ -90,7 +90,7 @@ class TPW_Member_Password_Setup {
 		if ( ! is_array( $result ) ) {
 			return [
 				'success' => false,
-				'message' => __( 'Password setup email could not be sent.', 'tpw-core' ),
+				'message' => __( 'Password setup email could not be sent.', 'tpw-ilungu-club' ),
 			];
 		}
 

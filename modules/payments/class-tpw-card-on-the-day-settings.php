@@ -10,8 +10,8 @@ class TPW_Card_On_The_Day_Settings {
     public function register_settings_page() {
         add_submenu_page(
             'tpw_core',
-            __('Card on the day Settings', 'tpw-core'),
-            __('Card on the day Settings', 'tpw-core'),
+            __('Card on the day Settings', 'tpw-ilungu-club'),
+            __('Card on the day Settings', 'tpw-ilungu-club'),
             'manage_options',
             'tpw-card-on-the-day-settings',
             [$this, 'render_settings_page']
@@ -42,9 +42,9 @@ class TPW_Card_On_The_Day_Settings {
 
     public function render_settings_page() {
         ?>
-        <?php if ( function_exists( 'tpw_core_render_settings_header' ) ) { tpw_core_render_settings_header( __( 'Card on the day Settings', 'tpw-core' ) ); } ?>
+        <?php if ( function_exists( 'tpw_core_render_settings_header' ) ) { tpw_core_render_settings_header( __( 'Card on the day Settings', 'tpw-ilungu-club' ) ); } ?>
         <div class="tpw-admin-ui"><div class="wrap">
-            <p><a href="<?php echo esc_url( tpw_core_get_payment_methods_settings_url() ); ?>" class="button"><?php esc_html_e('Back to Payment Methods', 'tpw-core'); ?></a></p>
+            <p><a href="<?php echo esc_url( tpw_core_get_payment_methods_settings_url() ); ?>" class="button"><?php esc_html_e('Back to Payment Methods', 'tpw-ilungu-club'); ?></a></p>
             <?php self::render_settings_form(); ?>
         </div></div>
         <?php
@@ -53,7 +53,7 @@ class TPW_Card_On_The_Day_Settings {
     public static function render_settings_form() {
         ?>
             <?php if ( isset($_GET['settings-updated']) && $_GET['settings-updated'] ) : ?>
-                <div class="notice notice-success is-dismissible"><p><?php esc_html_e('Surcharge settings updated successfully.', 'tpw-core'); ?></p></div>
+                <div class="notice notice-success is-dismissible"><p><?php esc_html_e('Surcharge settings updated successfully.', 'tpw-ilungu-club'); ?></p></div>
             <?php endif; ?>
             <form method="post" action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>">
                 <?php
@@ -80,27 +80,27 @@ class TPW_Card_On_The_Day_Settings {
                 ?>
                 <table class="form-table">
                     <tr>
-                        <th scope="row"><label for="tpw_label_card_on_the_day"><?php esc_html_e('Label', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_label_card_on_the_day"><?php esc_html_e('Label', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" name="tpw_label_card_on_the_day" id="tpw_label_card_on_the_day" value="<?php echo esc_attr( $current_label ); ?>" class="regular-text" />
-                            <p class="description"><?php esc_html_e('Shown on checkout.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Shown on checkout.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row"><label for="tpw_card_on_the_day_message"><?php esc_html_e('Message to display', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_card_on_the_day_message"><?php esc_html_e('Message to display', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <textarea name="tpw_card_on_the_day_message" id="tpw_card_on_the_day_message" rows="6" class="large-text"><?php echo esc_textarea($message); ?></textarea>
-                            <p class="description"><?php esc_html_e('This message will be shown on the checkout, thank you page, and confirmation email.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('This message will be shown on the checkout, thank you page, and confirmation email.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_surcharge_card-on-the-day_percent"><?php esc_html_e('Surcharge (%)', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_surcharge_card-on-the-day_percent"><?php esc_html_e('Surcharge (%)', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="number" name="tpw_surcharge_card-on-the-day_percent" id="tpw_surcharge_card-on-the-day_percent" step="0.01" min="0" value="<?php echo esc_attr( get_option('tpw_surcharge_card-on-the-day_percent', 0) ); ?>" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_surcharge_card-on-the-day_fixed"><?php printf( esc_html__( 'Fixed (%s)', 'tpw-core' ), esc_html( $currency_symbol ) ); ?></label></th>
+                        <th scope="row"><label for="tpw_surcharge_card-on-the-day_fixed"><?php printf( esc_html__( 'Fixed (%s)', 'tpw-ilungu-club' ), esc_html( $currency_symbol ) ); ?></label></th>
                         <td>
                             <input type="number" name="tpw_surcharge_card-on-the-day_fixed" id="tpw_surcharge_card-on-the-day_fixed" step="0.01" min="0" value="<?php echo esc_attr( get_option('tpw_surcharge_card-on-the-day_fixed', 0) ); ?>" />
                         </td>

@@ -175,7 +175,7 @@ class TPW_Control {
         $sections = [
             'dashboard' => [
                 'key'        => 'dashboard',
-                'label'      => __( 'Dashboard', 'tpw-core' ),
+                'label'      => __( 'Dashboard', 'tpw-ilungu-club' ),
                 // Default visibility: members (per allowed statuses)
                 'visibility' => [ 'logged_in' => true ],
                 // Back-compat marker
@@ -186,7 +186,7 @@ class TPW_Control {
             ],
             'upload-pages' => [
                 'key'        => 'upload-pages',
-                'label'      => __( 'Upload Pages', 'tpw-core' ),
+                'label'      => __( 'Upload Pages', 'tpw-ilungu-club' ),
                 'visibility' => [ 'logged_in' => true, 'flags_any' => ['is_committee', 'is_admin'] ],
                 'capability' => '__tpw_control_is_committee_or_admin__',
                 'callback'   => [ 'TPW_Control_Upload_Pages', 'render' ],
@@ -195,7 +195,7 @@ class TPW_Control {
             ],
             'menu-manager' => [
                 'key'        => 'menu-manager',
-                'label'      => __( 'Menu Manager', 'tpw-core' ),
+                'label'      => __( 'Menu Manager', 'tpw-ilungu-club' ),
                 'visibility' => [ 'logged_in' => true, 'flags_any' => ['is_admin'] ],
                 'capability' => '__tpw_control_is_admin__',
                 'callback'   => [ 'TPW_Control_Router', 'render_menu_manager' ],

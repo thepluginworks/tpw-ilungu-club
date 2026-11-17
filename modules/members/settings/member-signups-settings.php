@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 wp_enqueue_script(
 	'sortablejs',
-	'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js',
+	TPW_CORE_URL . 'assets/third-party/sortablejs/Sortable.js',
 	array(),
-	null,
+	'1.15.0',
 	true
 );
 
@@ -21,44 +21,44 @@ $join_providers  = class_exists( 'TPW_Join_Page' ) ? TPW_Join_Page::get_register
 <p>
 	<label>
 		<input type="checkbox" name="tpw_members_settings[enable_signups]" value="1" <?php checked( $signup_settings['enable_signups'], '1' ); ?> />
-		<?php echo esc_html__( 'Enable Sign-Ups', 'tpw-core' ); ?>
+		<?php echo esc_html__( 'Enable Sign-Ups', 'tpw-ilungu-club' ); ?>
 	</label>
 </p>
 
 <p>
-	<label for="tpw_members_signup_page_id"><strong><?php echo esc_html__( 'Join Page', 'tpw-core' ); ?></strong></label><br>
+	<label for="tpw_members_signup_page_id"><strong><?php echo esc_html__( 'Join Page', 'tpw-ilungu-club' ); ?></strong></label><br>
 	<?php
 	wp_dropdown_pages(
 		array(
 			'name'              => 'tpw_members_settings[signup_page_id]',
 			'id'                => 'tpw_members_signup_page_id',
 			'selected'          => $signup_settings['signup_page_id'],
-			'show_option_none'  => __( '— Select —', 'tpw-core' ),
+			'show_option_none'  => __( '— Select —', 'tpw-ilungu-club' ),
 			'option_none_value' => '0',
 		)
 	);
 	?>
 	<br>
-	<small class="description"><?php echo esc_html__( 'When Sign-Ups are enabled, iLungu Club will provision or reuse a Join page automatically and store it here. You can also point the feature at an existing page and the Join shortcode will be added if needed.', 'tpw-core' ); ?></small>
+	<small class="description"><?php echo esc_html__( 'When Sign-Ups are enabled, iLungu Club will provision or reuse a Join page automatically and store it here. You can also point the feature at an existing page and the Join shortcode will be added if needed.', 'tpw-ilungu-club' ); ?></small>
 </p>
 
 <p>
-	<label for="tpw_members_join_provider_key"><strong><?php echo esc_html__( 'Active Join Provider', 'tpw-core' ); ?></strong></label><br>
+	<label for="tpw_members_join_provider_key"><strong><?php echo esc_html__( 'Active Join Provider', 'tpw-ilungu-club' ); ?></strong></label><br>
 	<select name="tpw_members_settings[join_provider_key]" id="tpw_members_join_provider_key">
 		<?php foreach ( $join_providers as $provider ) : ?>
 			<option value="<?php echo esc_attr( $provider['key'] ); ?>" <?php selected( $signup_settings['join_provider_key'], $provider['key'] ); ?>><?php echo esc_html( $provider['label'] ); ?></option>
 		<?php endforeach; ?>
 	</select>
 	<br>
-	<small class="description"><?php echo esc_html__( 'Select which registered provider tpw_join_form dispatches to on the managed Join page. The page content itself is not rewritten.', 'tpw-core' ); ?></small>
+	<small class="description"><?php echo esc_html__( 'Select which registered provider tpw_join_form dispatches to on the managed Join page. The page content itself is not rewritten.', 'tpw-ilungu-club' ); ?></small>
 </p>
 
 <hr>
 
-<p><strong><?php echo esc_html__( 'Field Configuration', 'tpw-core' ); ?></strong></p>
-<p class="description"><?php echo esc_html__( 'Only public-safe fields are shown here. Enable the fields you want on the Join form, choose whether they are required, and place them into the fixed Core section registry.', 'tpw-core' ); ?></p>
-<p class="description"><?php echo esc_html__( 'Drag rows to change field order. Ordering is saved within each section.', 'tpw-core' ); ?></p>
-<p class="description"><?php echo esc_html__( 'Email, First Name, and Surname are Core-required baseline Join fields. They stay visible here for reference, but their enabled and required states are locked and cannot be turned off.', 'tpw-core' ); ?></p>
+<p><strong><?php echo esc_html__( 'Field Configuration', 'tpw-ilungu-club' ); ?></strong></p>
+<p class="description"><?php echo esc_html__( 'Only public-safe fields are shown here. Enable the fields you want on the Join form, choose whether they are required, and place them into the fixed Core section registry.', 'tpw-ilungu-club' ); ?></p>
+<p class="description"><?php echo esc_html__( 'Drag rows to change field order. Ordering is saved within each section.', 'tpw-ilungu-club' ); ?></p>
+<p class="description"><?php echo esc_html__( 'Email, First Name, and Surname are Core-required baseline Join fields. They stay visible here for reference, but their enabled and required states are locked and cannot be turned off.', 'tpw-ilungu-club' ); ?></p>
 
 <style>
 .tpw-signups-resp {
@@ -147,11 +147,11 @@ $join_providers  = class_exists( 'TPW_Join_Page' ) ? TPW_Join_Page::get_register
 
 <div class="tpw-table">
 	<div class="tpw-table-header">
-		<div class="tpw-table-cell"><?php echo esc_html__( 'Field', 'tpw-core' ); ?></div>
-		<div class="tpw-table-cell"><?php echo esc_html__( 'Label', 'tpw-core' ); ?></div>
-		<div class="tpw-table-cell"><?php echo esc_html__( 'Enabled', 'tpw-core' ); ?></div>
-		<div class="tpw-table-cell"><?php echo esc_html__( 'Required', 'tpw-core' ); ?></div>
-		<div class="tpw-table-cell"><?php echo esc_html__( 'Section', 'tpw-core' ); ?></div>
+		<div class="tpw-table-cell"><?php echo esc_html__( 'Field', 'tpw-ilungu-club' ); ?></div>
+		<div class="tpw-table-cell"><?php echo esc_html__( 'Label', 'tpw-ilungu-club' ); ?></div>
+		<div class="tpw-table-cell"><?php echo esc_html__( 'Enabled', 'tpw-ilungu-club' ); ?></div>
+		<div class="tpw-table-cell"><?php echo esc_html__( 'Required', 'tpw-ilungu-club' ); ?></div>
+		<div class="tpw-table-cell"><?php echo esc_html__( 'Section', 'tpw-ilungu-club' ); ?></div>
 	</div>
 	<div id="tpw-signup-fields-sortable" class="tpw-signups-sortable">
 	<?php foreach ( $signup_fields as $field ) : ?>
@@ -164,32 +164,32 @@ $join_providers  = class_exists( 'TPW_Join_Page' ) ? TPW_Join_Page::get_register
 				<?php echo esc_html( $field['label'] ); ?>
 				<?php if ( ! empty( $field['is_signup_essential'] ) ) : ?>
 					<br>
-					<span class="tpw-signups-badge"><?php echo esc_html__( 'Core Required', 'tpw-core' ); ?></span>
+					<span class="tpw-signups-badge"><?php echo esc_html__( 'Core Required', 'tpw-ilungu-club' ); ?></span>
 				<?php endif; ?>
 			</div>
 			<div class="tpw-table-cell">
 				<label class="<?php echo ! empty( $field['signup_enabled_locked'] ) ? 'tpw-signups-locked-control' : ''; ?>" style="display:inline-flex; align-items:center; gap:6px;">
 					<input type="checkbox" name="signup_fields[<?php echo esc_attr( $field['key'] ); ?>][signup_enabled]" value="1" <?php checked( $field['signup_enabled'] ); ?> <?php disabled( ! empty( $field['signup_enabled_locked'] ) ); ?> />
-					<span class="tpw-signups-resp"><?php echo esc_html__( 'Enabled', 'tpw-core' ); ?></span>
+					<span class="tpw-signups-resp"><?php echo esc_html__( 'Enabled', 'tpw-ilungu-club' ); ?></span>
 				</label>
 				<?php if ( ! empty( $field['signup_enabled_locked'] ) ) : ?>
 					<br>
-					<span class="tpw-signups-lock-note"><?php echo esc_html__( 'System-required and always enabled.', 'tpw-core' ); ?></span>
+					<span class="tpw-signups-lock-note"><?php echo esc_html__( 'System-required and always enabled.', 'tpw-ilungu-club' ); ?></span>
 				<?php endif; ?>
 			</div>
 			<div class="tpw-table-cell">
 				<label class="<?php echo ! empty( $field['signup_required_locked'] ) ? 'tpw-signups-locked-control' : ''; ?>" style="display:inline-flex; align-items:center; gap:6px;">
 					<input type="checkbox" name="signup_fields[<?php echo esc_attr( $field['key'] ); ?>][signup_required]" value="1" <?php checked( $field['signup_required'] ); ?> <?php disabled( ! empty( $field['signup_required_locked'] ) ); ?> />
-					<span class="tpw-signups-resp"><?php echo esc_html__( 'Required', 'tpw-core' ); ?></span>
+					<span class="tpw-signups-resp"><?php echo esc_html__( 'Required', 'tpw-ilungu-club' ); ?></span>
 				</label>
 				<?php if ( ! empty( $field['signup_required_locked'] ) ) : ?>
 					<br>
-					<span class="tpw-signups-lock-note"><?php echo esc_html__( 'Locked as required for Join readiness.', 'tpw-core' ); ?></span>
+					<span class="tpw-signups-lock-note"><?php echo esc_html__( 'Locked as required for Join readiness.', 'tpw-ilungu-club' ); ?></span>
 				<?php endif; ?>
 			</div>
 			<div class="tpw-table-cell">
 				<select name="signup_fields[<?php echo esc_attr( $field['key'] ); ?>][signup_section]" class="tpw-signup-section-select">
-					<option value=""><?php echo esc_html__( '— Select —', 'tpw-core' ); ?></option>
+					<option value=""><?php echo esc_html__( '— Select —', 'tpw-ilungu-club' ); ?></option>
 					<?php foreach ( $signup_sections as $section_key => $section_label ) : ?>
 						<option value="<?php echo esc_attr( $section_key ); ?>" <?php selected( $field['signup_section'], $section_key ); ?>><?php echo esc_html( $section_label ); ?></option>
 					<?php endforeach; ?>

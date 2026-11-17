@@ -85,7 +85,7 @@ class TPW_Signup_Form_Validator {
 		$result['normalized_values'][ $key ] = $typed_value;
 
 		if ( $required && $this->is_empty_value( $type, $sticky_value, $typed_value ) ) {
-			$result['errors'][ $key ] = __( 'This field is required.', 'tpw-core' );
+			$result['errors'][ $key ] = __( 'This field is required.', 'tpw-ilungu-club' );
 			return;
 		}
 
@@ -94,27 +94,27 @@ class TPW_Signup_Form_Validator {
 		}
 
 		if ( 'email' === $type && ! is_email( (string) $typed_value ) ) {
-			$result['errors'][ $key ] = __( 'Enter a valid email address.', 'tpw-core' );
+			$result['errors'][ $key ] = __( 'Enter a valid email address.', 'tpw-ilungu-club' );
 			return;
 		}
 
 		if ( 'date' === $type && ! $this->is_valid_date_value( $sticky_value ) ) {
-			$result['errors'][ $key ] = __( 'Enter a valid date.', 'tpw-core' );
+			$result['errors'][ $key ] = __( 'Enter a valid date.', 'tpw-ilungu-club' );
 			return;
 		}
 
 		if ( 'datetime-local' === $type && ! $this->is_valid_datetime_value( $sticky_value ) ) {
-			$result['errors'][ $key ] = __( 'Enter a valid date and time.', 'tpw-core' );
+			$result['errors'][ $key ] = __( 'Enter a valid date and time.', 'tpw-ilungu-club' );
 			return;
 		}
 
 		if ( 'number' === $type && ! is_numeric( (string) $sticky_value ) ) {
-			$result['errors'][ $key ] = __( 'Enter a valid number.', 'tpw-core' );
+			$result['errors'][ $key ] = __( 'Enter a valid number.', 'tpw-ilungu-club' );
 			return;
 		}
 
 		if ( 'select' === $type && ! empty( $options ) && ! in_array( $sticky_value, $options, true ) ) {
-			$result['errors'][ $key ] = __( 'Choose a valid option.', 'tpw-core' );
+			$result['errors'][ $key ] = __( 'Choose a valid option.', 'tpw-ilungu-club' );
 		}
 	}
 

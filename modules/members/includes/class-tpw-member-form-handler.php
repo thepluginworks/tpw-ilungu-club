@@ -345,7 +345,7 @@ class TPW_Member_Form_Handler {
 
         $member_id = isset($_POST['member_id']) ? intval($_POST['member_id']) : 0;
         if ( ! $member_id ) {
-            wp_die( __( 'Invalid member ID.', 'tpw-core' ) );
+            wp_die( __( 'Invalid member ID.', 'tpw-ilungu-club' ) );
         }
 
         $enabled_fields = TPW_Member_Field_Loader::get_all_enabled_fields();
@@ -674,7 +674,7 @@ class TPW_Member_Form_Handler {
 
         $member_id = intval($_GET['id']);
         if ( ! $member_id ) {
-            echo '<div class="tpw-error">' . esc_html__( 'Invalid member ID.', 'tpw-core' ) . '</div>';
+            echo '<div class="tpw-error">' . esc_html__( 'Invalid member ID.', 'tpw-ilungu-club' ) . '</div>';
             return;
         }
 
@@ -682,7 +682,7 @@ class TPW_Member_Form_Handler {
         $member = $controller->get_member($member_id);
 
         if ( ! $member ) {
-            echo '<div class="tpw-error">' . esc_html__( 'Member not found.', 'tpw-core' ) . '</div>';
+            echo '<div class="tpw-error">' . esc_html__( 'Member not found.', 'tpw-ilungu-club' ) . '</div>';
             return;
         }
 

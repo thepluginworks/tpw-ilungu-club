@@ -3,7 +3,7 @@
 <div class="tpw-admin-ui"><div class="wrap">
     <p><a href="<?php echo esc_url( tpw_core_get_payment_methods_settings_url() ); ?>" class="button">Back to Payment Methods</a></p>
     <?php if ( ! function_exists( 'tpw_core_is_square_gateway_addon_active' ) || ! tpw_core_is_square_gateway_addon_active() ) : ?>
-        <div class="notice notice-warning"><p><?php esc_html_e( 'Square payments now require the TPW Square Gateway add-on. These settings are retained for compatibility and will be used by the add-on when it is active.', 'tpw-core' ); ?></p></div>
+        <div class="notice notice-warning"><p><?php esc_html_e( 'Square payments now require the TPW Square Gateway add-on. These settings are retained for compatibility and will be used by the add-on when it is active.', 'tpw-ilungu-club' ); ?></p></div>
     <?php endif; ?>
     <?php if ( isset($_GET['settings-updated']) && $_GET['settings-updated'] ) : ?>
         <div class="notice notice-success is-dismissible"><p>Surcharge settings updated successfully.</p></div>
@@ -64,7 +64,7 @@
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="tpw_surcharge_square_fixed"><?php printf( esc_html__( 'Fixed (%s)', 'tpw-core' ), esc_html( $currency_symbol ) ); ?></label></th>
+                <th scope="row"><label for="tpw_surcharge_square_fixed"><?php printf( esc_html__( 'Fixed (%s)', 'tpw-ilungu-club' ), esc_html( $currency_symbol ) ); ?></label></th>
                 <td>
                     <input type="number" name="tpw_surcharge_square_fixed" id="tpw_surcharge_square_fixed" step="0.01" min="0" value="<?php echo esc_attr( get_option('tpw_surcharge_square_fixed', 0) ); ?>" />
                 </td>

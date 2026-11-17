@@ -15,12 +15,12 @@ $notice_text    = isset( $workspace['notice_text'] ) ? (string) $workspace['noti
 <section id="ilungu-club-system-pages-overview" class="ilungu-club-dashboard__hero tpw-flexiclub-dashboard__hero tpw-card ilungu-club-system-pages__hero tpw-flexiclub-system-pages__hero">
 	<div class="ilungu-club-dashboard__brand-row tpw-flexiclub-dashboard__brand-row ilungu-club-system-pages__hero-head tpw-flexiclub-system-pages__hero-head">
 		<div class="ilungu-club-dashboard__welcome tpw-flexiclub-dashboard__welcome ilungu-club-system-pages__hero-copy tpw-flexiclub-system-pages__hero-copy">
-			<h2><?php esc_html_e( 'System Pages Workspace', 'tpw-core' ); ?></h2>
-			<p><?php esc_html_e( 'Review every registered iLungu Club and add-on page, then repair or recreate only the pages that actually need intervention.', 'tpw-core' ); ?></p>
+			<h2><?php esc_html_e( 'System Pages Workspace', 'tpw-ilungu-club' ); ?></h2>
+			<p><?php esc_html_e( 'Review every registered iLungu Club and add-on page, then repair or recreate only the pages that actually need intervention.', 'tpw-ilungu-club' ); ?></p>
 		</div>
 		<div class="ilungu-club-system-pages__hero-actions tpw-flexiclub-system-pages__hero-actions">
 			<?php if ( '' !== $dashboard_url ) : ?>
-				<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard_url ); ?>"><?php esc_html_e( 'Back to dashboard', 'tpw-core' ); ?></a>
+				<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard_url ); ?>"><?php esc_html_e( 'Back to dashboard', 'tpw-ilungu-club' ); ?></a>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -38,19 +38,19 @@ $notice_text    = isset( $workspace['notice_text'] ) ? (string) $workspace['noti
 <section id="ilungu-club-system-pages-list" class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card ilungu-club-system-pages__section tpw-flexiclub-system-pages__section ilungu-club-system-pages__section--full tpw-flexiclub-system-pages__section--full">
 	<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head ilungu-club-system-pages__section-head tpw-flexiclub-system-pages__section-head">
 		<div>
-			<h2><?php esc_html_e( 'Registered Pages', 'tpw-core' ); ?></h2>
-			<p><?php esc_html_e( 'Each row shows the registration state, current page health, and the actions you can take from this workspace.', 'tpw-core' ); ?></p>
+			<h2><?php esc_html_e( 'Registered Pages', 'tpw-ilungu-club' ); ?></h2>
+			<p><?php esc_html_e( 'Each row shows the registration state, current page health, and the actions you can take from this workspace.', 'tpw-ilungu-club' ); ?></p>
 		</div>
 		<details class="ilungu-club-system-pages__help-shell tpw-flexiclub-system-pages__help-shell">
-			<summary class="tpw-btn tpw-btn-outline ilungu-club-system-pages__help-toggle tpw-flexiclub-system-pages__help-toggle"><?php esc_html_e( 'How this works', 'tpw-core' ); ?></summary>
+			<summary class="tpw-btn tpw-btn-outline ilungu-club-system-pages__help-toggle tpw-flexiclub-system-pages__help-toggle"><?php esc_html_e( 'How this works', 'tpw-ilungu-club' ); ?></summary>
 			<div id="ilungu-club-system-pages-help" class="ilungu-club-system-pages__help-panel tpw-flexiclub-system-pages__help-panel">
-				<h3><?php esc_html_e( 'What the actions mean', 'tpw-core' ); ?></h3>
+				<h3><?php esc_html_e( 'What the actions mean', 'tpw-ilungu-club' ); ?></h3>
 				<ul class="ilungu-club-system-pages__guide-list tpw-flexiclub-system-pages__guide-list">
-					<li><?php esc_html_e( 'View opens the current front-end page. Edit opens the underlying WordPress page so you can fix content or shortcode issues directly.', 'tpw-core' ); ?></li>
-					<li><?php esc_html_e( 'Unlink uses the existing System Pages unlink action. It clears the stored mapping without deleting the WordPress page itself.', 'tpw-core' ); ?></li>
-					<li><?php esc_html_e( 'Recreate uses the existing System Pages recreate action. Use it when a registered page is missing or when the current logic can safely repair an unpublished page.', 'tpw-core' ); ?></li>
-					<li><?php esc_html_e( 'If a published page is missing the expected shortcode, edit that page to repair it. The current System Pages logic does not overwrite published content automatically.', 'tpw-core' ); ?></li>
-					<li><?php esc_html_e( 'Only authorised iLungu Club admins and member managers can access this workspace and run these actions.', 'tpw-core' ); ?></li>
+					<li><?php esc_html_e( 'View opens the current front-end page. Edit opens the underlying WordPress page so you can fix content or shortcode issues directly.', 'tpw-ilungu-club' ); ?></li>
+					<li><?php esc_html_e( 'Unlink uses the existing System Pages unlink action. It clears the stored mapping without deleting the WordPress page itself.', 'tpw-ilungu-club' ); ?></li>
+					<li><?php esc_html_e( 'Recreate uses the existing System Pages recreate action. Use it when a registered page is missing or when the current logic can safely repair an unpublished page.', 'tpw-ilungu-club' ); ?></li>
+					<li><?php esc_html_e( 'If a published page is missing the expected shortcode, edit that page to repair it. The current System Pages logic does not overwrite published content automatically.', 'tpw-ilungu-club' ); ?></li>
+					<li><?php esc_html_e( 'Only authorised iLungu Club admins and member managers can access this workspace and run these actions.', 'tpw-ilungu-club' ); ?></li>
 				</ul>
 			</div>
 		</details>
@@ -66,22 +66,22 @@ $notice_text    = isset( $workspace['notice_text'] ) ? (string) $workspace['noti
 	<div id="ilungu-club-system-pages-feedback" class="ilungu-club-system-pages__feedback tpw-flexiclub-system-pages__feedback" aria-live="polite"></div>
 
 	<?php if ( empty( $rows ) ) : ?>
-		<p class="ilungu-club-system-pages__empty tpw-flexiclub-system-pages__empty"><?php esc_html_e( 'No system pages are currently registered.', 'tpw-core' ); ?></p>
+		<p class="ilungu-club-system-pages__empty tpw-flexiclub-system-pages__empty"><?php esc_html_e( 'No system pages are currently registered.', 'tpw-ilungu-club' ); ?></p>
 	<?php else : ?>
-		<div class="tpw-table-container ilungu-club-system-pages__table tpw-flexiclub-system-pages__table" role="table" aria-label="<?php esc_attr_e( 'Registered system pages', 'tpw-core' ); ?>">
+		<div class="tpw-table-container ilungu-club-system-pages__table tpw-flexiclub-system-pages__table" role="table" aria-label="<?php esc_attr_e( 'Registered system pages', 'tpw-ilungu-club' ); ?>">
 			<div class="table-row ilungu-club-system-pages__row tpw-flexiclub-system-pages__row ilungu-club-system-pages__row--head tpw-flexiclub-system-pages__row--head" role="row">
-				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Page', 'tpw-core' ); ?></div>
-				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Required', 'tpw-core' ); ?></div>
-				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Page Status', 'tpw-core' ); ?></div>
-				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Shortcode', 'tpw-core' ); ?></div>
-				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Linked Page', 'tpw-core' ); ?></div>
-				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Action State', 'tpw-core' ); ?></div>
-				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Actions', 'tpw-core' ); ?></div>
+				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Page', 'tpw-ilungu-club' ); ?></div>
+				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Required', 'tpw-ilungu-club' ); ?></div>
+				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Page Status', 'tpw-ilungu-club' ); ?></div>
+				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Shortcode', 'tpw-ilungu-club' ); ?></div>
+				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Linked Page', 'tpw-ilungu-club' ); ?></div>
+				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Action State', 'tpw-ilungu-club' ); ?></div>
+				<div class="table-cell" role="columnheader"><?php esc_html_e( 'Actions', 'tpw-ilungu-club' ); ?></div>
 			</div>
 
 			<?php foreach ( $rows as $row ) : ?>
 				<div class="table-row ilungu-club-system-pages__row tpw-flexiclub-system-pages__row" role="row">
-					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Page', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Page', 'tpw-ilungu-club' ); ?>">
 						<div class="ilungu-club-system-pages__page-title tpw-flexiclub-system-pages__page-title"><?php echo esc_html( $row['title'] ); ?></div>
 						<div class="ilungu-club-system-pages__page-meta tpw-flexiclub-system-pages__page-meta">
 							<span class="ilungu-club-system-pages__page-chip tpw-flexiclub-system-pages__page-chip ilungu-club-system-pages__page-chip--plugin tpw-flexiclub-system-pages__page-chip--plugin"><?php echo esc_html( $row['plugin_label'] ); ?></span>
@@ -92,41 +92,41 @@ $notice_text    = isset( $workspace['notice_text'] ) ? (string) $workspace['noti
 						<p class="ilungu-club-system-pages__page-slug tpw-flexiclub-system-pages__page-slug"><?php echo esc_html( '/' . $row['slug'] . '/' ); ?></p>
 					</div>
 
-					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Required', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Required', 'tpw-ilungu-club' ); ?>">
 						<span class="ilungu-club-system-pages__page-chip tpw-flexiclub-system-pages__page-chip ilungu-club-system-pages__page-chip--<?php echo esc_attr( $row['required'] ? 'required' : 'optional' ); ?> tpw-flexiclub-system-pages__page-chip--<?php echo esc_attr( $row['required'] ? 'required' : 'optional' ); ?>"><?php echo esc_html( $row['required_label'] ); ?></span>
 					</div>
 
-					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Page Status', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Page Status', 'tpw-ilungu-club' ); ?>">
 						<span class="ilungu-club-dashboard__status tpw-flexiclub-dashboard__status ilungu-club-dashboard__status--<?php echo esc_attr( $row['status_tone'] ); ?> tpw-flexiclub-dashboard__status--<?php echo esc_attr( $row['status_tone'] ); ?>"><?php echo esc_html( $row['status_label'] ); ?></span>
 					</div>
 
-					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Shortcode', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Shortcode', 'tpw-ilungu-club' ); ?>">
 						<code class="ilungu-club-system-pages__shortcode tpw-flexiclub-system-pages__shortcode"><?php echo esc_html( $row['shortcode_display'] ); ?></code>
 					</div>
 
-					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Linked Page', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Linked Page', 'tpw-ilungu-club' ); ?>">
 						<div class="ilungu-club-system-pages__linked-title tpw-flexiclub-system-pages__linked-title"><?php echo esc_html( $row['linked_page_text'] ); ?></div>
 						<p class="ilungu-club-system-pages__linked-meta tpw-flexiclub-system-pages__linked-meta"><?php echo esc_html( $row['linked_page_meta'] ); ?></p>
 					</div>
 
-					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Action State', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Action State', 'tpw-ilungu-club' ); ?>">
 						<span class="ilungu-club-dashboard__status tpw-flexiclub-dashboard__status ilungu-club-dashboard__status--<?php echo esc_attr( $row['action_tone'] ); ?> tpw-flexiclub-dashboard__status--<?php echo esc_attr( $row['action_tone'] ); ?>"><?php echo esc_html( $row['action_label'] ); ?></span>
 						<p class="ilungu-club-system-pages__action-copy tpw-flexiclub-system-pages__action-copy"><?php echo esc_html( $row['action_message'] ); ?></p>
 					</div>
 
-					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Actions', 'tpw-core' ); ?>">
+					<div class="table-cell ilungu-club-system-pages__cell tpw-flexiclub-system-pages__cell" role="cell" data-label="<?php esc_attr_e( 'Actions', 'tpw-ilungu-club' ); ?>">
 						<div class="ilungu-club-system-pages__actions tpw-flexiclub-system-pages__actions">
 							<?php if ( ! empty( $row['linked_page_url'] ) ) : ?>
-								<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $row['linked_page_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-core' ); ?></a>
+								<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $row['linked_page_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-ilungu-club' ); ?></a>
 							<?php endif; ?>
 							<?php if ( ! empty( $row['edit_url'] ) ) : ?>
-								<a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( $row['edit_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Edit', 'tpw-core' ); ?></a>
+								<a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( $row['edit_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Edit', 'tpw-ilungu-club' ); ?></a>
 							<?php endif; ?>
 							<?php if ( ! empty( $row['can_unlink'] ) ) : ?>
-								<button class="tpw-btn tpw-btn-light js-tpw-flexiclub-system-page-unlink" type="button" data-slug="<?php echo esc_attr( $row['slug'] ); ?>" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-confirm="<?php echo esc_attr( sprintf( __( 'Clear the current System Pages link for %s?', 'tpw-core' ), $row['title'] ) ); ?>"><?php esc_html_e( 'Unlink', 'tpw-core' ); ?></button>
+								<button class="tpw-btn tpw-btn-light js-tpw-flexiclub-system-page-unlink" type="button" data-slug="<?php echo esc_attr( $row['slug'] ); ?>" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-confirm="<?php echo esc_attr( sprintf( __( 'Clear the current System Pages link for %s?', 'tpw-ilungu-club' ), $row['title'] ) ); ?>"><?php esc_html_e( 'Unlink', 'tpw-ilungu-club' ); ?></button>
 							<?php endif; ?>
 							<?php if ( ! empty( $row['can_recreate'] ) ) : ?>
-								<button class="tpw-btn tpw-btn-primary js-tpw-flexiclub-system-page-recreate" type="button" data-slug="<?php echo esc_attr( $row['slug'] ); ?>" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-confirm="<?php echo esc_attr( sprintf( __( 'Recreate or repair the page for %s?', 'tpw-core' ), $row['title'] ) ); ?>"><?php echo esc_html( $row['recreate_label'] ); ?></button>
+								<button class="tpw-btn tpw-btn-primary js-tpw-flexiclub-system-page-recreate" type="button" data-slug="<?php echo esc_attr( $row['slug'] ); ?>" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-confirm="<?php echo esc_attr( sprintf( __( 'Recreate or repair the page for %s?', 'tpw-ilungu-club' ), $row['title'] ) ); ?>"><?php echo esc_html( $row['recreate_label'] ); ?></button>
 							<?php endif; ?>
 						</div>
 					</div>

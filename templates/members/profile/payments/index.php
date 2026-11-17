@@ -25,7 +25,7 @@ $active_source = isset($active_source) ? $active_source : null;
 
 if ( empty( $sources ) ) {
     echo '<div class="tpw-card">';
-    echo '  <p>' . esc_html__( 'No payment modules are active.', 'tpw-core' ) . '</p>';
+    echo '  <p>' . esc_html__( 'No payment modules are active.', 'tpw-ilungu-club' ) . '</p>';
     echo '</div>';
     echo '</div>';
     return;
@@ -41,7 +41,7 @@ if ( ! $single ) {
 
 // Content area
 echo '<main class="tpw-content" role="region" aria-label="Payments content">';
-echo '  <h2 class="tpw-sr-only">' . esc_html__( 'My Payments', 'tpw-core' ) . '</h2>';
+echo '  <h2 class="tpw-sr-only">' . esc_html__( 'My Payments', 'tpw-ilungu-club' ) . '</h2>';
 
 if ( $active_type && is_array( $active_source ) ) {
     $cb = $active_source['callback'] ?? null;
@@ -49,7 +49,7 @@ if ( $active_type && is_array( $active_source ) ) {
         // Allow callbacks to echo their own layout; keep within content area per spec
         call_user_func( $cb );
     } else {
-        echo '<div class="tpw-card"><p>' . esc_html__( 'The selected payments view is not available.', 'tpw-core' ) . '</p></div>';
+        echo '<div class="tpw-card"><p>' . esc_html__( 'The selected payments view is not available.', 'tpw-ilungu-club' ) . '</p></div>';
     }
 } else {
     // Fallback: choose the first available source

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 add_action( 'wp_ajax_tpw_gallery_elementor_search', function() {
     if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) {
-        wp_send_json_error( [ 'message' => __( 'Permission denied', 'tpw-core' ) ] );
+        wp_send_json_error( [ 'message' => __( 'Permission denied', 'tpw-ilungu-club' ) ] );
     }
 
     check_ajax_referer( 'tpw_gallery_elementor', 'nonce' );

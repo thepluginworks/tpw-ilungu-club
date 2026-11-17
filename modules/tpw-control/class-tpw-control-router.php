@@ -18,13 +18,13 @@ class TPW_Control_Router {
     public static function render_layout() {
         // Global manage gate: restrict hub to admins by default (filterable)
         if ( ! TPW_Control::can_manage() ) {
-            self::render_not_allowed( __( 'You do not have permission to access TPW Control.', 'tpw-core' ) );
+            self::render_not_allowed( __( 'You do not have permission to access TPW Control.', 'tpw-ilungu-club' ) );
             return;
         }
         $section = self::current_section();
         // Permission gate
         if ( ! TPW_Control_UI::section_is_visible( $section ) ) {
-            self::render_not_allowed( __( 'You do not have permission to view this section.', 'tpw-core' ) );
+            self::render_not_allowed( __( 'You do not have permission to view this section.', 'tpw-ilungu-club' ) );
             return;
         }
         $template = __DIR__ . '/templates/layout.php';
@@ -63,18 +63,18 @@ class TPW_Control_Router {
     public static function render_dashboard() {
         $file = __DIR__ . '/templates/dashboard.php';
         if ( file_exists( $file ) ) include $file;
-        else echo '<h2>' . esc_html__( 'TPW Control', 'tpw-core' ) . '</h2>';
+        else echo '<h2>' . esc_html__( 'TPW Control', 'tpw-ilungu-club' ) . '</h2>';
     }
 
     public static function render_menu_manager() {
         $file = __DIR__ . '/templates/sections/menu-manager.php';
         if ( file_exists( $file ) ) include $file;
-        else echo '<p>' . esc_html__( 'Menu Manager coming soon…', 'tpw-core' ) . '</p>';
+        else echo '<p>' . esc_html__( 'Menu Manager coming soon…', 'tpw-ilungu-club' ) . '</p>';
     }
 
     protected static function render_not_allowed( $message = '' ) {
         echo '<div class="tpw-control tpw-control--denied">';
-        $msg = $message !== '' ? $message : __( 'You do not have permission to view this page.', 'tpw-core' );
+        $msg = $message !== '' ? $message : __( 'You do not have permission to view this page.', 'tpw-ilungu-club' );
         echo '<p>' . esc_html( $msg ) . '</p>';
         echo '</div>';
     }

@@ -68,7 +68,7 @@ class TPW_Email {
 
         $duration_ms = max( 0, (int) round( ( microtime( true ) - $started_at ) * 1000 ) );
         if ( ! $sent && empty( $mail_error ) ) {
-            $mail_error = __( 'wp_mail() returned false.', 'tpw-core' );
+            $mail_error = __( 'wp_mail() returned false.', 'tpw-ilungu-club' );
         }
 
         self::log_email(
@@ -115,8 +115,8 @@ class TPW_Email {
                 'success'  => false,
                 'queue_id' => 0,
                 'action_id' => 0,
-                'error'    => __( 'Email queue service unavailable.', 'tpw-core' ),
-                'message'  => __( 'Email queue service unavailable.', 'tpw-core' ),
+                'error'    => __( 'Email queue service unavailable.', 'tpw-ilungu-club' ),
+                'message'  => __( 'Email queue service unavailable.', 'tpw-ilungu-club' ),
             ];
         }
 
@@ -150,16 +150,16 @@ class TPW_Email {
         $html_message  = wp_kses_post( (string) $message );
 
         if ( empty($to_email) || ! is_email($to_email) ) {
-            return [ 'success' => false, 'message' => __( 'Invalid recipient email.', 'tpw-core' ) ];
+            return [ 'success' => false, 'message' => __( 'Invalid recipient email.', 'tpw-ilungu-club' ) ];
         }
         if ( empty($from_email) || ! is_email($from_email) ) {
-            return [ 'success' => false, 'message' => __( 'Invalid sender email.', 'tpw-core' ) ];
+            return [ 'success' => false, 'message' => __( 'Invalid sender email.', 'tpw-ilungu-club' ) ];
         }
         if ( '' === $subject_clean ) {
-            return [ 'success' => false, 'message' => __( 'Subject is required.', 'tpw-core' ) ];
+            return [ 'success' => false, 'message' => __( 'Subject is required.', 'tpw-ilungu-club' ) ];
         }
         if ( '' === trim( wp_strip_all_tags( $html_message ) ) ) {
-            return [ 'success' => false, 'message' => __( 'Message is required.', 'tpw-core' ) ];
+            return [ 'success' => false, 'message' => __( 'Message is required.', 'tpw-ilungu-club' ) ];
         }
 
         // Validate attachments (paths) if any
@@ -190,13 +190,13 @@ class TPW_Email {
         ] );
 
         if ( ! $sent ) {
-            return [ 'success' => false, 'message' => __( 'Failed to send email.', 'tpw-core' ) ];
+            return [ 'success' => false, 'message' => __( 'Failed to send email.', 'tpw-ilungu-club' ) ];
         }
 
         // Optionally send a copy to sender
         if ( $send_copy ) {
             $copy_subject = '[Copy] ' . $subject_clean;
-            $copy_body    = self::wrap_html( '<p>' . esc_html__( 'This is a copy of your message.', 'tpw-core' ) . '</p>' . $html_message, $from_name, (bool) $use_logo );
+            $copy_body    = self::wrap_html( '<p>' . esc_html__( 'This is a copy of your message.', 'tpw-ilungu-club' ) . '</p>' . $html_message, $from_name, (bool) $use_logo );
             // Sender copy: no attachments by default for safety
             self::dispatch_mail( $from_email, $copy_subject, $copy_body, $headers, [], [
                 'direction'    => 'copy',
@@ -207,7 +207,7 @@ class TPW_Email {
             ] );
         }
 
-        return [ 'success' => true, 'message' => __( 'Email sent successfully.', 'tpw-core' ) ];
+        return [ 'success' => true, 'message' => __( 'Email sent successfully.', 'tpw-ilungu-club' ) ];
     }
 
     /**
@@ -421,27 +421,27 @@ class TPW_Email {
                 }
                 if ( $error !== UPLOAD_ERR_OK ) {
                     $err_map = [
-                        UPLOAD_ERR_INI_SIZE   => __( 'The uploaded file exceeds the upload_max_filesize directive.', 'tpw-core' ),
-                        UPLOAD_ERR_FORM_SIZE  => __( 'The uploaded file exceeds the MAX_FILE_SIZE directive.', 'tpw-core' ),
-                        UPLOAD_ERR_PARTIAL    => __( 'The uploaded file was only partially uploaded.', 'tpw-core' ),
-                        UPLOAD_ERR_NO_FILE    => __( 'No file was uploaded.', 'tpw-core' ),
-                        UPLOAD_ERR_NO_TMP_DIR => __( 'Missing a temporary folder on the server.', 'tpw-core' ),
-                        UPLOAD_ERR_CANT_WRITE => __( 'Failed to write file to disk.', 'tpw-core' ),
-                        UPLOAD_ERR_EXTENSION  => __( 'A PHP extension stopped the file upload.', 'tpw-core' ),
+                        UPLOAD_ERR_INI_SIZE   => __( 'The uploaded file exceeds the upload_max_filesize directive.', 'tpw-ilungu-club' ),
+                        UPLOAD_ERR_FORM_SIZE  => __( 'The uploaded file exceeds the MAX_FILE_SIZE directive.', 'tpw-ilungu-club' ),
+                        UPLOAD_ERR_PARTIAL    => __( 'The uploaded file was only partially uploaded.', 'tpw-ilungu-club' ),
+                        UPLOAD_ERR_NO_FILE    => __( 'No file was uploaded.', 'tpw-ilungu-club' ),
+                        UPLOAD_ERR_NO_TMP_DIR => __( 'Missing a temporary folder on the server.', 'tpw-ilungu-club' ),
+                        UPLOAD_ERR_CANT_WRITE => __( 'Failed to write file to disk.', 'tpw-ilungu-club' ),
+                        UPLOAD_ERR_EXTENSION  => __( 'A PHP extension stopped the file upload.', 'tpw-ilungu-club' ),
                     ];
-                    $msg = isset($err_map[$error]) ? $err_map[$error] : __( 'Upload error.', 'tpw-core' );
+                    $msg = isset($err_map[$error]) ? $err_map[$error] : __( 'Upload error.', 'tpw-ilungu-club' );
                     return [ 'success' => false, 'message' => $msg ];
                 }
                 $ext = strtolower( pathinfo( $name, PATHINFO_EXTENSION ) );
                 if ( ! in_array( $ext, $allowed_exts, true ) ) {
-                    return [ 'success' => false, 'message' => sprintf( __( 'File type not allowed: %s', 'tpw-core' ), esc_html( $name ) ) ];
+                    return [ 'success' => false, 'message' => sprintf( __( 'File type not allowed: %s', 'tpw-ilungu-club' ), esc_html( $name ) ) ];
                 }
                 if ( $size > $max_bytes ) {
-                    return [ 'success' => false, 'message' => sprintf( __( 'File too large: %s', 'tpw-core' ), esc_html( $name ) ) ];
+                    return [ 'success' => false, 'message' => sprintf( __( 'File too large: %s', 'tpw-ilungu-club' ), esc_html( $name ) ) ];
                 }
                 $moved = self::move_to_temp( $tmp, $name );
                 if ( empty( $moved ) ) {
-                    return [ 'success' => false, 'message' => __( 'Unable to store uploaded file. Please try again or contact support.', 'tpw-core' ) ];
+                    return [ 'success' => false, 'message' => __( 'Unable to store uploaded file. Please try again or contact support.', 'tpw-ilungu-club' ) ];
                 }
                 $paths[] = $moved;
             }
@@ -451,10 +451,10 @@ class TPW_Email {
                 if ( is_string( $f ) && file_exists( $f ) ) {
                     $ext = strtolower( pathinfo( $f, PATHINFO_EXTENSION ) );
                     if ( ! in_array( $ext, $allowed_exts, true ) ) {
-                        return [ 'success' => false, 'message' => sprintf( __( 'File type not allowed: %s', 'tpw-core' ), esc_html( basename($f) ) ) ];
+                        return [ 'success' => false, 'message' => sprintf( __( 'File type not allowed: %s', 'tpw-ilungu-club' ), esc_html( basename($f) ) ) ];
                     }
                     if ( filesize( $f ) > $max_bytes ) {
-                        return [ 'success' => false, 'message' => sprintf( __( 'File too large: %s', 'tpw-core' ), esc_html( basename($f) ) ) ];
+                        return [ 'success' => false, 'message' => sprintf( __( 'File too large: %s', 'tpw-ilungu-club' ), esc_html( basename($f) ) ) ];
                     }
                     $paths[] = $f;
                 }
@@ -471,27 +471,27 @@ class TPW_Email {
             }
             if ( $error !== UPLOAD_ERR_OK ) {
                 $err_map = [
-                    UPLOAD_ERR_INI_SIZE   => __( 'The uploaded file exceeds the upload_max_filesize directive.', 'tpw-core' ),
-                    UPLOAD_ERR_FORM_SIZE  => __( 'The uploaded file exceeds the MAX_FILE_SIZE directive.', 'tpw-core' ),
-                    UPLOAD_ERR_PARTIAL    => __( 'The uploaded file was only partially uploaded.', 'tpw-core' ),
-                    UPLOAD_ERR_NO_FILE    => __( 'No file was uploaded.', 'tpw-core' ),
-                    UPLOAD_ERR_NO_TMP_DIR => __( 'Missing a temporary folder on the server.', 'tpw-core' ),
-                    UPLOAD_ERR_CANT_WRITE => __( 'Failed to write file to disk.', 'tpw-core' ),
-                    UPLOAD_ERR_EXTENSION  => __( 'A PHP extension stopped the file upload.', 'tpw-core' ),
+                    UPLOAD_ERR_INI_SIZE   => __( 'The uploaded file exceeds the upload_max_filesize directive.', 'tpw-ilungu-club' ),
+                    UPLOAD_ERR_FORM_SIZE  => __( 'The uploaded file exceeds the MAX_FILE_SIZE directive.', 'tpw-ilungu-club' ),
+                    UPLOAD_ERR_PARTIAL    => __( 'The uploaded file was only partially uploaded.', 'tpw-ilungu-club' ),
+                    UPLOAD_ERR_NO_FILE    => __( 'No file was uploaded.', 'tpw-ilungu-club' ),
+                    UPLOAD_ERR_NO_TMP_DIR => __( 'Missing a temporary folder on the server.', 'tpw-ilungu-club' ),
+                    UPLOAD_ERR_CANT_WRITE => __( 'Failed to write file to disk.', 'tpw-ilungu-club' ),
+                    UPLOAD_ERR_EXTENSION  => __( 'A PHP extension stopped the file upload.', 'tpw-ilungu-club' ),
                 ];
-                $msg = isset($err_map[$error]) ? $err_map[$error] : __( 'Upload error.', 'tpw-core' );
+                $msg = isset($err_map[$error]) ? $err_map[$error] : __( 'Upload error.', 'tpw-ilungu-club' );
                 return [ 'success' => false, 'message' => $msg ];
             }
             $ext = strtolower( pathinfo( $name, PATHINFO_EXTENSION ) );
             if ( ! in_array( $ext, $allowed_exts, true ) ) {
-                return [ 'success' => false, 'message' => sprintf( __( 'File type not allowed: %s', 'tpw-core' ), esc_html( $name ) ) ];
+                return [ 'success' => false, 'message' => sprintf( __( 'File type not allowed: %s', 'tpw-ilungu-club' ), esc_html( $name ) ) ];
             }
             if ( $size > $max_bytes ) {
-                return [ 'success' => false, 'message' => sprintf( __( 'File too large: %s', 'tpw-core' ), esc_html( $name ) ) ];
+                return [ 'success' => false, 'message' => sprintf( __( 'File too large: %s', 'tpw-ilungu-club' ), esc_html( $name ) ) ];
             }
             $moved = self::move_to_temp( $tmp, $name );
             if ( empty( $moved ) ) {
-                return [ 'success' => false, 'message' => __( 'Unable to store uploaded file. Please try again or contact support.', 'tpw-core' ) ];
+                return [ 'success' => false, 'message' => __( 'Unable to store uploaded file. Please try again or contact support.', 'tpw-ilungu-club' ) ];
             }
             $paths[] = $moved;
         }
@@ -634,7 +634,7 @@ class TPW_Email {
      */
     public static function send_with_template( $to, $from, $template_key, $token_values = [], $attachments = [], $send_copy = true ) {
         if ( ! class_exists('TPW_Email_Template_Manager') ) {
-            return [ 'success' => false, 'message' => __( 'Email template manager unavailable.', 'tpw-core' ) ];
+            return [ 'success' => false, 'message' => __( 'Email template manager unavailable.', 'tpw-ilungu-club' ) ];
         }
         $tpl = TPW_Email_Template_Manager::get_rendered_template( $template_key, is_array($token_values) ? $token_values : [] );
         $res = self::send_email( $to, $from, (string) $tpl['subject'], (string) $tpl['body'], $attachments, $send_copy, ! empty( $tpl['use_logo'] ) );

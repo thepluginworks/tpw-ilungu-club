@@ -28,7 +28,7 @@ class TPW_Menus_Frontend_Admin {
 
 		$pages = is_array( $pages ) ? $pages : [];
 		$pages[ self::PAGE_SLUG ] = [
-			'label'           => __( 'Dining Menus', 'tpw-core' ),
+			'label'           => __( 'Dining Menus', 'tpw-ilungu-club' ),
 			'capability'      => 'manage_options',
 			'default_view'    => 'list',
 			'allowed_views'   => [ 'list', 'add', 'edit', 'course-choices', 'course-choice' ],
@@ -38,27 +38,27 @@ class TPW_Menus_Frontend_Admin {
 			'variant'         => 'secondary',
 			'render_callback' => [ __CLASS__, 'render_page' ],
 			'notice_messages' => [
-				'created'             => __( 'Dining menu created.', 'tpw-core' ),
-				'updated'             => __( 'Dining menu updated.', 'tpw-core' ),
-				'deleted'             => __( 'Dining menu deleted.', 'tpw-core' ),
-				'choice_created'      => __( 'Course choice created.', 'tpw-core' ),
-				'choice_updated'      => __( 'Course choice updated.', 'tpw-core' ),
-				'choice_deleted'      => __( 'Course choice deleted.', 'tpw-core' ),
-				'course_name_updated' => __( 'Course name updated.', 'tpw-core' ),
+				'created'             => __( 'Dining menu created.', 'tpw-ilungu-club' ),
+				'updated'             => __( 'Dining menu updated.', 'tpw-ilungu-club' ),
+				'deleted'             => __( 'Dining menu deleted.', 'tpw-ilungu-club' ),
+				'choice_created'      => __( 'Course choice created.', 'tpw-ilungu-club' ),
+				'choice_updated'      => __( 'Course choice updated.', 'tpw-ilungu-club' ),
+				'choice_deleted'      => __( 'Course choice deleted.', 'tpw-ilungu-club' ),
+				'course_name_updated' => __( 'Course name updated.', 'tpw-ilungu-club' ),
 			],
 			'error_messages'  => [
-				'missing_menu_name'    => __( 'Menu name is required.', 'tpw-core' ),
-				'missing_choice_label' => __( 'Dish name is required.', 'tpw-core' ),
-				'invalid_menu'         => __( 'The selected dining menu is invalid.', 'tpw-core' ),
-				'invalid_choice'       => __( 'The selected course choice is invalid.', 'tpw-core' ),
-				'invalid_course'       => __( 'The selected course is invalid.', 'tpw-core' ),
-				'invalid_nonce'        => __( 'Security check failed. Please try again.', 'tpw-core' ),
-				'no_access'            => __( 'You do not have permission to manage dining menus.', 'tpw-core' ),
-				'save_failed'          => __( 'The dining menu could not be saved.', 'tpw-core' ),
-				'delete_failed'        => __( 'The dining menu could not be deleted.', 'tpw-core' ),
-				'save_choice_failed'   => __( 'The course choice could not be saved.', 'tpw-core' ),
-				'delete_choice_failed' => __( 'The course choice could not be deleted.', 'tpw-core' ),
-				'rename_course_failed' => __( 'The course name could not be updated.', 'tpw-core' ),
+				'missing_menu_name'    => __( 'Menu name is required.', 'tpw-ilungu-club' ),
+				'missing_choice_label' => __( 'Dish name is required.', 'tpw-ilungu-club' ),
+				'invalid_menu'         => __( 'The selected dining menu is invalid.', 'tpw-ilungu-club' ),
+				'invalid_choice'       => __( 'The selected course choice is invalid.', 'tpw-ilungu-club' ),
+				'invalid_course'       => __( 'The selected course is invalid.', 'tpw-ilungu-club' ),
+				'invalid_nonce'        => __( 'Security check failed. Please try again.', 'tpw-ilungu-club' ),
+				'no_access'            => __( 'You do not have permission to manage dining menus.', 'tpw-ilungu-club' ),
+				'save_failed'          => __( 'The dining menu could not be saved.', 'tpw-ilungu-club' ),
+				'delete_failed'        => __( 'The dining menu could not be deleted.', 'tpw-ilungu-club' ),
+				'save_choice_failed'   => __( 'The course choice could not be saved.', 'tpw-ilungu-club' ),
+				'delete_choice_failed' => __( 'The course choice could not be deleted.', 'tpw-ilungu-club' ),
+				'rename_course_failed' => __( 'The course name could not be updated.', 'tpw-ilungu-club' ),
 			],
 		];
 
@@ -67,7 +67,7 @@ class TPW_Menus_Frontend_Admin {
 
 	public static function render_page( $context ) {
 		if ( ! self::is_enabled() ) {
-			echo '<div class="flexievent-card"><p>' . esc_html__( 'Dining Menus is not currently available.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="flexievent-card"><p>' . esc_html__( 'Dining Menus is not currently available.', 'tpw-ilungu-club' ) . '</p></div>';
 			return;
 		}
 
@@ -345,29 +345,29 @@ class TPW_Menus_Frontend_Admin {
 					'current'   => $current_page,
 					'total'     => $total_pages,
 					'type'      => 'array',
-					'prev_text' => __( 'Previous', 'tpw-core' ),
-					'next_text' => __( 'Next', 'tpw-core' ),
+					'prev_text' => __( 'Previous', 'tpw-ilungu-club' ),
+					'next_text' => __( 'Next', 'tpw-ilungu-club' ),
 				]
 			)
 			: [];
 
 		echo '<div class="flexievent-toolbar">';
 		echo '<div>';
-		echo '<h3>' . esc_html__( 'Dining Menus', 'tpw-core' ) . '</h3>';
-		echo '<p class="description">' . esc_html__( 'Manage dining menus and the course choices used by dining-enabled events from the FlexiEvent front-end admin.', 'tpw-core' ) . '</p>';
+		echo '<h3>' . esc_html__( 'Dining Menus', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p class="description">' . esc_html__( 'Manage dining menus and the course choices used by dining-enabled events from the FlexiEvent front-end admin.', 'tpw-ilungu-club' ) . '</p>';
 		echo '</div>';
-		echo '<a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::page_url( $base_url, [ 'view' => 'add' ] ) ) . '">' . esc_html__( 'Add Menu', 'tpw-core' ) . '</a>';
+		echo '<a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::page_url( $base_url, [ 'view' => 'add' ] ) ) . '">' . esc_html__( 'Add Menu', 'tpw-ilungu-club' ) . '</a>';
 		echo '</div>';
 
 		echo '<div class="flexievent-card flexievent-list-card">';
 		if ( ! empty( $menus ) ) {
 			echo '<div class="flexievent-list-summary">';
-			echo '<div>' . esc_html__( 'Each menu now links directly into course management so you can maintain dishes without leaving the FE admin.', 'tpw-core' ) . '</div>';
-			echo '<div class="flexievent-list-summary-count">' . sprintf( esc_html__( '%d menus', 'tpw-core' ), $total_items ) . '</div>';
+			echo '<div>' . esc_html__( 'Each menu now links directly into course management so you can maintain dishes without leaving the FE admin.', 'tpw-ilungu-club' ) . '</div>';
+			echo '<div class="flexievent-list-summary-count">' . sprintf( esc_html__( '%d menus', 'tpw-ilungu-club' ), $total_items ) . '</div>';
 			echo '</div>';
 			echo '<div class="flexievent-table-wrap">';
 			echo '<table class="flexievent-table">';
-			echo '<thead><tr><th>' . esc_html__( 'Menu', 'tpw-core' ) . '</th><th>' . esc_html__( 'Description', 'tpw-core' ) . '</th><th>' . esc_html__( 'Courses', 'tpw-core' ) . '</th><th>' . esc_html__( 'Price', 'tpw-core' ) . '</th><th>' . esc_html__( 'Actions', 'tpw-core' ) . '</th></tr></thead>';
+			echo '<thead><tr><th>' . esc_html__( 'Menu', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Description', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Courses', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Price', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Actions', 'tpw-ilungu-club' ) . '</th></tr></thead>';
 			echo '<tbody>';
 			foreach ( $menus as $menu ) {
 				$edit_url    = self::page_url(
@@ -380,20 +380,20 @@ class TPW_Menus_Frontend_Admin {
 				$courses_url = self::course_choices_url( $base_url, (int) $menu->id );
 
 				echo '<tr>';
-				echo '<td data-label="' . esc_attr__( 'Menu', 'tpw-core' ) . '"><strong>' . esc_html( self::normalise_text( $menu->name ) ) . '</strong></td>';
-				echo '<td data-label="' . esc_attr__( 'Description', 'tpw-core' ) . '">' . esc_html( self::normalise_text( $menu->description ) ) . '</td>';
-				echo '<td data-label="' . esc_attr__( 'Courses', 'tpw-core' ) . '">' . esc_html( (string) $menu->number_of_courses ) . '</td>';
-				echo '<td data-label="' . esc_attr__( 'Price', 'tpw-core' ) . '">£' . esc_html( number_format( (float) $menu->price, 2 ) ) . '</td>';
-				echo '<td data-label="' . esc_attr__( 'Actions', 'tpw-core' ) . '">';
+				echo '<td data-label="' . esc_attr__( 'Menu', 'tpw-ilungu-club' ) . '"><strong>' . esc_html( self::normalise_text( $menu->name ) ) . '</strong></td>';
+				echo '<td data-label="' . esc_attr__( 'Description', 'tpw-ilungu-club' ) . '">' . esc_html( self::normalise_text( $menu->description ) ) . '</td>';
+				echo '<td data-label="' . esc_attr__( 'Courses', 'tpw-ilungu-club' ) . '">' . esc_html( (string) $menu->number_of_courses ) . '</td>';
+				echo '<td data-label="' . esc_attr__( 'Price', 'tpw-ilungu-club' ) . '">£' . esc_html( number_format( (float) $menu->price, 2 ) ) . '</td>';
+				echo '<td data-label="' . esc_attr__( 'Actions', 'tpw-ilungu-club' ) . '">';
 				echo '<div class="flexievent-inline-actions">';
-				echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $courses_url ) . '">' . esc_html__( 'Courses', 'tpw-core' ) . '</a>';
-				echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit', 'tpw-core' ) . '</a>';
-				echo '<form method="post" action="' . esc_url( self::admin_post_url() ) . '" onsubmit="return window.confirm(' . esc_attr( wp_json_encode( __( 'Delete this dining menu?', 'tpw-core' ) ) ) . ');" style="display:inline-block;margin:0;">';
+				echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $courses_url ) . '">' . esc_html__( 'Courses', 'tpw-ilungu-club' ) . '</a>';
+				echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit', 'tpw-ilungu-club' ) . '</a>';
+				echo '<form method="post" action="' . esc_url( self::admin_post_url() ) . '" onsubmit="return window.confirm(' . esc_attr( wp_json_encode( __( 'Delete this dining menu?', 'tpw-ilungu-club' ) ) ) . ');" style="display:inline-block;margin:0;">';
 				echo '<input type="hidden" name="action" value="' . esc_attr( self::DELETE_ACTION ) . '" />';
 				echo '<input type="hidden" name="base_url" value="' . esc_attr( $base_url ) . '" />';
 				echo '<input type="hidden" name="menu_id" value="' . esc_attr( (int) $menu->id ) . '" />';
 				wp_nonce_field( self::DELETE_ACTION . '_' . (int) $menu->id, 'tpw_fe_delete_dining_menu_nonce' );
-				echo '<button type="submit" class="tpw-btn tpw-btn-secondary flexievent-danger-button">' . esc_html__( 'Delete', 'tpw-core' ) . '</button>';
+				echo '<button type="submit" class="tpw-btn tpw-btn-secondary flexievent-danger-button">' . esc_html__( 'Delete', 'tpw-ilungu-club' ) . '</button>';
 				echo '</form>';
 				echo '</div>';
 				echo '</td>';
@@ -407,11 +407,11 @@ class TPW_Menus_Frontend_Admin {
 				$start_item = $total_items > 0 ? $offset + 1 : 0;
 				$end_item   = min( $total_items, $offset + count( $menus ) );
 
-				echo '<div class="flexievent-pagination" aria-label="' . esc_attr__( 'Dining menus pagination', 'tpw-core' ) . '">';
+				echo '<div class="flexievent-pagination" aria-label="' . esc_attr__( 'Dining menus pagination', 'tpw-ilungu-club' ) . '">';
 				echo '<div class="flexievent-pagination-summary">';
 				echo esc_html(
 					sprintf(
-						__( 'Showing %1$d-%2$d of %3$d', 'tpw-core' ),
+						__( 'Showing %1$d-%2$d of %3$d', 'tpw-ilungu-club' ),
 						$start_item,
 						$end_item,
 						$total_items
@@ -427,8 +427,8 @@ class TPW_Menus_Frontend_Admin {
 			}
 		} else {
 			echo '<div class="flexievent-empty-state">';
-			echo '<p>' . esc_html__( 'No dining menus have been created yet.', 'tpw-core' ) . '</p>';
-			echo '<p><a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::page_url( $base_url, [ 'view' => 'add' ] ) ) . '">' . esc_html__( 'Create your first menu', 'tpw-core' ) . '</a></p>';
+			echo '<p>' . esc_html__( 'No dining menus have been created yet.', 'tpw-ilungu-club' ) . '</p>';
+			echo '<p><a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::page_url( $base_url, [ 'view' => 'add' ] ) ) . '">' . esc_html__( 'Create your first menu', 'tpw-ilungu-club' ) . '</a></p>';
 			echo '</div>';
 		}
 		echo '</div>';
@@ -439,19 +439,19 @@ class TPW_Menus_Frontend_Admin {
 		$is_edit    = $menu_id > 0;
 		$page_url   = self::page_url( $base_url );
 		$form_url   = self::admin_post_url();
-		$page_title = $is_edit ? __( 'Edit Dining Menu', 'tpw-core' ) : __( 'Add Dining Menu', 'tpw-core' );
+		$page_title = $is_edit ? __( 'Edit Dining Menu', 'tpw-ilungu-club' ) : __( 'Add Dining Menu', 'tpw-ilungu-club' );
 		$page_text  = $is_edit
-			? __( 'Update the menu details used by your dining-enabled events.', 'tpw-core' )
-			: __( 'Create a dining menu with the core details needed for event setup.', 'tpw-core' );
+			? __( 'Update the menu details used by your dining-enabled events.', 'tpw-ilungu-club' )
+			: __( 'Create a dining menu with the core details needed for event setup.', 'tpw-ilungu-club' );
 
 		if ( $is_edit ) {
 			$menu = TPW_Menus_Manager::get_menu_by_id( $menu_id );
 			if ( ! $menu ) {
 				self::render_message_card(
-					__( 'Dining menu not found.', 'tpw-core' ),
-					__( 'The selected menu could not be loaded.', 'tpw-core' ),
+					__( 'Dining menu not found.', 'tpw-ilungu-club' ),
+					__( 'The selected menu could not be loaded.', 'tpw-ilungu-club' ),
 					$page_url,
-					__( 'Back to Menus', 'tpw-core' )
+					__( 'Back to Menus', 'tpw-ilungu-club' )
 				);
 				return;
 			}
@@ -467,7 +467,7 @@ class TPW_Menus_Frontend_Admin {
 		echo '<h3>' . esc_html( $page_title ) . '</h3>';
 		echo '<p class="description">' . esc_html( $page_text ) . '</p>';
 		echo '</div>';
-		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Back to Menus', 'tpw-core' ) . '</a>';
+		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Back to Menus', 'tpw-ilungu-club' ) . '</a>';
 		echo '</div>';
 
 		echo '<div class="flexievent-card">';
@@ -479,24 +479,24 @@ class TPW_Menus_Frontend_Admin {
 
 		echo '<div class="flexievent-section">';
 		echo '<div class="flexievent-section-header">';
-		echo '<h4 class="flexievent-section-title">' . esc_html__( 'Menu Details', 'tpw-core' ) . '</h4>';
-		echo '<p class="flexievent-section-text">' . esc_html__( 'These fields stay aligned with the existing backend menu records.', 'tpw-core' ) . '</p>';
+		echo '<h4 class="flexievent-section-title">' . esc_html__( 'Menu Details', 'tpw-ilungu-club' ) . '</h4>';
+		echo '<p class="flexievent-section-text">' . esc_html__( 'These fields stay aligned with the existing backend menu records.', 'tpw-ilungu-club' ) . '</p>';
 		echo '</div>';
 		echo '<div class="flexievent-grid">';
 		echo '<div class="flexievent-field full-width">';
-		echo '<label for="tpw-fe-menu-name">' . esc_html__( 'Menu Name', 'tpw-core' ) . '</label>';
+		echo '<label for="tpw-fe-menu-name">' . esc_html__( 'Menu Name', 'tpw-ilungu-club' ) . '</label>';
 		echo '<input type="text" id="tpw-fe-menu-name" name="menu_name" value="' . esc_attr( $name ) . '" required />';
 		echo '</div>';
 		echo '<div class="flexievent-field full-width">';
-		echo '<label for="tpw-fe-menu-description">' . esc_html__( 'Description', 'tpw-core' ) . '</label>';
+		echo '<label for="tpw-fe-menu-description">' . esc_html__( 'Description', 'tpw-ilungu-club' ) . '</label>';
 		echo '<textarea id="tpw-fe-menu-description" name="menu_description">' . esc_textarea( $description ) . '</textarea>';
 		echo '</div>';
 		echo '<div class="flexievent-field">';
-		echo '<label for="tpw-fe-number-of-courses">' . esc_html__( 'Number of Courses', 'tpw-core' ) . '</label>';
+		echo '<label for="tpw-fe-number-of-courses">' . esc_html__( 'Number of Courses', 'tpw-ilungu-club' ) . '</label>';
 		echo '<input type="number" id="tpw-fe-number-of-courses" name="number_of_courses" min="1" max="30" step="1" value="' . esc_attr( (string) $number_of_courses ) . '" required />';
 		echo '</div>';
 		echo '<div class="flexievent-field">';
-		echo '<label for="tpw-fe-menu-price">' . esc_html__( 'Price', 'tpw-core' ) . '</label>';
+		echo '<label for="tpw-fe-menu-price">' . esc_html__( 'Price', 'tpw-ilungu-club' ) . '</label>';
 		echo '<input type="number" id="tpw-fe-menu-price" name="price" min="0" step="0.01" value="' . esc_attr( $price ) . '" required />';
 		echo '</div>';
 		echo '</div>';
@@ -504,11 +504,11 @@ class TPW_Menus_Frontend_Admin {
 
 		echo '<div class="flexievent-actions">';
 		echo '<div class="flexievent-primary-actions">';
-		echo '<button type="submit" class="tpw-btn tpw-btn-primary">' . esc_html( $is_edit ? __( 'Save Changes', 'tpw-core' ) : __( 'Create Menu', 'tpw-core' ) ) . '</button>';
+		echo '<button type="submit" class="tpw-btn tpw-btn-primary">' . esc_html( $is_edit ? __( 'Save Changes', 'tpw-ilungu-club' ) : __( 'Create Menu', 'tpw-ilungu-club' ) ) . '</button>';
 		if ( $is_edit ) {
-			echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( self::course_choices_url( $base_url, (int) $menu_id ) ) . '">' . esc_html__( 'Courses', 'tpw-core' ) . '</a>';
+			echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( self::course_choices_url( $base_url, (int) $menu_id ) ) . '">' . esc_html__( 'Courses', 'tpw-ilungu-club' ) . '</a>';
 		}
-		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Cancel', 'tpw-core' ) . '</a>';
+		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Cancel', 'tpw-ilungu-club' ) . '</a>';
 		echo '</div>';
 		echo '</div>';
 
@@ -522,22 +522,22 @@ class TPW_Menus_Frontend_Admin {
 
 		if ( ! $menu ) {
 			self::render_message_card(
-				__( 'Dining menu not found.', 'tpw-core' ),
-				__( 'Select a valid dining menu to manage its courses and dishes.', 'tpw-core' ),
+				__( 'Dining menu not found.', 'tpw-ilungu-club' ),
+				__( 'Select a valid dining menu to manage its courses and dishes.', 'tpw-ilungu-club' ),
 				$page_url,
-				__( 'Back to Menus', 'tpw-core' )
+				__( 'Back to Menus', 'tpw-ilungu-club' )
 			);
 			return;
 		}
 
 		echo '<div class="flexievent-toolbar">';
 		echo '<div>';
-		echo '<h3>' . esc_html__( 'Course Options', 'tpw-core' ) . '</h3>';
-		echo '<p class="description">' . esc_html( sprintf( __( 'Manage course names and dish choices for %s.', 'tpw-core' ), self::normalise_text( $menu->name ) ) ) . '</p>';
+		echo '<h3>' . esc_html__( 'Course Options', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p class="description">' . esc_html( sprintf( __( 'Manage course names and dish choices for %s.', 'tpw-ilungu-club' ), self::normalise_text( $menu->name ) ) ) . '</p>';
 		echo '</div>';
 		echo '<div class="flexievent-primary-actions">';
-		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( self::page_url( $base_url, [ 'view' => 'edit', 'menu_id' => (int) $menu->id ] ) ) . '">' . esc_html__( 'Edit Menu', 'tpw-core' ) . '</a>';
-		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Back to Menus', 'tpw-core' ) . '</a>';
+		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( self::page_url( $base_url, [ 'view' => 'edit', 'menu_id' => (int) $menu->id ] ) ) . '">' . esc_html__( 'Edit Menu', 'tpw-ilungu-club' ) . '</a>';
+		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Back to Menus', 'tpw-ilungu-club' ) . '</a>';
 		echo '</div>';
 		echo '</div>';
 
@@ -545,15 +545,15 @@ class TPW_Menus_Frontend_Admin {
 		echo '<div class="flexievent-section">';
 		echo '<div class="flexievent-section-header">';
 		echo '<h4 class="flexievent-section-title">' . esc_html( self::normalise_text( $menu->name ) ) . '</h4>';
-		echo '<p class="flexievent-section-text">' . esc_html( sprintf( __( '%1$d courses configured. Menu price: %2$s.', 'tpw-core' ), (int) $menu->number_of_courses, '£' . number_format( (float) $menu->price, 2 ) ) ) . '</p>';
+		echo '<p class="flexievent-section-text">' . esc_html( sprintf( __( '%1$d courses configured. Menu price: %2$s.', 'tpw-ilungu-club' ), (int) $menu->number_of_courses, '£' . number_format( (float) $menu->price, 2 ) ) ) . '</p>';
 		echo '</div>';
 		echo '<div class="flexievent-grid">';
 		echo '<div class="flexievent-field">';
-		echo '<label>' . esc_html__( 'Description', 'tpw-core' ) . '</label>';
+		echo '<label>' . esc_html__( 'Description', 'tpw-ilungu-club' ) . '</label>';
 		echo '<p>' . esc_html( self::normalise_text( $menu->description ) ) . '</p>';
 		echo '</div>';
 		echo '<div class="flexievent-field">';
-		echo '<label>' . esc_html__( 'Number of Courses', 'tpw-core' ) . '</label>';
+		echo '<label>' . esc_html__( 'Number of Courses', 'tpw-ilungu-club' ) . '</label>';
 		echo '<p>' . esc_html( (string) $menu->number_of_courses ) . '</p>';
 		echo '</div>';
 		echo '</div>';
@@ -568,7 +568,7 @@ class TPW_Menus_Frontend_Admin {
 			echo '<div class="flexievent-section">';
 			echo '<div class="flexievent-section-header">';
 			echo '<h4 class="flexievent-section-title">' . esc_html( $course_title ) . '</h4>';
-			echo '<p class="flexievent-section-text">' . esc_html( sprintf( _n( '%d dish available.', '%d dishes available.', count( $choices ), 'tpw-core' ), count( $choices ) ) ) . '</p>';
+			echo '<p class="flexievent-section-text">' . esc_html( sprintf( _n( '%d dish available.', '%d dishes available.', count( $choices ), 'tpw-ilungu-club' ), count( $choices ) ) ) . '</p>';
 			echo '</div>';
 
 			echo '<form method="post" action="' . esc_url( self::admin_post_url() ) . '">';
@@ -579,14 +579,14 @@ class TPW_Menus_Frontend_Admin {
 			wp_nonce_field( self::RENAME_COURSE_ACTION . '_' . (int) $menu->id . '_' . (int) $course_number, 'tpw_fe_rename_course_nonce' );
 			echo '<div class="flexievent-grid">';
 			echo '<div class="flexievent-field full-width">';
-			echo '<label for="tpw-fe-course-name-' . esc_attr( (string) $course_number ) . '">' . esc_html__( 'Course Name', 'tpw-core' ) . '</label>';
+			echo '<label for="tpw-fe-course-name-' . esc_attr( (string) $course_number ) . '">' . esc_html__( 'Course Name', 'tpw-ilungu-club' ) . '</label>';
 			echo '<input type="text" id="tpw-fe-course-name-' . esc_attr( (string) $course_number ) . '" name="course_name" value="' . esc_attr( $course_title ) . '" />';
 			echo '</div>';
 			echo '</div>';
 			echo '<div class="flexievent-actions">';
 			echo '<div class="flexievent-primary-actions">';
-			echo '<button type="submit" class="tpw-btn tpw-btn-secondary">' . esc_html__( 'Update Course Name', 'tpw-core' ) . '</button>';
-			echo '<a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::course_choice_url( $base_url, (int) $menu->id, $course_number ) ) . '">' . esc_html__( 'Add Dish', 'tpw-core' ) . '</a>';
+			echo '<button type="submit" class="tpw-btn tpw-btn-secondary">' . esc_html__( 'Update Course Name', 'tpw-ilungu-club' ) . '</button>';
+			echo '<a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::course_choice_url( $base_url, (int) $menu->id, $course_number ) ) . '">' . esc_html__( 'Add Dish', 'tpw-ilungu-club' ) . '</a>';
 			echo '</div>';
 			echo '</div>';
 			echo '</form>';
@@ -594,27 +594,27 @@ class TPW_Menus_Frontend_Admin {
 			if ( ! empty( $choices ) ) {
 				echo '<div class="flexievent-table-wrap">';
 				echo '<table class="flexievent-table">';
-				echo '<thead><tr><th>' . esc_html__( 'Dish', 'tpw-core' ) . '</th><th>' . esc_html__( 'Description', 'tpw-core' ) . '</th><th>' . esc_html__( 'Extra Cost', 'tpw-core' ) . '</th><th>' . esc_html__( 'Actions', 'tpw-core' ) . '</th></tr></thead>';
+				echo '<thead><tr><th>' . esc_html__( 'Dish', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Description', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Extra Cost', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Actions', 'tpw-ilungu-club' ) . '</th></tr></thead>';
 				echo '<tbody>';
 				foreach ( $choices as $choice ) {
 					$edit_url = self::course_choice_url( $base_url, (int) $menu->id, $course_number, (int) $choice->id );
 					echo '<tr>';
-					echo '<td data-label="' . esc_attr__( 'Dish', 'tpw-core' ) . '"><strong>' . esc_html( self::normalise_text( $choice->label ) ) . '</strong></td>';
-					echo '<td data-label="' . esc_attr__( 'Description', 'tpw-core' ) . '">' . esc_html( self::normalise_text( $choice->description ) ) . '</td>';
-					echo '<td data-label="' . esc_attr__( 'Extra Cost', 'tpw-core' ) . '">' . esc_html( self::format_money( (float) $choice->extra_cost ) ) . '</td>';
-					echo '<td data-label="' . esc_attr__( 'Actions', 'tpw-core' ) . '">';
+					echo '<td data-label="' . esc_attr__( 'Dish', 'tpw-ilungu-club' ) . '"><strong>' . esc_html( self::normalise_text( $choice->label ) ) . '</strong></td>';
+					echo '<td data-label="' . esc_attr__( 'Description', 'tpw-ilungu-club' ) . '">' . esc_html( self::normalise_text( $choice->description ) ) . '</td>';
+					echo '<td data-label="' . esc_attr__( 'Extra Cost', 'tpw-ilungu-club' ) . '">' . esc_html( self::format_money( (float) $choice->extra_cost ) ) . '</td>';
+					echo '<td data-label="' . esc_attr__( 'Actions', 'tpw-ilungu-club' ) . '">';
 					echo '<div class="flexievent-actions">';
 					echo '<div class="flexievent-primary-actions">';
-					echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit', 'tpw-core' ) . '</a>';
+					echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit', 'tpw-ilungu-club' ) . '</a>';
 					echo '</div>';
 					echo '<div class="flexievent-danger-actions">';
-					echo '<form method="post" action="' . esc_url( self::admin_post_url() ) . '" onsubmit="return window.confirm(' . esc_attr( wp_json_encode( __( 'Delete this course choice?', 'tpw-core' ) ) ) . ');">';
+					echo '<form method="post" action="' . esc_url( self::admin_post_url() ) . '" onsubmit="return window.confirm(' . esc_attr( wp_json_encode( __( 'Delete this course choice?', 'tpw-ilungu-club' ) ) ) . ');">';
 					echo '<input type="hidden" name="action" value="' . esc_attr( self::DELETE_CHOICE_ACTION ) . '" />';
 					echo '<input type="hidden" name="base_url" value="' . esc_attr( $base_url ) . '" />';
 					echo '<input type="hidden" name="menu_id" value="' . esc_attr( (int) $menu->id ) . '" />';
 					echo '<input type="hidden" name="choice_id" value="' . esc_attr( (int) $choice->id ) . '" />';
 					wp_nonce_field( self::DELETE_CHOICE_ACTION . '_' . (int) $choice->id, 'tpw_fe_delete_course_choice_nonce' );
-					echo '<button type="submit" class="tpw-btn tpw-btn-secondary flexievent-danger-button">' . esc_html__( 'Delete', 'tpw-core' ) . '</button>';
+					echo '<button type="submit" class="tpw-btn tpw-btn-secondary flexievent-danger-button">' . esc_html__( 'Delete', 'tpw-ilungu-club' ) . '</button>';
 					echo '</form>';
 					echo '</div>';
 					echo '</div>';
@@ -626,8 +626,8 @@ class TPW_Menus_Frontend_Admin {
 				echo '</div>';
 			} else {
 				echo '<div class="flexievent-empty-state">';
-				echo '<p>' . esc_html__( 'No dishes have been added for this course yet.', 'tpw-core' ) . '</p>';
-				echo '<p><a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::course_choice_url( $base_url, (int) $menu->id, $course_number ) ) . '">' . esc_html__( 'Add the first dish', 'tpw-core' ) . '</a></p>';
+				echo '<p>' . esc_html__( 'No dishes have been added for this course yet.', 'tpw-ilungu-club' ) . '</p>';
+				echo '<p><a class="tpw-btn tpw-btn-primary" href="' . esc_url( self::course_choice_url( $base_url, (int) $menu->id, $course_number ) ) . '">' . esc_html__( 'Add the first dish', 'tpw-ilungu-club' ) . '</a></p>';
 				echo '</div>';
 			}
 
@@ -642,20 +642,20 @@ class TPW_Menus_Frontend_Admin {
 
 		if ( ! $menu ) {
 			self::render_message_card(
-				__( 'Dining menu not found.', 'tpw-core' ),
-				__( 'Select a valid dining menu to manage course choices.', 'tpw-core' ),
+				__( 'Dining menu not found.', 'tpw-ilungu-club' ),
+				__( 'Select a valid dining menu to manage course choices.', 'tpw-ilungu-club' ),
 				self::page_url( $base_url ),
-				__( 'Back to Menus', 'tpw-core' )
+				__( 'Back to Menus', 'tpw-ilungu-club' )
 			);
 			return;
 		}
 
 		if ( ! self::is_valid_course_number( $menu, $course_number ) ) {
 			self::render_message_card(
-				__( 'Course not found.', 'tpw-core' ),
-				__( 'The selected course is not available on this menu.', 'tpw-core' ),
+				__( 'Course not found.', 'tpw-ilungu-club' ),
+				__( 'The selected course is not available on this menu.', 'tpw-ilungu-club' ),
 				$page_url,
-				__( 'Back to Course Options', 'tpw-core' )
+				__( 'Back to Course Options', 'tpw-ilungu-club' )
 			);
 			return;
 		}
@@ -663,20 +663,20 @@ class TPW_Menus_Frontend_Admin {
 		$choice   = null;
 		$is_edit  = $choice_id > 0;
 		$form_url = self::admin_post_url();
-		$title    = $is_edit ? __( 'Edit Course Choice', 'tpw-core' ) : __( 'Add Course Choice', 'tpw-core' );
+		$title    = $is_edit ? __( 'Edit Course Choice', 'tpw-ilungu-club' ) : __( 'Add Course Choice', 'tpw-ilungu-club' );
 		$course   = self::get_course_title( (int) $menu->id, $course_number );
 		$subtitle = $is_edit
-			? sprintf( __( 'Update a dish option for %1$s on %2$s.', 'tpw-core' ), $course, self::normalise_text( $menu->name ) )
-			: sprintf( __( 'Add a new dish option for %1$s on %2$s.', 'tpw-core' ), $course, self::normalise_text( $menu->name ) );
+			? sprintf( __( 'Update a dish option for %1$s on %2$s.', 'tpw-ilungu-club' ), $course, self::normalise_text( $menu->name ) )
+			: sprintf( __( 'Add a new dish option for %1$s on %2$s.', 'tpw-ilungu-club' ), $course, self::normalise_text( $menu->name ) );
 
 		if ( $is_edit ) {
 			$choice = TPW_Course_Choices_Manager::get_choice_by_id( $choice_id );
 			if ( ! $choice || (int) $choice->menu_id !== (int) $menu->id || (int) $choice->course_number !== $course_number ) {
 				self::render_message_card(
-					__( 'Course choice not found.', 'tpw-core' ),
-					__( 'The selected dish could not be loaded for this course.', 'tpw-core' ),
+					__( 'Course choice not found.', 'tpw-ilungu-club' ),
+					__( 'The selected dish could not be loaded for this course.', 'tpw-ilungu-club' ),
 					$page_url,
-					__( 'Back to Course Options', 'tpw-core' )
+					__( 'Back to Course Options', 'tpw-ilungu-club' )
 				);
 				return;
 			}
@@ -691,7 +691,7 @@ class TPW_Menus_Frontend_Admin {
 		echo '<h3>' . esc_html( $title ) . '</h3>';
 		echo '<p class="description">' . esc_html( $subtitle ) . '</p>';
 		echo '</div>';
-		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Back to Course Options', 'tpw-core' ) . '</a>';
+		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Back to Course Options', 'tpw-ilungu-club' ) . '</a>';
 		echo '</div>';
 
 		echo '<div class="flexievent-card">';
@@ -705,20 +705,20 @@ class TPW_Menus_Frontend_Admin {
 
 		echo '<div class="flexievent-section">';
 		echo '<div class="flexievent-section-header">';
-		echo '<h4 class="flexievent-section-title">' . esc_html__( 'Dish Details', 'tpw-core' ) . '</h4>';
-		echo '<p class="flexievent-section-text">' . esc_html( sprintf( __( 'This choice belongs to %1$s on %2$s.', 'tpw-core' ), $course, self::normalise_text( $menu->name ) ) ) . '</p>';
+		echo '<h4 class="flexievent-section-title">' . esc_html__( 'Dish Details', 'tpw-ilungu-club' ) . '</h4>';
+		echo '<p class="flexievent-section-text">' . esc_html( sprintf( __( 'This choice belongs to %1$s on %2$s.', 'tpw-ilungu-club' ), $course, self::normalise_text( $menu->name ) ) ) . '</p>';
 		echo '</div>';
 		echo '<div class="flexievent-grid">';
 		echo '<div class="flexievent-field full-width">';
-		echo '<label for="tpw-fe-choice-label">' . esc_html__( 'Dish Name', 'tpw-core' ) . '</label>';
+		echo '<label for="tpw-fe-choice-label">' . esc_html__( 'Dish Name', 'tpw-ilungu-club' ) . '</label>';
 		echo '<input type="text" id="tpw-fe-choice-label" name="label" value="' . esc_attr( $label ) . '" required />';
 		echo '</div>';
 		echo '<div class="flexievent-field full-width">';
-		echo '<label for="tpw-fe-choice-description">' . esc_html__( 'Dish Description', 'tpw-core' ) . '</label>';
+		echo '<label for="tpw-fe-choice-description">' . esc_html__( 'Dish Description', 'tpw-ilungu-club' ) . '</label>';
 		echo '<textarea id="tpw-fe-choice-description" name="description" rows="4">' . esc_textarea( $description ) . '</textarea>';
 		echo '</div>';
 		echo '<div class="flexievent-field">';
-		echo '<label for="tpw-fe-choice-extra-cost">' . esc_html__( 'Extra Cost', 'tpw-core' ) . '</label>';
+		echo '<label for="tpw-fe-choice-extra-cost">' . esc_html__( 'Extra Cost', 'tpw-ilungu-club' ) . '</label>';
 		echo '<input type="number" id="tpw-fe-choice-extra-cost" name="extra_cost" min="0" step="0.01" value="' . esc_attr( $extra_cost ) . '" />';
 		echo '</div>';
 		echo '</div>';
@@ -726,18 +726,18 @@ class TPW_Menus_Frontend_Admin {
 
 		echo '<div class="flexievent-actions">';
 		echo '<div class="flexievent-primary-actions">';
-		echo '<button type="submit" class="tpw-btn tpw-btn-primary">' . esc_html( $is_edit ? __( 'Save Dish', 'tpw-core' ) : __( 'Create Dish', 'tpw-core' ) ) . '</button>';
-		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Cancel', 'tpw-core' ) . '</a>';
+		echo '<button type="submit" class="tpw-btn tpw-btn-primary">' . esc_html( $is_edit ? __( 'Save Dish', 'tpw-ilungu-club' ) : __( 'Create Dish', 'tpw-ilungu-club' ) ) . '</button>';
+		echo '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $page_url ) . '">' . esc_html__( 'Cancel', 'tpw-ilungu-club' ) . '</a>';
 		echo '</div>';
 		if ( $is_edit ) {
 			echo '<div class="flexievent-danger-actions">';
-			echo '<form method="post" action="' . esc_url( self::admin_post_url() ) . '" onsubmit="return window.confirm(' . esc_attr( wp_json_encode( __( 'Delete this course choice?', 'tpw-core' ) ) ) . ');">';
+			echo '<form method="post" action="' . esc_url( self::admin_post_url() ) . '" onsubmit="return window.confirm(' . esc_attr( wp_json_encode( __( 'Delete this course choice?', 'tpw-ilungu-club' ) ) ) . ');">';
 			echo '<input type="hidden" name="action" value="' . esc_attr( self::DELETE_CHOICE_ACTION ) . '" />';
 			echo '<input type="hidden" name="base_url" value="' . esc_attr( $base_url ) . '" />';
 			echo '<input type="hidden" name="menu_id" value="' . esc_attr( (int) $menu->id ) . '" />';
 			echo '<input type="hidden" name="choice_id" value="' . esc_attr( (int) $choice_id ) . '" />';
 			wp_nonce_field( self::DELETE_CHOICE_ACTION . '_' . (int) $choice_id, 'tpw_fe_delete_course_choice_nonce' );
-			echo '<button type="submit" class="tpw-btn tpw-btn-secondary flexievent-danger-button">' . esc_html__( 'Delete Dish', 'tpw-core' ) . '</button>';
+			echo '<button type="submit" class="tpw-btn tpw-btn-secondary flexievent-danger-button">' . esc_html__( 'Delete Dish', 'tpw-ilungu-club' ) . '</button>';
 			echo '</form>';
 			echo '</div>';
 		}
@@ -763,7 +763,7 @@ class TPW_Menus_Frontend_Admin {
 		$course_name = TPW_Menu_Courses_Manager::get_course_name( $menu_id, $course_number );
 
 		if ( '' === trim( (string) $course_name ) ) {
-			return sprintf( __( 'Course %d', 'tpw-core' ), (int) $course_number );
+			return sprintf( __( 'Course %d', 'tpw-ilungu-club' ), (int) $course_number );
 		}
 
 		return self::normalise_text( $course_name );

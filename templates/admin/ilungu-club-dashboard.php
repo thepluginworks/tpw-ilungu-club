@@ -7,17 +7,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="ilungu-club-dashboard__brand-row tpw-flexiclub-dashboard__brand-row">
 		<div class="ilungu-club-dashboard__brand tpw-flexiclub-dashboard__brand">
 			<?php if ( ! empty( $dashboard['logo_url'] ) ) : ?>
-				<img class="ilungu-club-dashboard__logo tpw-flexiclub-dashboard__logo" src="<?php echo esc_url( $dashboard['logo_url'] ); ?>" alt="<?php esc_attr_e( 'iLungu™ Club', 'tpw-core' ); ?>" />
+				<img class="ilungu-club-dashboard__logo tpw-flexiclub-dashboard__logo" src="<?php echo esc_url( $dashboard['logo_url'] ); ?>" alt="<?php esc_attr_e( 'iLungu™ Club', 'tpw-ilungu-club' ); ?>" />
 			<?php else : ?>
-				<h1><?php esc_html_e( 'iLungu™ Club', 'tpw-core' ); ?></h1>
+				<h1><?php esc_html_e( 'iLungu™ Club', 'tpw-ilungu-club' ); ?></h1>
 			<?php endif; ?>
 			<div class="ilungu-club-dashboard__brand-copy tpw-flexiclub-dashboard__brand-copy">
-				<p class="ilungu-club-dashboard__tagline tpw-flexiclub-dashboard__tagline"><?php esc_html_e( 'Your club. Your members. Your community.', 'tpw-core' ); ?></p>
+				<p class="ilungu-club-dashboard__tagline tpw-flexiclub-dashboard__tagline"><?php esc_html_e( 'Your club. Your members. Your community.', 'tpw-ilungu-club' ); ?></p>
 			</div>
 		</div>
 		<?php if ( ! empty( $dashboard['version'] ) ) : ?>
 			<div class="ilungu-club-dashboard__version tpw-flexiclub-dashboard__version">
-				<span><?php esc_html_e( 'Version', 'tpw-core' ); ?></span>
+				<span><?php esc_html_e( 'Version', 'tpw-ilungu-club' ); ?></span>
 				<strong><?php echo esc_html( $dashboard['version'] ); ?></strong>
 			</div>
 		<?php endif; ?>
@@ -29,12 +29,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php
 				printf(
 					/* translators: %s: current user display name */
-					esc_html__( 'Welcome back, %s', 'tpw-core' ),
+					esc_html__( 'Welcome back, %s', 'tpw-ilungu-club' ),
 					esc_html( $dashboard['welcome_name'] )
 				);
 				?>
 			</h2>
-			<p><?php esc_html_e( 'Here’s what’s happening across your club operations today.', 'tpw-core' ); ?></p>
+			<p><?php esc_html_e( 'Here’s what’s happening across your club operations today.', 'tpw-ilungu-club' ); ?></p>
 		</div>
 
 		<div class="ilungu-club-dashboard__summary-grid tpw-flexiclub-dashboard__summary-grid">
@@ -64,8 +64,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<section id="ilungu-club-checklist" class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card ilungu-club-dashboard__section--checklist tpw-flexiclub-dashboard__section--checklist ilungu-club-dashboard__section--checklist-full tpw-flexiclub-dashboard__section--checklist-full">
 				<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head">
 					<div>
-						<h2><?php esc_html_e( 'Getting Started', 'tpw-core' ); ?></h2>
-						<p><?php esc_html_e( 'A simple checklist for launching your club workspace.', 'tpw-core' ); ?></p>
+						<h2><?php esc_html_e( 'Getting Started', 'tpw-ilungu-club' ); ?></h2>
+						<p><?php esc_html_e( 'A simple checklist for launching your club workspace.', 'tpw-ilungu-club' ); ?></p>
 					</div>
 				</div>
 
@@ -75,12 +75,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<strong><?php echo esc_html( $dashboard['checklist_done'] ); ?>/<?php echo esc_html( $dashboard['checklist_total'] ); ?></strong>
 						</div>
 						<div class="ilungu-club-dashboard__progress-copy tpw-flexiclub-dashboard__progress-copy">
-							<h3><?php esc_html_e( 'Setup Progress', 'tpw-core' ); ?></h3>
+							<h3><?php esc_html_e( 'Setup Progress', 'tpw-ilungu-club' ); ?></h3>
 							<p>
 								<?php
 								echo ! empty( $dashboard['checklist_complete'] )
-									? esc_html__( 'Everything is in place.', 'tpw-core' )
-									: esc_html__( 'Almost there.', 'tpw-core' );
+									? esc_html__( 'Everything is in place.', 'tpw-ilungu-club' )
+									: esc_html__( 'Almost there.', 'tpw-ilungu-club' );
 								?>
 							</p>
 						</div>
@@ -97,20 +97,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<div class="ilungu-club-dashboard__checklist-title tpw-flexiclub-dashboard__checklist-title">
 											<?php echo esc_html( $item['label'] ); ?>
 											<?php if ( ! empty( $item['optional'] ) ) : ?>
-												<span class="ilungu-club-dashboard__optional tpw-flexiclub-dashboard__optional"><?php esc_html_e( 'Optional', 'tpw-core' ); ?></span>
+												<span class="ilungu-club-dashboard__optional tpw-flexiclub-dashboard__optional"><?php esc_html_e( 'Optional', 'tpw-ilungu-club' ); ?></span>
 											<?php endif; ?>
 										</div>
 										<p><?php echo esc_html( $item['description'] ); ?></p>
 									</div>
-									<a href="<?php echo esc_url( $item['url'] ); ?>"><?php esc_html_e( 'Open', 'tpw-core' ); ?></a>
+									<a href="<?php echo esc_url( $item['url'] ); ?>"><?php esc_html_e( 'Open', 'tpw-ilungu-club' ); ?></a>
 								</div>
 							<?php endforeach; ?>
 						</div>
 
 						<div class="ilungu-club-dashboard__checklist-actions tpw-flexiclub-dashboard__checklist-actions">
 							<?php if ( ! empty( $dashboard['checklist_complete'] ) ) : ?>
-								<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard['collapse_checklist_url'] ); ?>"><?php esc_html_e( 'Collapse', 'tpw-core' ); ?></a>
-								<a class="ilungu-club-dashboard__muted-link tpw-flexiclub-dashboard__muted-link" href="<?php echo esc_url( $dashboard['dismiss_setup_url'] ); ?>"><?php esc_html_e( 'Dismiss', 'tpw-core' ); ?></a>
+								<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard['collapse_checklist_url'] ); ?>"><?php esc_html_e( 'Collapse', 'tpw-ilungu-club' ); ?></a>
+								<a class="ilungu-club-dashboard__muted-link tpw-flexiclub-dashboard__muted-link" href="<?php echo esc_url( $dashboard['dismiss_setup_url'] ); ?>"><?php esc_html_e( 'Dismiss', 'tpw-ilungu-club' ); ?></a>
 							<?php else : ?>
 								<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard['checklist_primary_action']['url'] ); ?>"><?php echo esc_html( $dashboard['checklist_primary_action']['label'] ); ?></a>
 							<?php endif; ?>
@@ -119,14 +119,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 			</section>
 		<?php elseif ( ! empty( $dashboard['show_setup_banner'] ) ) : ?>
-			<section class="ilungu-club-dashboard__setup-banner tpw-flexiclub-dashboard__setup-banner tpw-card" aria-label="<?php esc_attr_e( 'Setup complete', 'tpw-core' ); ?>">
+			<section class="ilungu-club-dashboard__setup-banner tpw-flexiclub-dashboard__setup-banner tpw-card" aria-label="<?php esc_attr_e( 'Setup complete', 'tpw-ilungu-club' ); ?>">
 				<div class="ilungu-club-dashboard__setup-banner-copy tpw-flexiclub-dashboard__setup-banner-copy">
-					<h2><?php esc_html_e( 'Setup complete', 'tpw-core' ); ?></h2>
-					<p><?php esc_html_e( 'Your current onboarding checklist is complete.', 'tpw-core' ); ?></p>
+					<h2><?php esc_html_e( 'Setup complete', 'tpw-ilungu-club' ); ?></h2>
+					<p><?php esc_html_e( 'Your current onboarding checklist is complete.', 'tpw-ilungu-club' ); ?></p>
 				</div>
 				<div class="ilungu-club-dashboard__setup-banner-actions tpw-flexiclub-dashboard__setup-banner-actions">
-					<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard['checklist_url'] ); ?>"><?php esc_html_e( 'View checklist', 'tpw-core' ); ?></a>
-					<a class="ilungu-club-dashboard__muted-link tpw-flexiclub-dashboard__muted-link" href="<?php echo esc_url( $dashboard['dismiss_setup_url'] ); ?>"><?php esc_html_e( 'Dismiss', 'tpw-core' ); ?></a>
+					<a class="tpw-btn tpw-btn-outline" href="<?php echo esc_url( $dashboard['checklist_url'] ); ?>"><?php esc_html_e( 'View checklist', 'tpw-ilungu-club' ); ?></a>
+					<a class="ilungu-club-dashboard__muted-link tpw-flexiclub-dashboard__muted-link" href="<?php echo esc_url( $dashboard['dismiss_setup_url'] ); ?>"><?php esc_html_e( 'Dismiss', 'tpw-ilungu-club' ); ?></a>
 				</div>
 			</section>
 		<?php endif; ?>
@@ -134,8 +134,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<section class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card">
 			<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head">
 				<div>
-					<h2><?php esc_html_e( 'Club Overview', 'tpw-core' ); ?></h2>
-					<p><?php esc_html_e( 'A snapshot of your key management areas.', 'tpw-core' ); ?></p>
+					<h2><?php esc_html_e( 'Club Overview', 'tpw-ilungu-club' ); ?></h2>
+					<p><?php esc_html_e( 'A snapshot of your key management areas.', 'tpw-ilungu-club' ); ?></p>
 				</div>
 			</div>
 
@@ -175,8 +175,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<section id="ilungu-club-extend" class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card">
 			<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head">
 				<div>
-									<h2><?php esc_html_e( 'Extend iLungu Club', 'tpw-core' ); ?></h2>
-					<p><?php esc_html_e( 'Add powerful add-ons to grow your club.', 'tpw-core' ); ?></p>
+									<h2><?php esc_html_e( 'Extend iLungu Club', 'tpw-ilungu-club' ); ?></h2>
+					<p><?php esc_html_e( 'Add powerful add-ons to grow your club.', 'tpw-ilungu-club' ); ?></p>
 				</div>
 			</div>
 
@@ -216,7 +216,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<section class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card">
 			<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head">
 				<div>
-					<h2><?php esc_html_e( 'Quick Actions', 'tpw-core' ); ?></h2>
+					<h2><?php esc_html_e( 'Quick Actions', 'tpw-ilungu-club' ); ?></h2>
 				</div>
 			</div>
 
@@ -240,8 +240,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<section class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card ilungu-club-dashboard__section--activity tpw-flexiclub-dashboard__section--activity">
 			<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head">
 				<div>
-					<h2><?php esc_html_e( 'Recent Activity', 'tpw-core' ); ?></h2>
-					<p><?php esc_html_e( 'Latest operational updates across members, notices, and logs.', 'tpw-core' ); ?></p>
+					<h2><?php esc_html_e( 'Recent Activity', 'tpw-ilungu-club' ); ?></h2>
+					<p><?php esc_html_e( 'Latest operational updates across members, notices, and logs.', 'tpw-ilungu-club' ); ?></p>
 				</div>
 			</div>
 
@@ -261,7 +261,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<section class="ilungu-club-dashboard__section tpw-flexiclub-dashboard__section tpw-card">
 			<div class="ilungu-club-dashboard__section-head tpw-flexiclub-dashboard__section-head">
 				<div>
-					<h2><?php esc_html_e( 'System Status', 'tpw-core' ); ?></h2>
+					<h2><?php esc_html_e( 'System Status', 'tpw-ilungu-club' ); ?></h2>
 				</div>
 			</div>
 

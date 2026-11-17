@@ -45,7 +45,7 @@ class TPW_Identity_Audit_Admin {
 			$tabs = array();
 		}
 
-		$tabs[ self::TAB_SLUG ] = __( 'Identity Audit', 'tpw-core' );
+		$tabs[ self::TAB_SLUG ] = __( 'Identity Audit', 'tpw-ilungu-club' );
 
 		return $tabs;
 	}
@@ -57,15 +57,15 @@ class TPW_Identity_Audit_Admin {
 	 */
 	public static function render_tab() {
 		if ( ! self::current_user_can_view() ) {
-			echo '<p>' . esc_html__( 'You do not have permission to view this page.', 'tpw-core' ) . '</p>';
+			echo '<p>' . esc_html__( 'You do not have permission to view this page.', 'tpw-ilungu-club' ) . '</p>';
 			return;
 		}
 
 		$report = self::build_report();
 
 		echo '<div class="tpw-identity-audit">';
-		echo '<h2>' . esc_html__( 'Identity Audit', 'tpw-core' ) . '</h2>';
-		echo '<p>' . esc_html__( 'Phase 1 safety tooling for the TPW identity architecture. This screen is read-only and reports current linkage, identity projection, role drift, and member status data without modifying any records.', 'tpw-core' ) . '</p>';
+		echo '<h2>' . esc_html__( 'Identity Audit', 'tpw-ilungu-club' ) . '</h2>';
+		echo '<p>' . esc_html__( 'Phase 1 safety tooling for the TPW identity architecture. This screen is read-only and reports current linkage, identity projection, role drift, and member status data without modifying any records.', 'tpw-ilungu-club' ) . '</p>';
 
 		if ( ! empty( $report['error'] ) ) {
 			echo '<div class="notice notice-warning inline"><p>' . esc_html( $report['error'] ) . '</p></div>';
@@ -73,7 +73,7 @@ class TPW_Identity_Audit_Admin {
 			return;
 		}
 
-		echo '<p><strong>' . esc_html__( 'Snapshot:', 'tpw-core' ) . '</strong> ' . esc_html( $report['snapshot_time'] ) . '</p>';
+		echo '<p><strong>' . esc_html__( 'Snapshot:', 'tpw-ilungu-club' ) . '</strong> ' . esc_html( $report['snapshot_time'] ) . '</p>';
 
 		self::render_linkage_section( $report );
 		self::render_weak_linkage_section( $report );
@@ -99,7 +99,7 @@ class TPW_Identity_Audit_Admin {
 
 		if ( $table_exists !== $member_table ) {
 			return array(
-				'error' => __( 'The tpw_members table is not available on this site, so the identity audit cannot run yet.', 'tpw-core' ),
+				'error' => __( 'The tpw_members table is not available on this site, so the identity audit cannot run yet.', 'tpw-ilungu-club' ),
 			);
 		}
 
@@ -338,7 +338,7 @@ class TPW_Identity_Audit_Admin {
 				if ( ! isset( $user_indexes['by_id'][ $user_id ] ) ) {
 					$rows[] = array(
 						'member' => $member,
-						'reason' => __( 'Linked user_id points to no existing WordPress user.', 'tpw-core' ),
+						'reason' => __( 'Linked user_id points to no existing WordPress user.', 'tpw-ilungu-club' ),
 					);
 				}
 				continue;
@@ -348,7 +348,7 @@ class TPW_Identity_Audit_Admin {
 			if ( empty( $weak_user_matches ) ) {
 				$rows[] = array(
 					'member' => $member,
-					'reason' => __( 'No linked user_id and no email or username fallback match.', 'tpw-core' ),
+					'reason' => __( 'No linked user_id and no email or username fallback match.', 'tpw-ilungu-club' ),
 				);
 			}
 		}
@@ -585,19 +585,19 @@ class TPW_Identity_Audit_Admin {
 		return array(
 			'summary'             => array(
 				array(
-					'label' => __( 'Users with identity role but no member record', 'tpw-core' ),
+					'label' => __( 'Users with identity role but no member record', 'tpw-ilungu-club' ),
 					'count' => count( $role_without_member ),
 				),
 				array(
-					'label' => __( 'Users with member record but no identity role', 'tpw-core' ),
+					'label' => __( 'Users with member record but no identity role', 'tpw-ilungu-club' ),
 					'count' => count( $member_without_role ),
 				),
 				array(
-					'label' => __( 'Member records linked to non-existent users', 'tpw-core' ),
+					'label' => __( 'Member records linked to non-existent users', 'tpw-ilungu-club' ),
 					'count' => count( $linked_missing_user ),
 				),
 				array(
-					'label' => __( 'Users resolving only through weak linkage fallback', 'tpw-core' ),
+					'label' => __( 'Users resolving only through weak linkage fallback', 'tpw-ilungu-club' ),
 					'count' => count( $weak_only ),
 				),
 			),
@@ -776,7 +776,7 @@ class TPW_Identity_Audit_Admin {
 		);
 
 		if ( '' === $name ) {
-			$name = __( '(Unnamed member)', 'tpw-core' );
+			$name = __( '(Unnamed member)', 'tpw-ilungu-club' );
 		}
 
 		$parts[] = sprintf( '%1$s (#%2$d)', $name, isset( $member->id ) ? (int) $member->id : 0 );
@@ -858,23 +858,23 @@ class TPW_Identity_Audit_Admin {
 		$linkage = $report['linkage'];
 
 		echo '<hr />';
-		echo '<h3>' . esc_html__( '1. User to Member Linkage Audit', 'tpw-core' ) . '</h3>';
-		echo '<p>' . esc_html__( 'This report shows how current WordPress users relate to tpw_members rows using direct user_id linkage first, then the existing weak fallback paths where no direct stored relationship exists.', 'tpw-core' ) . '</p>';
+		echo '<h3>' . esc_html__( '1. User to Member Linkage Audit', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p>' . esc_html__( 'This report shows how current WordPress users relate to tpw_members rows using direct user_id linkage first, then the existing weak fallback paths where no direct stored relationship exists.', 'tpw-ilungu-club' ) . '</p>';
 
 		self::render_simple_table(
-			array( __( 'Metric', 'tpw-core' ), __( 'Count', 'tpw-core' ) ),
+			array( __( 'Metric', 'tpw-ilungu-club' ), __( 'Count', 'tpw-ilungu-club' ) ),
 			array(
-				array( __( 'Users with direct member linkage', 'tpw-core' ), count( $linkage['direct'] ) ),
-				array( __( 'Users matched only through weak fallback', 'tpw-core' ), count( $linkage['weak'] ) ),
-				array( __( 'Users without any linkage', 'tpw-core' ), count( $linkage['unlinked_users'] ) ),
-				array( __( 'Members without a corresponding user', 'tpw-core' ), count( $linkage['members_without_user'] ) ),
+				array( __( 'Users with direct member linkage', 'tpw-ilungu-club' ), count( $linkage['direct'] ) ),
+				array( __( 'Users matched only through weak fallback', 'tpw-ilungu-club' ), count( $linkage['weak'] ) ),
+				array( __( 'Users without any linkage', 'tpw-ilungu-club' ), count( $linkage['unlinked_users'] ) ),
+				array( __( 'Members without a corresponding user', 'tpw-ilungu-club' ), count( $linkage['members_without_user'] ) ),
 			)
 		);
 
-		self::render_user_linkage_table( __( 'Users with direct member linkage', 'tpw-core' ), $linkage['direct'], 'direct' );
-		self::render_user_linkage_table( __( 'Users matched only through weak fallback', 'tpw-core' ), $linkage['weak'], 'weak' );
-		self::render_user_linkage_table( __( 'Users without any member linkage', 'tpw-core' ), $linkage['unlinked_users'], 'none' );
-		self::render_member_gap_table( __( 'Members without a corresponding user', 'tpw-core' ), $linkage['members_without_user'] );
+		self::render_user_linkage_table( __( 'Users with direct member linkage', 'tpw-ilungu-club' ), $linkage['direct'], 'direct' );
+		self::render_user_linkage_table( __( 'Users matched only through weak fallback', 'tpw-ilungu-club' ), $linkage['weak'], 'weak' );
+		self::render_user_linkage_table( __( 'Users without any member linkage', 'tpw-ilungu-club' ), $linkage['unlinked_users'], 'none' );
+		self::render_member_gap_table( __( 'Members without a corresponding user', 'tpw-ilungu-club' ), $linkage['members_without_user'] );
 	}
 
 	/**
@@ -887,20 +887,20 @@ class TPW_Identity_Audit_Admin {
 		$weak = $report['weak_linkage'];
 
 		echo '<hr />';
-		echo '<h3>' . esc_html__( '2. Weak Linkage Detection', 'tpw-core' ) . '</h3>';
-		echo '<p>' . esc_html__( 'These users do not have a direct stored user_id to member relationship and appear to resolve only through the current compatibility fallbacks.', 'tpw-core' ) . '</p>';
+		echo '<h3>' . esc_html__( '2. Weak Linkage Detection', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p>' . esc_html__( 'These users do not have a direct stored user_id to member relationship and appear to resolve only through the current compatibility fallbacks.', 'tpw-ilungu-club' ) . '</p>';
 
 		self::render_simple_table(
-			array( __( 'Weak Match Type', 'tpw-core' ), __( 'Count', 'tpw-core' ) ),
+			array( __( 'Weak Match Type', 'tpw-ilungu-club' ), __( 'Count', 'tpw-ilungu-club' ) ),
 			array(
-				array( __( 'Email only', 'tpw-core' ), $weak['breakdown']['email_only'] ),
-				array( __( 'Username only', 'tpw-core' ), $weak['breakdown']['username_only'] ),
-				array( __( 'Email and username', 'tpw-core' ), $weak['breakdown']['email_username'] ),
-				array( __( 'Ambiguous fallback matches', 'tpw-core' ), $weak['breakdown']['ambiguous_match'] ),
+				array( __( 'Email only', 'tpw-ilungu-club' ), $weak['breakdown']['email_only'] ),
+				array( __( 'Username only', 'tpw-ilungu-club' ), $weak['breakdown']['username_only'] ),
+				array( __( 'Email and username', 'tpw-ilungu-club' ), $weak['breakdown']['email_username'] ),
+				array( __( 'Ambiguous fallback matches', 'tpw-ilungu-club' ), $weak['breakdown']['ambiguous_match'] ),
 			)
 		);
 
-		self::render_user_linkage_table( __( 'Weak-linkage users', 'tpw-core' ), $weak['rows'], 'weak' );
+		self::render_user_linkage_table( __( 'Weak-linkage users', 'tpw-ilungu-club' ), $weak['rows'], 'weak' );
 	}
 
 	/**
@@ -913,17 +913,17 @@ class TPW_Identity_Audit_Admin {
 		$roles = $report['identity_roles'];
 
 		echo '<hr />';
-		echo '<h3>' . esc_html__( '3. Identity Role Projection Audit', 'tpw-core' ) . '</h3>';
-		echo '<p>' . esc_html__( 'This section groups users by the current identity-style role slugs present in WordPress. The legacy tpw_member role is highlighted separately to support later cleanup planning.', 'tpw-core' ) . '</p>';
+		echo '<h3>' . esc_html__( '3. Identity Role Projection Audit', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p>' . esc_html__( 'This section groups users by the current identity-style role slugs present in WordPress. The legacy tpw_member role is highlighted separately to support later cleanup planning.', 'tpw-ilungu-club' ) . '</p>';
 
 		$summary_rows = array();
 		foreach ( $roles as $role => $users ) {
 			$summary_rows[] = array( $role, count( $users ) );
 		}
-		self::render_simple_table( array( __( 'Role', 'tpw-core' ), __( 'Users', 'tpw-core' ) ), $summary_rows );
+		self::render_simple_table( array( __( 'Role', 'tpw-ilungu-club' ), __( 'Users', 'tpw-ilungu-club' ) ), $summary_rows );
 
 		if ( ! empty( $roles['tpw_member'] ) ) {
-			echo '<div class="notice notice-warning inline"><p>' . esc_html__( 'Legacy identity role detected: tpw_member is still assigned to one or more users.', 'tpw-core' ) . '</p></div>';
+			echo '<div class="notice notice-warning inline"><p>' . esc_html__( 'Legacy identity role detected: tpw_member is still assigned to one or more users.', 'tpw-ilungu-club' ) . '</p></div>';
 		}
 
 		foreach ( $roles as $role => $users ) {
@@ -941,11 +941,11 @@ class TPW_Identity_Audit_Admin {
 		$roles = $report['unknown_roles'];
 
 		echo '<hr />';
-		echo '<h3>' . esc_html__( '4. Unknown Role Detection', 'tpw-core' ) . '</h3>';
-		echo '<p>' . esc_html__( 'These assigned roles are not WordPress core roles and are not currently classified as known TPW roles by the audit. They may be legacy, site-local, or third-party roles and are reported without modification.', 'tpw-core' ) . '</p>';
+		echo '<h3>' . esc_html__( '4. Unknown Role Detection', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p>' . esc_html__( 'These assigned roles are not WordPress core roles and are not currently classified as known TPW roles by the audit. They may be legacy, site-local, or third-party roles and are reported without modification.', 'tpw-ilungu-club' ) . '</p>';
 
 		if ( empty( $roles ) ) {
-			echo '<p>' . esc_html__( 'No unknown roles were found in current user assignments.', 'tpw-core' ) . '</p>';
+			echo '<p>' . esc_html__( 'No unknown roles were found in current user assignments.', 'tpw-ilungu-club' ) . '</p>';
 			return;
 		}
 
@@ -964,7 +964,7 @@ class TPW_Identity_Audit_Admin {
 		}
 
 		self::render_simple_table(
-			array( __( 'Role', 'tpw-core' ), __( 'Assigned Users', 'tpw-core' ), __( 'User Details', 'tpw-core' ) ),
+			array( __( 'Role', 'tpw-ilungu-club' ), __( 'Assigned Users', 'tpw-ilungu-club' ), __( 'User Details', 'tpw-ilungu-club' ) ),
 			$rows
 		);
 	}
@@ -979,15 +979,15 @@ class TPW_Identity_Audit_Admin {
 		$statuses = $report['statuses'];
 
 		echo '<hr />';
-		echo '<h3>' . esc_html__( '5. Member Status Distribution', 'tpw-core' ) . '</h3>';
-		echo '<p>' . esc_html__( 'Current status counts from tpw_members.status. This is an audit snapshot only and does not enforce any status vocabulary.', 'tpw-core' ) . '</p>';
+		echo '<h3>' . esc_html__( '5. Member Status Distribution', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p>' . esc_html__( 'Current status counts from tpw_members.status. This is an audit snapshot only and does not enforce any status vocabulary.', 'tpw-ilungu-club' ) . '</p>';
 
 		$rows = array();
 		foreach ( $statuses as $status_row ) {
 			$rows[] = array( $status_row['status'], $status_row['count'] );
 		}
 
-		self::render_simple_table( array( __( 'Status', 'tpw-core' ), __( 'Count', 'tpw-core' ) ), $rows );
+		self::render_simple_table( array( __( 'Status', 'tpw-ilungu-club' ), __( 'Count', 'tpw-ilungu-club' ) ), $rows );
 	}
 
 	/**
@@ -1000,20 +1000,20 @@ class TPW_Identity_Audit_Admin {
 		$drift = $report['drift'];
 
 		echo '<hr />';
-		echo '<h3>' . esc_html__( '6. Identity Drift Indicators', 'tpw-core' ) . '</h3>';
-		echo '<p>' . esc_html__( 'These conditions are diagnostic warnings only. They help identify current-state drift before later migration and enforcement work begins.', 'tpw-core' ) . '</p>';
+		echo '<h3>' . esc_html__( '6. Identity Drift Indicators', 'tpw-ilungu-club' ) . '</h3>';
+		echo '<p>' . esc_html__( 'These conditions are diagnostic warnings only. They help identify current-state drift before later migration and enforcement work begins.', 'tpw-ilungu-club' ) . '</p>';
 
 		$summary_rows = array();
 		foreach ( $drift['summary'] as $row ) {
 			$summary_rows[] = array( $row['label'], $row['count'] );
 		}
 
-		self::render_simple_table( array( __( 'Warning', 'tpw-core' ), __( 'Count', 'tpw-core' ) ), $summary_rows );
+		self::render_simple_table( array( __( 'Warning', 'tpw-ilungu-club' ), __( 'Count', 'tpw-ilungu-club' ) ), $summary_rows );
 
-		self::render_drift_users_without_member_table( __( 'Users with identity role but no member record', 'tpw-core' ), $drift['role_without_member'] );
-		self::render_drift_member_without_role_table( __( 'Users with member record but no identity role', 'tpw-core' ), $drift['member_without_role'] );
-		self::render_member_gap_table( __( 'Member records linked to non-existent users', 'tpw-core' ), $drift['linked_missing_user'] );
-		self::render_drift_weak_only_table( __( 'Users resolving only through weak linkage fallback', 'tpw-core' ), $drift['weak_only'] );
+		self::render_drift_users_without_member_table( __( 'Users with identity role but no member record', 'tpw-ilungu-club' ), $drift['role_without_member'] );
+		self::render_drift_member_without_role_table( __( 'Users with member record but no identity role', 'tpw-ilungu-club' ), $drift['member_without_role'] );
+		self::render_member_gap_table( __( 'Member records linked to non-existent users', 'tpw-ilungu-club' ), $drift['linked_missing_user'] );
+		self::render_drift_weak_only_table( __( 'Users resolving only through weak linkage fallback', 'tpw-ilungu-club' ), $drift['weak_only'] );
 	}
 
 	/**
@@ -1032,7 +1032,7 @@ class TPW_Identity_Audit_Admin {
 		echo '</tr></thead><tbody>';
 
 		if ( empty( $rows ) ) {
-			echo '<tr><td colspan="' . esc_attr( (string) count( $headers ) ) . '">' . esc_html__( 'No records found.', 'tpw-core' ) . '</td></tr>';
+			echo '<tr><td colspan="' . esc_attr( (string) count( $headers ) ) . '">' . esc_html__( 'No records found.', 'tpw-ilungu-club' ) . '</td></tr>';
 		} else {
 			foreach ( $rows as $row ) {
 				echo '<tr>';
@@ -1069,20 +1069,20 @@ class TPW_Identity_Audit_Admin {
 
 			if ( 'direct' === $mode && ! empty( $row['direct_member'] ) ) {
 				$member_label = self::format_member_label( $row['direct_member'] );
-				$linkage_note = __( 'Direct user_id linkage', 'tpw-core' );
+				$linkage_note = __( 'Direct user_id linkage', 'tpw-ilungu-club' );
 			} elseif ( 'weak' === $mode ) {
 				$match_labels = array();
 				foreach ( $row['weak_matches'] as $match ) {
 					$methods = implode( ', ', $match['methods'] );
 					/* translators: %s: Comma-separated weak-linkage match methods such as email or username. */
-					$match_labels[] = self::format_member_label( $match['member'] ) . ' | ' . sprintf( __( 'methods: %s', 'tpw-core' ), $methods );
+					$match_labels[] = self::format_member_label( $match['member'] ) . ' | ' . sprintf( __( 'methods: %s', 'tpw-ilungu-club' ), $methods );
 				}
 				$member_label = implode( "\n", $match_labels );
 				$linkage_note = count( $row['weak_matches'] ) > 1
-					? __( 'Weak fallback with multiple possible matches', 'tpw-core' )
-					: __( 'Weak fallback only', 'tpw-core' );
+					? __( 'Weak fallback with multiple possible matches', 'tpw-ilungu-club' )
+					: __( 'Weak fallback only', 'tpw-ilungu-club' );
 			} else {
-				$linkage_note = __( 'No linked member record found', 'tpw-core' );
+				$linkage_note = __( 'No linked member record found', 'tpw-ilungu-club' );
 			}
 
 			$table_rows[] = array(
@@ -1093,7 +1093,7 @@ class TPW_Identity_Audit_Admin {
 		}
 
 		self::render_simple_table(
-			array( __( 'User', 'tpw-core' ), __( 'Matched Member', 'tpw-core' ), __( 'Notes', 'tpw-core' ) ),
+			array( __( 'User', 'tpw-ilungu-club' ), __( 'Matched Member', 'tpw-ilungu-club' ), __( 'Notes', 'tpw-ilungu-club' ) ),
 			$table_rows
 		);
 	}
@@ -1120,13 +1120,13 @@ class TPW_Identity_Audit_Admin {
 
 			$table_rows[] = array(
 				self::format_member_label( $member ),
-				$user_id > 0 ? $user_id : __( '(none)', 'tpw-core' ),
+				$user_id > 0 ? $user_id : __( '(none)', 'tpw-ilungu-club' ),
 				$reason,
 			);
 		}
 
 		self::render_simple_table(
-			array( __( 'Member', 'tpw-core' ), __( 'Linked user_id', 'tpw-core' ), __( 'Reason', 'tpw-core' ) ),
+			array( __( 'Member', 'tpw-ilungu-club' ), __( 'Linked user_id', 'tpw-ilungu-club' ), __( 'Reason', 'tpw-ilungu-club' ) ),
 			$table_rows
 		);
 	}
@@ -1140,7 +1140,7 @@ class TPW_Identity_Audit_Admin {
 	 */
 	private static function render_identity_role_users_table( $role, array $users ) {
 		/* translators: %s: WordPress role slug being reported in the identity audit. */
-		echo '<h4>' . esc_html( sprintf( __( 'Users with role: %s', 'tpw-core' ), $role ) ) . '</h4>';
+		echo '<h4>' . esc_html( sprintf( __( 'Users with role: %s', 'tpw-ilungu-club' ), $role ) ) . '</h4>';
 
 		$rows = array();
 		foreach ( $users as $row ) {
@@ -1168,7 +1168,7 @@ class TPW_Identity_Audit_Admin {
 		}
 
 		self::render_simple_table(
-			array( __( 'User', 'tpw-core' ), __( 'Resolved Member', 'tpw-core' ), __( 'Linkage Type', 'tpw-core' ) ),
+			array( __( 'User', 'tpw-ilungu-club' ), __( 'Resolved Member', 'tpw-ilungu-club' ), __( 'Linkage Type', 'tpw-ilungu-club' ) ),
 			$rows
 		);
 	}
@@ -1195,7 +1195,7 @@ class TPW_Identity_Audit_Admin {
 			);
 		}
 
-		self::render_simple_table( array( __( 'User', 'tpw-core' ), __( 'Identity Roles', 'tpw-core' ) ), $table_rows );
+		self::render_simple_table( array( __( 'User', 'tpw-ilungu-club' ), __( 'Identity Roles', 'tpw-ilungu-club' ) ), $table_rows );
 	}
 
 	/**
@@ -1225,7 +1225,7 @@ class TPW_Identity_Audit_Admin {
 		}
 
 		self::render_simple_table(
-			array( __( 'User', 'tpw-core' ), __( 'Resolved Member', 'tpw-core' ), __( 'Linkage Type', 'tpw-core' ) ),
+			array( __( 'User', 'tpw-ilungu-club' ), __( 'Resolved Member', 'tpw-ilungu-club' ), __( 'Linkage Type', 'tpw-ilungu-club' ) ),
 			$table_rows
 		);
 	}
@@ -1257,7 +1257,7 @@ class TPW_Identity_Audit_Admin {
 			);
 		}
 
-		self::render_simple_table( array( __( 'User', 'tpw-core' ), __( 'Weak Matches', 'tpw-core' ) ), $table_rows );
+		self::render_simple_table( array( __( 'User', 'tpw-ilungu-club' ), __( 'Weak Matches', 'tpw-ilungu-club' ) ), $table_rows );
 	}
 }
 

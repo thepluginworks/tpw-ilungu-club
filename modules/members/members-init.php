@@ -207,7 +207,7 @@ if ( $tpw_members_active ) {
     // Shortcode: [tpw_logout_link] -> outputs a logout link redirecting to homepage
     add_shortcode( 'tpw_logout_link', function( $atts = [], $content = null ) {
         $url = wp_logout_url( home_url() );
-        $label = $content ? wp_kses_post( $content ) : esc_html__( 'Logout', 'tpw-core' );
+        $label = $content ? wp_kses_post( $content ) : esc_html__( 'Logout', 'tpw-ilungu-club' );
         return '<a class="tpw-logout-link" href="' . esc_url( $url ) . '">' . $label . '</a>';
     } );
 
@@ -220,7 +220,7 @@ if ( $tpw_members_active ) {
             return $block_content;
         }
         $logout_url = esc_url( wp_logout_url( home_url() ) );
-        $li = '<li class="wp-block-navigation-item menu-item-tpw-logout"><a href="' . $logout_url . '">' . esc_html__( 'Logout', 'tpw-core' ) . '</a></li>';
+        $li = '<li class="wp-block-navigation-item menu-item-tpw-logout"><a href="' . $logout_url . '">' . esc_html__( 'Logout', 'tpw-ilungu-club' ) . '</a></li>';
         // Insert before the first closing </ul> in the navigation container
         $updated = preg_replace( '/(<\/ul>)/i', $li . '$1', $block_content, 1 );
         return $updated ? $updated : $block_content;

@@ -23,14 +23,14 @@ class TPW_Payment_Logs_Admin {
 
     public static function render_logs_page() {
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_die( esc_html__( 'Access denied.', 'tpw-core' ) );
+            wp_die( esc_html__( 'Access denied.', 'tpw-ilungu-club' ) );
         }
 
         $logs = self::get_page( 1, 100 );
 
         echo '<div class="tpw-admin-ui"><div class="wrap">';
         self::render_request_notice();
-        echo '<h1>' . esc_html__( 'TPW Payment Logs', 'tpw-core' ) . '</h1>';
+        echo '<h1>' . esc_html__( 'TPW Payment Logs', 'tpw-ilungu-club' ) . '</h1>';
         self::render_clear_form();
         self::render_logs_table( $logs );
         echo '</div></div>';
@@ -122,7 +122,7 @@ class TPW_Payment_Logs_Admin {
 
     public static function handle_clear_logs() {
         if ( ! self::current_user_can_clear_logs() ) {
-            wp_die( esc_html__( 'Access denied.', 'tpw-core' ) );
+            wp_die( esc_html__( 'Access denied.', 'tpw-ilungu-club' ) );
         }
 
         check_admin_referer( self::CLEAR_NONCE_ACTION, self::CLEAR_NONCE_FIELD );
@@ -149,7 +149,7 @@ class TPW_Payment_Logs_Admin {
         wp_nonce_field( self::CLEAR_NONCE_ACTION, self::CLEAR_NONCE_FIELD );
         echo '<input type="hidden" name="action" value="' . esc_attr( self::CLEAR_ACTION ) . '" />';
         echo '<input type="hidden" name="tpw_payment_logs_redirect" value="' . esc_url( $redirect_url ) . '" />';
-        echo '<input type="submit" class="button button-danger" value="' . esc_attr__( 'Clear All Logs', 'tpw-core' ) . '" onclick="return confirm(\'Are you sure you want to delete all payment logs?\');" />';
+        echo '<input type="submit" class="button button-danger" value="' . esc_attr__( 'Clear All Logs', 'tpw-ilungu-club' ) . '" onclick="return confirm(\'Are you sure you want to delete all payment logs?\');" />';
         echo '</form>';
     }
 
@@ -157,11 +157,11 @@ class TPW_Payment_Logs_Admin {
         $logs = is_array( $logs ) ? $logs : [];
 
         echo '<table class="widefat fixed striped">';
-        echo '<thead><tr><th>' . esc_html__( 'Date', 'tpw-core' ) . '</th><th>' . esc_html__( 'Method', 'tpw-core' ) . '</th><th>' . esc_html__( 'Reference', 'tpw-core' ) . '</th><th>' . esc_html__( 'Status', 'tpw-core' ) . '</th><th>' . esc_html__( 'Message', 'tpw-core' ) . '</th></tr></thead>';
+        echo '<thead><tr><th>' . esc_html__( 'Date', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Method', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Reference', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Status', 'tpw-ilungu-club' ) . '</th><th>' . esc_html__( 'Message', 'tpw-ilungu-club' ) . '</th></tr></thead>';
         echo '<tbody>';
 
         if ( empty( $logs ) ) {
-            echo '<tr><td colspan="5">' . esc_html__( 'No payment log entries found.', 'tpw-core' ) . '</td></tr>';
+            echo '<tr><td colspan="5">' . esc_html__( 'No payment log entries found.', 'tpw-ilungu-club' ) . '</td></tr>';
         } else {
             foreach ( $logs as $log ) {
                 echo '<tr>';
@@ -181,9 +181,9 @@ class TPW_Payment_Logs_Admin {
         $notice = isset( $_GET['tpw_payment_logs_notice'] ) ? sanitize_key( wp_unslash( $_GET['tpw_payment_logs_notice'] ) ) : '';
 
         if ( 'cleared' === $notice ) {
-            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'All payment logs have been cleared.', 'tpw-core' ) . '</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'All payment logs have been cleared.', 'tpw-ilungu-club' ) . '</p></div>';
         } elseif ( 'failed' === $notice ) {
-            echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Payment logs could not be cleared.', 'tpw-core' ) . '</p></div>';
+            echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Payment logs could not be cleared.', 'tpw-ilungu-club' ) . '</p></div>';
         }
     }
 

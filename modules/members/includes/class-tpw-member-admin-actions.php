@@ -209,7 +209,7 @@ class TPW_Member_Admin_Actions {
             if ( ! $member || $user_id <= 0 || (int) $member->user_id !== $user_id ) {
                 $results['skipped'][] = [
                     'email'   => $email,
-                    'message' => __( 'Member is no longer linked to the expected WordPress user.', 'tpw-core' ),
+                    'message' => __( 'Member is no longer linked to the expected WordPress user.', 'tpw-ilungu-club' ),
                 ];
                 continue;
             }
@@ -218,14 +218,14 @@ class TPW_Member_Admin_Actions {
             if ( ! empty( $result['success'] ) ) {
                 $results['sent'][] = [
                     'email'   => $email,
-                    'message' => __( 'Password setup email sent.', 'tpw-core' ),
+                    'message' => __( 'Password setup email sent.', 'tpw-ilungu-club' ),
                 ];
                 continue;
             }
 
             $results['failed'][] = [
                 'email'   => $email,
-                'message' => isset( $result['message'] ) ? (string) $result['message'] : __( 'Password setup email could not be sent.', 'tpw-core' ),
+                'message' => isset( $result['message'] ) ? (string) $result['message'] : __( 'Password setup email could not be sent.', 'tpw-ilungu-club' ),
             ];
         }
 
@@ -414,7 +414,7 @@ class TPW_Member_Admin_Actions {
         }
 
         echo '<fieldset class="tpw-section">';
-        echo '<legend class="tpw-section__legend">' . esc_html__( 'Household', 'tpw-core' ) . '</legend>';
+        echo '<legend class="tpw-section__legend">' . esc_html__( 'Household', 'tpw-ilungu-club' ) . '</legend>';
         echo '<div class="form-group">';
 
         // Flash notice (after admin-post actions).
@@ -428,8 +428,8 @@ class TPW_Member_Admin_Actions {
         }
         if ( '' !== $notice ) {
             $messages = [
-                'created' => __( 'Household created and member assigned.', 'tpw-core' ),
-                'assigned' => __( 'Member assigned to household.', 'tpw-core' ),
+                'created' => __( 'Household created and member assigned.', 'tpw-ilungu-club' ),
+                'assigned' => __( 'Member assigned to household.', 'tpw-ilungu-club' ),
             ];
             if ( isset( $messages[ $notice ] ) ) {
                 echo '<div class="notice notice-success" style="margin:10px 0;"><p>' . esc_html( $messages[ $notice ] ) . '</p></div>';
@@ -437,14 +437,14 @@ class TPW_Member_Admin_Actions {
         }
         if ( '' !== $error ) {
             $errors = [
-                'permission' => __( 'You do not have permission to manage households.', 'tpw-core' ),
-                'disabled' => __( 'Household support is disabled.', 'tpw-core' ),
-                'invalid_member' => __( 'Invalid member.', 'tpw-core' ),
-                'missing_society' => __( 'Cannot create household: member has no society assigned.', 'tpw-core' ),
-                'create_failed' => __( 'Failed to create household.', 'tpw-core' ),
-                'assign_failed' => __( 'Failed to assign member to household.', 'tpw-core' ),
-                'invalid_primary' => __( 'Please select a valid primary member.', 'tpw-core' ),
-                'society_mismatch' => __( 'Household belongs to a different society.', 'tpw-core' ),
+                'permission' => __( 'You do not have permission to manage households.', 'tpw-ilungu-club' ),
+                'disabled' => __( 'Household support is disabled.', 'tpw-ilungu-club' ),
+                'invalid_member' => __( 'Invalid member.', 'tpw-ilungu-club' ),
+                'missing_society' => __( 'Cannot create household: member has no society assigned.', 'tpw-ilungu-club' ),
+                'create_failed' => __( 'Failed to create household.', 'tpw-ilungu-club' ),
+                'assign_failed' => __( 'Failed to assign member to household.', 'tpw-ilungu-club' ),
+                'invalid_primary' => __( 'Please select a valid primary member.', 'tpw-ilungu-club' ),
+                'society_mismatch' => __( 'Household belongs to a different society.', 'tpw-ilungu-club' ),
             ];
             if ( isset( $errors[ $error ] ) ) {
                 echo '<div class="notice notice-error" style="margin:10px 0;"><p>' . esc_html( $errors[ $error ] ) . '</p></div>';
@@ -459,10 +459,10 @@ class TPW_Member_Admin_Actions {
         $primary_member_name = $primary_member ? self::get_member_display_name( $primary_member ) : '—';
 
         if ( 0 < $household_id ) {
-            echo '<div><strong>' . esc_html__( 'Assigned:', 'tpw-core' ) . '</strong> ' . esc_html__( 'Yes', 'tpw-core' ) . '</div>';
-            echo '<div><strong>' . esc_html__( 'Primary member:', 'tpw-core' ) . '</strong> ' . esc_html( $primary_member_name ) . '</div>';
-            echo '<div><strong>' . esc_html__( 'Primary member (this record):', 'tpw-core' ) . '</strong> ' . esc_html( $is_primary ? __( 'Yes', 'tpw-core' ) : __( 'No', 'tpw-core' ) ) . '</div>';
-            echo '<div><strong>' . esc_html__( 'Role:', 'tpw-core' ) . '</strong> ' . esc_html( '' !== $role ? ucfirst( $role ) : '—' ) . '</div>';
+            echo '<div><strong>' . esc_html__( 'Assigned:', 'tpw-ilungu-club' ) . '</strong> ' . esc_html__( 'Yes', 'tpw-ilungu-club' ) . '</div>';
+            echo '<div><strong>' . esc_html__( 'Primary member:', 'tpw-ilungu-club' ) . '</strong> ' . esc_html( $primary_member_name ) . '</div>';
+            echo '<div><strong>' . esc_html__( 'Primary member (this record):', 'tpw-ilungu-club' ) . '</strong> ' . esc_html( $is_primary ? __( 'Yes', 'tpw-ilungu-club' ) : __( 'No', 'tpw-ilungu-club' ) ) . '</div>';
+            echo '<div><strong>' . esc_html__( 'Role:', 'tpw-ilungu-club' ) . '</strong> ' . esc_html( '' !== $role ? ucfirst( $role ) : '—' ) . '</div>';
 
             // Household members list (admin-only UI on Edit Member screen).
             $household_members = (array) $repo->get_household_members( $household_id );
@@ -505,7 +505,7 @@ class TPW_Member_Admin_Actions {
                 } );
 
                 echo '<div style="margin-top:10px;">';
-                echo '<strong>' . esc_html__( 'Household members:', 'tpw-core' ) . '</strong>';
+                echo '<strong>' . esc_html__( 'Household members:', 'tpw-ilungu-club' ) . '</strong>';
                 echo '<div style="margin-top:6px;">';
                 echo '<ul style="margin:0; padding-left:18px;">';
                 foreach ( $household_members as $hm ) {
@@ -520,13 +520,13 @@ class TPW_Member_Admin_Actions {
                     }
                     $role_label = '';
                     if ( 'primary' === $hm_role ) {
-                        $role_label = __( 'Primary', 'tpw-core' );
+                        $role_label = __( 'Primary', 'tpw-ilungu-club' );
                     } elseif ( 'partner' === $hm_role ) {
-                        $role_label = __( 'Partner', 'tpw-core' );
+                        $role_label = __( 'Partner', 'tpw-ilungu-club' );
                     } elseif ( 'child' === $hm_role ) {
-                        $role_label = __( 'Child', 'tpw-core' );
+                        $role_label = __( 'Child', 'tpw-ilungu-club' );
                     } else {
-                        $role_label = __( 'Member', 'tpw-core' );
+                        $role_label = __( 'Member', 'tpw-ilungu-club' );
                     }
                     $badge = '<span style="display:inline-block; font-size:11px; line-height:1; padding:3px 6px; border-radius:999px; border:1px solid #cbd5e1; color:#334155; background:#f8fafc; margin-left:6px;">' . esc_html( $role_label ) . '</span>';
 
@@ -538,7 +538,7 @@ class TPW_Member_Admin_Actions {
                     }
 
                     $is_this = ( $hm_id === $member_id );
-                    $this_marker = $is_this ? '<em style="margin-left:6px; color:#475569;">' . esc_html__( 'This record', 'tpw-core' ) . '</em>' : '';
+                    $this_marker = $is_this ? '<em style="margin-left:6px; color:#475569;">' . esc_html__( 'This record', 'tpw-ilungu-club' ) . '</em>' : '';
 
                     $edit_url = esc_url( site_url( '/manage-members/?action=edit_form&id=' . $hm_id ) );
                     echo '<li style="margin:4px 0;">';
@@ -556,14 +556,14 @@ class TPW_Member_Admin_Actions {
                 echo '</div>';
             }
         } else {
-            echo '<div><strong>' . esc_html__( 'Status:', 'tpw-core' ) . '</strong> ' . esc_html__( 'Not assigned to a household', 'tpw-core' ) . '</div>';
+            echo '<div><strong>' . esc_html__( 'Status:', 'tpw-ilungu-club' ) . '</strong> ' . esc_html__( 'Not assigned to a household', 'tpw-ilungu-club' ) . '</div>';
         }
 
         $primary_options = self::get_primary_members_for_society( $member_society_id, $member_id );
 
         // If this member is the household primary, the UI is read-only.
         if ( $is_primary ) {
-            echo '<div class="description" style="margin-top:10px;">' . esc_html__( 'This member is the primary contact for their household. Household changes are disabled here.', 'tpw-core' ) . '</div>';
+            echo '<div class="description" style="margin-top:10px;">' . esc_html__( 'This member is the primary contact for their household. Household changes are disabled here.', 'tpw-ilungu-club' ) . '</div>';
         } else {
             // Editable UI for non-primary members.
             if ( 'primary' === $role ) {
@@ -580,8 +580,8 @@ class TPW_Member_Admin_Actions {
             $warn_replace_id     = 'tpw-household-warn-replace-' . (int) $member_id;
 
             echo '<div style="margin-top:12px;">';
-            echo '<button type="button" id="' . esc_attr( $reveal_btn_id ) . '" class="tpw-btn tpw-btn-light" aria-expanded="false" aria-controls="' . esc_attr( $controls_id ) . '">' . esc_html__( 'Change household / primary member', 'tpw-core' ) . '</button>';
-            echo '<div class="description" style="margin-top:6px;">' . esc_html__( 'Choose a primary member to attach or move this member into that household.', 'tpw-core' ) . '</div>';
+            echo '<button type="button" id="' . esc_attr( $reveal_btn_id ) . '" class="tpw-btn tpw-btn-light" aria-expanded="false" aria-controls="' . esc_attr( $controls_id ) . '">' . esc_html__( 'Change household / primary member', 'tpw-ilungu-club' ) . '</button>';
+            echo '<div class="description" style="margin-top:6px;">' . esc_html__( 'Choose a primary member to attach or move this member into that household.', 'tpw-ilungu-club' ) . '</div>';
             echo '</div>';
 
             echo '<div id="' . esc_attr( $controls_id ) . '" hidden style="margin-top:12px;" data-current-household-id="' . esc_attr( (string) (int) $household_id ) . '" data-current-primary-member-id="' . esc_attr( (string) (int) $primary_member_id ) . '">';
@@ -591,16 +591,16 @@ class TPW_Member_Admin_Actions {
 
             if ( 0 >= $household_id ) {
                 echo '<div style="margin-bottom:12px;">';
-                echo '<button type="submit" name="action" value="tpw_members_household_create" class="tpw-btn tpw-btn-secondary" formaction="' . esc_url( admin_url( 'admin-post.php' ) ) . '" formnovalidate>' . esc_html__( 'Create new household with this member as primary', 'tpw-core' ) . '</button>';
+                echo '<button type="submit" name="action" value="tpw_members_household_create" class="tpw-btn tpw-btn-secondary" formaction="' . esc_url( admin_url( 'admin-post.php' ) ) . '" formnovalidate>' . esc_html__( 'Create new household with this member as primary', 'tpw-ilungu-club' ) . '</button>';
                 echo '</div>';
             }
 
             echo '<div>';
             // Primary select
             echo '<div style="margin-top:10px; margin-bottom:8px;">';
-            echo '<label for="' . esc_attr( $select_household_id ) . '" style="display:block; margin-bottom:4px;">' . esc_html__( 'Choose household (primary member)', 'tpw-core' ) . '</label>';
+            echo '<label for="' . esc_attr( $select_household_id ) . '" style="display:block; margin-bottom:4px;">' . esc_html__( 'Choose household (primary member)', 'tpw-ilungu-club' ) . '</label>';
             echo '<select id="' . esc_attr( $select_household_id ) . '" name="tpw_household_primary_member_id" style="min-width:260px;">';
-            echo '<option value="0">' . esc_html__( '— Select —', 'tpw-core' ) . '</option>';
+            echo '<option value="0">' . esc_html__( '— Select —', 'tpw-ilungu-club' ) . '</option>';
             foreach ( $primary_options as $pm ) {
                 $pm_id = isset( $pm->id ) ? (int) $pm->id : 0;
                 if ( 0 >= $pm_id ) {
@@ -611,14 +611,14 @@ class TPW_Member_Admin_Actions {
             }
             echo '</select>';
             echo '</div>';
-            echo '<div id="' . esc_attr( $warn_move_id ) . '" style="display:none; margin:8px 0; padding:8px 10px; border:1px solid #fcd34d; background:#fffbeb; color:#92400e; border-radius:6px;">⚠️ ' . esc_html__( 'This will move the member to a different household.', 'tpw-core' ) . '</div>';
+            echo '<div id="' . esc_attr( $warn_move_id ) . '" style="display:none; margin:8px 0; padding:8px 10px; border:1px solid #fcd34d; background:#fffbeb; color:#92400e; border-radius:6px;">⚠️ ' . esc_html__( 'This will move the member to a different household.', 'tpw-ilungu-club' ) . '</div>';
 
             // Role select
             echo '<div style="margin-bottom:10px;">';
-            echo '<label for="' . esc_attr( $select_role_id ) . '" style="display:block; margin-bottom:4px;">' . esc_html__( 'Household role for this member', 'tpw-core' ) . '</label>';
+            echo '<label for="' . esc_attr( $select_role_id ) . '" style="display:block; margin-bottom:4px;">' . esc_html__( 'Household role for this member', 'tpw-ilungu-club' ) . '</label>';
             echo '<select id="' . esc_attr( $select_role_id ) . '" name="tpw_household_role" style="min-width:260px;">';
-            echo '<option value="partner"' . ( 'partner' === $role ? ' selected' : '' ) . '>' . esc_html__( 'Partner', 'tpw-core' ) . '</option>';
-            echo '<option value="child"' . ( 'child' === $role ? ' selected' : '' ) . '>' . esc_html__( 'Child', 'tpw-core' ) . '</option>';
+            echo '<option value="partner"' . ( 'partner' === $role ? ' selected' : '' ) . '>' . esc_html__( 'Partner', 'tpw-ilungu-club' ) . '</option>';
+            echo '<option value="child"' . ( 'child' === $role ? ' selected' : '' ) . '>' . esc_html__( 'Child', 'tpw-ilungu-club' ) . '</option>';
             echo '</select>';
             echo '</div>';
 
@@ -626,15 +626,15 @@ class TPW_Member_Admin_Actions {
             echo '<div style="margin-top:8px;">';
             echo '<label style="display:inline-block; margin-right:10px;">';
             echo '<input id="' . esc_attr( $checkbox_primary_id ) . '" type="checkbox" name="tpw_household_make_primary" value="1" style="margin-right:4px;">';
-            echo esc_html__( 'Make this member the primary member for this household', 'tpw-core' );
+            echo esc_html__( 'Make this member the primary member for this household', 'tpw-ilungu-club' );
             echo '</label>';
-            echo '<div class="description" style="margin-top:4px;">' . esc_html__( 'This will replace the existing primary member.', 'tpw-core' ) . '</div>';
+            echo '<div class="description" style="margin-top:4px;">' . esc_html__( 'This will replace the existing primary member.', 'tpw-ilungu-club' ) . '</div>';
             echo '</div>';
-            echo '<div id="' . esc_attr( $warn_replace_id ) . '" style="display:none; margin:8px 0; padding:8px 10px; border:1px solid #fcd34d; background:#fffbeb; color:#92400e; border-radius:6px;">⚠️ ' . esc_html__( 'This will replace the existing primary member for this household.', 'tpw-core' ) . '</div>';
+            echo '<div id="' . esc_attr( $warn_replace_id ) . '" style="display:none; margin:8px 0; padding:8px 10px; border:1px solid #fcd34d; background:#fffbeb; color:#92400e; border-radius:6px;">⚠️ ' . esc_html__( 'This will replace the existing primary member for this household.', 'tpw-ilungu-club' ) . '</div>';
 
             // Submit button (own row)
             echo '<div style="margin-top:10px;">';
-            echo '<button id="' . esc_attr( $update_btn_id ) . '" type="submit" name="action" value="tpw_members_household_assign" class="tpw-btn tpw-btn-secondary" formaction="' . esc_url( admin_url( 'admin-post.php' ) ) . '" formnovalidate disabled>' . esc_html__( 'Update household', 'tpw-core' ) . '</button>';
+            echo '<button id="' . esc_attr( $update_btn_id ) . '" type="submit" name="action" value="tpw_members_household_assign" class="tpw-btn tpw-btn-secondary" formaction="' . esc_url( admin_url( 'admin-post.php' ) ) . '" formnovalidate disabled>' . esc_html__( 'Update household', 'tpw-ilungu-club' ) . '</button>';
             echo '</div>';
             echo '</div>';
             echo '</div>';

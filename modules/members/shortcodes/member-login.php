@@ -96,7 +96,7 @@ class TPW_Member_Login_Shortcode {
             $bundle = ['count' => 0, 'start' => $now];
         }
         if ($bundle['count'] >= $limit) {
-            return new WP_Error('rate_limited', __('Too many attempts. Please try again later.', 'tpw-core'));
+            return new WP_Error('rate_limited', __('Too many attempts. Please try again later.', 'tpw-ilungu-club'));
         }
         return $bundle;
     }
@@ -114,7 +114,7 @@ class TPW_Member_Login_Shortcode {
 
     private static function handle_login_post() {
         if (!isset($_POST['tpw_member_login_nonce']) || !wp_verify_nonce($_POST['tpw_member_login_nonce'], 'tpw_member_login')) {
-            wp_die(__('Security check failed.', 'tpw-core'));
+            wp_die(__('Security check failed.', 'tpw-ilungu-club'));
         }
         $bundle = self::check_rate_limit();
         if (is_wp_error($bundle)) {
@@ -129,7 +129,7 @@ class TPW_Member_Login_Shortcode {
 
         if ($login === '' || $password === '') {
             self::bump_rate_limit($bundle);
-            $message = __('Please enter your email/username and password.', 'tpw-core');
+            $message = __('Please enter your email/username and password.', 'tpw-ilungu-club');
             self::store_message('error', $message);
             self::set_notice_cookie('error', $message);
             self::redirect_back_preserving_redirect();
@@ -151,7 +151,7 @@ class TPW_Member_Login_Shortcode {
         $signon = wp_signon($creds, is_ssl());
         if (is_wp_error($signon)) {
             self::bump_rate_limit($bundle);
-            $msg = __('Invalid username or password.', 'tpw-core');
+            $msg = __('Invalid username or password.', 'tpw-ilungu-club');
             self::store_message('error', $msg);
             self::set_notice_cookie('error', $msg);
             self::redirect_back_preserving_redirect();
@@ -202,13 +202,13 @@ class TPW_Member_Login_Shortcode {
             $nonce_ok = true;
         }
         if ( ! $nonce_ok ) {
-            self::store_message('reset_error', __('Security check failed. Please refresh the page and try again.', 'tpw-core'));
+            self::store_message('reset_error', __('Security check failed. Please refresh the page and try again.', 'tpw-ilungu-club'));
             self::redirect_back_to_lost_password();
         }
 
         $identifier = sanitize_text_field($_POST['identifier'] ?? '');
         if ($identifier === '') {
-            self::store_message('reset_error', __('Please enter your email or username.', 'tpw-core'));
+            self::store_message('reset_error', __('Please enter your email or username.', 'tpw-ilungu-club'));
             self::redirect_back_to_lost_password();
         }
 
@@ -220,7 +220,7 @@ class TPW_Member_Login_Shortcode {
         }
         if (!$user) {
             // Do not disclose whether the account exists; show a generic success notice
-            $msg = __("If an account with that email address exists, you'll receive an email with a link to reset your password shortly. Please check your inbox (and junk folder).", 'tpw-core');
+            $msg = __("If an account with that email address exists, you'll receive an email with a link to reset your password shortly. Please check your inbox (and junk folder).", 'tpw-ilungu-club');
             self::store_message('reset_success', $msg);
             self::set_notice_cookie('reset_sent');
             self::redirect_back_preserving_redirect();
@@ -229,11 +229,11 @@ class TPW_Member_Login_Shortcode {
         // Trigger WordPress password reset flow
         $result = retrieve_password($user->user_login);
         if ($result === true) {
-            $msg = __("If an account with that email address exists, you'll receive an email with a link to reset your password shortly. Please check your inbox (and junk folder).", 'tpw-core');
+            $msg = __("If an account with that email address exists, you'll receive an email with a link to reset your password shortly. Please check your inbox (and junk folder).", 'tpw-ilungu-club');
             self::store_message('reset_success', $msg);
             self::set_notice_cookie('reset_sent');
         } else {
-            $message = is_wp_error($result) ? $result->get_error_message() : __('Password reset failed. Please try again later.', 'tpw-core');
+            $message = is_wp_error($result) ? $result->get_error_message() : __('Password reset failed. Please try again later.', 'tpw-ilungu-club');
             self::store_message('reset_error', $message);
             self::set_notice_cookie('reset_error', $message);
             self::redirect_back_to_lost_password();
@@ -245,7 +245,7 @@ class TPW_Member_Login_Shortcode {
         // Nonce
         $nonce_ok = isset($_POST['tpw_member_do_reset_nonce']) && wp_verify_nonce($_POST['tpw_member_do_reset_nonce'], 'tpw_member_do_reset');
         if ( ! $nonce_ok ) {
-            $message = __('Security check failed. Please refresh the page and try again.', 'tpw-core');
+            $message = __('Security check failed. Please refresh the page and try again.', 'tpw-ilungu-club');
             self::store_message('reset_error', $message);
             self::set_notice_cookie('reset_error', $message);
             $k = sanitize_text_field($_POST['key'] ?? '');
@@ -259,19 +259,19 @@ class TPW_Member_Login_Shortcode {
         $pass2 = isset($_POST['pass2']) ? (string) wp_unslash($_POST['pass2']) : '';
 
         if ($key === '' || $login === '') {
-            $message = __('This password reset link is invalid or has expired. Please request a new password reset.', 'tpw-core');
+            $message = __('This password reset link is invalid or has expired. Please request a new password reset.', 'tpw-ilungu-club');
             self::store_message('reset_error', $message);
             self::set_notice_cookie('reset_error', $message);
             self::redirect_back_preserving_redirect();
         }
         if ($pass1 === '' || $pass2 === '') {
-            $message = __('Please enter your new password twice.', 'tpw-core');
+            $message = __('Please enter your new password twice.', 'tpw-ilungu-club');
             self::store_message('reset_error', $message);
             self::set_notice_cookie('reset_error', $message);
             self::redirect_back_to_rp($key, $login);
         }
         if ($pass1 !== $pass2) {
-            $message = __('Passwords do not match.', 'tpw-core');
+            $message = __('Passwords do not match.', 'tpw-ilungu-club');
             self::store_message('reset_error', $message);
             self::set_notice_cookie('reset_error', $message);
             self::redirect_back_to_rp($key, $login);
@@ -289,7 +289,7 @@ class TPW_Member_Login_Shortcode {
         // Set the new password
         reset_password($user, $pass1);
         self::clear_stored_message('reset_error');
-        $success_message = __('Password successfully reset. Please log in.', 'tpw-core');
+        $success_message = __('Password successfully reset. Please log in.', 'tpw-ilungu-club');
         self::store_message('reset_success', $success_message);
         self::set_notice_cookie('reset_success', $success_message);
 
@@ -325,7 +325,7 @@ class TPW_Member_Login_Shortcode {
         if ( is_wp_error( $error ) ) {
             $code = $error->get_error_code();
             if ( $code === 'invalid_key' || $code === 'expired_key' ) {
-                return __('This password reset link is invalid or has expired. Please request a new password reset.', 'tpw-core');
+                return __('This password reset link is invalid or has expired. Please request a new password reset.', 'tpw-ilungu-club');
             }
 
             $message = $error->get_error_message();
@@ -334,7 +334,7 @@ class TPW_Member_Login_Shortcode {
             }
         }
 
-        return __('Password reset failed. Please request a new password reset.', 'tpw-core');
+        return __('Password reset failed. Please request a new password reset.', 'tpw-ilungu-club');
     }
 
     /**
@@ -396,7 +396,7 @@ class TPW_Member_Login_Shortcode {
 
         if ( ! $replaced ) {
             // If we didn't find the default link, append our link clearly so users get the correct destination
-            $message .= "\n\n" . sprintf( __( 'Reset your password: %s', 'tpw-core' ), $new_url );
+            $message .= "\n\n" . sprintf( __( 'Reset your password: %s', 'tpw-ilungu-club' ), $new_url );
         }
         return $message;
     }
@@ -562,13 +562,13 @@ class TPW_Member_Login_Shortcode {
             }
 
             if ( $flag === 'reset_sent' ) {
-                $messages['reset_success'] = __("If an account with that email address exists, you'll receive an email with a link to reset your password shortly. Please check your inbox (and junk folder).", 'tpw-core');
+                $messages['reset_success'] = __("If an account with that email address exists, you'll receive an email with a link to reset your password shortly. Please check your inbox (and junk folder).", 'tpw-ilungu-club');
             } elseif ( $flag === 'reset_error' ) {
-                $messages['reset_error'] = $fallback_message !== '' ? $fallback_message : __('Password reset failed. Please try again later.', 'tpw-core');
+                $messages['reset_error'] = $fallback_message !== '' ? $fallback_message : __('Password reset failed. Please try again later.', 'tpw-ilungu-club');
             } elseif ( $flag === 'reset_success' ) {
-                $messages['reset_success'] = $fallback_message !== '' ? $fallback_message : __('Password successfully reset. Please log in.', 'tpw-core');
+                $messages['reset_success'] = $fallback_message !== '' ? $fallback_message : __('Password successfully reset. Please log in.', 'tpw-ilungu-club');
             } elseif ( $flag === 'error' ) {
-                $messages['error'] = $fallback_message !== '' ? $fallback_message : __('Invalid username or password.', 'tpw-core');
+                $messages['error'] = $fallback_message !== '' ? $fallback_message : __('Invalid username or password.', 'tpw-ilungu-club');
             }
             self::clear_notice_cookie();
         }
@@ -587,7 +587,7 @@ class TPW_Member_Login_Shortcode {
             ];
             include $template;
         } else {
-            echo esc_html__('Login form template missing.', 'tpw-core');
+            echo esc_html__('Login form template missing.', 'tpw-ilungu-club');
         }
         return ob_get_clean();
     }

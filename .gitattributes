@@ -30,3 +30,7 @@
 /tests export-ignore
 /tooling export-ignore
 /uninstall.php -export-ignore
+
+# Preserve upstream SortableJS line endings.
+/assets/third-party/sortablejs/Sortable.js whitespace=cr-at-eol
+/assets/third-party/sortablejs/LICENSE whitespace=cr-at-eol

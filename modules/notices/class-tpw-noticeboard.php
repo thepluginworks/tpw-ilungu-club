@@ -10,23 +10,23 @@ class TPW_Noticeboard {
 
     public static function register_cpt_and_tax() {
         $labels = [
-            'name'               => __('Noticeboard Notices', 'tpw-core'),
-            'singular_name'      => __('Notice', 'tpw-core'),
-            'all_items'          => __('All Noticeboard Notices', 'tpw-core'),
-            'add_new'            => __('Add New Notice', 'tpw-core'),
-            'add_new_item'       => __('Add New Notice', 'tpw-core'),
-            'edit_item'          => __('Edit Notice', 'tpw-core'),
-            'new_item'           => __('New Notice', 'tpw-core'),
-            'view_item'          => __('View Notice', 'tpw-core'),
-            'archives'           => __('Notice Archives', 'tpw-core'),
-            'search_items'       => __('Search Notices', 'tpw-core'),
-            'not_found'          => __('No notices found', 'tpw-core'),
-            'not_found_in_trash' => __('No notices found in Trash', 'tpw-core'),
-            'menu_name'          => __('Noticeboard', 'tpw-core'),
+            'name'               => __('Noticeboard Notices', 'tpw-ilungu-club'),
+            'singular_name'      => __('Notice', 'tpw-ilungu-club'),
+            'all_items'          => __('All Noticeboard Notices', 'tpw-ilungu-club'),
+            'add_new'            => __('Add New Notice', 'tpw-ilungu-club'),
+            'add_new_item'       => __('Add New Notice', 'tpw-ilungu-club'),
+            'edit_item'          => __('Edit Notice', 'tpw-ilungu-club'),
+            'new_item'           => __('New Notice', 'tpw-ilungu-club'),
+            'view_item'          => __('View Notice', 'tpw-ilungu-club'),
+            'archives'           => __('Notice Archives', 'tpw-ilungu-club'),
+            'search_items'       => __('Search Notices', 'tpw-ilungu-club'),
+            'not_found'          => __('No notices found', 'tpw-ilungu-club'),
+            'not_found_in_trash' => __('No notices found in Trash', 'tpw-ilungu-club'),
+            'menu_name'          => __('Noticeboard', 'tpw-ilungu-club'),
         ];
 
         $args = [
-            'label'              => __('Noticeboard Notices', 'tpw-core'),
+            'label'              => __('Noticeboard Notices', 'tpw-ilungu-club'),
             'labels'             => $labels,
             'public'             => true,
             'publicly_queryable' => true,
@@ -44,17 +44,17 @@ class TPW_Noticeboard {
         register_post_type('tpw_notice', $args);
 
         $tax_labels = [
-            'name'              => __('Notice Categories', 'tpw-core'),
-            'singular_name'     => __('Notice Category', 'tpw-core'),
-            'search_items'      => __('Search Notice Categories', 'tpw-core'),
-            'all_items'         => __('All Notice Categories', 'tpw-core'),
-            'parent_item'       => __('Parent Category', 'tpw-core'),
-            'parent_item_colon' => __('Parent Category:', 'tpw-core'),
-            'edit_item'         => __('Edit Category', 'tpw-core'),
-            'update_item'       => __('Update Category', 'tpw-core'),
-            'add_new_item'      => __('Add New Category', 'tpw-core'),
-            'new_item_name'     => __('New Category Name', 'tpw-core'),
-            'menu_name'         => __('Notice Categories', 'tpw-core'),
+            'name'              => __('Notice Categories', 'tpw-ilungu-club'),
+            'singular_name'     => __('Notice Category', 'tpw-ilungu-club'),
+            'search_items'      => __('Search Notice Categories', 'tpw-ilungu-club'),
+            'all_items'         => __('All Notice Categories', 'tpw-ilungu-club'),
+            'parent_item'       => __('Parent Category', 'tpw-ilungu-club'),
+            'parent_item_colon' => __('Parent Category:', 'tpw-ilungu-club'),
+            'edit_item'         => __('Edit Category', 'tpw-ilungu-club'),
+            'update_item'       => __('Update Category', 'tpw-ilungu-club'),
+            'add_new_item'      => __('Add New Category', 'tpw-ilungu-club'),
+            'new_item_name'     => __('New Category Name', 'tpw-ilungu-club'),
+            'menu_name'         => __('Notice Categories', 'tpw-ilungu-club'),
         ];
         $tax_args = [
             'hierarchical' => true,

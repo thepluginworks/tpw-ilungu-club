@@ -33,7 +33,7 @@ function tpw_core_ajax_lookup_postcode() {
 		wp_send_json(
 			array(
 				'success' => false,
-				'message' => __( 'Invalid request.', 'tpw-core' ),
+				'message' => __( 'Invalid request.', 'tpw-ilungu-club' ),
 			),
 			403
 		);
@@ -48,7 +48,7 @@ function tpw_core_ajax_lookup_postcode() {
 		wp_send_json(
 			array(
 				'success' => false,
-				'message' => __( 'Postcode is required.', 'tpw-core' ),
+				'message' => __( 'Postcode is required.', 'tpw-ilungu-club' ),
 			),
 			400
 		);
@@ -58,7 +58,7 @@ function tpw_core_ajax_lookup_postcode() {
 		wp_send_json(
 			array(
 				'success' => false,
-				'message' => __( 'Postcode helper unavailable.', 'tpw-core' ),
+				'message' => __( 'Postcode helper unavailable.', 'tpw-ilungu-club' ),
 			),
 			500
 		);
@@ -68,7 +68,7 @@ function tpw_core_ajax_lookup_postcode() {
 		wp_send_json(
 			array(
 				'success' => false,
-				'message' => __( 'Address lookup is not available for the selected provider.', 'tpw-core' ),
+				'message' => __( 'Address lookup is not available for the selected provider.', 'tpw-ilungu-club' ),
 			),
 			400
 		);
@@ -84,7 +84,7 @@ function tpw_core_ajax_lookup_postcode() {
 		);
 	}
 
-	$msg = is_array( $res ) && ! empty( $res['message'] ) ? $res['message'] : __( 'Postcode not found.', 'tpw-core' );
+	$msg = is_array( $res ) && ! empty( $res['message'] ) ? $res['message'] : __( 'Postcode not found.', 'tpw-ilungu-club' );
 	wp_send_json(
 		array(
 			'success' => false,

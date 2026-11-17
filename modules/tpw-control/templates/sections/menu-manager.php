@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Admin guard (section visibility is admin, but double check)
 if ( ! class_exists('TPW_Control_UI') || ! TPW_Control_UI::user_has_access( [ 'logged_in' => true, 'flags_any' => ['is_admin'] ] ) ) {
-    echo '<p>' . esc_html__( 'You do not have permission to manage menus.', 'tpw-core' ) . '</p>';
+    echo '<p>' . esc_html__( 'You do not have permission to manage menus.', 'tpw-ilungu-club' ) . '</p>';
     return;
 }
 
@@ -767,7 +767,7 @@ echo '<script>
     function ensureSortable(cb){
         if (window.Sortable) { cb(); return; }
         var s = document.createElement("script");
-        s.src = "https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js";
+        s.src = ' . wp_json_encode( TPW_CORE_URL . 'assets/third-party/sortablejs/Sortable.js' ) . ';
         s.onload = cb; document.head.appendChild(s);
     }
     function summarize(form){

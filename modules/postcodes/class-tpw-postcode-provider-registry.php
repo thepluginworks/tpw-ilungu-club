@@ -25,45 +25,45 @@ class TPW_Postcode_Provider_Registry {
         self::$providers = array(
             'none'            => array(
                 'key'              => 'none',
-                'label'            => __( 'None', 'tpw-core' ),
+                'label'            => __( 'None', 'tpw-ilungu-club' ),
                 'class'            => '',
                 'supports_lookup'  => false,
                 'supports_full'    => false,
                 'settings_fields'  => array(),
-                'settings_notice'  => __( 'Lookup controls stay hidden and address entry remains manual only.', 'tpw-core' ),
-                'inactive_message' => __( 'Address lookup is disabled.', 'tpw-core' ),
+                'settings_notice'  => __( 'Lookup controls stay hidden and address entry remains manual only.', 'tpw-ilungu-club' ),
+                'inactive_message' => __( 'Address lookup is disabled.', 'tpw-ilungu-club' ),
             ),
             'ideal_postcodes' => array(
                 'key'              => 'ideal_postcodes',
-                'label'            => __( 'Ideal Postcodes', 'tpw-core' ),
+                'label'            => __( 'Ideal Postcodes', 'tpw-ilungu-club' ),
                 'class'            => 'TPW_Postcode_Provider_Ideal_Postcodes',
                 'supports_lookup'  => true,
                 'supports_full'    => true,
                 'settings_fields'  => array(
                     array(
                         'key'         => 'ideal_postcodes_api_key',
-                        'label'       => __( 'Ideal Postcodes API Key', 'tpw-core' ),
-                        'description' => __( 'Required for live GB address lookup. Available from your Ideal Postcodes dashboard.', 'tpw-core' ),
+                        'label'       => __( 'Ideal Postcodes API Key', 'tpw-ilungu-club' ),
+                        'description' => __( 'Required for live GB address lookup. Available from your Ideal Postcodes dashboard.', 'tpw-ilungu-club' ),
                     ),
                 ),
-                'settings_notice'  => __( 'Ideal Postcodes is fully wired for live GB address lookup when a valid API key is configured.', 'tpw-core' ),
-                'inactive_message' => __( 'Ideal Postcodes is selected but no API key has been configured yet.', 'tpw-core' ),
+                'settings_notice'  => __( 'Ideal Postcodes is fully wired for live GB address lookup when a valid API key is configured.', 'tpw-ilungu-club' ),
+                'inactive_message' => __( 'Ideal Postcodes is selected but no API key has been configured yet.', 'tpw-ilungu-club' ),
             ),
             'fetchify'        => array(
                 'key'              => 'fetchify',
-                'label'            => __( 'Fetchify', 'tpw-core' ),
+                'label'            => __( 'Fetchify', 'tpw-ilungu-club' ),
                 'class'            => 'TPW_Postcode_Provider_Fetchify',
                 'supports_lookup'  => false,
                 'supports_full'    => false,
                 'settings_fields'  => array(
                     array(
                         'key'         => 'fetchify_access_token',
-                        'label'       => __( 'Fetchify Access Token', 'tpw-core' ),
-                        'description' => __( 'Stored in Core now so the provider can be selected safely. Live Fetchify lookup is not wired in this release.', 'tpw-core' ),
+                        'label'       => __( 'Fetchify Access Token', 'tpw-ilungu-club' ),
+                        'description' => __( 'Stored in Core now so the provider can be selected safely. Live Fetchify lookup is not wired in this release.', 'tpw-ilungu-club' ),
                     ),
                 ),
-                'settings_notice'  => __( 'Fetchify settings are scaffolded only in this Core release. Selecting Fetchify keeps manual address entry active and does not expose lookup UI yet.', 'tpw-core' ),
-                'inactive_message' => __( 'Fetchify credentials can be stored here, but live Fetchify address lookup is not wired yet.', 'tpw-core' ),
+                'settings_notice'  => __( 'Fetchify settings are scaffolded only in this Core release. Selecting Fetchify keeps manual address entry active and does not expose lookup UI yet.', 'tpw-ilungu-club' ),
+                'inactive_message' => __( 'Fetchify credentials can be stored here, but live Fetchify address lookup is not wired yet.', 'tpw-ilungu-club' ),
             ),
         );
 
@@ -256,7 +256,7 @@ class TPW_Postcode_Provider_Registry {
         if ( 'none' === $provider ) {
             return array(
                 'error'   => 'lookup_disabled',
-                'message' => __( 'Address lookup is disabled.', 'tpw-core' ),
+                'message' => __( 'Address lookup is disabled.', 'tpw-ilungu-club' ),
             );
         }
 
@@ -266,14 +266,14 @@ class TPW_Postcode_Provider_Registry {
         if ( '' === $class || ! is_callable( array( $class, 'lookup' ) ) ) {
             return array(
                 'error'   => 'no_provider',
-                'message' => __( 'No valid address lookup provider is configured.', 'tpw-core' ),
+                'message' => __( 'No valid address lookup provider is configured.', 'tpw-ilungu-club' ),
             );
         }
 
         if ( ! self::is_lookup_enabled( $provider, $settings ) ) {
             return array(
                 'error'   => 'lookup_unavailable',
-                'message' => isset( $definition['inactive_message'] ) ? (string) $definition['inactive_message'] : __( 'Address lookup is not available for the selected provider.', 'tpw-core' ),
+                'message' => isset( $definition['inactive_message'] ) ? (string) $definition['inactive_message'] : __( 'Address lookup is not available for the selected provider.', 'tpw-ilungu-club' ),
             );
         }
 

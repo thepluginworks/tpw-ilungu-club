@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) {
-    wp_die( esc_html__( 'You do not have permission to access this page.', 'tpw-core' ) );
+    wp_die( esc_html__( 'You do not have permission to access this page.', 'tpw-ilungu-club' ) );
 }
 
 $cats = function_exists('tpw_gallery_get_categories') ? tpw_gallery_get_categories() : [];
@@ -17,17 +17,17 @@ $gallery = isset($gallery) && is_array($gallery) ? $gallery : null; // allow pre
     <form id="tpw-gallery-form">
       <input type="hidden" name="gallery_id" value="<?php echo $gallery ? (int) $gallery['gallery']['gallery_id'] : 0; ?>">
       <div class="tpw-field">
-        <label><?php esc_html_e('Title', 'tpw-core'); ?></label>
+        <label><?php esc_html_e('Title', 'tpw-ilungu-club'); ?></label>
         <input type="text" name="title" value="<?php echo $gallery ? esc_attr($gallery['gallery']['title']) : ''; ?>" required>
       </div>
       <div class="tpw-field">
-        <label><?php esc_html_e('Description', 'tpw-core'); ?></label>
+        <label><?php esc_html_e('Description', 'tpw-ilungu-club'); ?></label>
         <textarea name="description" rows="3"><?php echo $gallery ? esc_textarea($gallery['gallery']['description']) : ''; ?></textarea>
       </div>
       <div class="tpw-field">
-        <label><?php esc_html_e('Category', 'tpw-core'); ?></label>
+        <label><?php esc_html_e('Category', 'tpw-ilungu-club'); ?></label>
         <select name="category_id">
-          <option value="0"><?php esc_html_e('Uncategorised', 'tpw-core'); ?></option>
+          <option value="0"><?php esc_html_e('Uncategorised', 'tpw-ilungu-club'); ?></option>
           <?php foreach ( $cats as $c ) : ?>
             <option value="<?php echo (int) $c['category_id']; ?>" <?php if ( $gallery && (int)$gallery['gallery']['category_id'] === (int)$c['category_id'] ) echo 'selected'; ?>>
               <?php echo esc_html( $c['name'] ); ?>
@@ -37,14 +37,14 @@ $gallery = isset($gallery) && is_array($gallery) ? $gallery : null; // allow pre
       </div>
 
       <div class="tpw-field">
-        <label><?php esc_html_e('Images', 'tpw-core'); ?></label>
+        <label><?php esc_html_e('Images', 'tpw-ilungu-club'); ?></label>
         <div class="tpw-row" style="gap:8px; align-items:center; position:relative;">
           <button type="button" class="tpw-btn tpw-btn-primary" id="tpw-add-images-menu-btn" aria-haspopup="true" aria-expanded="false">
-            <?php esc_html_e('Add Images', 'tpw-core'); ?>
+            <?php esc_html_e('Add Images', 'tpw-ilungu-club'); ?>
           </button>
           <div id="tpw-add-images-menu" class="tpw-dropdown" role="menu" aria-hidden="true" style="display:none;">
-            <button type="button" class="tpw-btn tpw-btn-secondary tpw-dropdown__item" data-action="library"><?php esc_html_e('From Media Library', 'tpw-core'); ?></button>
-            <button type="button" class="tpw-btn tpw-btn-secondary tpw-dropdown__item" data-action="upload"><?php esc_html_e('Upload New Files', 'tpw-core'); ?></button>
+            <button type="button" class="tpw-btn tpw-btn-secondary tpw-dropdown__item" data-action="library"><?php esc_html_e('From Media Library', 'tpw-ilungu-club'); ?></button>
+            <button type="button" class="tpw-btn tpw-btn-secondary tpw-dropdown__item" data-action="upload"><?php esc_html_e('Upload New Files', 'tpw-ilungu-club'); ?></button>
           </div>
           <input type="file" id="tpw-gallery-file" accept="image/*" multiple style="display:none;" />
         </div>
@@ -76,16 +76,16 @@ $gallery = isset($gallery) && is_array($gallery) ? $gallery : null; // allow pre
                 </div>
                 <div class="tpw-cap-wrap" style="width:100%;margin-top:4px;">
                   <div class="tpw-row" style="justify-content:space-between;align-items:center;gap:6px;">
-                    <div class="tpw-cap-text" tabindex="0" title="<?php esc_attr_e('Edit caption','tpw-core'); ?>" data-caption="<?php echo esc_attr( $cap ); ?>"><?php echo esc_html( $cap ); ?></div>
+                    <div class="tpw-cap-text" tabindex="0" title="<?php esc_attr_e('Edit caption','tpw-ilungu-club'); ?>" data-caption="<?php echo esc_attr( $cap ); ?>"><?php echo esc_html( $cap ); ?></div>
                   </div>
                 </div>
                 <div class="tpw-card__footer">
                   <div class="tpw-row tpw-gallery-actions tpw-gallery-actions--main" style="gap:6px; width:100%;">
-                    <button type="button" class="tpw-btn tpw-btn-gallery tpw-btn-secondary tpw-gallery-focal" data-image-id="<?php echo (int) $img['image_id']; ?>"><?php esc_html_e('Focal', 'tpw-core'); ?></button>
-                    <button type="button" class="tpw-btn tpw-btn-gallery tpw-btn-secondary tpw-gallery-remove-image" data-image-id="<?php echo (int) $img['image_id']; ?>"><?php esc_html_e('Remove', 'tpw-core'); ?></button>
+                    <button type="button" class="tpw-btn tpw-btn-gallery tpw-btn-secondary tpw-gallery-focal" data-image-id="<?php echo (int) $img['image_id']; ?>"><?php esc_html_e('Focal', 'tpw-ilungu-club'); ?></button>
+                    <button type="button" class="tpw-btn tpw-btn-gallery tpw-btn-secondary tpw-gallery-remove-image" data-image-id="<?php echo (int) $img['image_id']; ?>"><?php esc_html_e('Remove', 'tpw-ilungu-club'); ?></button>
                   </div>
                   <div class="tpw-row tpw-gallery-actions tpw-gallery-actions--danger" style="gap:6px; width:100%;">
-                    <button type="button" class="tpw-btn tpw-btn-gallery tpw-btn-danger tpw-gallery-remove-image-perm" data-image-id="<?php echo (int) $img['image_id']; ?>"><?php esc_html_e('Delete', 'tpw-core'); ?></button>
+                    <button type="button" class="tpw-btn tpw-btn-gallery tpw-btn-danger tpw-gallery-remove-image-perm" data-image-id="<?php echo (int) $img['image_id']; ?>"><?php esc_html_e('Delete', 'tpw-ilungu-club'); ?></button>
                   </div>
                 </div>
               </div>
@@ -95,8 +95,8 @@ $gallery = isset($gallery) && is_array($gallery) ? $gallery : null; // allow pre
       </div>
 
       <div class="tpw-actions">
-        <button type="submit" class="tpw-btn tpw-btn-primary"><?php esc_html_e('Save Gallery', 'tpw-core'); ?></button>
-        <button type="button" class="tpw-btn" id="tpw-gallery-cancel"><?php esc_html_e('Cancel', 'tpw-core'); ?></button>
+        <button type="submit" class="tpw-btn tpw-btn-primary"><?php esc_html_e('Save Gallery', 'tpw-ilungu-club'); ?></button>
+        <button type="button" class="tpw-btn" id="tpw-gallery-cancel"><?php esc_html_e('Cancel', 'tpw-ilungu-club'); ?></button>
       </div>
     </form>
   </div>

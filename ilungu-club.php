@@ -8,7 +8,7 @@
  * Version: 2.12.0
  * Requires at least: 6.5
  * Requires PHP: 8.3
- * Text Domain: tpw-core
+ * Text Domain: tpw-ilungu-club
  * Domain Path: /languages
  * License: GPLv2 or later
  */
@@ -31,9 +31,30 @@ define( 'TPW_CORE_URL', plugin_dir_url( __FILE__ ) );
 
 // Load translations before other Core init callbacks run.
 function tpw_core_load_textdomain() {
-    load_plugin_textdomain( 'tpw-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+    $languages_path = dirname( plugin_basename( __FILE__ ) ) . '/languages';
+    load_plugin_textdomain( 'tpw-core', false, $languages_path );
+    load_plugin_textdomain( 'tpw-ilungu-club', false, $languages_path );
+
+    if ( ! is_textdomain_loaded( 'tpw-ilungu-club' ) ) {
+        unload_textdomain( 'tpw-ilungu-club', true );
+        get_translations_for_domain( 'tpw-ilungu-club' );
+    }
+
+    if ( is_textdomain_loaded( 'tpw-ilungu-club' ) ) {
+        return;
+    }
+
+    $locale = apply_filters( 'plugin_locale', determine_locale(), 'tpw-ilungu-club' );
+    foreach ( array( WP_LANG_DIR . '/plugins/', TPW_CORE_PATH . 'languages/' ) as $directory ) {
+        $mofile = $directory . 'tpw-core-' . $locale . '.mo';
+        if ( ( is_readable( $mofile ) || is_readable( substr( $mofile, 0, -3 ) . '.l10n.php' ) )
+            && load_textdomain( 'tpw-ilungu-club', $mofile, $locale ) ) {
+            break;
+        }
+    }
 }
 add_action( 'init', 'tpw_core_load_textdomain', 0 );
+add_action( 'change_locale', 'tpw_core_load_textdomain', 10, 0 );
 
 // Load System Pages scaffold
 require_once TPW_CORE_PATH . 'includes/class-tpw-core-system-pages.php';

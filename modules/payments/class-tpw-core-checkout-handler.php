@@ -14,15 +14,15 @@ class TPW_Core_Checkout_Handler {
             if ( ! TPW_Payments_Manager::is_method_available( $payment_method ) ) {
                 if ( 'square' === $payment_method ) {
                     wp_die(
-                        esc_html__( 'Square payments are not available because the TPW Square Gateway add-on is not active. Please choose another payment method.', 'tpw-core' ),
-                        esc_html__( 'Square Unavailable', 'tpw-core' ),
+                        esc_html__( 'Square payments are not available because the TPW Square Gateway add-on is not active. Please choose another payment method.', 'tpw-ilungu-club' ),
+                        esc_html__( 'Square Unavailable', 'tpw-ilungu-club' ),
                         array( 'response' => 503 )
                     );
                 }
 
                 wp_die(
-                    esc_html__( 'The selected payment method is not currently available. Please choose another payment method.', 'tpw-core' ),
-                    esc_html__( 'Payment Method Unavailable', 'tpw-core' ),
+                    esc_html__( 'The selected payment method is not currently available. Please choose another payment method.', 'tpw-ilungu-club' ),
+                    esc_html__( 'Payment Method Unavailable', 'tpw-ilungu-club' ),
                     array( 'response' => 400 )
                 );
             }

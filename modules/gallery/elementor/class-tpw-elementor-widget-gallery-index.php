@@ -10,7 +10,7 @@ class TPW_Elementor_Widget_Gallery_Index extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return __( 'TPW Gallery Index', 'tpw-core' );
+        return __( 'TPW Gallery Index', 'tpw-ilungu-club' );
     }
 
     public function get_icon() {
@@ -25,19 +25,19 @@ class TPW_Elementor_Widget_Gallery_Index extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'section_content',
             [
-                'label' => __( 'Content', 'tpw-core' ),
+                'label' => __( 'Content', 'tpw-ilungu-club' ),
             ]
         );
 
         $this->add_control(
             'layout',
             [
-                'label'   => __( 'Index layout', 'tpw-core' ),
+                'label'   => __( 'Index layout', 'tpw-ilungu-club' ),
                 'type'    => \Elementor\Controls_Manager::SELECT,
                 'default' => 'grid',
                 'options' => [
-                    'grid' => __( 'Grid', 'tpw-core' ),
-                    'list' => __( 'List', 'tpw-core' ),
+                    'grid' => __( 'Grid', 'tpw-ilungu-club' ),
+                    'list' => __( 'List', 'tpw-ilungu-club' ),
                 ],
             ]
         );
@@ -45,7 +45,7 @@ class TPW_Elementor_Widget_Gallery_Index extends \Elementor\Widget_Base {
         $this->add_control(
             'columns',
             [
-                'label'     => __( 'Index columns', 'tpw-core' ),
+                'label'     => __( 'Index columns', 'tpw-ilungu-club' ),
                 'type'      => \Elementor\Controls_Manager::SELECT,
                 'default'   => '3',
                 'options'   => [
@@ -65,13 +65,13 @@ class TPW_Elementor_Widget_Gallery_Index extends \Elementor\Widget_Base {
         $this->add_control(
             'detail_view',
             [
-                'label'   => __( 'Selected gallery view', 'tpw-core' ),
+                'label'   => __( 'Selected gallery view', 'tpw-ilungu-club' ),
                 'type'    => \Elementor\Controls_Manager::SELECT,
                 'default' => 'grid',
                 'options' => [
-                    'grid'  => __( 'Grid', 'tpw-core' ),
-                    'list'  => __( 'List', 'tpw-core' ),
-                    'story' => __( 'Story', 'tpw-core' ),
+                    'grid'  => __( 'Grid', 'tpw-ilungu-club' ),
+                    'list'  => __( 'List', 'tpw-ilungu-club' ),
+                    'story' => __( 'Story', 'tpw-ilungu-club' ),
                 ],
             ]
         );
@@ -79,7 +79,7 @@ class TPW_Elementor_Widget_Gallery_Index extends \Elementor\Widget_Base {
         $this->add_control(
             'detail_columns',
             [
-                'label'     => __( 'Selected gallery columns', 'tpw-core' ),
+                'label'     => __( 'Selected gallery columns', 'tpw-ilungu-club' ),
                 'type'      => \Elementor\Controls_Manager::SELECT,
                 'default'   => '3',
                 'options'   => [
@@ -99,10 +99,10 @@ class TPW_Elementor_Widget_Gallery_Index extends \Elementor\Widget_Base {
         $this->add_control(
             'show_gallery_heading',
             [
-                'label'        => __( 'Show selected gallery heading', 'tpw-core' ),
+                'label'        => __( 'Show selected gallery heading', 'tpw-ilungu-club' ),
                 'type'         => \Elementor\Controls_Manager::SWITCHER,
-                'label_on'     => __( 'Yes', 'tpw-core' ),
-                'label_off'    => __( 'No', 'tpw-core' ),
+                'label_on'     => __( 'Yes', 'tpw-ilungu-club' ),
+                'label_off'    => __( 'No', 'tpw-ilungu-club' ),
                 'return_value' => 'yes',
                 'default'      => 'yes',
             ]

@@ -20,8 +20,8 @@ class TPW_Email_Form {
             'nonce'   => wp_create_nonce( 'tpw_email_send' ),
             'maxBytes'=> $max_bytes,
             'i18n'    => [
-                'sending' => __( 'Sending…', 'tpw-core' ),
-                'send'    => __( 'Send', 'tpw-core' ),
+                'sending' => __( 'Sending…', 'tpw-ilungu-club' ),
+                'send'    => __( 'Send', 'tpw-ilungu-club' ),
             ],
         ] );
     }
@@ -65,12 +65,12 @@ class TPW_Email_Form {
         // Basic perms: require logged-in user by default; filter can relax
         $require_login = apply_filters( 'tpw_email/require_login', true );
         if ( $require_login && ! is_user_logged_in() ) {
-            wp_send_json_error( [ 'message' => __( 'Access denied.', 'tpw-core' ) ], 403 );
+            wp_send_json_error( [ 'message' => __( 'Access denied.', 'tpw-ilungu-club' ) ], 403 );
         }
 
         $nonce = isset($_POST['_wpnonce']) ? sanitize_text_field( $_POST['_wpnonce'] ) : '';
         if ( ! wp_verify_nonce( $nonce, 'tpw_email_send' ) ) {
-            wp_send_json_error( [ 'message' => __( 'Invalid request.', 'tpw-core' ) ], 403 );
+            wp_send_json_error( [ 'message' => __( 'Invalid request.', 'tpw-ilungu-club' ) ], 403 );
         }
 
         $to_name    = isset($_POST['recipient_name'])  ? sanitize_text_field( wp_unslash($_POST['recipient_name']) )  : '';
@@ -82,7 +82,7 @@ class TPW_Email_Form {
         $send_copy  = isset($_POST['send_copy'])       ? (bool) $_POST['send_copy'] : true;
 
         if ( empty($to_name) || empty($to_email) || empty($from_name) || empty($from_email) ) {
-            wp_send_json_error( [ 'message' => __( 'Missing required fields.', 'tpw-core' ) ], 400 );
+            wp_send_json_error( [ 'message' => __( 'Missing required fields.', 'tpw-ilungu-club' ) ], 400 );
         }
 
         $attachments = [];
@@ -99,6 +99,6 @@ class TPW_Email_Form {
             wp_send_json_error( [ 'message' => $result['message'] ], 500 );
         }
 
-        wp_send_json_success( [ 'message' => __( 'Email sent.', 'tpw-core' ) ] );
+        wp_send_json_success( [ 'message' => __( 'Email sent.', 'tpw-ilungu-club' ) ] );
     }
 }

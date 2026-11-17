@@ -20,7 +20,7 @@ $has_selection = ( $selected_gallery_html ?? '' ) !== '';
   <?php if ( $has_selection ) : ?>
     <div class="tpw-gallery-index-selected" id="tpw-gallery-selected">
       <div class="tpw-gallery-index-back-wrap">
-        <a class="tpw-btn tpw-btn-secondary tpw-gallery-index-back" href="<?php echo esc_url( tpw_gallery_get_index_url() ); ?>"><?php echo esc_html__( 'Back to Galleries', 'tpw-core' ); ?></a>
+        <a class="tpw-btn tpw-btn-secondary tpw-gallery-index-back" href="<?php echo esc_url( tpw_gallery_get_index_url() ); ?>"><?php echo esc_html__( 'Back to Galleries', 'tpw-ilungu-club' ); ?></a>
       </div>
       <?php echo $selected_gallery_html; ?>
     </div>

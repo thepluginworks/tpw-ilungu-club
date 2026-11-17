@@ -34,7 +34,7 @@ class TPW_Postcode_Provider_Fetchify extends TPW_Postcode_Provider_Abstract {
     public static function lookup( $postcode, $country, $mode, $street_prefix, $settings ) {
         return self::error(
             'provider_not_wired',
-            __( 'Fetchify credentials can be stored in Core, but live Fetchify address lookup is not wired in this release.', 'tpw-core' )
+            __( 'Fetchify credentials can be stored in Core, but live Fetchify address lookup is not wired in this release.', 'tpw-ilungu-club' )
         );
     }
 }

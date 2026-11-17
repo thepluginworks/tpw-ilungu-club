@@ -28,6 +28,19 @@ matches the smoke and contribution-contract specs. This keeps the maintained
 existing-install, authenticated-admin, portal/workspace, and fresh-install
 fixture checks separate from historical diagnostics.
 
+## Localized dependency checks
+
+`local-dependencies.spec.ts` uses the existing administrator account and Club
+Local data. It drags rows without saving, reloads to restore the displayed
+order, opens the add-member datepicker without saving, and blocks POST requests
+after login. It requires existing sortable rows, menu items and date fields. The
+Field Settings test also uses `ILUNGU_WP_PATH` and `ILUNGU_LOCAL_SHELL` for a
+read-only safety check and stops if loading the page would modify settings.
+
+```sh
+npx playwright test --config=tests/playwright/playwright.config.ts tests/playwright/local-dependencies.spec.ts --project=chromium
+```
+
 ## Member-role permission fixture
 
 `member-role-permissions.spec.ts` is a Local-only, rerun-safe role contract suite.

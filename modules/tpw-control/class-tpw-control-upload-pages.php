@@ -35,7 +35,7 @@ add_action('wp_ajax_tpw_control_delete_file', function() {
     if ( $wpdb->last_error ) {
         error_log( 'TPW Upload Pages: unable to delete file link. Database error: ' . $wpdb->last_error );
     }
-    wp_send_json_error( [ 'message' => __( 'Delete failed. Please try again or contact an administrator.', 'tpw-core' ) ], 500 );
+    wp_send_json_error( [ 'message' => __( 'Delete failed. Please try again or contact an administrator.', 'tpw-ilungu-club' ) ], 500 );
 });
 
 // Provide a consistent JSON response for unauthenticated requests too (will return Not logged in.)
@@ -1198,12 +1198,12 @@ class TPW_Control_Upload_Pages {
                             if ($ok) { $report['ok']++; $report['items'][] = [ 'id' => $lid, 'status' => 'ok', 'message' => 'Moved to Trash' ]; }
                             else { $report['fail']++; $report['items'][] = [ 'id' => $lid, 'status' => 'error' ]; }
                         }
-                        $report['message'] = sprintf( _n( 'Moved %d file to Trash', 'Moved %d files to Trash', (int) $report['ok'], 'tpw-core' ), (int) $report['ok'] );
+                        $report['message'] = sprintf( _n( 'Moved %d file to Trash', 'Moved %d files to Trash', (int) $report['ok'], 'tpw-ilungu-club' ), (int) $report['ok'] );
                     } elseif ( $action2 === 'restore' ) {
                         foreach ( $ids as $lid ) { $ok = self::restore_link( (int)$lid ); if ($ok) { $report['ok']++; $report['items'][] = [ 'id' => $lid, 'status' => 'ok' ]; } else { $report['fail']++; $report['items'][] = [ 'id' => $lid, 'status' => 'error' ]; } }
                     } elseif ( $action2 === 'delete_permanent' ) {
                         foreach ( $ids as $lid ) { $ok = self::purge_link( (int)$lid ); if ($ok) { $report['ok']++; $report['items'][] = [ 'id' => $lid, 'status' => 'ok' ]; } else { $report['fail']++; $report['items'][] = [ 'id' => $lid, 'status' => 'error' ]; } }
-                        $report['message'] = sprintf( _n( 'Deleted %d file permanently', 'Deleted %d files permanently', (int) $report['ok'], 'tpw-core' ), (int) $report['ok'] );
+                        $report['message'] = sprintf( _n( 'Deleted %d file permanently', 'Deleted %d files permanently', (int) $report['ok'], 'tpw-ilungu-club' ), (int) $report['ok'] );
                     }
                 }
                 // Store report transient and log
@@ -1929,7 +1929,7 @@ class TPW_Control_Upload_Pages {
             // Build edit URL and ask the editor to open the Add File modal immediately
             $edit_url  = add_query_arg( [ TPW_Control::ACTION_QUERY_VAR => 'upload-pages', 'sub' => 'edit', 'upload_page_id' => (int) $page->id, 'open' => 'add_file' ], $hub_url );
             echo '<div class="tpw-admin-tools" style="margin:8px 0 12px">'
-                . '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit Upload Page', 'tpw-core' ) . '</a>'
+                . '<a class="tpw-btn tpw-btn-secondary" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit Upload Page', 'tpw-ilungu-club' ) . '</a>'
                 . '</div>';
         }
         if ( ! empty( $page->description ) ) {
@@ -1939,7 +1939,7 @@ class TPW_Control_Upload_Pages {
             echo apply_filters( 'the_content', $desc );
         }
         if ( empty( $files ) ) {
-            echo '<p class="tpw-empty">' . esc_html__( 'No files uploaded yet.', 'tpw-core' ) . '</p>';
+            echo '<p class="tpw-empty">' . esc_html__( 'No files uploaded yet.', 'tpw-ilungu-club' ) . '</p>';
             echo '</div>';
             return ob_get_clean();
         }
@@ -1990,7 +1990,7 @@ class TPW_Control_Upload_Pages {
             echo '<div class="tpw-upload-filter" style="margin:10px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap">';
             if ( $has_categories ) {
                 echo '<div class="tpw-filter tpw-filter-cat">';
-                echo '<strong>' . esc_html__('Category:', 'tpw-core') . '</strong> ';
+                echo '<strong>' . esc_html__('Category:', 'tpw-ilungu-club') . '</strong> ';
                 $base = remove_query_arg( [ 'category', 'tpw_cat', 'cat' ] );
                 $all_active = ($selected_cat === '');
                 if ( $selected_year !== '' ) {
@@ -1999,7 +1999,7 @@ class TPW_Control_Upload_Pages {
                     $base = remove_query_arg( [ 'year', 'tpw_year' ], $base );
                 }
                 $all_url = esc_url( $base );
-                echo '<a class="tpw-btn ' . ( $all_active ? 'tpw-btn-primary' : 'tpw-btn-secondary' ) . ' tpw-cat-filter" data-page="' . (int)$page->id . '" data-cat="" href="' . $all_url . '">' . esc_html__('All', 'tpw-core') . '</a> ';
+                echo '<a class="tpw-btn ' . ( $all_active ? 'tpw-btn-primary' : 'tpw-btn-secondary' ) . ' tpw-cat-filter" data-page="' . (int)$page->id . '" data-cat="" href="' . $all_url . '">' . esc_html__('All', 'tpw-ilungu-club') . '</a> ';
                 foreach ( $categories_for_ui as $cid => $meta ) {
                     $url = add_query_arg( 'category', $meta['slug'], $base );
                     $active = $selected_cat === $meta['slug'];
@@ -2011,17 +2011,17 @@ class TPW_Control_Upload_Pages {
             if ( $year_option_count >= 2 ) {
                 // Year filter as a dropdown with deep-linkable state.
                 echo '<div class="tpw-filter tpw-filter-year" style="display:flex;align-items:center;gap:6px">';
-                echo '<label><strong>' . esc_html__('Year:', 'tpw-core') . '</strong> ';
+                echo '<label><strong>' . esc_html__('Year:', 'tpw-ilungu-club') . '</strong> ';
                 echo '<select name="tpw_year" data-page="' . (int) $page->id . '">';
                 $sel = ( $selected_year === 'all' ) ? ' selected' : '';
-                echo '<option value="all"' . $sel . '>' . esc_html__( 'Show all years', 'tpw-core' ) . '</option>';
+                echo '<option value="all"' . $sel . '>' . esc_html__( 'Show all years', 'tpw-ilungu-club' ) . '</option>';
                 foreach ( $years as $y ) {
                     $ys = (string) (int) $y; $sel = ( $selected_year === $ys ) ? ' selected' : '';
                     echo '<option value="' . esc_attr( $ys ) . '"' . $sel . '>' . esc_html( $ys ) . '</option>';
                 }
                 if ( $has_none_year ) {
                     $sel = ( $selected_year === 'none' ) ? ' selected' : '';
-                    echo '<option value="none"' . $sel . '>' . esc_html__( 'Uncategorised', 'tpw-core' ) . '</option>';
+                    echo '<option value="none"' . $sel . '>' . esc_html__( 'Uncategorised', 'tpw-ilungu-club' ) . '</option>';
                 }
                 echo '</select></label>';
                 echo '</div>';
@@ -2114,7 +2114,7 @@ class TPW_Control_Upload_Pages {
         $idx = 0; // sequential index across all previewable items for Lightbox navigation
         if ( $layout === 'table' ) {
             foreach ( $by_year as $year => $category_groups ) {
-                $year_title = (int) $year > 0 ? (string) $year : esc_html__( 'Documents', 'tpw-core' );
+                $year_title = (int) $year > 0 ? (string) $year : esc_html__( 'Documents', 'tpw-ilungu-club' );
                 echo '<h2>' . esc_html( $year_title ) . '</h2>';
                 foreach ( $category_groups as $cid => $group ) {
                     $cat_label = isset($categories[$cid]) ? $categories[$cid]['name'] : '';
@@ -2139,7 +2139,7 @@ class TPW_Control_Upload_Pages {
             }
         } elseif ( $layout === 'list' ) {
             foreach ( $by_year as $year => $category_groups ) {
-                $year_title = (int) $year > 0 ? (string) $year : esc_html__( 'Documents', 'tpw-core' );
+                $year_title = (int) $year > 0 ? (string) $year : esc_html__( 'Documents', 'tpw-ilungu-club' );
                 echo '<h2>' . esc_html( $year_title ) . '</h2>';
                 foreach ( $category_groups as $cid => $group ) {
                     $cat_label = isset($categories[$cid]) ? $categories[$cid]['name'] : '';
@@ -2162,7 +2162,7 @@ class TPW_Control_Upload_Pages {
         } else { // cards
             echo '<div class="tpw-upload-cards">';
             foreach ( $by_year as $year => $category_groups ) {
-                $year_title = (int) $year > 0 ? (string) $year : esc_html__( 'Documents', 'tpw-core' );
+                $year_title = (int) $year > 0 ? (string) $year : esc_html__( 'Documents', 'tpw-ilungu-club' );
                 echo '<h2>' . esc_html( $year_title ) . '</h2>';
                 foreach ( $category_groups as $cid => $group ) {
                     $cat_label = isset($categories[$cid]) ? $categories[$cid]['name'] : '';
@@ -2178,7 +2178,7 @@ class TPW_Control_Upload_Pages {
                         $a = '<a class="tpw-upl-preview" data-index="' . (int)$idx . '" data-type="' . esc_attr( $f->file_type ) . '" data-label="' . esc_attr( $label ) . '" href="' . esc_url( $url ) . '">';
                         $link = $a . esc_html( $label ) . '</a>';
                         echo '<h4 class="tpw-card-title">' . $link . '</h4>';
-                        echo '<div class="tpw-card-actions"><a class="tpw-btn tpw-btn-primary" href="' . esc_url( add_query_arg( 'dl', 1, $url ) ) . '">' . esc_html__( 'Download', 'tpw-core' ) . '</a></div>';
+                        echo '<div class="tpw-card-actions"><a class="tpw-btn tpw-btn-primary" href="' . esc_url( add_query_arg( 'dl', 1, $url ) ) . '">' . esc_html__( 'Download', 'tpw-ilungu-club' ) . '</a></div>';
                         echo '</div>';
                         $idx++;
                     }
@@ -2414,7 +2414,7 @@ class TPW_Control_Upload_Pages {
         self::handle_post();
         $template = __DIR__ . '/templates/sections/upload-pages.php';
         if ( file_exists( $template ) ) { include $template; return; }
-        echo '<p>' . esc_html__( 'Upload Pages module not available.', 'tpw-core' ) . '</p>';
+        echo '<p>' . esc_html__( 'Upload Pages module not available.', 'tpw-ilungu-club' ) . '</p>';
     }
 }
 

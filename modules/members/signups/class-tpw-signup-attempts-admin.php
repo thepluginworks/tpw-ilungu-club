@@ -60,8 +60,8 @@ class TPW_Signup_Attempts_Admin {
 
 		add_submenu_page(
 			'ilungu-club-dashboard',
-			esc_html__( 'Sign Ups (Debug)', 'tpw-core' ),
-			esc_html__( 'Sign Ups (Debug)', 'tpw-core' ),
+			esc_html__( 'Sign Ups (Debug)', 'tpw-ilungu-club' ),
+			esc_html__( 'Sign Ups (Debug)', 'tpw-ilungu-club' ),
 			'manage_options',
 			self::PAGE_SLUG,
 			array( __CLASS__, 'render_page' )
@@ -77,14 +77,14 @@ class TPW_Signup_Attempts_Admin {
 	 */
 	public static function render_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to access this screen.', 'tpw-core' ), 403 );
+			wp_die( esc_html__( 'You do not have permission to access this screen.', 'tpw-ilungu-club' ), 403 );
 		}
 
 		if ( ! self::is_debug_enabled() ) {
 			?>
 			<div class="wrap">
-				<h1><?php echo esc_html__( 'Sign Ups (Debug)', 'tpw-core' ); ?></h1>
-				<p><?php echo esc_html__( 'Signup debug mode is disabled.', 'tpw-core' ); ?></p>
+				<h1><?php echo esc_html__( 'Sign Ups (Debug)', 'tpw-ilungu-club' ); ?></h1>
+				<p><?php echo esc_html__( 'Signup debug mode is disabled.', 'tpw-ilungu-club' ); ?></p>
 			</div>
 			<?php
 			return;
@@ -99,24 +99,24 @@ class TPW_Signup_Attempts_Admin {
 
 		?>
 		<div class="wrap">
-			<h1><?php echo esc_html__( 'Sign Ups (Debug)', 'tpw-core' ); ?></h1>
-			<p><?php echo esc_html__( 'Temporary internal testing screen for draft signup attempts and the Branch 5 internal completion bridge.', 'tpw-core' ); ?></p>
+			<h1><?php echo esc_html__( 'Sign Ups (Debug)', 'tpw-ilungu-club' ); ?></h1>
+			<p><?php echo esc_html__( 'Temporary internal testing screen for draft signup attempts and the Branch 5 internal completion bridge.', 'tpw-ilungu-club' ); ?></p>
 			<?php self::render_notice(); ?>
 			<table class="widefat striped">
 				<thead>
 					<tr>
-						<th scope="col"><?php echo esc_html__( 'Attempt ID', 'tpw-core' ); ?></th>
-						<th scope="col"><?php echo esc_html__( 'Email', 'tpw-core' ); ?></th>
-						<th scope="col"><?php echo esc_html__( 'Flow Key', 'tpw-core' ); ?></th>
-						<th scope="col"><?php echo esc_html__( 'Status', 'tpw-core' ); ?></th>
-						<th scope="col"><?php echo esc_html__( 'Created Date', 'tpw-core' ); ?></th>
-						<th scope="col"><?php echo esc_html__( 'Action', 'tpw-core' ); ?></th>
+						<th scope="col"><?php echo esc_html__( 'Attempt ID', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php echo esc_html__( 'Email', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php echo esc_html__( 'Flow Key', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php echo esc_html__( 'Status', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php echo esc_html__( 'Created Date', 'tpw-ilungu-club' ); ?></th>
+						<th scope="col"><?php echo esc_html__( 'Action', 'tpw-ilungu-club' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php if ( empty( $attempts ) ) : ?>
 						<tr>
-							<td colspan="6"><?php echo esc_html__( 'No signup attempts found.', 'tpw-core' ); ?></td>
+							<td colspan="6"><?php echo esc_html__( 'No signup attempts found.', 'tpw-ilungu-club' ); ?></td>
 						</tr>
 					<?php else : ?>
 						<?php foreach ( $attempts as $attempt ) : ?>
@@ -151,10 +151,10 @@ class TPW_Signup_Attempts_Admin {
 						<input type="hidden" name="action" value="tpw_signup_complete_internal" />
 						<input type="hidden" name="attempt_id" value="<?php echo esc_attr( (string) $attempt_id ); ?>" />
 						<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( 'tpw_signup_complete_internal_' . $attempt_id ) ); ?>" />
-						<button type="submit" class="button button-primary button-small"><?php echo esc_html__( 'Complete Internally', 'tpw-core' ); ?></button>
+						<button type="submit" class="button button-primary button-small"><?php echo esc_html__( 'Complete Internally', 'tpw-ilungu-club' ); ?></button>
 					</form>
 				<?php else : ?>
-					<?php echo esc_html__( '—', 'tpw-core' ); ?>
+					<?php echo esc_html__( '—', 'tpw-ilungu-club' ); ?>
 				<?php endif; ?>
 			</td>
 		</tr>

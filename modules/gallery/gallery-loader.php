@@ -21,20 +21,20 @@ add_action( 'init', function(){
     // Register public and admin Gallery pages through the shared System Pages API.
     if ( class_exists( 'TPW_Core_System_Pages' ) ) {
         TPW_Core_System_Pages::register_page( 'gallery', [
-            'title'     => __( 'Gallery', 'tpw-core' ),
+            'title'     => __( 'Gallery', 'tpw-ilungu-club' ),
             'shortcode' => '[tpw_gallery_index]',
             'plugin'    => 'tpw-core',
             'required'  => 0,
         ] );
         TPW_Core_System_Pages::register_page( 'gallery-admin', [
-            'title'     => __( 'Gallery Admin', 'tpw-core' ),
+            'title'     => __( 'Gallery Admin', 'tpw-ilungu-club' ),
             'shortcode' => '[tpw_gallery_admin]',
             'plugin'    => 'tpw-core',
             'required'  => 0,
         ] );
         // Register a front-end help page at /gallery-help/
         TPW_Core_System_Pages::register_page( 'gallery-help', [
-            'title'     => __( 'Gallery Help', 'tpw-core' ),
+            'title'     => __( 'Gallery Help', 'tpw-ilungu-club' ),
             'shortcode' => '[tpw_gallery_help]',
             'plugin'    => 'tpw-core',
             'required'  => 0,
@@ -53,7 +53,7 @@ add_action( 'init', function(){
 // Shortcode renders the admin wrapper plus list/categories
 add_shortcode( 'tpw_gallery_admin', function( $atts ){
     if ( ! is_user_logged_in() || ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) {
-        return '<div class="tpw-notice tpw-notice--error">' . esc_html__( 'You do not have permission to access the Gallery admin.', 'tpw-core' ) . '</div>';
+        return '<div class="tpw-notice tpw-notice--error">' . esc_html__( 'You do not have permission to access the Gallery admin.', 'tpw-ilungu-club' ) . '</div>';
     }
     ob_start();
     // Enqueue admin assets (module-scoped)
@@ -79,35 +79,35 @@ add_shortcode( 'tpw_gallery_admin', function( $atts ){
     $editor_id = isset($_GET['gallery_id']) ? (int) $_GET['gallery_id'] : 0;
     wp_localize_script( 'tpw-gallery-admin', 'tpwGallery', [
         'nonce' => wp_create_nonce( 'tpw_gallery' ),
-        'i18nConfirmDelete' => __( 'Delete this gallery?', 'tpw-core' ),
-        'i18nAddTitle' => __( 'Add Gallery', 'tpw-core' ),
-        'i18nEditTitle' => __( 'Edit Gallery', 'tpw-core' ),
+        'i18nConfirmDelete' => __( 'Delete this gallery?', 'tpw-ilungu-club' ),
+        'i18nAddTitle' => __( 'Add Gallery', 'tpw-ilungu-club' ),
+        'i18nEditTitle' => __( 'Edit Gallery', 'tpw-ilungu-club' ),
         'adminUrl' => home_url( '/gallery-admin/' ),
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'isAdmin' => true,
         'isEditorPage' => $editor_id > 0,
         'editorGalleryId' => $editor_id,
-        'i18nRemoveConfirm' => __( 'Remove this image from the gallery?', 'tpw-core' ),
-        'i18nRemove' => __( 'Remove', 'tpw-core' ),
-        'i18nNoImages' => __( 'No images in this gallery yet.', 'tpw-core' ),
-        'i18nUploadToGallery' => __( 'Upload to this Gallery', 'tpw-core' ),
-        'i18nAddFromLibrary' => __( 'Add Images (Media Library)', 'tpw-core' ),
-        'i18nDeletePerm' => __( 'Delete this image permanently from the Media Library? This cannot be undone.', 'tpw-core' ),
-        'i18nDeletePermShort' => __( 'Delete', 'tpw-core' ),
-        'i18nEditCaption' => __( 'Edit caption', 'tpw-core' ),
-        'i18nPrevious' => __( 'Previous', 'tpw-core' ),
-        'i18nNext' => __( 'Next', 'tpw-core' ),
-        'i18nUnsavedCaption' => __( 'You have unsaved caption changes. Discard them?', 'tpw-core' ),
-        'i18nSave' => __( 'Save', 'tpw-core' ),
-        'i18nCancel' => __( 'Cancel', 'tpw-core' ),
-        'i18nSaved' => __( 'Saved', 'tpw-core' ),
-        'i18nAddCategory' => __( 'Add Category', 'tpw-core' ),
-        'i18nCategoryNamePH' => __( 'Category name', 'tpw-core' ),
-        'i18nDeleteCategoryConfirm' => __( 'Delete this category?', 'tpw-core' ),
-        'i18nUploading' => __( 'Uploading...', 'tpw-core' ),
-        'i18nUploadFailed' => __( 'Upload failed', 'tpw-core' ),
-        'i18nAutoSavedBeforeUpload' => __( 'Gallery saved automatically before upload.', 'tpw-core' ),
-        'i18nFocusHelp' => __( 'Click or drag to set the focal point.', 'tpw-core' ),
+        'i18nRemoveConfirm' => __( 'Remove this image from the gallery?', 'tpw-ilungu-club' ),
+        'i18nRemove' => __( 'Remove', 'tpw-ilungu-club' ),
+        'i18nNoImages' => __( 'No images in this gallery yet.', 'tpw-ilungu-club' ),
+        'i18nUploadToGallery' => __( 'Upload to this Gallery', 'tpw-ilungu-club' ),
+        'i18nAddFromLibrary' => __( 'Add Images (Media Library)', 'tpw-ilungu-club' ),
+        'i18nDeletePerm' => __( 'Delete this image permanently from the Media Library? This cannot be undone.', 'tpw-ilungu-club' ),
+        'i18nDeletePermShort' => __( 'Delete', 'tpw-ilungu-club' ),
+        'i18nEditCaption' => __( 'Edit caption', 'tpw-ilungu-club' ),
+        'i18nPrevious' => __( 'Previous', 'tpw-ilungu-club' ),
+        'i18nNext' => __( 'Next', 'tpw-ilungu-club' ),
+        'i18nUnsavedCaption' => __( 'You have unsaved caption changes. Discard them?', 'tpw-ilungu-club' ),
+        'i18nSave' => __( 'Save', 'tpw-ilungu-club' ),
+        'i18nCancel' => __( 'Cancel', 'tpw-ilungu-club' ),
+        'i18nSaved' => __( 'Saved', 'tpw-ilungu-club' ),
+        'i18nAddCategory' => __( 'Add Category', 'tpw-ilungu-club' ),
+        'i18nCategoryNamePH' => __( 'Category name', 'tpw-ilungu-club' ),
+        'i18nDeleteCategoryConfirm' => __( 'Delete this category?', 'tpw-ilungu-club' ),
+        'i18nUploading' => __( 'Uploading...', 'tpw-ilungu-club' ),
+        'i18nUploadFailed' => __( 'Upload failed', 'tpw-ilungu-club' ),
+        'i18nAutoSavedBeforeUpload' => __( 'Gallery saved automatically before upload.', 'tpw-ilungu-club' ),
+        'i18nFocusHelp' => __( 'Click or drag to set the focal point.', 'tpw-ilungu-club' ),
     ] );
 
     // Default list view with embedded categories panel
@@ -123,7 +123,7 @@ add_shortcode( 'tpw_gallery_admin', function( $atts ){
 // Shortcode: gallery help page
 add_shortcode( 'tpw_gallery_help', function( $atts ){
     if ( ! is_user_logged_in() || ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) {
-        return '<div class="tpw-notice tpw-notice--error">' . esc_html__( 'You do not have permission to access the Gallery help.', 'tpw-core' ) . '</div>';
+        return '<div class="tpw-notice tpw-notice--error">' . esc_html__( 'You do not have permission to access the Gallery help.', 'tpw-ilungu-club' ) . '</div>';
     }
     // Enqueue base admin UI styles for consistent look
     $base_url = trailingslashit( TPW_CORE_URL ) . 'modules/gallery/';
@@ -142,7 +142,7 @@ add_shortcode( 'tpw_gallery_help', function( $atts ){
 
 // AJAX: delete gallery
 add_action( 'wp_ajax_tpw_gallery_delete', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $res = tpw_gallery_delete( $id );
@@ -152,7 +152,7 @@ add_action( 'wp_ajax_tpw_gallery_delete', function(){
 
 // AJAX: create gallery
 add_action( 'wp_ajax_tpw_gallery_create', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $title = isset($_POST['title']) ? sanitize_text_field( wp_unslash($_POST['title']) ) : '';
     $description = isset($_POST['description']) ? wp_kses_post( wp_unslash($_POST['description']) ) : '';
@@ -169,7 +169,7 @@ add_action( 'wp_ajax_tpw_gallery_create', function(){
 
 // AJAX: update gallery
 add_action( 'wp_ajax_tpw_gallery_update', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $gallery_id = isset($_POST['gallery_id']) ? (int) $_POST['gallery_id'] : 0;
     $title = isset($_POST['title']) ? sanitize_text_field( wp_unslash($_POST['title']) ) : null;
@@ -187,7 +187,7 @@ add_action( 'wp_ajax_tpw_gallery_update', function(){
 
 // AJAX: get gallery (for edit prefill)
 add_action( 'wp_ajax_tpw_gallery_get', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     if ( ! $id ) wp_send_json_error( 'Invalid ID' );
@@ -199,7 +199,7 @@ add_action( 'wp_ajax_tpw_gallery_get', function(){
 
 // AJAX: upload a file directly to this gallery (stores in uploads/tpw-galleries/{slug})
 add_action( 'wp_ajax_tpw_gallery_upload_image', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $gid = isset($_POST['gallery_id']) ? (int) $_POST['gallery_id'] : 0;
     if ( $gid <= 0 ) wp_send_json_error( 'Invalid gallery ID' );
@@ -212,7 +212,7 @@ add_action( 'wp_ajax_tpw_gallery_upload_image', function(){
 
 // AJAX: add selected media library attachments to a gallery
 add_action( 'wp_ajax_tpw_gallery_add_attachments', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $gid = isset($_POST['gallery_id']) ? (int) $_POST['gallery_id'] : 0;
     $ids = isset($_POST['ids']) ? explode( ',', (string) $_POST['ids'] ) : [];
@@ -224,7 +224,7 @@ add_action( 'wp_ajax_tpw_gallery_add_attachments', function(){
 
 // AJAX: add category
 add_action( 'wp_ajax_tpw_gallery_add_category', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $name = isset($_POST['name']) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
     $res = tpw_gallery_add_category( $name );
@@ -234,7 +234,7 @@ add_action( 'wp_ajax_tpw_gallery_add_category', function(){
 
 // AJAX: delete category
 add_action( 'wp_ajax_tpw_gallery_delete_category', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $res = tpw_gallery_delete_category( $id );
@@ -244,7 +244,7 @@ add_action( 'wp_ajax_tpw_gallery_delete_category', function(){
 
 // AJAX: delete a single image (remove from gallery)
 add_action( 'wp_ajax_tpw_gallery_delete_image', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $image_id = isset($_POST['image_id']) ? (int) $_POST['image_id'] : 0;
     if ( $image_id <= 0 ) wp_send_json_error( 'Invalid image ID' );
@@ -256,7 +256,7 @@ add_action( 'wp_ajax_tpw_gallery_delete_image', function(){
 
 // AJAX: permanently delete image (attachment + row)
 add_action( 'wp_ajax_tpw_gallery_delete_image_permanently', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $image_id = isset($_POST['image_id']) ? (int) $_POST['image_id'] : 0;
     if ( $image_id <= 0 ) wp_send_json_error( 'Invalid image ID' );
@@ -268,7 +268,7 @@ add_action( 'wp_ajax_tpw_gallery_delete_image_permanently', function(){
 
 // AJAX: update caption for an image (updates DB row and Media Library caption)
 add_action( 'wp_ajax_tpw_gallery_update_caption', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $image_id = isset($_POST['image_id']) ? (int) $_POST['image_id'] : 0;
     $caption  = isset($_POST['caption']) ? wp_unslash( (string) $_POST['caption'] ) : '';
@@ -281,7 +281,7 @@ add_action( 'wp_ajax_tpw_gallery_update_caption', function(){
 
 // AJAX: update image focal point (focus_x, focus_y ratios 0..1)
 add_action( 'wp_ajax_tpw_gallery_update_image_focus', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $image_id = isset($_POST['image_id']) ? (int) $_POST['image_id'] : 0;
     $fx = isset($_POST['focus_x']) ? (float) $_POST['focus_x'] : null;
@@ -295,7 +295,7 @@ add_action( 'wp_ajax_tpw_gallery_update_image_focus', function(){
 
 // AJAX: reorder images within a gallery (saves to sort_order)
 add_action( 'wp_ajax_tpw_gallery_reorder_images', function(){
-    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! function_exists( 'tpw_gallery_user_can_manage' ) || ! tpw_gallery_user_can_manage() ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_ajax_referer( 'tpw_gallery' );
     $gallery_id = isset($_POST['gallery_id']) ? (int) $_POST['gallery_id'] : 0;
     $order_raw  = isset($_POST['order']) ? (string) $_POST['order'] : '';

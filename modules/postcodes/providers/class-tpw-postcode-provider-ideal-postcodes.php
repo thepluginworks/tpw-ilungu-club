@@ -52,14 +52,14 @@ class TPW_Postcode_Provider_Ideal_Postcodes extends TPW_Postcode_Provider_Abstra
         $normalized_country = self::normalize_lookup_country( $requested_country );
 
         if ( 'GB' !== $normalized_country ) {
-            return self::error( 'unsupported_country', __( 'Ideal Postcodes supports GB lookup only.', 'tpw-core' ) );
+            return self::error( 'unsupported_country', __( 'Ideal Postcodes supports GB lookup only.', 'tpw-ilungu-club' ) );
         }
 
         $api_key = isset( $settings['ideal_postcodes_api_key'] ) ? (string) $settings['ideal_postcodes_api_key'] : '';
         $api_key = apply_filters( 'tpw_postcode_lookup_api_key', $api_key, 'ideal_postcodes' );
 
         if ( '' === $api_key ) {
-            return self::error( 'missing_api_key', __( 'Ideal Postcodes API key missing.', 'tpw-core' ) );
+            return self::error( 'missing_api_key', __( 'Ideal Postcodes API key missing.', 'tpw-ilungu-club' ) );
         }
 
         $postcode_compact = self::sanitize_postcode( $postcode );
@@ -89,12 +89,12 @@ class TPW_Postcode_Provider_Ideal_Postcodes extends TPW_Postcode_Provider_Abstra
         $data   = json_decode( $body, true );
 
         if ( 404 === $status ) {
-            $message = is_array( $data ) && ! empty( $data['message'] ) ? (string) $data['message'] : __( 'Postcode not found.', 'tpw-core' );
+            $message = is_array( $data ) && ! empty( $data['message'] ) ? (string) $data['message'] : __( 'Postcode not found.', 'tpw-ilungu-club' );
 
             if ( is_array( $data ) && ! empty( $data['suggestions'] ) && is_array( $data['suggestions'] ) ) {
                 $message .= ' ' . sprintf(
                     /* translators: %s: suggestion list */
-                    __( 'Suggestions: %s', 'tpw-core' ),
+                    __( 'Suggestions: %s', 'tpw-ilungu-club' ),
                     implode( ', ', array_map( 'sanitize_text_field', $data['suggestions'] ) )
                 );
             }
@@ -103,12 +103,12 @@ class TPW_Postcode_Provider_Ideal_Postcodes extends TPW_Postcode_Provider_Abstra
         }
 
         if ( 200 !== $status ) {
-            $message = is_array( $data ) && ! empty( $data['message'] ) ? (string) $data['message'] : sprintf( __( 'HTTP %d from Ideal Postcodes.', 'tpw-core' ), $status );
+            $message = is_array( $data ) && ! empty( $data['message'] ) ? (string) $data['message'] : sprintf( __( 'HTTP %d from Ideal Postcodes.', 'tpw-ilungu-club' ), $status );
             return self::error( 'http_status', $message, $status );
         }
 
         if ( ! is_array( $data ) || empty( $data['result'] ) || ! is_array( $data['result'] ) ) {
-            return self::error( 'no_addresses', __( 'No addresses returned for this postcode.', 'tpw-core' ) );
+            return self::error( 'no_addresses', __( 'No addresses returned for this postcode.', 'tpw-ilungu-club' ) );
         }
 
         $addresses = array();
@@ -131,7 +131,7 @@ class TPW_Postcode_Provider_Ideal_Postcodes extends TPW_Postcode_Provider_Abstra
         }
 
         if ( empty( $addresses ) ) {
-            return self::error( 'no_addresses', __( 'No matching addresses were returned for this postcode.', 'tpw-core' ) );
+            return self::error( 'no_addresses', __( 'No matching addresses were returned for this postcode.', 'tpw-ilungu-club' ) );
         }
 
         $first = $addresses[0];

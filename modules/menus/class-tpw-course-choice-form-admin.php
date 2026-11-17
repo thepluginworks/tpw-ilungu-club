@@ -43,8 +43,8 @@ class TPW_Course_Choice_Form_Admin {
     }
 
     public static function render_page() {
-        $header_title = __( 'Course Options', 'tpw-core' );
-        $header_desc  = __( 'Add or update an individual dish option for your menu.', 'tpw-core' );
+        $header_title = __( 'Course Options', 'tpw-ilungu-club' );
+        $header_desc  = __( 'Add or update an individual dish option for your menu.', 'tpw-ilungu-club' );
 
         if ( function_exists( 'tpw_admin_output_header' ) ) {
             tpw_admin_output_header( $header_title, $header_desc );
@@ -122,7 +122,7 @@ class TPW_Course_Choice_Form_Admin {
 
         wp_localize_script( 'tpw-course-rename-warning', 'TPW_COURSE_RENAME', [
             'original' => $original,
-            'message'  => __( "Changing this menu item's name will remove the preselected value from existing RSVPs. Are you sure you want to continue?", 'tpw-core' ),
+            'message'  => __( "Changing this menu item's name will remove the preselected value from existing RSVPs. Are you sure you want to continue?", 'tpw-ilungu-club' ),
         ] );
     }
 }

@@ -69,18 +69,18 @@ class TPW_Menus_Admin {
 
         if ( function_exists( 'tpw_admin_output_header' ) ) {
             tpw_admin_output_header(
-                __( 'Manage Menus', 'tpw-core' ),
-                __( 'Add, edit, and delete dining menus for your events. For Admins and Secretaries.', 'tpw-core' )
+                __( 'Manage Menus', 'tpw-ilungu-club' ),
+                __( 'Add, edit, and delete dining menus for your events. For Admins and Secretaries.', 'tpw-ilungu-club' )
             );
             echo '<div class="tpw-admin-ui"><div class="wrap">';
         } elseif ( function_exists( 'flexievent_output_header' ) ) {
             flexievent_output_header(
-                __( 'Manage Menus', 'tpw-core' ),
-                __( 'Add, edit, and delete dining menus for your events. For Admins and Secretaries.', 'tpw-core' )
+                __( 'Manage Menus', 'tpw-ilungu-club' ),
+                __( 'Add, edit, and delete dining menus for your events. For Admins and Secretaries.', 'tpw-ilungu-club' )
             );
             echo '<div class="tpw-admin-ui"><div class="wrap">';
         } else {
-            echo '<div class="tpw-admin-ui"><div class="wrap"><h1>' . esc_html__( 'Manage Menus', 'tpw-core' ) . '</h1>';
+            echo '<div class="tpw-admin-ui"><div class="wrap"><h1>' . esc_html__( 'Manage Menus', 'tpw-ilungu-club' ) . '</h1>';
         }
 
         echo '<a href="' . esc_url(admin_url('admin.php?page=tpw-core-dining-menus-add')) . '" class="page-title-action">Add New Menu</a>';

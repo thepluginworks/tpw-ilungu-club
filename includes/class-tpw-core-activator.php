@@ -229,7 +229,7 @@ class TPW_Core_Activator {
 
                 if ( ! $has_assignment ) {
                     // Create or find a "Members Menu"
-                    $menu_name = __( 'Members Menu', 'tpw-core' );
+                    $menu_name = __( 'Members Menu', 'tpw-ilungu-club' );
                     $menu_obj  = function_exists( 'wp_get_nav_menu_object' ) ? wp_get_nav_menu_object( $menu_name ) : null;
                     $menu_id   = $menu_obj && isset( $menu_obj->term_id ) ? (int) $menu_obj->term_id : 0;
 

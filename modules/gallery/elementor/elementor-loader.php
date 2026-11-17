@@ -42,7 +42,7 @@ function tpw_gallery_elementor_editor_assets() {
         'nonce'   => wp_create_nonce( 'tpw_gallery_elementor' ),
         'action'  => 'tpw_gallery_elementor_search',
         'i18n'    => [
-            'searchPlaceholder' => __( 'Type to search galleries…', 'tpw-core' ),
+            'searchPlaceholder' => __( 'Type to search galleries…', 'tpw-ilungu-club' ),
         ],
     ] );
 }

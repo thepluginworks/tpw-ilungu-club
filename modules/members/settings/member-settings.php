@@ -181,24 +181,24 @@ $profile_page_id = (int) get_option( 'tpw_member_profile_page_id', 0 );
 ?>
 <div class="tpw-member-settings">
     <div class="tpw-settings-card">
-    <h2><?php echo esc_html__( 'Member Settings', 'tpw-core' ); ?></h2>
+    <h2><?php echo esc_html__( 'Member Settings', 'tpw-ilungu-club' ); ?></h2>
         <?php tpw_members_render_settings_tabs( $current_tab ); ?>
         <h3>
             <?php
             if ( $current_tab === 'general' ) {
-                echo esc_html__( 'General Settings', 'tpw-core' );
+                echo esc_html__( 'General Settings', 'tpw-ilungu-club' );
             } elseif ( $current_tab === 'privacy' ) {
-                echo esc_html__( 'Privacy Settings', 'tpw-core' );
+                echo esc_html__( 'Privacy Settings', 'tpw-ilungu-club' );
             } elseif ( $current_tab === 'signups' ) {
-                echo esc_html__( 'Sign-Ups', 'tpw-core' );
+                echo esc_html__( 'Sign-Ups', 'tpw-ilungu-club' );
             } elseif ( $current_tab === 'profile' ) {
-                echo esc_html__( 'Member Profile', 'tpw-core' );
+                echo esc_html__( 'Member Profile', 'tpw-ilungu-club' );
             } elseif ( $current_tab === 'postcodes' ) {
-                echo esc_html__( 'Address Lookup', 'tpw-core' );
+                echo esc_html__( 'Address Lookup', 'tpw-ilungu-club' );
             } elseif ( $current_tab === 'help' ) {
-                echo esc_html__( 'Help', 'tpw-core' );
+                echo esc_html__( 'Help', 'tpw-ilungu-club' );
             } else {
-                echo esc_html__( 'Member Settings', 'tpw-core' );
+                echo esc_html__( 'Member Settings', 'tpw-ilungu-club' );
             }
             ?>
         </h3>

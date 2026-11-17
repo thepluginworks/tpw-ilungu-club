@@ -35,9 +35,9 @@ defined( 'ABSPATH' ) || exit;
             <?php
             $error = sanitize_key( wp_unslash( $_GET['tpw_import_password_setup_error'] ) );
             if ( 'expired' === $error ) {
-                esc_html_e( 'The password setup email import run has expired or is no longer available.', 'tpw-core' );
+                esc_html_e( 'The password setup email import run has expired or is no longer available.', 'tpw-ilungu-club' );
             } else {
-                esc_html_e( 'The password setup email import run is invalid.', 'tpw-core' );
+                esc_html_e( 'The password setup email import run is invalid.', 'tpw-ilungu-club' );
             }
             ?>
         </p></div>

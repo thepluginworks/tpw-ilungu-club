@@ -2,6 +2,16 @@
 
 Reference for actions and filters provided by the shared plugin framework modules. For usage examples, see the relevant sections below.
 
+Club-owned gettext calls use `tpw-ilungu-club`; the legacy `tpw-core` text domain remains available to consumers. See the [translation compatibility contract](architecture/tpw-core-canonical-legacy-identity-compatibility-contract.md#club-translation-domain) for legacy catalogue fallback and precedence. Operational `tpw-core` identifiers are unchanged.
+
+Regenerate the Club catalogue without including bundled Action Scheduler or test fixtures:
+
+```sh
+wp i18n make-pot . languages/tpw-ilungu-club.pot --slug=tpw-ilungu-club --domain=tpw-ilungu-club --include=ilungu-club.php,includes,modules,templates --exclude=includes/scheduler/action-scheduler
+```
+
+The older POT templates are retained for historical compatibility; they contain no translated strings.
+
 ## Permissions Compatibility
 
 The shared plugin framework's current plugin-facing permission bridge is:

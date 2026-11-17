@@ -7,7 +7,17 @@
 
 Core supports canonical identifiers alongside declared legacy aliases during a consumer migration. The canonical identifier is the write and presentation identity. Legacy values remain readable; Core does not bulk rewrite, delete, recreate, or overwrite managed-site data.
 
-This contract covers identity aliases only. It does not rename `TPW_Core_*`, `TPW_Member_*`, shared UI contracts, shortcodes, routes, or stored member data.
+This contract covers identity aliases and the Club translation-domain transition. It does not rename `TPW_Core_*`, `TPW_Member_*`, shared UI contracts, shortcodes, routes, or stored member data.
+
+## Club Translation Domain
+
+Club-owned gettext calls use `tpw-ilungu-club`, independently of operational `tpw-core` identifiers. The legacy `tpw-core` text domain remains registered for consumers that use it.
+
+For each active locale, a canonical Club translation takes precedence. If none loads, Club may load an existing `tpw-core-<locale>.mo` or `tpw-core-<locale>.l10n.php` from the WordPress plugin languages directory or Club's languages directory into the canonical domain. This is a whole-catalogue fallback, not a per-string merge; missing strings use WordPress's normal source-text fallback. Locale changes must repeat this resolution. Existing translation files are not moved or modified. Consumer plugins retain their own text domains and must not rename operational identifiers.
+
+WordPress can consider a malformed canonical catalogue loaded before its contents are parsed. In that case the legacy fallback is not selected and strings can appear untranslated; repair or remove the malformed canonical file.
+
+Filters targeting Club's translated strings by domain, including `gettext_tpw-core`, must also target the new domain; registering the old domain does not redirect those filters.
 
 ## Email Template Groups
 

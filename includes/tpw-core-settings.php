@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'init', function () {
     // Avoid fatal if function unavailable very early
     if ( function_exists( 'register_nav_menu' ) ) {
-        register_nav_menu( 'tpw_member_menu', __( 'TPW Member Menu', 'tpw-core' ) );
+        register_nav_menu( 'tpw_member_menu', __( 'TPW Member Menu', 'tpw-ilungu-club' ) );
     }
 }, 5 );
 
@@ -77,8 +77,8 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
         if ( $settings_updated === 1 ) {
             $msg = ( $current_tab === 'email' )
-                ? __( 'Email settings saved.', 'tpw-core' )
-                : __( 'Settings saved.', 'tpw-core' );
+                ? __( 'Email settings saved.', 'tpw-ilungu-club' )
+                : __( 'Settings saved.', 'tpw-ilungu-club' );
 
             echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
         }
@@ -89,15 +89,15 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
         if ( $redirect_notice !== '' ) {
             if ( $redirect_notice === 'email_logo_b64_skipped' ) {
-                echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html__( 'Base64 copy not created – image too large or incompatible format.', 'tpw-core' ) . '</p></div>';
+                echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html__( 'Base64 copy not created – image too large or incompatible format.', 'tpw-ilungu-club' ) . '</p></div>';
             } elseif ( $redirect_notice === 'email_settings_class_missing' ) {
-                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Could not save. Email settings class missing.', 'tpw-core' ) . '</p></div>';
+                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Could not save. Email settings class missing.', 'tpw-ilungu-club' ) . '</p></div>';
             } elseif ( $redirect_notice === 'email_template_db_missing' ) {
-                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Could not save. Email Templates DB class missing.', 'tpw-core' ) . '</p></div>';
+                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Could not save. Email Templates DB class missing.', 'tpw-ilungu-club' ) . '</p></div>';
             } elseif ( $redirect_notice === 'email_logs_cleared' ) {
-                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Email logs cleared.', 'tpw-core' ) . '</p></div>';
+                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Email logs cleared.', 'tpw-ilungu-club' ) . '</p></div>';
             } elseif ( $redirect_notice === 'email_logs_class_missing' ) {
-                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email logs are unavailable. Please ensure iLungu Club is fully updated.', 'tpw-core' ) . '</p></div>';
+                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email logs are unavailable. Please ensure iLungu Club is fully updated.', 'tpw-ilungu-club' ) . '</p></div>';
             }
         }
 
@@ -106,27 +106,27 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
         if ( $current_tab === 'system-pages' ) {
             $tpl = defined( 'TPW_CORE_PATH' ) ? TPW_CORE_PATH . 'modules/system-pages/templates/system-pages.php' : '';
             if ( ! ( $tpl && file_exists( $tpl ) ) ) {
-                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'System Pages template not found.', 'tpw-core' ) . '</p></div>';
+                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'System Pages template not found.', 'tpw-ilungu-club' ) . '</p></div>';
             }
         }
 
         if ( $current_tab === 'email' && ! class_exists( 'TPW_Core_Email_Settings' ) ) {
-            echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email settings class not found. Please ensure iLungu Club is fully updated.', 'tpw-core' ) . '</p></div>';
+            echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email settings class not found. Please ensure iLungu Club is fully updated.', 'tpw-ilungu-club' ) . '</p></div>';
         }
 
 		if ( $current_tab === 'email-logs' && ! class_exists( 'TPW_Email_Logs' ) ) {
-            echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email logs class not found. Please ensure iLungu Club is fully updated.', 'tpw-core' ) . '</p></div>';
+            echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email logs class not found. Please ensure iLungu Club is fully updated.', 'tpw-ilungu-club' ) . '</p></div>';
 		}
 
         if ( $current_tab === 'email-templates' ) {
             if ( ! class_exists( 'TPW_Email_Template_Registry' ) ) {
-                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email Template Registry not loaded.', 'tpw-core' ) . '</p></div>';
+                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Email Template Registry not loaded.', 'tpw-ilungu-club' ) . '</p></div>';
             } else {
                 $editing = isset( $_GET['edit_template'] ) ? strtolower( preg_replace( '/[^a-z0-9_-]/i', '', (string) wp_unslash( $_GET['edit_template'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 if ( $editing !== '' ) {
                     $tpl = TPW_Email_Template_Registry::get( $editing );
                     if ( ! $tpl ) {
-                        echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Unknown template key.', 'tpw-core' ) . '</p></div>';
+                        echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__( 'Unknown template key.', 'tpw-ilungu-club' ) . '</p></div>';
                     }
                 }
             }
@@ -137,8 +137,8 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
             if ( ! tpw_core_profile_page_is_configured() ) {
                 $url = add_query_arg( [ 'page' => 'ilungu-club-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
                 echo '<div class="notice notice-warning is-dismissible"><p>'
-                    . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-core' )
-                    . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-core' ) . '</a>'
+                    . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-ilungu-club' )
+                    . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-ilungu-club' ) . '</a>'
                     . '</p></div>';
             } else {
                 $pid = (int) get_option( 'tpw_member_profile_page_id', 0 );
@@ -147,8 +147,8 @@ if ( ! function_exists( 'tpw_core_output_core_settings_warnings' ) ) {
                     if ( $p && 'page' === $p->post_type && 'publish' !== $p->post_status ) {
                         $edit = get_edit_post_link( $pid, '' );
                         echo '<div class="notice notice-error is-dismissible"><p>'
-                            . esc_html__( 'iLungu Club: The selected Member Profile page is not published. Members cannot view it until it is Public and Published.', 'tpw-core' )
-                            . ( $edit ? ' <a href="' . esc_url( $edit ) . '">' . esc_html__( 'Edit page', 'tpw-core' ) . '</a>' : '' )
+                            . esc_html__( 'iLungu Club: The selected Member Profile page is not published. Members cannot view it until it is Public and Published.', 'tpw-ilungu-club' )
+                            . ( $edit ? ' <a href="' . esc_url( $edit ) . '">' . esc_html__( 'Edit page', 'tpw-ilungu-club' ) . '</a>' : '' )
                             . '</p></div>';
                     }
                 }
@@ -211,21 +211,21 @@ if ( ! function_exists( 'tpw_core_get_settings_view_context' ) ) {
 if ( ! function_exists( 'tpw_core_get_settings_tabs' ) ) {
     function tpw_core_get_settings_tabs() {
         $tabs = [
-            'branding'        => __( 'Branding', 'tpw-core' ),
-            'member-menu'     => __( 'Member Menu', 'tpw-core' ),
-            'features'        => __( 'Features', 'tpw-core' ),
-            'email'           => __( 'Email Settings', 'tpw-core' ),
-            'email-logs'      => __( 'Email Logs', 'tpw-core' ),
-            'email-templates' => __( 'Email Templates', 'tpw-core' ),
-            'lifecycle'       => __( 'Data Retention', 'tpw-core' ),
+            'branding'        => __( 'Branding', 'tpw-ilungu-club' ),
+            'member-menu'     => __( 'Member Menu', 'tpw-ilungu-club' ),
+            'features'        => __( 'Features', 'tpw-ilungu-club' ),
+            'email'           => __( 'Email Settings', 'tpw-ilungu-club' ),
+            'email-logs'      => __( 'Email Logs', 'tpw-ilungu-club' ),
+            'email-templates' => __( 'Email Templates', 'tpw-ilungu-club' ),
+            'lifecycle'       => __( 'Data Retention', 'tpw-ilungu-club' ),
         ];
 
         $payments_required = function_exists( 'tpw_core_payments_required' ) && tpw_core_payments_required();
         if ( $payments_required ) {
-            $tabs['payment-methods'] = __( 'Payment Methods', 'tpw-core' );
+            $tabs['payment-methods'] = __( 'Payment Methods', 'tpw-ilungu-club' );
         }
 
-        $tabs['system-pages'] = __( 'System Pages', 'tpw-core' );
+        $tabs['system-pages'] = __( 'System Pages', 'tpw-ilungu-club' );
 
         return apply_filters( 'tpw_core_settings_tabs', $tabs );
     }
@@ -389,35 +389,35 @@ if ( ! function_exists( 'tpw_core_get_settings_request_notices' ) ) {
             $notices[] = [
                 'type'    => 'success',
                 'message' => ( 'email' === $current_tab )
-                    ? __( 'Email settings saved.', 'tpw-core' )
-                    : __( 'Settings saved.', 'tpw-core' ),
+                    ? __( 'Email settings saved.', 'tpw-ilungu-club' )
+                    : __( 'Settings saved.', 'tpw-ilungu-club' ),
             ];
         }
 
         if ( 'email_logo_b64_skipped' === $redirect_notice ) {
             $notices[] = [
                 'type'    => 'warning',
-                'message' => __( 'Base64 copy not created – image too large or incompatible format.', 'tpw-core' ),
+                'message' => __( 'Base64 copy not created – image too large or incompatible format.', 'tpw-ilungu-club' ),
             ];
         } elseif ( 'email_settings_class_missing' === $redirect_notice ) {
             $notices[] = [
                 'type'    => 'error',
-                'message' => __( 'Could not save. Email settings class missing.', 'tpw-core' ),
+                'message' => __( 'Could not save. Email settings class missing.', 'tpw-ilungu-club' ),
             ];
         } elseif ( 'email_template_db_missing' === $redirect_notice ) {
             $notices[] = [
                 'type'    => 'error',
-                'message' => __( 'Could not save. Email Templates DB class missing.', 'tpw-core' ),
+                'message' => __( 'Could not save. Email Templates DB class missing.', 'tpw-ilungu-club' ),
             ];
         } elseif ( 'email_logs_cleared' === $redirect_notice ) {
             $notices[] = [
                 'type'    => 'success',
-                'message' => __( 'Email logs cleared.', 'tpw-core' ),
+                'message' => __( 'Email logs cleared.', 'tpw-ilungu-club' ),
             ];
         } elseif ( 'email_logs_class_missing' === $redirect_notice ) {
             $notices[] = [
                 'type'    => 'error',
-                'message' => __( 'Email logs are unavailable. Please ensure iLungu Club is fully updated.', 'tpw-core' ),
+                'message' => __( 'Email logs are unavailable. Please ensure iLungu Club is fully updated.', 'tpw-ilungu-club' ),
             ];
         }
 
@@ -487,7 +487,7 @@ if ( ! function_exists( 'tpw_core_render_settings_tab_content' ) ) {
         if ( trim( $tpw_core_hooked_tab_output ) !== '' ) {
             echo $tpw_core_hooked_tab_output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Tab content callbacks are responsible for escaping.
         } elseif ( ! $tpw_core_builtin_tab_rendered ) {
-            echo '<p>' . esc_html__( 'No content registered for this tab.', 'tpw-core' ) . '</p>';
+            echo '<p>' . esc_html__( 'No content registered for this tab.', 'tpw-ilungu-club' ) . '</p>';
         }
     }
 }
@@ -520,10 +520,10 @@ if ( ! function_exists( 'tpw_core_render_settings_page' ) ) {
         <?php
         if ( function_exists( 'tpw_core_render_settings_header' ) ) {
             tpw_core_render_settings_header(
-                __( 'iLungu Club Settings', 'tpw-core' ),
+                __( 'iLungu Club Settings', 'tpw-ilungu-club' ),
 				$payments_required
-					? __( 'Configure branding, menus, email, payment methods, and system pages.', 'tpw-core' )
-					: __( 'Configure branding, menus, email, and system pages.', 'tpw-core' )
+					? __( 'Configure branding, menus, email, payment methods, and system pages.', 'tpw-ilungu-club' )
+					: __( 'Configure branding, menus, email, and system pages.', 'tpw-ilungu-club' )
             );
         }
         ?>
@@ -566,21 +566,21 @@ if ( ! function_exists( 'tpw_core_render_lifecycle_tab' ) ) {
             <?php wp_nonce_field( 'tpw_core_save_lifecycle', 'tpw_core_lifecycle_nonce' ); ?>
             <?php tpw_core_render_settings_context_fields( 'lifecycle' ); ?>
 
-            <h2><?php esc_html_e( 'Data Retention', 'tpw-core' ); ?></h2>
-            <p><?php esc_html_e( 'Persistent iLungu Club data is retained by default when the plugin is deactivated, updated, or uninstalled.', 'tpw-core' ); ?></p>
+            <h2><?php esc_html_e( 'Data Retention', 'tpw-ilungu-club' ); ?></h2>
+            <p><?php esc_html_e( 'Persistent iLungu Club data is retained by default when the plugin is deactivated, updated, or uninstalled.', 'tpw-ilungu-club' ); ?></p>
             <p>
                 <label>
                     <input type="checkbox" name="tpw_core_delete_data_on_uninstall" value="1" <?php checked( $delete_on_uninstall ); ?> />
-                    <?php esc_html_e( 'Delete all proven iLungu Club-owned data when the plugin is uninstalled', 'tpw-core' ); ?>
+                    <?php esc_html_e( 'Delete all proven iLungu Club-owned data when the plugin is uninstalled', 'tpw-ilungu-club' ); ?>
                 </label>
             </p>
             <p class="description">
-                <?php esc_html_e( 'If enabled, uninstalling iLungu Club will permanently delete data proven to be owned solely by iLungu Club, including Club member records and other Club-owned business data. Back up or export anything you may need before uninstalling.', 'tpw-core' ); ?>
+                <?php esc_html_e( 'If enabled, uninstalling iLungu Club will permanently delete data proven to be owned solely by iLungu Club, including Club member records and other Club-owned business data. Back up or export anything you may need before uninstalling.', 'tpw-ilungu-club' ); ?>
             </p>
             <p class="description">
-                <?php esc_html_e( 'This cannot be undone. WordPress users, uploads/media, shared payment and email infrastructure, consumer or sibling-plugin data, provider-owned records, and ownership-ambiguous data are retained.', 'tpw-core' ); ?>
+                <?php esc_html_e( 'This cannot be undone. WordPress users, uploads/media, shared payment and email infrastructure, consumer or sibling-plugin data, provider-owned records, and ownership-ambiguous data are retained.', 'tpw-ilungu-club' ); ?>
             </p>
-            <?php tpw_core_render_settings_submit_button( __( 'Save Data Retention Setting', 'tpw-core' ) ); ?>
+            <?php tpw_core_render_settings_submit_button( __( 'Save Data Retention Setting', 'tpw-ilungu-club' ) ); ?>
         </form>
         <?php
     }
@@ -607,7 +607,7 @@ if ( ! function_exists( 'tpw_core_render_features_tab' ) ) {
             <table class="form-table" role="presentation">
                 <tbody>
                     <tr>
-                        <th scope="row"><label for="tpw_core_default_login_page"><?php esc_html_e( 'Default Login Page', 'tpw-core' ); ?></label></th>
+                        <th scope="row"><label for="tpw_core_default_login_page"><?php esc_html_e( 'Default Login Page', 'tpw-ilungu-club' ); ?></label></th>
                         <td>
                             <?php
                             echo wp_dropdown_pages( [
@@ -618,13 +618,13 @@ if ( ! function_exists( 'tpw_core_render_features_tab' ) ) {
                                 'option_none_value' => '0',
                                 'echo'              => 0,
                                 'post_status'       => 'publish',
-                            ] ) ?: '<em>' . esc_html__( 'No published pages found.', 'tpw-core' ) . '</em>';
+                            ] ) ?: '<em>' . esc_html__( 'No published pages found.', 'tpw-ilungu-club' ) . '</em>';
                             ?>
-                            <p class="description"><?php esc_html_e( 'Select the page members should be redirected to when login is required. Used by FlexiEvent and other TPW modules.', 'tpw-core' ); ?></p>
+                            <p class="description"><?php esc_html_e( 'Select the page members should be redirected to when login is required. Used by FlexiEvent and other TPW modules.', 'tpw-ilungu-club' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_login_redirect_page_id"><?php esc_html_e( 'Redirect After Login', 'tpw-core' ); ?></label></th>
+                        <th scope="row"><label for="tpw_login_redirect_page_id"><?php esc_html_e( 'Redirect After Login', 'tpw-ilungu-club' ); ?></label></th>
                         <td>
                             <?php
                             echo wp_dropdown_pages( [
@@ -635,14 +635,14 @@ if ( ! function_exists( 'tpw_core_render_features_tab' ) ) {
                                 'option_none_value' => '0',
                                 'echo'              => 0,
                                 'post_status'       => 'publish',
-                            ] ) ?: '<em>' . esc_html__( 'No published pages found.', 'tpw-core' ) . '</em>';
+                            ] ) ?: '<em>' . esc_html__( 'No published pages found.', 'tpw-ilungu-club' ) . '</em>';
                             ?>
-                            <p class="description"><?php esc_html_e( 'Choose a page to send members to immediately after they log in. Leave as “No redirect” to go to the site home.', 'tpw-core' ); ?></p>
+                            <p class="description"><?php esc_html_e( 'Choose a page to send members to immediately after they log in. Leave as “No redirect” to go to the site home.', 'tpw-ilungu-club' ); ?></p>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <?php tpw_core_render_settings_submit_button( __( 'Save Features', 'tpw-core' ) ); ?>
+            <?php tpw_core_render_settings_submit_button( __( 'Save Features', 'tpw-ilungu-club' ) ); ?>
         </form>
         <?php
     }
@@ -661,10 +661,10 @@ if ( ! function_exists( 'tpw_core_render_member_menu_tab' ) ) {
 
         if ( '1' === $repair_notice ) {
             $repair_tone = 'success';
-            $repair_message = __( 'Members Menu repair completed. Missing default items were added without duplicating existing entries.', 'tpw-core' );
+            $repair_message = __( 'Members Menu repair completed. Missing default items were added without duplicating existing entries.', 'tpw-ilungu-club' );
         } elseif ( '0' === $repair_notice ) {
             $repair_tone = 'error';
-            $repair_message = __( 'Members Menu repair could not complete. Check that WordPress nav menu functions are available and try again.', 'tpw-core' );
+            $repair_message = __( 'Members Menu repair could not complete. Check that WordPress nav menu functions are available and try again.', 'tpw-ilungu-club' );
         }
         ?>
         <?php if ( '' !== $repair_message ) : ?>
@@ -677,27 +677,27 @@ if ( ! function_exists( 'tpw_core_render_member_menu_tab' ) ) {
             <table class="form-table" role="presentation">
                 <tbody>
                     <tr>
-                        <th scope="row"><label for="tpw_member_menu_location"><?php esc_html_e( 'Replace Which Menu Location for Members?', 'tpw-core' ); ?></label></th>
+                        <th scope="row"><label for="tpw_member_menu_location"><?php esc_html_e( 'Replace Which Menu Location for Members?', 'tpw-ilungu-club' ); ?></label></th>
                         <td>
                             <select name="tpw_member_menu_location" id="tpw_member_menu_location">
                                 <?php foreach ( $locations as $key => $label ) : ?>
                                     <option value="<?php echo esc_attr( $key ); ?>" <?php selected( $selected, $key ); ?>><?php echo esc_html( $label ); ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <p class="description"><?php esc_html_e( 'Logged-in users will see the TPW Member Menu at this location if a menu is assigned to it.', 'tpw-core' ); ?></p>
+                            <p class="description"><?php esc_html_e( 'Logged-in users will see the TPW Member Menu at this location if a menu is assigned to it.', 'tpw-ilungu-club' ); ?></p>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <?php tpw_core_render_settings_submit_button( __( 'Save Member Menu', 'tpw-core' ) ); ?>
+            <?php tpw_core_render_settings_submit_button( __( 'Save Member Menu', 'tpw-ilungu-club' ) ); ?>
         </form>
         <form method="post" action="<?php echo $action; ?>">
             <?php wp_nonce_field( 'tpw_core_repair_member_menu', 'tpw_core_repair_member_menu_nonce' ); ?>
             <input type="hidden" name="action" value="tpw_core_repair_member_menu" />
             <?php tpw_core_render_settings_context_fields( 'member-menu' ); ?>
             <p>
-                <?php tpw_core_render_settings_submit_button( __( 'Repair Members Menu', 'tpw-core' ), 'secondary', 'submit', false ); ?>
-                <span class="description"><?php esc_html_e( 'Safely add any missing default iLungu Club member-menu items on existing installs without deactivating or reactivating the plugin.', 'tpw-core' ); ?></span>
+                <?php tpw_core_render_settings_submit_button( __( 'Repair Members Menu', 'tpw-ilungu-club' ), 'secondary', 'submit', false ); ?>
+                <span class="description"><?php esc_html_e( 'Safely add any missing default iLungu Club member-menu items on existing installs without deactivating or reactivating the plugin.', 'tpw-ilungu-club' ); ?></span>
             </p>
         </form>
         <?php
@@ -743,30 +743,30 @@ if ( ! function_exists( 'tpw_core_render_email_logs_tab' ) ) {
         $action = esc_url( admin_url( 'admin-post.php' ) );
         ?>
         <div class="tpw-email-logs-tab">
-            <p><?php esc_html_e( 'Recent email dispatch attempts recorded by the central core dispatcher. The latest 100 entries are shown, newest first, and logs older than 30 days are removed automatically.', 'tpw-core' ); ?></p>
+            <p><?php esc_html_e( 'Recent email dispatch attempts recorded by the central core dispatcher. The latest 100 entries are shown, newest first, and logs older than 30 days are removed automatically.', 'tpw-ilungu-club' ); ?></p>
 
             <form method="post" action="<?php echo $action; ?>" style="margin: 0 0 1rem;">
                 <?php wp_nonce_field( 'tpw_core_clear_email_logs', 'tpw_core_email_logs_nonce' ); ?>
                 <input type="hidden" name="action" value="tpw_core_clear_email_logs" />
                 <?php tpw_core_render_settings_context_fields( 'email-logs' ); ?>
-                <?php tpw_core_render_settings_submit_button( __( 'Clear Logs', 'tpw-core' ), 'delete', 'tpw_clear_email_logs', false, [ 'onclick' => "return confirm('Are you sure you want to clear all email logs?');" ] ); ?>
+                <?php tpw_core_render_settings_submit_button( __( 'Clear Logs', 'tpw-ilungu-club' ), 'delete', 'tpw_clear_email_logs', false, [ 'onclick' => "return confirm('Are you sure you want to clear all email logs?');" ] ); ?>
             </form>
 
             <table class="widefat fixed striped">
                 <thead>
                     <tr>
-                        <th scope="col"><?php esc_html_e( 'Timestamp', 'tpw-core' ); ?></th>
-                        <th scope="col"><?php esc_html_e( 'Recipient', 'tpw-core' ); ?></th>
-                        <th scope="col"><?php esc_html_e( 'Subject', 'tpw-core' ); ?></th>
-                        <th scope="col"><?php esc_html_e( 'Context', 'tpw-core' ); ?></th>
-                        <th scope="col"><?php esc_html_e( 'Status', 'tpw-core' ); ?></th>
-                        <th scope="col"><?php esc_html_e( 'Error', 'tpw-core' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Timestamp', 'tpw-ilungu-club' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Recipient', 'tpw-ilungu-club' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Subject', 'tpw-ilungu-club' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Context', 'tpw-ilungu-club' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Status', 'tpw-ilungu-club' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Error', 'tpw-ilungu-club' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if ( empty( $logs ) ) : ?>
                         <tr>
-                            <td colspan="6"><?php esc_html_e( 'No email log entries found.', 'tpw-core' ); ?></td>
+                            <td colspan="6"><?php esc_html_e( 'No email log entries found.', 'tpw-ilungu-club' ); ?></td>
                         </tr>
                     <?php else : ?>
                         <?php foreach ( $logs as $log ) : ?>
@@ -821,95 +821,95 @@ if ( ! function_exists( 'tpw_core_render_email_settings_tab' ) ) {
                         <th scope="row"><label for="tpw_brand_title">Brand Title</label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_brand_title" name="brand_title" value="<?php echo esc_attr( $brand_title ); ?>" placeholder="<?php echo esc_attr( get_bloginfo('name') ); ?>" />
-                            <p class="description"><?php esc_html_e( 'Displayed in email headers. Leave blank to use your Site Title.', 'tpw-core' ); ?></p>
+                            <p class="description"><?php esc_html_e( 'Displayed in email headers. Leave blank to use your Site Title.', 'tpw-ilungu-club' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_brand_primary_color"><?php esc_html_e( 'Email Header Primary Colour', 'tpw-core' ); ?></label></th>
+                        <th scope="row"><label for="tpw_brand_primary_color"><?php esc_html_e( 'Email Header Primary Colour', 'tpw-ilungu-club' ); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_brand_primary_color" name="brand_primary_color" value="<?php echo esc_attr( $brand_primary_color ); ?>" placeholder="#0b6cad" />
-                            <p class="description"><?php esc_html_e( 'Used by the shared email header renderer. Enter a valid hexadecimal colour.', 'tpw-core' ); ?></p>
+                            <p class="description"><?php esc_html_e( 'Used by the shared email header renderer. Enter a valid hexadecimal colour.', 'tpw-ilungu-club' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e( 'Enable Throttling', 'tpw-core' ); ?></th>
+                        <th scope="row"><?php esc_html_e( 'Enable Throttling', 'tpw-ilungu-club' ); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="enable_throttling" value="1" <?php checked( ! empty( $s['enable_throttling'] ) ); ?> />
-                                <?php esc_html_e( 'Limit the rate of outgoing emails', 'tpw-core' ); ?>
+                                <?php esc_html_e( 'Limit the rate of outgoing emails', 'tpw-ilungu-club' ); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e( 'Max Emails Per Minute', 'tpw-core' ); ?></th>
+                        <th scope="row"><?php esc_html_e( 'Max Emails Per Minute', 'tpw-ilungu-club' ); ?></th>
                         <td>
                             <input type="number" class="small-text" name="max_emails_per_minute" min="1" value="<?php echo esc_attr( (int) $s['max_emails_per_minute'] ); ?>" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e( 'Delay Between Emails (sec)', 'tpw-core' ); ?></th>
+                        <th scope="row"><?php esc_html_e( 'Delay Between Emails (sec)', 'tpw-ilungu-club' ); ?></th>
                         <td>
                             <input type="number" class="small-text" name="delay_between_emails" min="0" value="<?php echo esc_attr( (int) $s['delay_between_emails'] ); ?>" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e( 'Enable Logging', 'tpw-core' ); ?></th>
+                        <th scope="row"><?php esc_html_e( 'Enable Logging', 'tpw-ilungu-club' ); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="enable_logging" value="1" <?php checked( ! empty( $s['enable_logging'] ) ); ?> />
-                                <?php esc_html_e( 'Record email activity (via hooks)', 'tpw-core' ); ?>
+                                <?php esc_html_e( 'Record email activity (via hooks)', 'tpw-ilungu-club' ); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e( 'Enable Test Mode', 'tpw-core' ); ?></th>
+                        <th scope="row"><?php esc_html_e( 'Enable Test Mode', 'tpw-ilungu-club' ); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="send_test_mode" value="1" <?php checked( ! empty( $s['send_test_mode'] ) ); ?> />
-                                <?php esc_html_e( 'Send all emails to a single test address', 'tpw-core' ); ?>
+                                <?php esc_html_e( 'Send all emails to a single test address', 'tpw-ilungu-club' ); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e( 'Test Email Recipient', 'tpw-core' ); ?></th>
+                        <th scope="row"><?php esc_html_e( 'Test Email Recipient', 'tpw-ilungu-club' ); ?></th>
                         <td>
                             <input type="email" class="regular-text" name="test_mode_recipient" value="<?php echo esc_attr( (string) $s['test_mode_recipient'] ); ?>" />
-                            <p class="description"><?php esc_html_e( 'Used only when Test Mode is enabled.', 'tpw-core' ); ?></p>
+                            <p class="description"><?php esc_html_e( 'Used only when Test Mode is enabled.', 'tpw-ilungu-club' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e( 'Fallback Logo URL', 'tpw-core' ); ?></th>
+                        <th scope="row"><?php esc_html_e( 'Fallback Logo URL', 'tpw-ilungu-club' ); ?></th>
                         <td>
                             <input type="text" class="regular-text code" id="tpw-fallback-logo-url" name="fallback_logo_url" value="<?php echo esc_attr( (string) ( $s['fallback_logo_url'] ?: $s['default_logo_url'] ) ); ?>" />
-                            <button type="button" class="button" id="tpw-select-logo"><?php esc_html_e('Select Image','tpw-core'); ?></button>
-                            <button type="button" class="button" id="tpw-clear-logo"><?php esc_html_e('Clear','tpw-core'); ?></button>
-                            <p class="description"><?php esc_html_e( 'Optional fallback logo displayed in email templates. PNG/JPG only for base64 copy.', 'tpw-core' ); ?></p>
+                            <button type="button" class="button" id="tpw-select-logo"><?php esc_html_e('Select Image','tpw-ilungu-club'); ?></button>
+                            <button type="button" class="button" id="tpw-clear-logo"><?php esc_html_e('Clear','tpw-ilungu-club'); ?></button>
+                            <p class="description"><?php esc_html_e( 'Optional fallback logo displayed in email templates. PNG/JPG only for base64 copy.', 'tpw-ilungu-club' ); ?></p>
                             <?php if ( ! empty( $s['fallback_logo_url'] ) || ! empty( $s['default_logo_url'] ) ) : ?>
                                 <div style="margin-top:8px;">
-                                    <strong><?php esc_html_e('Current Logo Preview','tpw-core'); ?>:</strong><br/>
+                                    <strong><?php esc_html_e('Current Logo Preview','tpw-ilungu-club'); ?>:</strong><br/>
                                     <img src="<?php echo esc_url( $s['fallback_logo_url'] ?: $s['default_logo_url'] ); ?>" alt="" style="max-height:60px; background:#fff; padding:4px; border:1px solid #eee;" />
                                 </div>
                             <?php endif; ?>
                             <div style="margin-top:8px;">
                                 <label>
                                     <input type="checkbox" name="embed_logo_base64" value="1" <?php checked( ! empty( $s['embed_logo_base64'] ) ); ?> />
-                                    <?php esc_html_e('Embed Logo as Inline Image (base64)','tpw-core'); ?>
+                                    <?php esc_html_e('Embed Logo as Inline Image (base64)','tpw-ilungu-club'); ?>
                                 </label>
-                                <p class="description"><?php esc_html_e('Use this if you want to embed the logo directly in the email for clients that block remote images. Not recommended for large images.','tpw-core'); ?></p>
+                                <p class="description"><?php esc_html_e('Use this if you want to embed the logo directly in the email for clients that block remote images. Not recommended for large images.','tpw-ilungu-club'); ?></p>
                                 <?php if ( ! empty( $s['fallback_logo_base64'] ) ) : ?>
                                     <p class="description" style="color:#2271b1;">
-                                        <?php esc_html_e('Base64 copy is stored.','tpw-core'); ?>
-                                        <button type="submit" name="reset_logo_base64" value="1" class="button-link">(<?php esc_html_e('Reset','tpw-core'); ?>)</button>
+                                        <?php esc_html_e('Base64 copy is stored.','tpw-ilungu-club'); ?>
+                                        <button type="submit" name="reset_logo_base64" value="1" class="button-link">(<?php esc_html_e('Reset','tpw-ilungu-club'); ?>)</button>
                                     </p>
                                 <?php else: ?>
-                                    <p class="description"><?php esc_html_e('No base64 copy stored yet. It will be created automatically when you select a compatible image (PNG/JPG, ≤50KB, ≤400px wide).','tpw-core'); ?></p>
+                                    <p class="description"><?php esc_html_e('No base64 copy stored yet. It will be created automatically when you select a compatible image (PNG/JPG, ≤50KB, ≤400px wide).','tpw-ilungu-club'); ?></p>
                                 <?php endif; ?>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <?php tpw_core_render_settings_submit_button( __( 'Save Email Settings', 'tpw-core' ) ); ?>
+            <?php tpw_core_render_settings_submit_button( __( 'Save Email Settings', 'tpw-ilungu-club' ) ); ?>
         </form>
         <script>
         (function(){
@@ -980,7 +980,7 @@ if ( ! function_exists( 'tpw_core_render_email_templates_tab' ) ) {
 
             $action = esc_url( admin_url( 'admin-post.php' ) );
             echo '<h2>' . esc_html( $tpl['label'] ) . ' <small style="font-weight:normal">(' . esc_html( $tpl['group'] ) . ')</small></h2>';
-            echo '<p><a class="button" href="' . esc_url( $base_url ) . '">← ' . esc_html__( 'Back to list', 'tpw-core' ) . '</a></p>';
+            echo '<p><a class="button" href="' . esc_url( $base_url ) . '">← ' . esc_html__( 'Back to list', 'tpw-ilungu-club' ) . '</a></p>';
 
             echo '<form method="post" action="' . $action . '">';
             wp_nonce_field( 'tpw_save_email_template', 'tpw_email_tmpl_nonce' );
@@ -989,35 +989,35 @@ if ( ! function_exists( 'tpw_core_render_email_templates_tab' ) ) {
             tpw_core_render_settings_context_fields( 'email-templates' );
 
             echo '<table class="form-table" role="presentation"><tbody>';
-            echo '<tr><th scope="row">' . esc_html__( 'Template', 'tpw-core' ) . '</th><td>' . esc_html( $tpl['label'] ) . ' <code>(' . esc_html( $tpl['key'] ) . ')</code></td></tr>';
-            echo '<tr><th scope="row">' . esc_html__( 'Group', 'tpw-core' ) . '</th><td>' . esc_html( $tpl['group'] ) . '</td></tr>';
+            echo '<tr><th scope="row">' . esc_html__( 'Template', 'tpw-ilungu-club' ) . '</th><td>' . esc_html( $tpl['label'] ) . ' <code>(' . esc_html( $tpl['key'] ) . ')</code></td></tr>';
+            echo '<tr><th scope="row">' . esc_html__( 'Group', 'tpw-ilungu-club' ) . '</th><td>' . esc_html( $tpl['group'] ) . '</td></tr>';
             if ( $tpl['editable_subject'] ) {
-                echo '<tr><th scope="row">' . esc_html__( 'Subject', 'tpw-core' ) . '</th><td>';
+                echo '<tr><th scope="row">' . esc_html__( 'Subject', 'tpw-ilungu-club' ) . '</th><td>';
                 echo '<input type="text" class="regular-text" name="subject_override" value="' . esc_attr( $subject_val ) . '" />';
-                echo '<p class="description">' . esc_html__( 'Use placeholders below in the subject.', 'tpw-core' ) . '</p>';
+                echo '<p class="description">' . esc_html__( 'Use placeholders below in the subject.', 'tpw-ilungu-club' ) . '</p>';
                 echo '</td></tr>';
             } else {
-                echo '<tr><th scope="row">' . esc_html__( 'Subject', 'tpw-core' ) . '</th><td><code>' . esc_html( $subject_val ) . '</code><p class="description">' . esc_html__( 'Subject is not editable for this template.', 'tpw-core' ) . '</p></td></tr>';
+                echo '<tr><th scope="row">' . esc_html__( 'Subject', 'tpw-ilungu-club' ) . '</th><td><code>' . esc_html( $subject_val ) . '</code><p class="description">' . esc_html__( 'Subject is not editable for this template.', 'tpw-ilungu-club' ) . '</p></td></tr>';
             }
             if ( $tpl['editable_body'] ) {
-                echo '<tr><th scope="row">' . esc_html__( 'Body', 'tpw-core' ) . '</th><td>';
+                echo '<tr><th scope="row">' . esc_html__( 'Body', 'tpw-ilungu-club' ) . '</th><td>';
                 // Use wp_editor for TinyMCE
                 ob_start();
                 wp_editor( $body_val, 'tpw_email_template_body', [ 'textarea_name' => 'body_override', 'textarea_rows' => 12 ] );
                 $editor = ob_get_clean();
                 echo $editor;
-                echo '<p class="description">' . esc_html__( 'You can use the placeholders below in the body.', 'tpw-core' ) . '</p>';
+                echo '<p class="description">' . esc_html__( 'You can use the placeholders below in the body.', 'tpw-ilungu-club' ) . '</p>';
                 echo '</td></tr>';
             } else {
-                echo '<tr><th scope="row">' . esc_html__( 'Body', 'tpw-core' ) . '</th><td><div class="inside" style="background:#fff;border:1px solid #ccd0d4;padding:10px;max-width:780px;overflow:auto">' . wp_kses_post( $body_val ) . '</div><p class="description">' . esc_html__( 'Body is not editable for this template.', 'tpw-core' ) . '</p></td></tr>';
+                echo '<tr><th scope="row">' . esc_html__( 'Body', 'tpw-ilungu-club' ) . '</th><td><div class="inside" style="background:#fff;border:1px solid #ccd0d4;padding:10px;max-width:780px;overflow:auto">' . wp_kses_post( $body_val ) . '</div><p class="description">' . esc_html__( 'Body is not editable for this template.', 'tpw-ilungu-club' ) . '</p></td></tr>';
             }
 
-            echo '<tr><th scope="row">' . esc_html__( 'Include fallback logo', 'tpw-core' ) . '</th><td>';
-            echo '<label><input type="checkbox" name="use_logo" value="1" ' . checked( $use_logo, true, false ) . ' /> ' . esc_html__( 'Show the configured fallback logo at the top of this email', 'tpw-core' ) . '</label>';
+            echo '<tr><th scope="row">' . esc_html__( 'Include fallback logo', 'tpw-ilungu-club' ) . '</th><td>';
+            echo '<label><input type="checkbox" name="use_logo" value="1" ' . checked( $use_logo, true, false ) . ' /> ' . esc_html__( 'Show the configured fallback logo at the top of this email', 'tpw-ilungu-club' ) . '</label>';
             echo '</td></tr>';
 
             // Placeholders list
-            echo '<tr><th scope="row">' . esc_html__( 'Available placeholders', 'tpw-core' ) . '</th><td>';
+            echo '<tr><th scope="row">' . esc_html__( 'Available placeholders', 'tpw-ilungu-club' ) . '</th><td>';
             if ( ! empty( $tpl['placeholders'] ) && is_array( $tpl['placeholders'] ) ) {
                 echo '<ul style="margin:0;">';
                 foreach ( $tpl['placeholders'] as $token => $desc ) {
@@ -1025,13 +1025,13 @@ if ( ! function_exists( 'tpw_core_render_email_templates_tab' ) ) {
                 }
                 echo '</ul>';
             } else {
-                echo '<em>' . esc_html__( 'No placeholders defined for this template.', 'tpw-core' ) . '</em>';
+                echo '<em>' . esc_html__( 'No placeholders defined for this template.', 'tpw-ilungu-club' ) . '</em>';
             }
             echo '</td></tr>';
 
             echo '</tbody></table>';
-            tpw_core_render_settings_submit_button( __( 'Save Template', 'tpw-core' ) );
-            echo ' <a class="button button-secondary" href="' . esc_url( wp_nonce_url( add_query_arg( [ 'action' => 'tpw_core_reset_email_template', 'template_key' => $tpl['key'], 'tpw_settings_context' => isset( tpw_core_get_settings_view_context()['mode'] ) ? tpw_core_get_settings_view_context()['mode'] : 'admin', 'tpw_settings_return_url' => tpw_core_build_settings_tab_url( 'email-templates', [ 'edit_template' => $tpl['key'] ] ) ], admin_url( 'admin-post.php' ) ), 'tpw_reset_email_template', 'tpw_email_tmpl_nonce' ) ) . '">' . esc_html__( 'Reset to Default', 'tpw-core' ) . '</a>';
+            tpw_core_render_settings_submit_button( __( 'Save Template', 'tpw-ilungu-club' ) );
+            echo ' <a class="button button-secondary" href="' . esc_url( wp_nonce_url( add_query_arg( [ 'action' => 'tpw_core_reset_email_template', 'template_key' => $tpl['key'], 'tpw_settings_context' => isset( tpw_core_get_settings_view_context()['mode'] ) ? tpw_core_get_settings_view_context()['mode'] : 'admin', 'tpw_settings_return_url' => tpw_core_build_settings_tab_url( 'email-templates', [ 'edit_template' => $tpl['key'] ] ) ], admin_url( 'admin-post.php' ) ), 'tpw_reset_email_template', 'tpw_email_tmpl_nonce' ) ) . '">' . esc_html__( 'Reset to Default', 'tpw-ilungu-club' ) . '</a>';
             echo '</form>';
 
             return;
@@ -1039,25 +1039,25 @@ if ( ! function_exists( 'tpw_core_render_email_templates_tab' ) ) {
 
         // List view
         $grouped = TPW_Email_Template_Registry::all_grouped();
-        echo '<p>' . esc_html__( 'Registered email templates from TPW plugins. Edit to override the default subject/body and choose whether to include the fallback logo.', 'tpw-core' ) . '</p>';
+        echo '<p>' . esc_html__( 'Registered email templates from TPW plugins. Edit to override the default subject/body and choose whether to include the fallback logo.', 'tpw-ilungu-club' ) . '</p>';
         if ( empty( $grouped ) ) {
-            echo '<p><em>' . esc_html__( 'No templates registered yet.', 'tpw-core' ) . '</em></p>';
+            echo '<p><em>' . esc_html__( 'No templates registered yet.', 'tpw-ilungu-club' ) . '</em></p>';
             return;
         }
         echo '<div class="tpw-email-templates-list">';
         foreach ( $grouped as $group => $templates ) {
             echo '<h2 style="margin-top:1.5em">' . esc_html( ucfirst( $group ) ) . '</h2>';
             echo '<table class="widefat striped"><thead><tr>';
-            echo '<th>' . esc_html__( 'Label', 'tpw-core' ) . '</th>';
-            echo '<th>' . esc_html__( 'Key', 'tpw-core' ) . '</th>';
-            echo '<th>' . esc_html__( 'Actions', 'tpw-core' ) . '</th>';
+            echo '<th>' . esc_html__( 'Label', 'tpw-ilungu-club' ) . '</th>';
+            echo '<th>' . esc_html__( 'Key', 'tpw-ilungu-club' ) . '</th>';
+            echo '<th>' . esc_html__( 'Actions', 'tpw-ilungu-club' ) . '</th>';
             echo '</tr></thead><tbody>';
             foreach ( $templates as $t ) {
                 $edit_url = esc_url( add_query_arg( [ 'edit_template' => $t['key'] ], $base_url ) );
                 echo '<tr>';
                 echo '<td>' . esc_html( $t['label'] ) . '</td>';
                 echo '<td><code>' . esc_html( $t['key'] ) . '</code></td>';
-                echo '<td><a class="button" href="' . $edit_url . '">' . esc_html__( 'Edit', 'tpw-core' ) . '</a></td>';
+                echo '<td><a class="button" href="' . $edit_url . '">' . esc_html__( 'Edit', 'tpw-ilungu-club' ) . '</a></td>';
                 echo '</tr>';
             }
             echo '</tbody></table>';
@@ -1068,7 +1068,7 @@ if ( ! function_exists( 'tpw_core_render_email_templates_tab' ) ) {
 
 // Handle Email Template save
 add_action( 'admin_post_tpw_core_save_email_template', function() {
-    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_admin_referer( 'tpw_save_email_template', 'tpw_email_tmpl_nonce' );
 
     $key = isset($_POST['template_key']) ? strtolower( preg_replace( '/[^a-z0-9_-]/i', '', (string) $_POST['template_key'] ) ) : '';
@@ -1327,10 +1327,10 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                     ?>
                     <tr><th colspan="2"><h2 style="margin:12px 0 6px;">Headings</h2></th></tr>
                     <tr>
-                        <th scope="row"><label for="tpw_heading_font_family"><?php esc_html_e('Heading font family', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_heading_font_family"><?php esc_html_e('Heading font family', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_heading_font_family" name="tpw_heading_font_family" value="<?php echo esc_attr( (string) ($heading['font_family'] ?? '') ); ?>" placeholder='inherit UI font (leave empty) or e.g. "Inter", system-ui' />
-                            <p class="description"><?php esc_html_e('Leave empty to inherit the UI Theme font. Applies to h1–h6 within TPW UIs.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Leave empty to inherit the UI Theme font. Applies to h1–h6 within TPW UIs.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <?php for ( $i = 1; $i <= 6; $i++ ):
@@ -1340,7 +1340,7 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                         $weight= (string) ($row['weight'] ?? '');
                     ?>
                     <tr>
-                        <th scope="row"><label for="<?php echo 'h' . $i . '_color'; ?>"><?php echo esc_html( strtoupper($hk) ); ?> <?php esc_html_e('colour / size / weight', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="<?php echo 'h' . $i . '_color'; ?>"><?php echo esc_html( strtoupper($hk) ); ?> <?php esc_html_e('colour / size / weight', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="small-text" id="<?php echo 'h' . $i . '_color'; ?>" name="<?php echo 'h' . $i . '_color'; ?>" value="<?php echo esc_attr( $color ); ?>" placeholder="e.g. #1d2327 or var(--brand)" />
                             <input type="color" value="<?php echo esc_attr( preg_match('/^var\(/', $color) ? '#000000' : ( $color !== '' ? $color : '#000000' ) ); ?>" oninput="document.getElementById('<?php echo 'h' . $i . '_color'; ?>').value=this.value" />
@@ -1348,11 +1348,11 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                             <?php $fw = $weight !== '' ? $weight : $heading_defaults[$hk]['weight']; ?>
                             <select id="<?php echo 'h' . $i . '_weight'; ?>" name="<?php echo 'h' . $i . '_weight'; ?>">
                                 <?php foreach ( ['','normal','500','600','700'] as $wopt ): ?>
-                                    <option value="<?php echo esc_attr($wopt); ?>" <?php selected( $fw, $wopt ); ?>><?php echo $wopt === '' ? esc_html__('Default','tpw-core') : esc_html($wopt); ?></option>
+                                    <option value="<?php echo esc_attr($wopt); ?>" <?php selected( $fw, $wopt ); ?>><?php echo $wopt === '' ? esc_html__('Default','tpw-ilungu-club') : esc_html($wopt); ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <p class="description" style="margin-top:4px;">
-                                <?php esc_html_e('Leave colour empty to inherit. Size accepts px, rem, or em. Weight: choose Default to use the built-in scale.', 'tpw-core'); ?>
+                                <?php esc_html_e('Leave colour empty to inherit. Size accepts px, rem, or em. Weight: choose Default to use the built-in scale.', 'tpw-ilungu-club'); ?>
                             </p>
                         </td>
                     </tr>
@@ -1391,7 +1391,7 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                         <td>
                             <input type="text" class="regular-text" id="action_edit" name="action_edit" value="<?php echo esc_attr($val['action_edit']); ?>" placeholder="#2d7ff9" />
                             <input type="color" value="<?php echo esc_attr($val['action_edit']); ?>" oninput="document.getElementById('action_edit').value=this.value" />
-                            <p class="description"><?php esc_html_e('Used for .tpw-action-edit buttons in admin module lists.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Used for .tpw-action-edit buttons in admin module lists.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -1407,30 +1407,30 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                         <td><input type="text" class="regular-text" id="btn_font_size" name="btn_font_size" value="<?php echo esc_attr($val['btn_font_size']); ?>" placeholder="0.9rem" /> <span class="description">e.g., 14px, 0.9rem</span></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="btn_font_size_lg"><?php esc_html_e('Large buttons font size', 'tpw-core'); ?></label></th>
-                        <td><input type="text" class="regular-text" id="btn_font_size_lg" name="btn_font_size_lg" value="<?php echo esc_attr($val['btn_font_size_lg']); ?>" placeholder="1.05rem" /> <span class="description"><?php esc_html_e('Used by .tpw-btn-lg.', 'tpw-core'); ?></span></td>
+                        <th scope="row"><label for="btn_font_size_lg"><?php esc_html_e('Large buttons font size', 'tpw-ilungu-club'); ?></label></th>
+                        <td><input type="text" class="regular-text" id="btn_font_size_lg" name="btn_font_size_lg" value="<?php echo esc_attr($val['btn_font_size_lg']); ?>" placeholder="1.05rem" /> <span class="description"><?php esc_html_e('Used by .tpw-btn-lg.', 'tpw-ilungu-club'); ?></span></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="btn_padding_lg"><?php esc_html_e('Large buttons padding', 'tpw-core'); ?></label></th>
-                        <td><input type="text" class="regular-text" id="btn_padding_lg" name="btn_padding_lg" value="<?php echo esc_attr($val['btn_padding_lg']); ?>" placeholder="10px 18px" /> <span class="description"><?php esc_html_e('CSS shorthand accepted. Used by .tpw-btn-lg.', 'tpw-core'); ?></span></td>
+                        <th scope="row"><label for="btn_padding_lg"><?php esc_html_e('Large buttons padding', 'tpw-ilungu-club'); ?></label></th>
+                        <td><input type="text" class="regular-text" id="btn_padding_lg" name="btn_padding_lg" value="<?php echo esc_attr($val['btn_padding_lg']); ?>" placeholder="10px 18px" /> <span class="description"><?php esc_html_e('CSS shorthand accepted. Used by .tpw-btn-lg.', 'tpw-ilungu-club'); ?></span></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="btn_height_lg"><?php esc_html_e('Large buttons height', 'tpw-core'); ?></label></th>
-                        <td><input type="text" class="regular-text" id="btn_height_lg" name="btn_height_lg" value="<?php echo esc_attr($val['btn_height_lg']); ?>" placeholder="48px" /> <span class="description"><?php esc_html_e('Minimum height for .tpw-btn-lg. Use a unit such as px, rem, or em.', 'tpw-core'); ?></span></td>
+                        <th scope="row"><label for="btn_height_lg"><?php esc_html_e('Large buttons height', 'tpw-ilungu-club'); ?></label></th>
+                        <td><input type="text" class="regular-text" id="btn_height_lg" name="btn_height_lg" value="<?php echo esc_attr($val['btn_height_lg']); ?>" placeholder="48px" /> <span class="description"><?php esc_html_e('Minimum height for .tpw-btn-lg. Use a unit such as px, rem, or em.', 'tpw-ilungu-club'); ?></span></td>
                     </tr>
                     <tr><th colspan="2"><h2 style="margin:12px 0 6px;">Semantic Notice Colours</h2></th></tr>
                     <tr>
                         <th scope="row"><label for="color_success">Success</label></th>
                         <td>
                             <input type="text" class="regular-text" id="color_success" name="color_success" value="<?php echo esc_attr($val['color_success']); ?>" placeholder="color-mix(in oklab, var(--tpw-btn-primary) 60%, white 40%)" />
-                            <p class="description"><?php esc_html_e('Background/base colour for success states. Supports CSS functions (color-mix, var()).', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Background/base colour for success states. Supports CSS functions (color-mix, var()).', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row"><label for="color_info">Info</label></th>
                         <td>
                             <input type="text" class="regular-text" id="color_info" name="color_info" value="<?php echo esc_attr($val['color_info']); ?>" placeholder="var(--tpw-accent-color)" />
-                            <p class="description"><?php esc_html_e('Base colour for informational notices. Typically uses the UI accent.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Base colour for informational notices. Typically uses the UI accent.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -1438,25 +1438,25 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                         <td>
                             <input type="text" class="regular-text" id="color_warning" name="color_warning" value="<?php echo esc_attr($val['color_warning']); ?>" placeholder="#ed6c02" />
                             <input type="color" value="<?php echo esc_attr(preg_match('/^#/', $val['color_warning']) ? $val['color_warning'] : '#ed6c02'); ?>" oninput="document.getElementById('color_warning').value=this.value" />
-                            <p class="description"><?php esc_html_e('High-attention but non-fatal states.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('High-attention but non-fatal states.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row"><label for="color_error">Error</label></th>
                         <td>
                             <input type="text" class="regular-text" id="color_error" name="color_error" value="<?php echo esc_attr($val['color_error']); ?>" placeholder="var(--tpw-btn-danger)" />
-                            <p class="description"><?php esc_html_e('Critical / failure state colour, usually matches Danger button.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Critical / failure state colour, usually matches Danger button.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="btn_height"><?php esc_html_e('Buttons Height', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="btn_height"><?php esc_html_e('Buttons Height', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="btn_height" name="btn_height" value="<?php echo esc_attr($val['btn_height']); ?>" placeholder="auto | 32px" />
-                            <span class="description"><?php esc_html_e('Optional. Sets a fixed height for TPW buttons. Use a unit (e.g., 32px). Leave blank or set to “auto” to size by padding.', 'tpw-core'); ?></span>
+                            <span class="description"><?php esc_html_e('Optional. Sets a fixed height for TPW buttons. Use a unit (e.g., 32px). Leave blank or set to “auto” to size by padding.', 'tpw-ilungu-club'); ?></span>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="btn_font_weight"><?php esc_html_e('Buttons Font Weight', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="btn_font_weight"><?php esc_html_e('Buttons Font Weight', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <?php $bfw = isset($val['btn_font_weight']) ? (string) $val['btn_font_weight'] : '600'; ?>
                             <select id="btn_font_weight" name="btn_font_weight">
@@ -1464,26 +1464,26 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                                     <option value="<?php echo esc_attr($opt); ?>" <?php selected($bfw, $opt); ?>><?php echo esc_html($opt); ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <span class="description"><?php esc_html_e('Overrides UI weight for TPW buttons only. Leave as 600 for the default.', 'tpw-core'); ?></span>
+                            <span class="description"><?php esc_html_e('Overrides UI weight for TPW buttons only. Leave as 600 for the default.', 'tpw-ilungu-club'); ?></span>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="btn_font_family"><?php esc_html_e('Buttons Font Family', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="btn_font_family"><?php esc_html_e('Buttons Font Family', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="btn_font_family" name="btn_font_family" value="<?php echo esc_attr($val['btn_font_family']); ?>" placeholder='"Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial' />
-                            <span class="description"><?php esc_html_e('Optional. Overrides UI font for TPW buttons only. If empty, buttons use the UI Theme font or the system stack.', 'tpw-core'); ?></span>
+                            <span class="description"><?php esc_html_e('Optional. Overrides UI font for TPW buttons only. If empty, buttons use the UI Theme font or the system stack.', 'tpw-ilungu-club'); ?></span>
                         </td>
                     </tr>
                     <tr><th colspan="2"><h2 style="margin:6px 0;">UI Theme (applies to .tpw-admin-ui)</h2></th></tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_font_family"><?php esc_html_e('Font family', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_font_family"><?php esc_html_e('Font family', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_ui_font_family" name="tpw_ui_font_family" value="<?php echo esc_attr( (string) ($ui['font_family'] ?? '') ); ?>" placeholder="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" />
-                            <p class="description"><?php esc_html_e('Applies within .tpw-admin-ui only.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Applies within .tpw-admin-ui only.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_font_weight"><?php esc_html_e('Font weight', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_font_weight"><?php esc_html_e('Font weight', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <?php $fw = (string) ($ui['font_weight'] ?? '600'); ?>
                             <select id="tpw_ui_font_weight" name="tpw_ui_font_weight">
@@ -1494,7 +1494,7 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_text_transform"><?php esc_html_e('Text transform', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_text_transform"><?php esc_html_e('Text transform', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <?php $tt = (string) ($ui['text_transform'] ?? 'none'); ?>
                             <select id="tpw_ui_text_transform" name="tpw_ui_text_transform">
@@ -1505,47 +1505,47 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_letter_spacing"><?php esc_html_e('Letter spacing', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_letter_spacing"><?php esc_html_e('Letter spacing', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_ui_letter_spacing" name="tpw_ui_letter_spacing" value="<?php echo esc_attr( (string) ($ui['letter_spacing'] ?? 'normal') ); ?>" placeholder="normal | 0.03em | 1px" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_text_shadow"><?php esc_html_e('Text shadow', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_text_shadow"><?php esc_html_e('Text shadow', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_ui_text_shadow" name="tpw_ui_text_shadow" value="<?php echo esc_attr( (string) ($ui['text_shadow'] ?? 'none') ); ?>" placeholder="none | 0 0 0 rgba(0,0,0,0.3)" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_btn_bg"><?php esc_html_e('Button background colour', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_btn_bg"><?php esc_html_e('Button background colour', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_ui_btn_bg" name="tpw_ui_btn_bg" value="<?php echo esc_attr( (string) ($ui['btn_bg'] ?? '#0b6cad') ); ?>" placeholder="#0b6cad" />
                             <input type="color" value="<?php echo esc_attr( (string) ($ui['btn_bg'] ?? '#0b6cad') ); ?>" oninput="document.getElementById('tpw_ui_btn_bg').value=this.value" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_btn_text"><?php esc_html_e('Button text colour', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_btn_text"><?php esc_html_e('Button text colour', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_ui_btn_text" name="tpw_ui_btn_text" value="<?php echo esc_attr( (string) ($ui['btn_text'] ?? '#ffffff') ); ?>" placeholder="#ffffff" />
                             <input type="color" value="<?php echo esc_attr( (string) ($ui['btn_text'] ?? '#ffffff') ); ?>" oninput="document.getElementById('tpw_ui_btn_text').value=this.value" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_accent"><?php esc_html_e('Accent colour', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_accent"><?php esc_html_e('Accent colour', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <input type="text" class="regular-text" id="tpw_ui_accent" name="tpw_ui_accent" value="<?php echo esc_attr( (string) ($ui['accent_color'] ?? '#2271b1') ); ?>" placeholder="#2271b1" />
                             <input type="color" value="<?php echo esc_attr( (string) ($ui['accent_color'] ?? '#2271b1') ); ?>" oninput="document.getElementById('tpw_ui_accent').value=this.value" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_inherit_global_frontend"><?php esc_html_e('Inherit global site styles on admin screens (front-end only)', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_inherit_global_frontend"><?php esc_html_e('Inherit global site styles on admin screens (front-end only)', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <?php $inherit_flag = ! empty( $ui['inherit_global_frontend'] ) ? 1 : 0; ?>
                             <label>
                                 <input type="checkbox" id="tpw_ui_inherit_global_frontend" name="tpw_ui_inherit_global_frontend" value="1" <?php checked( 1, $inherit_flag ); ?> />
-                                <?php esc_html_e('Do not apply TPW Admin UI wrapper/styles on front-end shortcodes. Useful when using Elementor/Theme global styles.', 'tpw-core'); ?>
+                                <?php esc_html_e('Do not apply TPW Admin UI wrapper/styles on front-end shortcodes. Useful when using Elementor/Theme global styles.', 'tpw-ilungu-club'); ?>
                             </label>
-                            <p class="description"><?php esc_html_e('Does not affect wp-admin. Only front-end admin-like pages (shortcodes) are affected.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('Does not affect wp-admin. Only front-end admin-like pages (shortcodes) are affected.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                 </tbody>
@@ -1554,7 +1554,7 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
             <table class="form-table" role="presentation">
                 <tbody>
                     <tr>
-                        <th scope="row"><label for="tpw_ui_inherit_global_frontend"><?php esc_html_e('Inherit global site styles on admin screens (front-end only)', 'tpw-core'); ?></label></th>
+                        <th scope="row"><label for="tpw_ui_inherit_global_frontend"><?php esc_html_e('Inherit global site styles on admin screens (front-end only)', 'tpw-ilungu-club'); ?></label></th>
                         <td>
                             <?php 
                             $ui_theme = get_option( 'tpw_ui_theme_settings', [] );
@@ -1563,14 +1563,14 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
                             ?>
                             <label>
                                 <input type="checkbox" id="tpw_ui_inherit_global_frontend" name="tpw_ui_inherit_global_frontend" value="1" <?php checked( 1, $inherit_flag ); ?> />
-                                <?php esc_html_e('Do not apply TPW Admin UI wrapper/styles on front-end shortcodes. Useful when using Elementor/Theme global styles.', 'tpw-core'); ?>
+                                <?php esc_html_e('Do not apply TPW Admin UI wrapper/styles on front-end shortcodes. Useful when using Elementor/Theme global styles.', 'tpw-ilungu-club'); ?>
                             </label>
-                            <p class="description"><?php esc_html_e('This does not affect wp-admin. It applies only to front-end admin-like pages powered by TPW shortcodes.', 'tpw-core'); ?></p>
+                            <p class="description"><?php esc_html_e('This does not affect wp-admin. It applies only to front-end admin-like pages powered by TPW shortcodes.', 'tpw-ilungu-club'); ?></p>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <?php tpw_core_render_settings_submit_button( __( 'Save Branding', 'tpw-core' ) ); ?>
+            <?php tpw_core_render_settings_submit_button( __( 'Save Branding', 'tpw-ilungu-club' ) ); ?>
             <button type="submit" name="tpw_branding_reset" value="1" class="button button-secondary" onclick="return confirm('Reset all branding values to defaults?');">Reset to Defaults</button>
         </form>
 
@@ -1590,7 +1590,7 @@ if ( ! function_exists( 'tpw_core_render_branding_tab' ) ) {
 
 // Save Branding handler
 add_action( 'admin_post_tpw_core_save_branding', function(){
-    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_admin_referer( 'tpw_core_save_branding', 'tpw_core_branding_nonce' );
 
     $defaults = [
@@ -1797,7 +1797,7 @@ add_action( 'admin_post_tpw_core_save_branding', function(){
 
 // Handle Email Template reset
 add_action( 'admin_post_tpw_core_reset_email_template', function() {
-    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_admin_referer( 'tpw_reset_email_template', 'tpw_email_tmpl_nonce' );
 
     $key = isset($_GET['template_key']) ? strtolower( preg_replace( '/[^a-z0-9_-]/i', '', (string) $_GET['template_key'] ) ) : '';
@@ -1817,7 +1817,7 @@ add_action( 'admin_post_tpw_core_reset_email_template', function() {
 
 add_action( 'admin_post_tpw_core_save_lifecycle', function() {
     if ( ! current_user_can( 'manage_options' ) ) {
-        wp_die( __( 'Permission denied', 'tpw-core' ) );
+        wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     }
 
     check_admin_referer( 'tpw_core_save_lifecycle', 'tpw_core_lifecycle_nonce' );
@@ -1835,7 +1835,7 @@ add_action( 'admin_post_tpw_core_save_lifecycle', function() {
 
 // New save handler: Features tab
 add_action( 'admin_post_tpw_core_save_features', function() {
-    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_admin_referer( 'tpw_core_save_features', 'tpw_core_features_nonce' );
 
     $login_page   = isset( $_POST['tpw_core_default_login_page'] ) ? (int) $_POST['tpw_core_default_login_page'] : 0;
@@ -1859,7 +1859,7 @@ add_action( 'admin_post_tpw_core_save_features', function() {
 
 // New save handler: Member Menu tab
 add_action( 'admin_post_tpw_core_save_member_menu', function() {
-    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-core' ) );
+    if ( ! tpw_core_current_user_can_manage_settings() ) wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     check_admin_referer( 'tpw_core_save_member_menu', 'tpw_core_member_menu_nonce' );
 
     $location = isset( $_POST['tpw_member_menu_location'] ) ? sanitize_key( $_POST['tpw_member_menu_location'] ) : 'primary';
@@ -1871,7 +1871,7 @@ add_action( 'admin_post_tpw_core_save_member_menu', function() {
 
 add_action( 'admin_post_tpw_core_repair_member_menu', function() {
     if ( ! tpw_core_current_user_can_manage_settings() ) {
-        wp_die( __( 'Permission denied', 'tpw-core' ) );
+        wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     }
 
     check_admin_referer( 'tpw_core_repair_member_menu', 'tpw_core_repair_member_menu_nonce' );
@@ -1939,7 +1939,7 @@ if ( ! function_exists( 'tpw_core_update_email_header_primary_color' ) ) {
 // Handle Email Settings save (POST)
 add_action( 'admin_post_tpw_core_save_email_settings', function() {
     if ( ! tpw_core_current_user_can_manage_settings() ) {
-        wp_die( __( 'You do not have permission to manage settings.', 'tpw-core' ) );
+        wp_die( __( 'You do not have permission to manage settings.', 'tpw-ilungu-club' ) );
     }
     check_admin_referer( 'tpw_core_save_email_settings', 'tpw_core_email_nonce' );
 
@@ -2005,7 +2005,7 @@ add_action( 'admin_post_tpw_core_save_email_settings', function() {
 
 add_action( 'admin_post_tpw_core_clear_email_logs', function() {
     if ( ! tpw_core_current_user_can_manage_settings() ) {
-        wp_die( __( 'You do not have permission to manage settings.', 'tpw-core' ) );
+        wp_die( __( 'You do not have permission to manage settings.', 'tpw-ilungu-club' ) );
     }
 
     check_admin_referer( 'tpw_core_clear_email_logs', 'tpw_core_email_logs_nonce' );
@@ -2040,7 +2040,7 @@ if ( ! function_exists( 'tpw_member_menu_location_dropdown' ) ) {
         echo '</select>';
 
         // Helpful note
-        echo '<p class="description">' . esc_html__( 'Logged-in users will see the TPW Member Menu at this location if a menu is assigned to it.', 'tpw-core' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Logged-in users will see the TPW Member Menu at this location if a menu is assigned to it.', 'tpw-ilungu-club' ) . '</p>';
     }
 }
 
@@ -2270,7 +2270,7 @@ if ( ! function_exists( 'tpw_core_get_member_menu_core_default_items' ) ) {
             [
                 'key'            => 'noticeboard',
                 'provider'       => 'tpw-core',
-                'title'          => __( 'Noticeboard', 'tpw-core' ),
+                'title'          => __( 'Noticeboard', 'tpw-ilungu-club' ),
                 'system_slug'    => 'noticeboard',
                 'shortcode_tag'  => 'tpw_noticeboard_list',
                 'fallback_slug'  => 'noticeboard',
@@ -2282,7 +2282,7 @@ if ( ! function_exists( 'tpw_core_get_member_menu_core_default_items' ) ) {
             [
                 'key'            => 'members',
                 'provider'       => 'tpw-core',
-                'title'          => __( 'Members', 'tpw-core' ),
+                'title'          => __( 'Members', 'tpw-ilungu-club' ),
                 'system_slug'    => 'manage-members',
                 'shortcode_tag'  => 'tpw_manage_members',
                 'fallback_slug'  => 'manage-members',
@@ -2295,7 +2295,7 @@ if ( ! function_exists( 'tpw_core_get_member_menu_core_default_items' ) ) {
             [
                 'key'            => 'gallery',
                 'provider'       => 'tpw-core',
-                'title'          => __( 'Gallery', 'tpw-core' ),
+                'title'          => __( 'Gallery', 'tpw-ilungu-club' ),
                 'shortcode_tag'  => 'tpw_gallery',
                 'fallback_slug'  => 'gallery',
                 'requires_login' => true,
@@ -2306,7 +2306,7 @@ if ( ! function_exists( 'tpw_core_get_member_menu_core_default_items' ) ) {
             [
                 'key'            => 'gallery-admin',
                 'provider'       => 'tpw-core',
-                'title'          => __( 'Gallery Admin', 'tpw-core' ),
+                'title'          => __( 'Gallery Admin', 'tpw-ilungu-club' ),
                 'system_slug'    => 'gallery-admin',
                 'shortcode_tag'  => 'tpw_gallery_admin',
                 'fallback_slug'  => 'gallery-admin',
@@ -2320,7 +2320,7 @@ if ( ! function_exists( 'tpw_core_get_member_menu_core_default_items' ) ) {
             [
                 'key'            => 'my-profile',
                 'provider'       => 'tpw-core',
-                'title'          => __( 'My Profile', 'tpw-core' ),
+                'title'          => __( 'My Profile', 'tpw-ilungu-club' ),
                 'system_slug'    => 'my-profile',
                 'requires_login' => true,
                 'visibility'     => [
@@ -2330,7 +2330,7 @@ if ( ! function_exists( 'tpw_core_get_member_menu_core_default_items' ) ) {
             [
                 'key'            => 'admin',
                 'provider'       => 'tpw-core',
-                'title'          => __( 'Admin', 'tpw-core' ),
+                'title'          => __( 'Admin', 'tpw-ilungu-club' ),
                 'system_slug'    => 'club-management',
                 'shortcode_tag'  => 'flexiclub',
                 'fallback_slug'  => 'club-management',
@@ -2342,7 +2342,7 @@ if ( ! function_exists( 'tpw_core_get_member_menu_core_default_items' ) ) {
             [
                 'key'            => 'logout',
                 'provider'       => 'tpw-core',
-                'title'          => __( 'Logout', 'tpw-core' ),
+                'title'          => __( 'Logout', 'tpw-ilungu-club' ),
                 'url'            => '/?tpw_action=logout',
                 'requires_login' => true,
                 'visibility'     => [],
@@ -2578,12 +2578,12 @@ if ( ! function_exists( 'tpw_core_ensure_member_menu_defaults' ) ) {
 
         $menu_id = absint( $menu_id );
         if ( $menu_id <= 0 && function_exists( 'wp_get_nav_menu_object' ) ) {
-            $menu_obj = wp_get_nav_menu_object( __( 'Members Menu', 'tpw-core' ) );
+            $menu_obj = wp_get_nav_menu_object( __( 'Members Menu', 'tpw-ilungu-club' ) );
             $menu_id  = $menu_obj && isset( $menu_obj->term_id ) ? (int) $menu_obj->term_id : 0;
         }
 
         if ( $menu_id <= 0 ) {
-            $menu_id = (int) wp_create_nav_menu( __( 'Members Menu', 'tpw-core' ) );
+            $menu_id = (int) wp_create_nav_menu( __( 'Members Menu', 'tpw-ilungu-club' ) );
         }
 
         if ( $menu_id <= 0 ) {
@@ -2851,8 +2851,8 @@ add_filter( 'wp_nav_menu_items', function( $items, $args ) {
     // Build submenu: My Profile + Logout (logout redirects to Home)
     $logout_url = function_exists( 'wp_logout_url' ) ? wp_logout_url( home_url( '/' ) ) : home_url( '/?logout=1' );
     $profile_li .= '<ul class="sub-menu tpw-member-profile-sub">'
-                . '<li class="menu-item"><a href="' . esc_url( $profile_url ) . '">' . esc_html__( 'My Profile', 'tpw-core' ) . '</a></li>'
-                . '<li class="menu-item"><a href="' . esc_url( $logout_url ) . '">' . esc_html__( 'Logout', 'tpw-core' ) . '</a></li>'
+                . '<li class="menu-item"><a href="' . esc_url( $profile_url ) . '">' . esc_html__( 'My Profile', 'tpw-ilungu-club' ) . '</a></li>'
+                . '<li class="menu-item"><a href="' . esc_url( $logout_url ) . '">' . esc_html__( 'Logout', 'tpw-ilungu-club' ) . '</a></li>'
                 . '</ul>';
     $profile_li .= '</li>';
 
@@ -3067,8 +3067,8 @@ add_action( 'admin_notices', function() {
     if ( ! tpw_core_profile_page_is_configured() ) {
         $url = add_query_arg( [ 'page' => 'ilungu-club-settings', 'tab' => 'profile' ], admin_url( 'admin.php' ) );
         echo '<div class="notice notice-warning is-dismissible"><p>'
-            . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-core' )
-            . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-core' ) . '</a>'
+            . esc_html__( 'iLungu Club: The Member Profile page is not configured. ', 'tpw-ilungu-club' )
+            . '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Select a Profile page now', 'tpw-ilungu-club' ) . '</a>'
             . '</p></div>';
         return;
     }
@@ -3079,8 +3079,8 @@ add_action( 'admin_notices', function() {
         if ( $p && 'page' === $p->post_type && 'publish' !== $p->post_status ) {
             $edit = get_edit_post_link( $pid, '' );
             echo '<div class="notice notice-error is-dismissible"><p>'
-                . esc_html__( 'iLungu Club: The selected Member Profile page is not published. Members cannot view it until it is Public and Published.', 'tpw-core' )
-                . ( $edit ? ' <a href="' . esc_url( $edit ) . '">' . esc_html__( 'Edit page', 'tpw-core' ) . '</a>' : '' )
+                . esc_html__( 'iLungu Club: The selected Member Profile page is not published. Members cannot view it until it is Public and Published.', 'tpw-ilungu-club' )
+                . ( $edit ? ' <a href="' . esc_url( $edit ) . '">' . esc_html__( 'Edit page', 'tpw-ilungu-club' ) . '</a>' : '' )
                 . '</p></div>';
         }
     }
@@ -3188,7 +3188,7 @@ add_action( 'admin_init', function () {
     // Create a new My Profile page with the shortcode
     $author = function_exists( 'get_current_user_id' ) ? (int) get_current_user_id() : 0;
     $post_id = wp_insert_post( [
-        'post_title'     => __( 'My Profile', 'tpw-core' ),
+        'post_title'     => __( 'My Profile', 'tpw-ilungu-club' ),
         'post_name'      => 'my-profile',
         'post_status'    => 'publish',
         'post_type'      => 'page',

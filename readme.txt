@@ -31,6 +31,15 @@ You do not use iLungu Club directly in the same way as a feature add-on — it w
 Learn more about ThePluginWorks ecosystem:
 https://www.thepluginworks.com
 
+== External Services ==
+
+Ideal Postcodes, provided by IDDQD Limited, is an optional service for looking up GB addresses by postcode. To use it, an administrator must select Ideal Postcodes in Member Settings > Address Lookup and configure an API key from their Ideal Postcodes account. Manual address entry remains available without it.
+
+When a user performs a lookup in a supported form, or an administrator runs Test Lookup, the site sends the entered postcode and configured API key to the Ideal Postcodes API. The request is made by the site's server, whose network address is visible to the service. In forms without a lookup button, a lookup may run when the postcode field loses focus.
+
+Terms of service: https://terms.ideal-postcodes.co.uk/
+Privacy policy: https://terms.ideal-postcodes.co.uk/website/privacy
+
 == Installation ==
 
 1. Install iLungu™ Club from the WordPress.org plugin directory, or upload the `tpw-ilungu-club` folder to `/wp-content/plugins/`.

@@ -21,20 +21,20 @@ $upload_pages_url    = TPW_Control_UI::menu_url( 'upload-pages' );
 $menu_manager_url    = TPW_Control_UI::menu_url( 'menu-manager' );
 ?>
 <div class="tpw-control-dashboard tpw-control-dashboard--legacy-workspace">
-    <span class="tpw-badge"><?php echo esc_html__( 'Legacy Workspace', 'tpw-core' ); ?></span>
-    <h3><?php echo esc_html__( 'iLungu Club Control has been split into separate FE workspaces', 'tpw-core' ); ?></h3>
-    <p><?php echo esc_html__( 'Use the new Menu Management and Archival System workspaces for day-to-day front-end operations. This legacy page remains available during the transition so existing links, pages, and shortcodes continue to work.', 'tpw-core' ); ?></p>
+    <span class="tpw-badge"><?php echo esc_html__( 'Legacy Workspace', 'tpw-ilungu-club' ); ?></span>
+    <h3><?php echo esc_html__( 'iLungu Club Control has been split into separate FE workspaces', 'tpw-ilungu-club' ); ?></h3>
+    <p><?php echo esc_html__( 'Use the new Menu Management and Archival System workspaces for day-to-day front-end operations. This legacy page remains available during the transition so existing links, pages, and shortcodes continue to work.', 'tpw-ilungu-club' ); ?></p>
     <div class="tpw-control-quicklinks">
         <?php if ( '' !== $menu_management_url ) : ?>
-            <a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( $menu_management_url ); ?>"><?php echo esc_html__( 'Open Menu Management', 'tpw-core' ); ?></a>
+            <a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( $menu_management_url ); ?>"><?php echo esc_html__( 'Open Menu Management', 'tpw-ilungu-club' ); ?></a>
         <?php endif; ?>
         <?php if ( '' !== $archival_system_url ) : ?>
-            <a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( $archival_system_url ); ?>"><?php echo esc_html__( 'Open Archival System', 'tpw-core' ); ?></a>
+            <a class="tpw-btn tpw-btn-secondary" href="<?php echo esc_url( $archival_system_url ); ?>"><?php echo esc_html__( 'Open Archival System', 'tpw-ilungu-club' ); ?></a>
         <?php endif; ?>
     </div>
-    <p><?php echo esc_html__( 'Legacy quick links remain available below while the older combined workspace is phased into transition status.', 'tpw-core' ); ?></p>
+    <p><?php echo esc_html__( 'Legacy quick links remain available below while the older combined workspace is phased into transition status.', 'tpw-ilungu-club' ); ?></p>
     <div class="tpw-control-quicklinks">
-        <a class="tpw-btn tpw-btn-light" href="<?php echo esc_url( $upload_pages_url ); ?>"><?php echo esc_html__( 'Legacy Upload Pages', 'tpw-core' ); ?></a>
-        <a class="tpw-btn tpw-btn-light" href="<?php echo esc_url( $menu_manager_url ); ?>"><?php echo esc_html__( 'Legacy Menu Manager', 'tpw-core' ); ?></a>
+        <a class="tpw-btn tpw-btn-light" href="<?php echo esc_url( $upload_pages_url ); ?>"><?php echo esc_html__( 'Legacy Upload Pages', 'tpw-ilungu-club' ); ?></a>
+        <a class="tpw-btn tpw-btn-light" href="<?php echo esc_url( $menu_manager_url ); ?>"><?php echo esc_html__( 'Legacy Menu Manager', 'tpw-ilungu-club' ); ?></a>
     </div>
 </div>

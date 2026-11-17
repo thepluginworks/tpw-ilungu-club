@@ -17,10 +17,10 @@ class TPW_Signup_Sections {
 	 */
 	public static function get_sections() {
 		return array(
-			'account_details'   => __( 'Account Details', 'tpw-core' ),
-			'personal_details'  => __( 'Personal Details', 'tpw-core' ),
-			'address'           => __( 'Address', 'tpw-core' ),
-			'emergency_contact' => __( 'Emergency Contact', 'tpw-core' ),
+			'account_details'   => __( 'Account Details', 'tpw-ilungu-club' ),
+			'personal_details'  => __( 'Personal Details', 'tpw-ilungu-club' ),
+			'address'           => __( 'Address', 'tpw-ilungu-club' ),
+			'emergency_contact' => __( 'Emergency Contact', 'tpw-ilungu-club' ),
 		);
 	}
 

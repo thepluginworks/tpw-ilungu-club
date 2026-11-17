@@ -1,7 +1,7 @@
 <?php
 use TPW_Feedback_Model;
 if ( ! current_user_can( 'manage_options' ) ) {
-    wp_die( __( 'You do not have sufficient permissions to access this page.', 'tpw-core' ) );
+    wp_die( __( 'You do not have sufficient permissions to access this page.', 'tpw-ilungu-club' ) );
 }
 $chart_data = TPW_Feedback_Model::get_chart_data();
 $chart_data_json = wp_json_encode($chart_data);

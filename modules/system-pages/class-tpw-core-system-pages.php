@@ -356,12 +356,12 @@ add_action( 'plugins_loaded', [ 'TPW_Core_System_Pages', 'ensure_tables' ], 1 );
 // Handle System Pages admin actions (recreate)
 add_action( 'admin_post_tpw_system_pages_action', function(){
     if ( ! current_user_can( 'manage_options' ) ) {
-        wp_die( __( 'Permission denied', 'tpw-core' ) );
+        wp_die( __( 'Permission denied', 'tpw-ilungu-club' ) );
     }
     // Nonce
     $nonce_ok = isset($_POST['tpw_sys_pages_nonce']) && wp_verify_nonce( $_POST['tpw_sys_pages_nonce'], 'tpw_system_pages_action' );
     if ( ! $nonce_ok ) {
-        wp_die( __( 'Security check failed', 'tpw-core' ) );
+        wp_die( __( 'Security check failed', 'tpw-ilungu-club' ) );
     }
 
     $op   = isset($_POST['op']) ? sanitize_key( $_POST['op'] ) : '';
@@ -406,9 +406,9 @@ add_action( 'admin_post_tpw_system_pages_action', function(){
                 }
                 wp_reset_postdata();
             }
-            add_settings_error( 'tpw_system_pages', 'tpw_sp_recreated', sprintf( __( "Page '%s' successfully recreated.", 'tpw-core' ), esc_html( $label ) ), 'updated' );
+            add_settings_error( 'tpw_system_pages', 'tpw_sp_recreated', sprintf( __( "Page '%s' successfully recreated.", 'tpw-ilungu-club' ), esc_html( $label ) ), 'updated' );
         } else {
-            add_settings_error( 'tpw_system_pages', 'tpw_sp_recreate_failed', sprintf( __( "Failed to recreate page '%s'.", 'tpw-core' ), esc_html( $label ) ), 'error' );
+            add_settings_error( 'tpw_system_pages', 'tpw_sp_recreate_failed', sprintf( __( "Failed to recreate page '%s'.", 'tpw-ilungu-club' ), esc_html( $label ) ), 'error' );
         }
         // Persist for redirect
         $errs = get_settings_errors();
@@ -424,13 +424,13 @@ add_action( 'admin_post_tpw_system_pages_action', function(){
 
 // AJAX: Unlink a system page mapping
 add_action( 'wp_ajax_tpw_system_page_unlink', function(){
-    if ( ! current_user_can( 'manage_options' ) ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ), 403 );
+    if ( ! current_user_can( 'manage_options' ) ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ), 403 );
     $nonce = isset($_POST['nonce']) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
-    if ( ! wp_verify_nonce( $nonce, 'tpw_system_pages_ajax' ) ) wp_send_json_error( __( 'Bad nonce', 'tpw-core' ), 400 );
+    if ( ! wp_verify_nonce( $nonce, 'tpw_system_pages_ajax' ) ) wp_send_json_error( __( 'Bad nonce', 'tpw-ilungu-club' ), 400 );
     $slug = isset($_POST['slug']) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
-    if ( ! $slug ) wp_send_json_error( __( 'Missing slug', 'tpw-core' ), 400 );
+    if ( ! $slug ) wp_send_json_error( __( 'Missing slug', 'tpw-ilungu-club' ), 400 );
     $ok = TPW_Core_System_Pages::unlink( $slug );
-    if ( ! $ok ) wp_send_json_error( __( 'Failed to unlink', 'tpw-core' ), 500 );
+    if ( ! $ok ) wp_send_json_error( __( 'Failed to unlink', 'tpw-ilungu-club' ), 500 );
 
     // Return updated row HTML
     ob_start();
@@ -441,15 +441,15 @@ add_action( 'wp_ajax_tpw_system_page_unlink', function(){
 
 // AJAX: Recreate a system page immediately
 add_action( 'wp_ajax_tpw_system_page_recreate', function(){
-    if ( ! current_user_can( 'manage_options' ) ) wp_send_json_error( __( 'Permission denied', 'tpw-core' ), 403 );
+    if ( ! current_user_can( 'manage_options' ) ) wp_send_json_error( __( 'Permission denied', 'tpw-ilungu-club' ), 403 );
     $nonce = isset($_POST['nonce']) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
-    if ( ! wp_verify_nonce( $nonce, 'tpw_system_pages_ajax' ) ) wp_send_json_error( __( 'Bad nonce', 'tpw-core' ), 400 );
+    if ( ! wp_verify_nonce( $nonce, 'tpw_system_pages_ajax' ) ) wp_send_json_error( __( 'Bad nonce', 'tpw-ilungu-club' ), 400 );
     $slug = isset($_POST['slug']) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
-    if ( ! $slug ) wp_send_json_error( __( 'Missing slug', 'tpw-core' ), 400 );
+    if ( ! $slug ) wp_send_json_error( __( 'Missing slug', 'tpw-ilungu-club' ), 400 );
     // Unlink and recreate
     TPW_Core_System_Pages::unlink( $slug );
     $new = TPW_Core_System_Pages::ensure_page( $slug );
-    if ( $new <= 0 ) wp_send_json_error( __( 'Failed to recreate page', 'tpw-core' ), 500 );
+    if ( $new <= 0 ) wp_send_json_error( __( 'Failed to recreate page', 'tpw-ilungu-club' ), 500 );
 
     ob_start();
     TPW_Core_System_Pages_Render::render_row_by_slug( $slug );
@@ -496,21 +496,21 @@ class TPW_Core_System_Pages_Render {
                     </div>
                     <div style="margin-top:4px;">
                         <?php if ( $perm ) : ?>
-                            <a class="button button-small" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-core' ); ?></a>
+                            <a class="button button-small" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-ilungu-club' ); ?></a>
                         <?php endif; ?>
                         <?php if ( $page_obj ) : ?>
-                            <a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $pid, '' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Edit', 'tpw-core' ); ?></a>
+                            <a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $pid, '' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Edit', 'tpw-ilungu-club' ); ?></a>
                         <?php endif; ?>
                     </div>
                 <?php else : ?>
-                    <em><?php esc_html_e( 'Not linked', 'tpw-core' ); ?></em>
+                    <em><?php esc_html_e( 'Not linked', 'tpw-ilungu-club' ); ?></em>
                 <?php endif; ?>
             </td>
             <td>
                 <?php if ( $is_live ) : ?>
-                    <span style="color:#008a20;">✅ <?php esc_html_e( 'Exists', 'tpw-core' ); ?></span>
+                    <span style="color:#008a20;">✅ <?php esc_html_e( 'Exists', 'tpw-ilungu-club' ); ?></span>
                 <?php else : ?>
-                    <span style="color:#b52727;">❌ <?php esc_html_e( 'Missing', 'tpw-core' ); ?></span>
+                    <span style="color:#b52727;">❌ <?php esc_html_e( 'Missing', 'tpw-ilungu-club' ); ?></span>
                 <?php endif; ?>
             </td>
             <td><?php echo esc_html( $plugin ); ?></td>
@@ -522,10 +522,10 @@ class TPW_Core_System_Pages_Render {
                 <?php endif; ?>
             </td>
             <td>
-                <button class="tpw-btn tpw-btn-secondary js-tpw-sp-unlink" data-nonce="<?php echo esc_attr($nonce); ?>" data-slug="<?php echo esc_attr($slug); ?>"><?php esc_html_e('Unlink','tpw-core'); ?></button>
-                <button class="tpw-btn tpw-btn-primary js-tpw-sp-recreate" data-nonce="<?php echo esc_attr($nonce); ?>" data-slug="<?php echo esc_attr($slug); ?>"><?php esc_html_e('Recreate','tpw-core'); ?></button>
+                <button class="tpw-btn tpw-btn-secondary js-tpw-sp-unlink" data-nonce="<?php echo esc_attr($nonce); ?>" data-slug="<?php echo esc_attr($slug); ?>"><?php esc_html_e('Unlink','tpw-ilungu-club'); ?></button>
+                <button class="tpw-btn tpw-btn-primary js-tpw-sp-recreate" data-nonce="<?php echo esc_attr($nonce); ?>" data-slug="<?php echo esc_attr($slug); ?>"><?php esc_html_e('Recreate','tpw-ilungu-club'); ?></button>
                 <?php if ( $is_live && $perm ) : ?>
-                    <a class="tpw-btn" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-core' ); ?></a>
+                    <a class="tpw-btn" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-ilungu-club' ); ?></a>
                 <?php endif; ?>
             </td>
         </tr>

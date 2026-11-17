@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
-    echo '<div class="notice notice-error"><p>' . esc_html__( 'System Pages manager not loaded.', 'tpw-core' ) . '</p></div>';
+    echo '<div class="notice notice-error"><p>' . esc_html__( 'System Pages manager not loaded.', 'tpw-ilungu-club' ) . '</p></div>';
     return;
 }
 
@@ -22,21 +22,21 @@ $admin_post = admin_url( 'admin-post.php' );
 $base_url   = admin_url( 'admin.php?page=ilungu-club-settings&tab=system-pages' );
 ?>
 <div class="tpw-system-pages">
-    <p><?php echo esc_html__( 'Registered TPW system pages across plugins. This list does not auto-create WordPress pages. Use Recreate to restore a missing page for an existing slug.', 'tpw-core' ); ?></p>
+    <p><?php echo esc_html__( 'Registered TPW system pages across plugins. This list does not auto-create WordPress pages. Use Recreate to restore a missing page for an existing slug.', 'tpw-ilungu-club' ); ?></p>
 
     <?php if ( empty( $rows ) ) : ?>
-        <p><em><?php echo esc_html__( 'No system pages registered yet.', 'tpw-core' ); ?></em></p>
+        <p><em><?php echo esc_html__( 'No system pages registered yet.', 'tpw-ilungu-club' ); ?></em></p>
     <?php else : ?>
         <table class="widefat striped">
             <thead>
                 <tr>
-                    <th><?php esc_html_e( 'Title', 'tpw-core' ); ?></th>
-                    <th><?php esc_html_e( 'Slug', 'tpw-core' ); ?></th>
-                    <th><?php esc_html_e( 'Linked WP Page', 'tpw-core' ); ?></th>
-                    <th><?php esc_html_e( 'Status', 'tpw-core' ); ?></th>
-                    <th><?php esc_html_e( 'Plugin', 'tpw-core' ); ?></th>
-                    <th><?php esc_html_e( 'Required', 'tpw-core' ); ?></th>
-                    <th><?php esc_html_e( 'Actions', 'tpw-core' ); ?></th>
+                    <th><?php esc_html_e( 'Title', 'tpw-ilungu-club' ); ?></th>
+                    <th><?php esc_html_e( 'Slug', 'tpw-ilungu-club' ); ?></th>
+                    <th><?php esc_html_e( 'Linked WP Page', 'tpw-ilungu-club' ); ?></th>
+                    <th><?php esc_html_e( 'Status', 'tpw-ilungu-club' ); ?></th>
+                    <th><?php esc_html_e( 'Plugin', 'tpw-ilungu-club' ); ?></th>
+                    <th><?php esc_html_e( 'Required', 'tpw-ilungu-club' ); ?></th>
+                    <th><?php esc_html_e( 'Actions', 'tpw-ilungu-club' ); ?></th>
                 </tr>
             </thead>
             <tbody id="tpw-system-pages-table-body">
@@ -68,21 +68,21 @@ $base_url   = admin_url( 'admin.php?page=ilungu-club-settings&tab=system-pages' 
                             </div>
                             <div style="margin-top:4px;">
                                 <?php if ( $perm ) : ?>
-                                    <a class="button button-small" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-core' ); ?></a>
+                                    <a class="button button-small" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-ilungu-club' ); ?></a>
                                 <?php endif; ?>
                                 <?php if ( $page_obj ) : ?>
-                                    <a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $pid, '' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Edit', 'tpw-core' ); ?></a>
+                                    <a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $pid, '' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Edit', 'tpw-ilungu-club' ); ?></a>
                                 <?php endif; ?>
                             </div>
                         <?php else : ?>
-                            <em><?php esc_html_e( 'Not linked', 'tpw-core' ); ?></em>
+                            <em><?php esc_html_e( 'Not linked', 'tpw-ilungu-club' ); ?></em>
                         <?php endif; ?>
                     </td>
                     <td>
                         <?php if ( $is_live ) : ?>
-                            <span style="color:#008a20;">✅ <?php esc_html_e( 'Exists', 'tpw-core' ); ?></span>
+                            <span style="color:#008a20;">✅ <?php esc_html_e( 'Exists', 'tpw-ilungu-club' ); ?></span>
                         <?php else : ?>
-                            <span style="color:#b52727;">❌ <?php esc_html_e( 'Missing', 'tpw-core' ); ?></span>
+                            <span style="color:#b52727;">❌ <?php esc_html_e( 'Missing', 'tpw-ilungu-club' ); ?></span>
                         <?php endif; ?>
                     </td>
                     <td><?php echo esc_html( $plugin ); ?></td>
@@ -95,10 +95,10 @@ $base_url   = admin_url( 'admin.php?page=ilungu-club-settings&tab=system-pages' 
                     </td>
                     <td>
                         <?php $ajax_nonce = wp_create_nonce( 'tpw_system_pages_ajax' ); ?>
-                        <button class="tpw-btn tpw-btn-secondary js-tpw-sp-unlink" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Unlink', 'tpw-core' ); ?></button>
-                        <button class="tpw-btn tpw-btn-primary js-tpw-sp-recreate" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Recreate', 'tpw-core' ); ?></button>
+                        <button class="tpw-btn tpw-btn-secondary js-tpw-sp-unlink" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Unlink', 'tpw-ilungu-club' ); ?></button>
+                        <button class="tpw-btn tpw-btn-primary js-tpw-sp-recreate" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>" data-slug="<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Recreate', 'tpw-ilungu-club' ); ?></button>
                         <?php if ( $is_live && $perm ) : ?>
-                            <a class="tpw-btn" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-core' ); ?></a>
+                            <a class="tpw-btn" href="<?php echo esc_url( $perm ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View', 'tpw-ilungu-club' ); ?></a>
                         <?php endif; ?>
                     </td>
                 </tr>

@@ -1,8 +1,9 @@
 <?php
 use TPW_Feedback_Model;
 if ( ! current_user_can( 'manage_options' ) ) {
-    wp_die( __( 'You do not have sufficient permissions to access this page.', 'tpw-core' ) );
+    wp_die( __( 'You do not have sufficient permissions to access this page.', 'tpw-ilungu-club' ) );
 }
+wp_enqueue_script( 'tpw-feedback-chartjs', TPW_CORE_URL . 'assets/third-party/chartjs/chart.umd.js', array(), '4.4.9', true );
 $chart_data = TPW_Feedback_Model::get_chart_data();
 $chart_data_json = wp_json_encode($chart_data);
 
@@ -96,7 +97,6 @@ $results = $wpdb->get_results(
     </div>
 </div></div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const chartData = <?php echo $chart_data_json; ?>;

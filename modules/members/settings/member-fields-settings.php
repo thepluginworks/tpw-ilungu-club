@@ -6,9 +6,9 @@ require_once TPW_CORE_PATH . 'modules/members/includes/admin-settings-tabs.php';
 
 wp_enqueue_script(
   'sortablejs',
-  'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js',
+  TPW_CORE_URL . 'assets/third-party/sortablejs/Sortable.js',
   array(),
-  null,
+  '1.15.0',
   true
 );
 
@@ -311,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }
+  });
 
 		const guardedFields = Array.from(document.querySelectorAll('.tpw-field-settings .tpw-autofill-guard'));
 		function markAutofillBaseline(field) {
@@ -355,8 +356,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		window.setTimeout(scrubAutofillFields, 250);
 		window.setTimeout(scrubAutofillFields, 1000);
 		window.setTimeout(scrubAutofillFields, 2000);
-  });
-
 	// Searchable toggle logic
 	const nonce = '<?php echo esc_js( wp_create_nonce('tpw_member_searchable_nonce') ); ?>';
 	const ajaxUrl = '<?php echo esc_js( admin_url('admin-ajax.php') ); ?>';

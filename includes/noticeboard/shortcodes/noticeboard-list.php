@@ -105,7 +105,7 @@ class TPW_Noticeboard_List_Shortcode {
         }
         if ($can_manage) {
             echo '<div class="tpw-notice-admin-actions">';
-            echo '<button class="button button-primary tpw-notice-add">' . esc_html__('Add New Notice', 'tpw-core') . '</button>';
+            echo '<button class="button button-primary tpw-notice-add">' . esc_html__('Add New Notice', 'tpw-ilungu-club') . '</button>';
             echo '</div>';
         }
 
@@ -124,20 +124,20 @@ class TPW_Noticeboard_List_Shortcode {
                 echo '<h3 class="tpw-notice-title">' . esc_html($title) . '</h3>';
                 if ($cat) echo '<div class="tpw-notice-cat">' . $cat . '</div>';
                 if ($excerpt) echo '<div class="tpw-notice-excerpt">' . esc_html($excerpt) . '</div>';
-                if ($atts['read_more'] === 'true') echo '<a class="tpw-notice-more" href="' . esc_url(get_permalink($id)) . '">' . esc_html__('Read More', 'tpw-core') . '</a>';
+                if ($atts['read_more'] === 'true') echo '<a class="tpw-notice-more" href="' . esc_url(get_permalink($id)) . '">' . esc_html__('Read More', 'tpw-ilungu-club') . '</a>';
                 echo '</div>';
                 if ($can_manage) {
                     echo '<div class="tpw-notice-actions">';
-                    echo '<button class="button tpw-notice-edit">' . esc_html__('Edit', 'tpw-core') . '</button>';
-                    echo '<button class="button tpw-notice-duplicate">' . esc_html__('Duplicate', 'tpw-core') . '</button>';
-                    echo '<button class="button button-link-delete tpw-notice-delete">' . esc_html__('Delete', 'tpw-core') . '</button>';
+                    echo '<button class="button tpw-notice-edit">' . esc_html__('Edit', 'tpw-ilungu-club') . '</button>';
+                    echo '<button class="button tpw-notice-duplicate">' . esc_html__('Duplicate', 'tpw-ilungu-club') . '</button>';
+                    echo '<button class="button button-link-delete tpw-notice-delete">' . esc_html__('Delete', 'tpw-ilungu-club') . '</button>';
                     echo '</div>';
                 }
                 echo '</div>';
             }
             wp_reset_postdata();
         } else {
-            echo '<p>' . esc_html__('No notices found.', 'tpw-core') . '</p>';
+            echo '<p>' . esc_html__('No notices found.', 'tpw-ilungu-club') . '</p>';
         }
         echo '</div>';
 

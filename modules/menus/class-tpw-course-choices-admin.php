@@ -44,18 +44,18 @@ class TPW_Course_Choices_Admin {
 
         if ( function_exists( 'tpw_admin_output_header' ) ) {
             tpw_admin_output_header(
-                __( 'Manage Course Options', 'tpw-core' ),
-                __( 'View and edit available choices for each course in your dining menus. For Admins and Secretaries.', 'tpw-core' )
+                __( 'Manage Course Options', 'tpw-ilungu-club' ),
+                __( 'View and edit available choices for each course in your dining menus. For Admins and Secretaries.', 'tpw-ilungu-club' )
             );
             echo '<div class="tpw-admin-ui">';
         } elseif ( function_exists( 'flexievent_output_header' ) ) {
             flexievent_output_header(
-                __( 'Manage Course Options', 'tpw-core' ),
-                __( 'View and edit available choices for each course in your dining menus. For Admins and Secretaries.', 'tpw-core' )
+                __( 'Manage Course Options', 'tpw-ilungu-club' ),
+                __( 'View and edit available choices for each course in your dining menus. For Admins and Secretaries.', 'tpw-ilungu-club' )
             );
             echo '<div class="tpw-admin-ui">';
         } else {
-            echo '<div class="tpw-admin-ui"><div class="wrap"><h1>' . esc_html__( 'Manage Course Options', 'tpw-core' ) . '</h1>';
+            echo '<div class="tpw-admin-ui"><div class="wrap"><h1>' . esc_html__( 'Manage Course Options', 'tpw-ilungu-club' ) . '</h1>';
         }
         echo '<p><a href="' . esc_url(admin_url('admin.php?page=tpw-core-dining-menus')) . '" class="button button-secondary">&larr; Back to Dining Menus</a></p>';
         echo '<div class="wrap">';

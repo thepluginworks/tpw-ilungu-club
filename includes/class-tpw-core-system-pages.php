@@ -40,7 +40,7 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
             // Known core system pages (extend over time)
             self::$registry = [
                 'member-login' => [
-                    'title'     => __( 'Member Login', 'tpw-core' ),
+                    'title'     => __( 'Member Login', 'tpw-ilungu-club' ),
                     'shortcode' => '[tpw_member_login]',
                     'plugin'    => 'tpw-core',
                     'required'  => 0,
@@ -319,7 +319,7 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
                 'tpw_system_page_slug_conflict',
                 sprintf(
                     /* translators: %s: system page slug */
-                    __( 'Cannot create or recreate the system page at "/%s/" because an unrelated WordPress page already uses that path. Reassign or rename that page before continuing.', 'tpw-core' ),
+                    __( 'Cannot create or recreate the system page at "/%s/" because an unrelated WordPress page already uses that path. Reassign or rename that page before continuing.', 'tpw-ilungu-club' ),
                     $slug
                 )
             );
@@ -346,7 +346,7 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
         protected static function ensure_page_result( $slug, $recreate = false ) {
             $s = sanitize_key( (string) $slug );
             if ( '' === $s ) {
-                return new WP_Error( 'tpw_system_page_missing_slug', __( 'Missing system page slug.', 'tpw-core' ) );
+                return new WP_Error( 'tpw_system_page_missing_slug', __( 'Missing system page slug.', 'tpw-ilungu-club' ) );
             }
 
             self::boot_defaults();
@@ -388,7 +388,7 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
                         'tpw_system_page_in_trash',
                         sprintf(
                             /* translators: %s: system page slug */
-                            __( 'The page for slug "%s" is currently in Trash. Empty Trash or restore that page before recreating it.', 'tpw-core' ),
+                            __( 'The page for slug "%s" is currently in Trash. Empty Trash or restore that page before recreating it.', 'tpw-ilungu-club' ),
                             $s
                         )
                     );
@@ -507,7 +507,7 @@ if ( ! class_exists( 'TPW_Core_System_Pages' ) ) {
         public static function recreate_page( $slug ) {
             $s = sanitize_key( (string) $slug );
             if ( '' === $s ) {
-                return new WP_Error( 'tpw_system_page_missing_slug', __( 'Missing system page slug.', 'tpw-core' ) );
+                return new WP_Error( 'tpw_system_page_missing_slug', __( 'Missing system page slug.', 'tpw-ilungu-club' ) );
             }
 
             return self::ensure_page_result( $s, true );
@@ -852,7 +852,7 @@ if ( ! has_action( 'wp_ajax_tpw_system_page_unlink' ) ) {
         'wp_ajax_tpw_system_page_unlink',
         function() {
             if ( ! TPW_Core_System_Pages::current_user_can_manage() ) {
-                tpw_core_system_pages_ajax_error( __( 'Permission denied', 'tpw-core' ), 403 );
+                tpw_core_system_pages_ajax_error( __( 'Permission denied', 'tpw-ilungu-club' ), 403 );
             }
 
             $nonce = '';
@@ -861,7 +861,7 @@ if ( ! has_action( 'wp_ajax_tpw_system_page_unlink' ) ) {
             }
 
             if ( ! wp_verify_nonce( $nonce, 'tpw_system_pages_ajax' ) ) {
-                tpw_core_system_pages_ajax_error( __( 'Bad nonce', 'tpw-core' ), 400 );
+                tpw_core_system_pages_ajax_error( __( 'Bad nonce', 'tpw-ilungu-club' ), 400 );
             }
 
             $slug = '';
@@ -870,16 +870,16 @@ if ( ! has_action( 'wp_ajax_tpw_system_page_unlink' ) ) {
             }
 
             if ( '' === $slug ) {
-                tpw_core_system_pages_ajax_error( __( 'Missing slug', 'tpw-core' ), 400 );
+                tpw_core_system_pages_ajax_error( __( 'Missing slug', 'tpw-ilungu-club' ), 400 );
             }
 
             if ( false === TPW_Core_System_Pages::unlink( $slug ) ) {
-                tpw_core_system_pages_ajax_error( __( 'Failed to unlink page mapping.', 'tpw-core' ) );
+                tpw_core_system_pages_ajax_error( __( 'Failed to unlink page mapping.', 'tpw-ilungu-club' ) );
             }
 
             wp_send_json_success(
                 array(
-                    'message' => __( 'Page mapping cleared.', 'tpw-core' ),
+                    'message' => __( 'Page mapping cleared.', 'tpw-ilungu-club' ),
                     'reload'  => true,
                 )
             );
@@ -892,7 +892,7 @@ if ( ! has_action( 'wp_ajax_tpw_system_page_recreate' ) ) {
         'wp_ajax_tpw_system_page_recreate',
         function() {
             if ( ! TPW_Core_System_Pages::current_user_can_manage() ) {
-                tpw_core_system_pages_ajax_error( __( 'Permission denied', 'tpw-core' ), 403 );
+                tpw_core_system_pages_ajax_error( __( 'Permission denied', 'tpw-ilungu-club' ), 403 );
             }
 
             $nonce = '';
@@ -901,7 +901,7 @@ if ( ! has_action( 'wp_ajax_tpw_system_page_recreate' ) ) {
             }
 
             if ( ! wp_verify_nonce( $nonce, 'tpw_system_pages_ajax' ) ) {
-                tpw_core_system_pages_ajax_error( __( 'Bad nonce', 'tpw-core' ), 400 );
+                tpw_core_system_pages_ajax_error( __( 'Bad nonce', 'tpw-ilungu-club' ), 400 );
             }
 
             $slug = '';
@@ -910,7 +910,7 @@ if ( ! has_action( 'wp_ajax_tpw_system_page_recreate' ) ) {
             }
 
             if ( '' === $slug ) {
-                tpw_core_system_pages_ajax_error( __( 'Missing slug', 'tpw-core' ), 400 );
+                tpw_core_system_pages_ajax_error( __( 'Missing slug', 'tpw-ilungu-club' ), 400 );
             }
 
             $result = TPW_Core_System_Pages::recreate_page( $slug );
@@ -922,7 +922,7 @@ if ( ! has_action( 'wp_ajax_tpw_system_page_recreate' ) ) {
                 array(
                     'message' => sprintf(
                         /* translators: %s: system page slug */
-                        __( 'Page "%s" recreated.', 'tpw-core' ),
+                        __( 'Page "%s" recreated.', 'tpw-ilungu-club' ),
                         $slug
                     ),
                     'pageId'  => (int) $result,

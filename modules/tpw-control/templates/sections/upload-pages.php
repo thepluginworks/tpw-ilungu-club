@@ -377,7 +377,7 @@ if ( ! function_exists( 'tpw_upl_vis_value' ) ) {
                                     <span class="tpw-upl-group-caret" aria-hidden="true">▾</span>
                                     <span><?php echo esc_html( $group_title ); ?></span>
                                 </span>
-                                <span class="tpw-upl-group-meta"><?php echo esc_html( sprintf( _n( '%d file', '%d files', $group_count, 'tpw-core' ), $group_count ) ); ?></span>
+                                <span class="tpw-upl-group-meta"><?php echo esc_html( sprintf( _n( '%d file', '%d files', $group_count, 'tpw-ilungu-club' ), $group_count ) ); ?></span>
                             </button>
                             <div class="tpw-upl-group-body"<?php echo $default_open ? '' : ' hidden'; ?>>
                             <table>

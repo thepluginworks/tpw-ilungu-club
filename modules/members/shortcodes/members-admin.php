@@ -122,7 +122,7 @@ add_action('wp_enqueue_scripts', function () {
 
                 // Datepicker for Advanced Search modal (date_range)
                 wp_enqueue_script('jquery-ui-datepicker');
-                wp_enqueue_style('jquery-ui-theme', 'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css', [], '1.13.2');
+                wp_enqueue_style('jquery-ui-theme', TPW_CORE_URL . 'assets/third-party/jquery-ui/jquery-ui.css', [], '1.13.2');
                 $initAdv = "jQuery(function($){ $('.tpw-adv-date').datepicker({ dateFormat: 'dd/mm/yy', changeMonth:true, changeYear:true, yearRange:'1900:2100' }); });";
                 wp_add_inline_script('jquery-ui-datepicker', $initAdv);
             }
@@ -130,7 +130,7 @@ add_action('wp_enqueue_scripts', function () {
             // Datepicker for add/edit forms
             if (in_array($action, ['add','edit_form'], true)) {
                 wp_enqueue_script('jquery-ui-datepicker');
-                wp_enqueue_style('jquery-ui-theme', 'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css', [], '1.13.2');
+                wp_enqueue_style('jquery-ui-theme', TPW_CORE_URL . 'assets/third-party/jquery-ui/jquery-ui.css', [], '1.13.2');
                 // Inline init script with site-configured format
                 $php_date = tpw_core_get_date_format();
                 $jq_date  = tpw_core_php_date_to_jqueryui( $php_date );
@@ -448,9 +448,9 @@ add_shortcode('tpw_manage_members', function() {
         $msg = sanitize_text_field( $_GET['msg'] );
         $text = '';
         if ( $msg === 'photo_deleted' ) {
-            $text = esc_html__( 'Member photo deleted.', 'tpw-core' );
+            $text = esc_html__( 'Member photo deleted.', 'tpw-ilungu-club' );
         } elseif ( $msg === 'photo_replaced' ) {
-            $text = esc_html__( 'Member photo updated.', 'tpw-core' );
+            $text = esc_html__( 'Member photo updated.', 'tpw-ilungu-club' );
         }
         if ( $text !== '' ) {
             echo '<div class="notice notice-success" style="margin:10px 0;"><p>' . esc_html($text) . '</p></div>';
@@ -460,8 +460,8 @@ add_shortcode('tpw_manage_members', function() {
     if ( isset( $_GET['tpw_password_setup_notice'] ) ) {
         $notice = sanitize_key( wp_unslash( $_GET['tpw_password_setup_notice'] ) );
         $messages = [
-            'add_sent' => __( 'Member saved and password setup email sent.', 'tpw-core' ),
-            'resent'   => __( 'Password setup link sent to the member.', 'tpw-core' ),
+            'add_sent' => __( 'Member saved and password setup email sent.', 'tpw-ilungu-club' ),
+            'resent'   => __( 'Password setup link sent to the member.', 'tpw-ilungu-club' ),
         ];
         if ( isset( $messages[ $notice ] ) ) {
             echo '<div class="notice notice-success" style="margin:10px 0;"><p>' . esc_html( $messages[ $notice ] ) . '</p></div>';
@@ -471,10 +471,10 @@ add_shortcode('tpw_manage_members', function() {
     if ( isset( $_GET['tpw_password_setup_error'] ) ) {
         $error = sanitize_key( wp_unslash( $_GET['tpw_password_setup_error'] ) );
         $errors = [
-            'add_send_failed' => __( 'Member saved, but the password setup email could not be sent.', 'tpw-core' ),
-            'send_failed'     => __( 'Password setup email could not be sent.', 'tpw-core' ),
-            'user_missing'    => __( 'This member is not linked to a valid WordPress user.', 'tpw-core' ),
-            'email_mismatch' => __( 'Password setup email is blocked because the member email and linked WordPress account email do not match. Resolve the mismatch first.', 'tpw-core' ),
+            'add_send_failed' => __( 'Member saved, but the password setup email could not be sent.', 'tpw-ilungu-club' ),
+            'send_failed'     => __( 'Password setup email could not be sent.', 'tpw-ilungu-club' ),
+            'user_missing'    => __( 'This member is not linked to a valid WordPress user.', 'tpw-ilungu-club' ),
+            'email_mismatch' => __( 'Password setup email is blocked because the member email and linked WordPress account email do not match. Resolve the mismatch first.', 'tpw-ilungu-club' ),
         ];
         if ( isset( $errors[ $error ] ) ) {
             echo '<div class="notice notice-error" style="margin:10px 0;"><p>' . esc_html( $errors[ $error ] ) . '</p></div>';
@@ -484,8 +484,8 @@ add_shortcode('tpw_manage_members', function() {
     if ( isset( $_GET['tpw_member_admin_error'] ) ) {
         $error = sanitize_key( wp_unslash( $_GET['tpw_member_admin_error'] ) );
         $errors = [
-            'last_admin_lockout' => __( 'Administrator access was not removed because this would leave the site without any other effective Administrator who can recover member management.', 'tpw-core' ),
-            'self_demotion_requires_other_admin' => __( 'Your Administrator access was not removed because no other effective Administrator currently exists to recover the system.', 'tpw-core' ),
+            'last_admin_lockout' => __( 'Administrator access was not removed because this would leave the site without any other effective Administrator who can recover member management.', 'tpw-ilungu-club' ),
+            'self_demotion_requires_other_admin' => __( 'Your Administrator access was not removed because no other effective Administrator currently exists to recover the system.', 'tpw-ilungu-club' ),
         ];
         if ( isset( $errors[ $error ] ) ) {
             echo '<div class="notice notice-error" style="margin:10px 0;"><p>' . esc_html( $errors[ $error ] ) . '</p></div>';
@@ -494,18 +494,18 @@ add_shortcode('tpw_manage_members', function() {
 
     // Show success notice after creating and linking a WP user
     if ( isset($_GET['wp_user_created']) && $_GET['wp_user_created'] === '1' ) {
-        echo '<div class="notice notice-success" style="margin:10px 0;"><p>' . esc_html__( 'WordPress user successfully created and linked.', 'tpw-core' ) . '</p></div>';
+        echo '<div class="notice notice-success" style="margin:10px 0;"><p>' . esc_html__( 'WordPress user successfully created and linked.', 'tpw-ilungu-club' ) . '</p></div>';
     }
     // Informational notice when email was added and page reloaded to reveal the button
     if ( isset($_GET['email_added']) && $_GET['email_added'] === '1' ) {
-        echo '<div class="notice notice-info" style="margin:10px 0;"><p>✉️ ' . esc_html__( 'Email address added — you can now create a WordPress user for this member.', 'tpw-core' ) . '</p></div>';
+        echo '<div class="notice notice-info" style="margin:10px 0;"><p>✉️ ' . esc_html__( 'Email address added — you can now create a WordPress user for this member.', 'tpw-ilungu-club' ) . '</p></div>';
     }
 
     $action = isset($_GET['action']) ? sanitize_text_field($_GET['action']) : 'list';
 
     // If the user cannot manage and also isn't eligible to view, block entirely
     if ( ! $can_manage && ! $can_view_directory ) {
-        return '<div class="tpw-error">' . esc_html__( 'Access Denied', 'tpw-core' ) . '</div>';
+        return '<div class="tpw-error">' . esc_html__( 'Access Denied', 'tpw-ilungu-club' ) . '</div>';
     }
 
     // Allow importer include when admin only

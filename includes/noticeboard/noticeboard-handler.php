@@ -42,11 +42,11 @@ class TPW_Noticeboard_Handler {
     private static function check_caps_and_nonce($action) {
         // Only allow users with is_admin (members flag) or is_noticeboard_admin
         if ( ! self::user_can_manage_notices() ) {
-            wp_send_json_error(['message' => __('Permission denied.', 'tpw-core')], 403);
+            wp_send_json_error(['message' => __('Permission denied.', 'tpw-ilungu-club')], 403);
         }
         $nonce = $_POST['_wpnonce'] ?? '';
         if (!wp_verify_nonce($nonce, $action)) {
-            wp_send_json_error(['message' => __('Security check failed.', 'tpw-core')], 400);
+            wp_send_json_error(['message' => __('Security check failed.', 'tpw-ilungu-club')], 400);
         }
     }
 
@@ -74,24 +74,24 @@ class TPW_Noticeboard_Handler {
         if ($category) { wp_set_object_terms($id, [$category], 'tpw_notice_category', false); }
         if ($thumb_id) { set_post_thumbnail($id, $thumb_id); }
 
-        wp_send_json_success(['message' => __('Notice saved.', 'tpw-core'), 'id' => $id]);
+        wp_send_json_success(['message' => __('Notice saved.', 'tpw-ilungu-club'), 'id' => $id]);
     }
 
     public static function delete_notice() {
         self::check_caps_and_nonce('tpw_notice_delete');
         $notice_id = isset($_POST['notice_id']) ? intval($_POST['notice_id']) : 0;
-        if (!$notice_id) wp_send_json_error(['message' => __('Invalid notice ID.', 'tpw-core')], 400);
+        if (!$notice_id) wp_send_json_error(['message' => __('Invalid notice ID.', 'tpw-ilungu-club')], 400);
         $res = wp_trash_post($notice_id);
-        if (!$res) wp_send_json_error(['message' => __('Delete failed.', 'tpw-core')], 400);
-        wp_send_json_success(['message' => __('Notice deleted.', 'tpw-core')]);
+        if (!$res) wp_send_json_error(['message' => __('Delete failed.', 'tpw-ilungu-club')], 400);
+        wp_send_json_success(['message' => __('Notice deleted.', 'tpw-ilungu-club')]);
     }
 
     public static function duplicate_notice() {
         self::check_caps_and_nonce('tpw_notice_duplicate');
         $notice_id = isset($_POST['notice_id']) ? intval($_POST['notice_id']) : 0;
-        if (!$notice_id) wp_send_json_error(['message' => __('Invalid notice ID.', 'tpw-core')], 400);
+        if (!$notice_id) wp_send_json_error(['message' => __('Invalid notice ID.', 'tpw-ilungu-club')], 400);
         $post = get_post($notice_id);
-        if (!$post || $post->post_type !== 'tpw_notice') wp_send_json_error(['message' => __('Not found.', 'tpw-core')], 404);
+        if (!$post || $post->post_type !== 'tpw_notice') wp_send_json_error(['message' => __('Not found.', 'tpw-ilungu-club')], 404);
 
         $new_postarr = [
             'post_type'   => 'tpw_notice',
@@ -110,21 +110,21 @@ class TPW_Noticeboard_Handler {
         $thumb_id = get_post_thumbnail_id($notice_id);
         if ($thumb_id) set_post_thumbnail($new_id, $thumb_id);
 
-        wp_send_json_success(['message' => __('Notice duplicated.', 'tpw-core'), 'id' => $new_id]);
+        wp_send_json_success(['message' => __('Notice duplicated.', 'tpw-ilungu-club'), 'id' => $new_id]);
     }
 
     public static function add_category() {
         self::check_caps_and_nonce('tpw_notice_add_category');
         $name = sanitize_text_field($_POST['name'] ?? '');
         if ($name === '') {
-            wp_send_json_error(['message' => __('Category name is required.','tpw-core')], 400);
+            wp_send_json_error(['message' => __('Category name is required.','tpw-ilungu-club')], 400);
         }
         $result = wp_insert_term($name, 'tpw_notice_category');
         if (is_wp_error($result)) {
             wp_send_json_error(['message' => $result->get_error_message()], 400);
         }
         $term = get_term($result['term_id'], 'tpw_notice_category');
-        wp_send_json_success(['message' => __('Category added.','tpw-core'), 'term' => [ 'id' => $term->term_id, 'name' => $term->name ]]);
+        wp_send_json_success(['message' => __('Category added.','tpw-ilungu-club'), 'term' => [ 'id' => $term->term_id, 'name' => $term->name ]]);
     }
 }
 

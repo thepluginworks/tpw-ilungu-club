@@ -88,9 +88,9 @@ $col = max(1, min(6, (int) ($columns ?? 3)));
       $next_url = add_query_arg( $qv, $next, $base );
     ?>
       <div class="tpw-gallery-pagination" aria-label="Gallery pagination">
-        <a class="tpw-btn tpw-btn-light small<?php echo $page <= 1 ? ' disabled' : ''; ?>" href="<?php echo esc_url( $prev_url ); ?>" aria-disabled="<?php echo $page <= 1 ? 'true' : 'false'; ?>"<?php echo $page <= 1 ? ' tabindex="-1"' : ''; ?>><?php echo esc_html__( 'Previous', 'tpw-core' ); ?></a>
+        <a class="tpw-btn tpw-btn-light small<?php echo $page <= 1 ? ' disabled' : ''; ?>" href="<?php echo esc_url( $prev_url ); ?>" aria-disabled="<?php echo $page <= 1 ? 'true' : 'false'; ?>"<?php echo $page <= 1 ? ' tabindex="-1"' : ''; ?>><?php echo esc_html__( 'Previous', 'tpw-ilungu-club' ); ?></a>
         <span class="tpw-btn tpw-btn-light small disabled tpw-gallery-pagination-status" aria-hidden="true"><?php echo (int) $page; ?>/<?php echo (int) $total_pages; ?></span>
-        <a class="tpw-btn tpw-btn-light small<?php echo $page >= $total_pages ? ' disabled' : ''; ?>" href="<?php echo esc_url( $next_url ); ?>" aria-disabled="<?php echo $page >= $total_pages ? 'true' : 'false'; ?>"<?php echo $page >= $total_pages ? ' tabindex="-1"' : ''; ?>><?php echo esc_html__( 'Next', 'tpw-core' ); ?></a>
+        <a class="tpw-btn tpw-btn-light small<?php echo $page >= $total_pages ? ' disabled' : ''; ?>" href="<?php echo esc_url( $next_url ); ?>" aria-disabled="<?php echo $page >= $total_pages ? 'true' : 'false'; ?>"<?php echo $page >= $total_pages ? ' tabindex="-1"' : ''; ?>><?php echo esc_html__( 'Next', 'tpw-ilungu-club' ); ?></a>
       </div>
     <?php endif; ?>
   </div>

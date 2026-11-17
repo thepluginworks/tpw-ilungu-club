@@ -20,7 +20,7 @@ class TPW_Signup_Form_Renderer {
 		?>
 		<div class="tpw-signup-form tpw-signup-form--disabled">
 			<div class="tpw-card tpw-settings-card">
-				<p><?php echo esc_html__( 'Join requests are not available at the moment.', 'tpw-core' ); ?></p>
+				<p><?php echo esc_html__( 'Join requests are not available at the moment.', 'tpw-ilungu-club' ); ?></p>
 			</div>
 		</div>
 		<?php
@@ -44,11 +44,11 @@ class TPW_Signup_Form_Renderer {
 		?>
 		<div class="tpw-signup-form tpw-signup-form--success">
 			<div class="tpw-card tpw-settings-card">
-				<h2><?php echo esc_html__( 'Thank you for joining us', 'tpw-core' ); ?></h2>
-				<p><?php echo esc_html__( 'We\'ve received your details successfully.', 'tpw-core' ); ?></p>
-				<p><?php echo esc_html__( 'We\'ll review your request and be in touch if anything further is needed. If you contact us about this request, please quote the reference below.', 'tpw-core' ); ?></p>
+				<h2><?php echo esc_html__( 'Thank you for joining us', 'tpw-ilungu-club' ); ?></h2>
+				<p><?php echo esc_html__( 'We\'ve received your details successfully.', 'tpw-ilungu-club' ); ?></p>
+				<p><?php echo esc_html__( 'We\'ll review your request and be in touch if anything further is needed. If you contact us about this request, please quote the reference below.', 'tpw-ilungu-club' ); ?></p>
 				<?php if ( '' !== $reference ) : ?>
-					<p><strong><?php echo esc_html__( 'Reference', 'tpw-core' ); ?>:</strong> <?php echo esc_html( $reference ); ?></p>
+					<p><strong><?php echo esc_html__( 'Reference', 'tpw-ilungu-club' ); ?>:</strong> <?php echo esc_html( $reference ); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -79,12 +79,12 @@ class TPW_Signup_Form_Renderer {
 		?>
 		<div class="tpw-signup-form">
 			<div class="tpw-card tpw-settings-card">
-				<h2><?php echo esc_html( isset( $schema['title'] ) ? $schema['title'] : __( 'Join', 'tpw-core' ) ); ?></h2>
+				<h2><?php echo esc_html( isset( $schema['title'] ) ? $schema['title'] : __( 'Join', 'tpw-ilungu-club' ) ); ?></h2>
 				<?php if ( ! empty( $state['form_error'] ) ) : ?>
 					<div class="notice notice-error"><p><?php echo esc_html( $state['form_error'] ); ?></p></div>
 				<?php endif; ?>
 				<?php if ( ! empty( $state['errors'] ) ) : ?>
-					<div class="notice notice-error"><p><?php echo esc_html__( 'Please correct the highlighted fields and try again.', 'tpw-core' ); ?></p></div>
+					<div class="notice notice-error"><p><?php echo esc_html__( 'Please correct the highlighted fields and try again.', 'tpw-ilungu-club' ); ?></p></div>
 				<?php endif; ?>
 				<form method="post" class="tpw-signup-form__form" novalidate>
 					<?php wp_nonce_field( 'tpw_join_submit', 'tpw_join_nonce' ); ?>
@@ -93,7 +93,7 @@ class TPW_Signup_Form_Renderer {
 						<?php $this->render_nodes( $nodes, $state ); ?>
 					</div>
 					<p class="tpw-signup-form__actions">
-						<button type="submit" class="button button-primary"><?php echo esc_html__( 'Submit Join Request', 'tpw-core' ); ?></button>
+						<button type="submit" class="button button-primary"><?php echo esc_html__( 'Submit Join Request', 'tpw-ilungu-club' ); ?></button>
 					</p>
 				</form>
 			</div>
@@ -233,7 +233,7 @@ class TPW_Signup_Form_Renderer {
 				<textarea id="<?php echo esc_attr( $field_id ); ?>" name="tpw_signup[<?php echo esc_attr( $key ); ?>]" rows="4" aria-invalid="<?php echo esc_attr( $invalid ); ?>"<?php echo esc_attr( $required_attr ); ?>><?php echo esc_textarea( $value ); ?></textarea>
 			<?php elseif ( 'select' === $type ) : ?>
 				<select id="<?php echo esc_attr( $field_id ); ?>" name="tpw_signup[<?php echo esc_attr( $key ); ?>]" aria-invalid="<?php echo esc_attr( $invalid ); ?>"<?php echo esc_attr( $required_attr ); ?>>
-					<option value=""><?php echo esc_html__( 'Select…', 'tpw-core' ); ?></option>
+					<option value=""><?php echo esc_html__( 'Select…', 'tpw-ilungu-club' ); ?></option>
 					<?php foreach ( $options as $option ) : ?>
 						<option value="<?php echo esc_attr( $option ); ?>" <?php selected( $value, $option ); ?>><?php echo esc_html( $option ); ?></option>
 					<?php endforeach; ?>

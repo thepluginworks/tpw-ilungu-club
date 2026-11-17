@@ -704,7 +704,7 @@ add_action('template_redirect', function() {
             'post_date'             => current_time('mysql'),
             'post_date_gmt'         => current_time('mysql', 1),
             'post_content'          => '[tpw_member_profile]',
-            'post_title'            => apply_filters('tpw_members/profile_virtual_title', __('My Profile', 'tpw-core')),
+            'post_title'            => apply_filters('tpw_members/profile_virtual_title', __('My Profile', 'tpw-ilungu-club')),
             'post_excerpt'          => '',
             'post_status'           => 'publish',
             'comment_status'        => 'closed',

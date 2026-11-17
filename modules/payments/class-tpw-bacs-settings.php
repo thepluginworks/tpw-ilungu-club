@@ -105,7 +105,7 @@ class TPW_BACS_Settings {
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="tpw_surcharge_bacs_fixed"><?php printf( esc_html__( 'Fixed (%s)', 'tpw-core' ), esc_html( $currency_symbol ) ); ?></label></th>
+                        <th scope="row"><label for="tpw_surcharge_bacs_fixed"><?php printf( esc_html__( 'Fixed (%s)', 'tpw-ilungu-club' ), esc_html( $currency_symbol ) ); ?></label></th>
                         <td>
                             <input type="number" name="tpw_surcharge_bacs_fixed" id="tpw_surcharge_bacs_fixed" step="0.01" min="0" value="<?php echo esc_attr( get_option('tpw_surcharge_bacs_fixed', 0) ); ?>" />
                         </td>

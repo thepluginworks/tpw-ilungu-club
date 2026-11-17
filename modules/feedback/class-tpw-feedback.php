@@ -116,8 +116,8 @@ if ( ! class_exists( 'TPW_Feedback' ) ) {
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
                 'nonce'   => wp_create_nonce( self::NONCE_ACTION ),
                 'i18n'    => [
-                    'thanks' => __( 'Thanks for your feedback!', 'tpw-core' ),
-                    'error'  => __( 'Sorry, something went wrong. Please try again.', 'tpw-core' ),
+                    'thanks' => __( 'Thanks for your feedback!', 'tpw-ilungu-club' ),
+                    'error'  => __( 'Sorry, something went wrong. Please try again.', 'tpw-ilungu-club' ),
                 ],
             ] );
         }
@@ -147,12 +147,12 @@ if ( ! class_exists( 'TPW_Feedback' ) ) {
 
             // Basic labels (British English tone).
             $labels = wp_parse_args( $args['labels'] ?? [], [
-                'title'        => __( 'Help us improve the RSVP form', 'tpw-core' ),
-                'ease'         => __( 'How easy was it to complete the RSVP?', 'tpw-core' ),
-                'clarity'      => __( 'Did you find all the options you needed?', 'tpw-core' ),
-                'time'         => __( 'About how long did it take?', 'tpw-core' ),
-                'suggestions'  => __( 'Any suggestions to improve the form?', 'tpw-core' ),
-                'submit'       => __( 'Send feedback', 'tpw-core' ),
+                'title'        => __( 'Help us improve the RSVP form', 'tpw-ilungu-club' ),
+                'ease'         => __( 'How easy was it to complete the RSVP?', 'tpw-ilungu-club' ),
+                'clarity'      => __( 'Did you find all the options you needed?', 'tpw-ilungu-club' ),
+                'time'         => __( 'About how long did it take?', 'tpw-ilungu-club' ),
+                'suggestions'  => __( 'Any suggestions to improve the form?', 'tpw-ilungu-club' ),
+                'submit'       => __( 'Send feedback', 'tpw-ilungu-club' ),
             ] );
             ?>
             <div class="tpw-feedback-panel" data-tpw-feedback>
@@ -179,21 +179,21 @@ if ( ! class_exists( 'TPW_Feedback' ) ) {
 
                     <fieldset class="tpw-field tpw-clarity">
                         <label><?php echo esc_html( $labels['clarity'] ); ?></label>
-                        <label><input type="radio" name="clarity_ok" value="1"> <?php esc_html_e( 'Yes', 'tpw-core' ); ?></label>
-                        <label><input type="radio" name="clarity_ok" value="0"> <?php esc_html_e( 'No', 'tpw-core' ); ?></label>
-                        <input type="text" name="missing_or_unclear" class="tpw-inline-text" placeholder="<?php esc_attr_e( 'If no, what was missing or unclear?', 'tpw-core' ); ?>">
+                        <label><input type="radio" name="clarity_ok" value="1"> <?php esc_html_e( 'Yes', 'tpw-ilungu-club' ); ?></label>
+                        <label><input type="radio" name="clarity_ok" value="0"> <?php esc_html_e( 'No', 'tpw-ilungu-club' ); ?></label>
+                        <input type="text" name="missing_or_unclear" class="tpw-inline-text" placeholder="<?php esc_attr_e( 'If no, what was missing or unclear?', 'tpw-ilungu-club' ); ?>">
                     </fieldset>
 
                     <fieldset class="tpw-field tpw-time">
                         <label><?php echo esc_html( $labels['time'] ); ?></label>
-                        <label><input type="radio" name="time_bucket" value="under2"> <?php esc_html_e( 'Under 2 minutes', 'tpw-core' ); ?></label>
-                        <label><input type="radio" name="time_bucket" value="2-5"> <?php esc_html_e( '2–5 minutes', 'tpw-core' ); ?></label>
-                        <label><input type="radio" name="time_bucket" value=">5"> <?php esc_html_e( 'Over 5 minutes', 'tpw-core' ); ?></label>
+                        <label><input type="radio" name="time_bucket" value="under2"> <?php esc_html_e( 'Under 2 minutes', 'tpw-ilungu-club' ); ?></label>
+                        <label><input type="radio" name="time_bucket" value="2-5"> <?php esc_html_e( '2–5 minutes', 'tpw-ilungu-club' ); ?></label>
+                        <label><input type="radio" name="time_bucket" value=">5"> <?php esc_html_e( 'Over 5 minutes', 'tpw-ilungu-club' ); ?></label>
                     </fieldset>
 
                     <fieldset class="tpw-field tpw-suggestions">
                         <label for="tpw_suggestions"><?php echo esc_html( $labels['suggestions'] ); ?></label>
-                        <textarea id="tpw_suggestions" name="suggestions" rows="3" maxlength="1000" placeholder="<?php esc_attr_e( 'Optional', 'tpw-core' ); ?>"></textarea>
+                        <textarea id="tpw_suggestions" name="suggestions" rows="3" maxlength="1000" placeholder="<?php esc_attr_e( 'Optional', 'tpw-ilungu-club' ); ?>"></textarea>
                     </fieldset>
 
                     <div class="tpw-actions">
@@ -215,7 +215,7 @@ if ( ! class_exists( 'TPW_Feedback' ) ) {
             // Basic nonce check
             $nonce = $_POST[ self::NONCE_FIELD ] ?? '';
             if ( ! wp_verify_nonce( $nonce, self::NONCE_ACTION ) ) {
-                wp_send_json_error( [ 'message' => __( 'Bad nonce.', 'tpw-core' ) ], 403 );
+                wp_send_json_error( [ 'message' => __( 'Bad nonce.', 'tpw-ilungu-club' ) ], 403 );
             }
 
             $submission_id = isset( $_POST['submission_id'] ) ? (int) $_POST['submission_id'] : 0;
@@ -225,7 +225,7 @@ if ( ! class_exists( 'TPW_Feedback' ) ) {
             $member_id     = isset( $_POST['member_id'] ) ? (int) $_POST['member_id'] : 0;
 
             if ( ! $submission_id || ! $event_id || ! $module_slug ) {
-                wp_send_json_error( [ 'message' => __( 'Missing context.', 'tpw-core' ) ], 400 );
+                wp_send_json_error( [ 'message' => __( 'Missing context.', 'tpw-ilungu-club' ) ], 400 );
             }
 
             $ease_rating   = isset( $_POST['ease_rating'] ) ? (int) $_POST['ease_rating'] : null;
@@ -314,9 +314,9 @@ if ( ! class_exists( 'TPW_Feedback' ) ) {
                     wp_mail( $to, $subject, $body, $headers );
                 }
 
-                wp_send_json_success( [ 'message' => __( 'Saved', 'tpw-core' ) ] );
+                wp_send_json_success( [ 'message' => __( 'Saved', 'tpw-ilungu-club' ) ] );
             } else {
-                wp_send_json_error( [ 'message' => __( 'Database error', 'tpw-core' ) ], 500 );
+                wp_send_json_error( [ 'message' => __( 'Database error', 'tpw-ilungu-club' ) ], 500 );
             }
         }
 

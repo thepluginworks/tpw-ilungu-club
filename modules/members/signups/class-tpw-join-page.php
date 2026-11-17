@@ -84,7 +84,7 @@ class TPW_Join_Page {
 		self::register_provider(
 			self::CORE_PROVIDER_KEY,
 			array(
-				'label'         => __( 'Core', 'tpw-core' ),
+				'label'         => __( 'Core', 'tpw-ilungu-club' ),
 				'plugin'        => 'tpw-core',
 				'render_type'   => 'internal',
 				'render_target' => self::CORE_PROVIDER_KEY,
@@ -167,7 +167,7 @@ class TPW_Join_Page {
 		TPW_Core_System_Pages::register_page(
 			self::SYSTEM_PAGE_KEY,
 			array(
-				'title'     => __( 'Join', 'tpw-core' ),
+				'title'     => __( 'Join', 'tpw-ilungu-club' ),
 				'shortcode' => '[' . self::SHORTCODE_TAG . ']',
 				'plugin'    => 'tpw-core',
 				'required'  => 0,

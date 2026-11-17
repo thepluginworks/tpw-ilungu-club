@@ -32,7 +32,7 @@ if ( empty( $payload['menu'] ) ) {
 $menu      = $payload['menu'];        // ['id','name','description','number_of_courses','price']
 $courses   = $payload['courses'];     // keyed by course_number => ['course_name' => '', 'choices' => [ ['label','description'], ... ]]
 $modal_id  = 'tpw-menu-modal-' . $event_id;
-$btn_label = apply_filters( 'tpw_core/menu_modal_button_label', __( 'View Menu', 'tpw-core' ), $event_id, $menu );
+$btn_label = apply_filters( 'tpw_core/menu_modal_button_label', __( 'View Menu', 'tpw-ilungu-club' ), $event_id, $menu );
 $title     = apply_filters( 'tpw_core/menu_modal_title', esc_html( $menu['name'] ), $event_id, $menu );
 
 $courses_count = is_array($courses) ? count($courses) : 0;
@@ -58,7 +58,7 @@ if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
             <h2 id="<?php echo esc_attr( $modal_id ); ?>-title" class="tpw-modal__title">
                 <?php echo esc_html( $title ); ?>
             </h2>
-            <button type="button" class="tpw-modal__close tpw-btn tpw-btn-secondary" aria-label="<?php esc_attr_e( 'Close', 'tpw-core' ); ?>" data-tpw-close><?php esc_html_e( 'Close', 'tpw-core' ); ?></button>
+            <button type="button" class="tpw-modal__close tpw-btn tpw-btn-secondary" aria-label="<?php esc_attr_e( 'Close', 'tpw-ilungu-club' ); ?>" data-tpw-close><?php esc_html_e( 'Close', 'tpw-ilungu-club' ); ?></button>
         </header>
 
         <?php if ( ! empty( $menu['description'] ) ) : ?>
@@ -67,7 +67,7 @@ if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
 
         <?php if ( ! $is_tickets_menu_presentation && isset( $menu['price'] ) && $menu['price'] !== null ) : ?>
             <p class="tpw-menu__price">
-                <strong><?php esc_html_e( 'Price', 'tpw-core' ); ?>:</strong>
+                <strong><?php esc_html_e( 'Price', 'tpw-ilungu-club' ); ?>:</strong>
                 <?php
                 $price_value = (float) $menu['price'];
                 if ( function_exists( 'wc_price' ) ) {
@@ -85,7 +85,7 @@ if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
                 <section class="tpw-menu__course">
                     <h3 class="tpw-menu__course-title">
                         <?php
-                        $course_heading = $course['course_name'] ?: sprintf( __( 'Course %d', 'tpw-core' ), (int) $course_number );
+                        $course_heading = $course['course_name'] ?: sprintf( __( 'Course %d', 'tpw-ilungu-club' ), (int) $course_number );
                         echo esc_html( $course_heading );
                         ?>
                     </h3>
@@ -103,7 +103,7 @@ if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
                                         <span class="tpw-menu__choice-supplement">
                                             <?php
                                             printf(
-                                                esc_html__( 'Supplement: %s%s', 'tpw-core' ),
+                                                esc_html__( 'Supplement: %s%s', 'tpw-ilungu-club' ),
                                                 esc_html( $currency_symbol ),
                                                 esc_html( number_format( (float) $choice['extra_cost'], 2 ) )
                                             );
@@ -114,7 +114,7 @@ if ( function_exists( 'tpw_core_flag_need_ui_assets' ) ) {
                             <?php endforeach; ?>
                         </ul>
                     <?php else : ?>
-                        <p class="tpw-menu__no-choices"><?php esc_html_e( 'Choices to be confirmed.', 'tpw-core' ); ?></p>
+                        <p class="tpw-menu__no-choices"><?php esc_html_e( 'Choices to be confirmed.', 'tpw-ilungu-club' ); ?></p>
                     <?php endif; ?>
                 </section>
             <?php endforeach; ?>
